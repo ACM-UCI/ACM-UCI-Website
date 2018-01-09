@@ -1,0 +1,334 @@
+body {
+  text-align: center; 
+  font-family: 'Arial';
+}
+
+body, html {
+    height: 100%; 
+}
+
+.navbar-default {
+    background-color:#02284B; 
+    margin-bottom: 0px !important; 
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top; 
+}
+
+.navbar-nav li {
+    margin-right: 20px; 
+    margin-left: 20px;  
+}
+
+.navbar-nav li a {
+    color: white !important; 
+    font-size: 18px; 
+    -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  transition: color 0.5s;
+}
+
+.navbar-nav li a:hover {
+    color: #6DB6E2 !important; 
+}
+
+#logo-img {
+    width:69px; 
+}
+
+.jumbotron {
+    background-color: white; 
+    margin-bottom: 0px;
+    padding-bottom: 0px; 
+}
+
+#jumbo-img {
+    width: 500px; 
+}
+
+.jumbotron .lead {
+    font-weight: bold; 
+    font-size: 40px;  
+    color: #6DB6E2; 
+}
+
+.jumbotron .lead-sub {
+    padding-bottom: 50px;
+    font-weight: bold; 
+    color: #606060;
+    margin-bottom: 0px;  
+}
+
+.main .lead-description {
+    color: white; 
+    width: 80%; 
+    margin: 0 auto; 
+    font-size: 20px; 
+    margin-top: 70px;   
+}
+
+.main .btn-info {
+    background-color: #6DB6E2; 
+    margin-top: 30px;
+    margin-bottom: 30px;  
+    font-size: 19px; 
+    -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+.main .btn-info:hover {
+    background-color: #02284B; 
+    border-color: #6DB6E2; 
+}
+
+.main {
+    background-image: url('../IMG/jumbo-img.png'); 
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;  
+    width: 100%; 
+    padding-left: 0px;
+    z-index: 0;   
+    position: relative; 
+    min-height: 520px; 
+}
+
+.pseudo {
+    position: absolute;
+    background-color: #606060;
+    height: 100%;
+    width: 100%; 
+    opacity: 0.8; 
+    z-index: -1;    
+}
+
+.main-event { 
+    background-image: url('../IMG/events.jpeg');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+    z-index: 0; 
+    color: white;  
+    position: relative;
+    min-height: 520px;  
+}
+
+.main-event h4 {
+    font-size: 25px; 
+    margin-top: 30px; 
+}
+
+.main-event .panel {
+    color: black; 
+    margin-top: 30px; 
+}
+
+.main-event .panel .table {
+    table-layout: fixed; 
+}
+
+.main-event .panel .panel-heading {
+    font-size: 18px; 
+}
+
+.main-event .panel .table th {
+     text-align: center;  
+}
+
+.main-event .panel .panel-body {
+    font-size: 16px; 
+}
+
+.main-event .btn-info {
+    background-color: #6DB6E2;
+    font-size: 16px;
+    -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;  
+}
+
+.main-event .btn-info:hover {
+    background-color: #02284B; 
+    border-color: #6DB6E2; 
+}
+
+.main-board {
+    background-color: #64757F; 
+    color: white; 
+}
+
+.main-board .board-img {
+    height: 282px; 
+}
+
+.main-board .thumbnail {
+    display: inline-block; 
+    max-width: 293px; 
+}
+
+.main-board .year {
+    color: white;
+    font-size: 30px; 
+    margin: 20px 0px; 
+}
+
+.contact-lead {
+    font-size: 20px; 
+    color: #606060; 
+    font-weight: bold; 
+    margin-top: 20px;
+}
+
+form {
+    text-align: left; 
+    margin-top: 10px; 
+}
+
+form .btn {
+    background-color: #6DB6E2; 
+    margin-bottom: 20px; 
+    -webkit-transition: background-color 0.5s;
+  -moz-transition: background-color 0.5s;
+  -o-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+form .btn:hover {
+    background-color: #02284B; 
+    border-color: #6DB6E2; 
+}
+
+form .response {
+    margin-bottom: 10px; 
+    margin-top: 10px;
+}
+
+.media-object {
+    width: 100px; 
+}
+
+.media {
+    text-align: left; 
+    margin: 40px; 
+}
+
+#resource1 {
+    background-image: url('../IMG/weekly.jpg');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center;
+}
+
+#resource2 {
+    background-image: url('../IMG/AI.jpg');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center;
+}
+
+#resource3 {
+    background-image: url('../IMG/other.jpg');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center;
+}
+
+.main-wiki .jumbotron {
+    margin-bottom: 20px; 
+    border: 2px solid #6DB6E2;
+    text-align: left; 
+    position: relative;
+    z-index: 0;  
+}
+
+.main-wiki .jumbotron:hover {
+    cursor: pointer; 
+    box-shadow: 4px 4px 30px #6DB6E2;
+}
+
+.main-wiki .jumbotron .lead-sub {
+    color: #6DB6E2; 
+    display: inline-block; 
+}
+
+.main-wiki .jumbotron h2 {
+    color: white; 
+    display: inline-block; 
+}
+
+.pseudo-resource {
+    position: absolute;
+    top: 0px; 
+    left: 0px; 
+    background-color: #02284B;
+    height: 100%;
+    width: 100%; 
+    opacity: 0.7; 
+    z-index: -1;
+}
+
+.main-weekly .panel-body {
+    text-align: left; 
+    color: #606060; 
+}
+
+.weekly-heading {
+    color: #606060;
+    font-weight: bold;  
+}
+
+.main-weekly .panel-heading {
+    background-color: #D9EDF8; 
+}
+
+.main-weekly .panel-heading .panel-title {
+    font-weight: bold;
+    color: #02284B; 
+}
+
+.main-weekly .problem-number {
+    font-weight: bold; 
+    font-size: 20px; 
+}
+
+#main-ai1 {
+    background-image: url('../IMG/ai-background1.jpg');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+}
+
+#main-ai2 {
+    background-image: url('../IMG/ai-background2.jpg');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+}
+
+#main-ai3 {
+    background-image: url('../IMG/ai-background3.jpg');  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center; 
+}
+
+.main-ai {
+    position: relative; 
+    z-index: 0; 
+    color: white;
+    text-align: left; 
+    padding: 40px; 
+}
+
+.main-ai p, .main-ai li {
+    font-size: 20px; 
+    color: #D6D5D5; 
+}
+
