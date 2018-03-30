@@ -240,6 +240,13 @@ form .response {
     background-position: center;
 }
 
+#resource4 {
+    background-image: url('../IMG/acm_seminar.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+}
+
 .main-wiki .jumbotron {
     margin-bottom: 20px; 
     border: 2px solid #6DB6E2;
