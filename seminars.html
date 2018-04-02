@@ -56,24 +56,118 @@
             <tr>
               <th>Presenter</th>
               <th>Date</th>
-              <th>Description</th>
+              <th>Title</th>
             </tr>
           </thead>
           <tbody>
+            <!-- WEEK 1 -->
             <tr>
-              <td>COMING SOON</td>
-              <td>COMING SOON</td>
-              <td>COMING SOON</td>
+              <td class='presenter'>Kevin Wang</td>
+              <td>Thursday, April 5th</td>
+              <td class='talk-description'>TBD</td>
             </tr>
+            <!-- WEEK 2 -->
             <tr>
-              <td>COMING SOON</td>
-              <td>COMING SOON</td>
-              <td>COMING SOON</td>
+              <td class='presenter'>Pasha Khosravi</td>
+              <td>Thursday, April 12th</td>
+              <td class='talk-description'>TBD</td>
             </tr>
+            <!-- WEEK 3 -->
             <tr>
-              <td>COMING SOON</td>
-              <td>COMING SOON</td>
-              <td>COMING SOON</td>
+              <td class='presenter'>Karthik Gajulapalli</td>
+              <td>Thursday, April 19th</td>
+              <td class='talk-description'>TBD</td>
+            </tr>
+            <!-- WEEK 4 -->
+            <tr>
+              <td class='presenter'>TBD</td>
+              <td>Thursday, April 26th</td>
+              <td class='talk-description'>TBD</td>
+            </tr>
+            <!-- WEEK 5 -->
+            <tr>
+              <td class='presenter'>TBD</td>
+              <td>Thursday, May 3rd</td>
+              <td class='talk-description'>TBD</td>
+            </tr>
+            <!-- WEEK 6 -->
+            <tr>
+              <td class='presenter'>Howard Chen
+                <div class='popup hidden'>
+                  <strong>About Howard:</strong><br />
+                  Howard is a 4th-year Computer Science major and likely
+                   the least-qualified of his peers to be graduating in June.
+                    He does weird things for fun, and security things for fun and money.
+                     His greatest achievement is successfully compiling a program with
+                      zero errors on the first try.  Howard is 70% nerd, 30% president
+                       of Cyber@UCI, 15% student, and 100% certain that's
+                        too many percentages
+                </div>
+              </td>
+              <td>Thursday, May 10th</td>
+              <td class='talk-description'>Low-tech Hacks: How to defeat a $831 lock for $1
+                  <div class='popup hidden'>
+                    <strong>Abstract:</strong><br />
+                    Talking about security oftentimes means involving
+                     a bunch of fancy tools and technologies that you've
+                      probably never heard of before. This talk has none
+                       of that. We'll look at some of the easy yet not-so-obvious
+                        ways anyone can "hack the system" to cause chaos and
+                         destruction. You'll learn about some of the basic
+                          concepts in physical security and social engineering,
+                           and see how anyone can use those concepts for evil
+                            (and how to protect yourself).
+                  </div>
+              </td>
+            </tr>
+            <!-- WEEK 7 -->
+            <tr>
+              <td class='presenter'>Chinmay Raut</td>
+              <td>Thursday, May 17th</td>
+              <td class='talk-description'>TBD</td>
+            </tr>
+            <!-- WEEK 8 -->
+            <tr>
+              <td class='presenter'>Bryon Tjanaka
+                <div class='popup hidden'>
+                  <strong>About Bryon:</strong><br />
+                  Bryon Tjanaka is a first-year computer science major at UCI. As
+                   a member of the ACM club, he has enjoyed learning to solve various
+                    programming problems. Outside of academia, his chief interest is
+                    ' robotics; in 2017, he won the VEX Robotics High School World Championship
+                     as part of Team 86868. Other than that, he enjoys procrastinating by
+                      folding origami, hitting the gym, and playing video games.
+                </div>
+              </td>
+              <td>Thursday, May 24th</td>
+              <td class='talk-description'>Twisting your Brain with Pure Functional Programming and Haskell
+                <div class='popup hidden'>
+                    <strong>Abstract:</strong><br />
+                    Functional programming is a programming paradigm
+                     that is growing in popularity, but how often do
+                      we deal with it in our classes? Sure, imperative
+                       languages like Java, Python, and even C++ have
+                        some built-in features to support functional
+                         programming, but at the end of the day, these
+                          languages still treat everything, even functions,
+                           as objects. What if we could learn to think purely
+                            in terms of functions? That’s exactly what purely
+                             functional programming languages like Haskell
+                              can help us do.
+                </div>
+              </td>
+            </tr>
+            <!-- WEEK 9 -->
+            <tr>
+              <td class='presenter'>TBD</td>
+              <td>Thursday, May 31th</td>
+              <td class='talk-description'>TBD</td>
+            </tr>
+            <!-- WEEK 10 -->
+            <tr>
+              <td class='presenter'>TBD</td>
+              <td>Thursday, June 7th</td>
+              <td class='talk-description'>TBD</td>
             </tr>
           </tbody>
         </table>
@@ -85,5 +179,16 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
 
+    <script>
+      $(document).ready(function () {
+        $('.presenter').click(function () {
+          $(this).find('div').toggleClass('hidden')
+        })
+
+        $('.talk-description').click(function () {
+          $(this).find('div').toggleClass('hidden')
+        })
+      })
+    </script>
   </body>
 </html>
