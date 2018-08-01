@@ -1,0 +1,13 @@
+.contact-lead { 
+  font-size: 20px; 
+  color: #606060; 
+  font-weight: bold; 
+}
+
+.contact-link { 
+  color: #6DB6E2;
+}
+
+.contact-link:hover {
+  color: #02284B;
+}

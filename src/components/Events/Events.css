@@ -1,0 +1,10 @@
+.event-body {
+  background-image: url('/img/events.jpeg'); 
+  background-repeat: no-repeat; 
+  background-position: center;
+  background-size: cover;  
+  z-index: 0;   
+  position: relative; 
+  min-height: 520px; 
+  color: white;
+}

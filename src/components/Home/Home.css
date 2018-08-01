@@ -1,0 +1,30 @@
+.home-body {
+    background-image: url('/img/jumbo-img.png'); 
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-size: cover;  
+    z-index: 0;   
+    position: relative; 
+    min-height: 520px; 
+}
+
+.home-body p {
+  color: #DBE7EF;/*#8DB1C6;*/
+  font-size: 20px;
+}
+
+.button {
+  color: white;
+}
+
+.button:hover {
+  background-color: #02284B;
+}
+
+.pseudo {
+  position: absolute;
+  height: 100%;
+  width: 100%; 
+  opacity: 0.7; 
+  z-index: -1;    
+}

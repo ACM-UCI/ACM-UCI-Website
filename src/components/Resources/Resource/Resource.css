@@ -1,0 +1,13 @@
+.resource-jumbotron {
+  background-color: #02284B;
+}
+
+.resource-jumbotron .lead-sub {
+  color: white;
+  font-weight: normal;
+}
+
+.resource-header {
+  font-weight: bold;
+  color: #6DB6E2;
+}

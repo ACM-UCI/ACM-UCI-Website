@@ -1,0 +1,43 @@
+// Navigation Vars
+$navbar-dark-color: #6DB6E2;
+$navbar-dark-hover-color: #02284B;
+$link-color: white;
+$link-hover-color: white;
+$link-hover-decoration: none;
+
+// Banner Vars
+$lead-font-size: 40px;
+$lead-font-weight: 700;
+$jumbotron-bg: #6DB6E2;
+
+$theme-colors: (
+  "primary": #02284B,
+  "secondary": #6DB6E2
+);
+
+@function theme-color($key: "secondary") {
+  @return map-get($theme-colors, $key);
+}
+
+@function theme-color($key: "ternary") {
+  @return map-get($theme-colors, $key);
+}
+
+// Banner Functions
+
+.lead-sub {
+  color: theme-color("primary");
+}
+
+// Resource page
+.resource-jumbotron {
+  border: 4px solid theme-color("secondary");
+}
+
+// General
+.pseudo {
+  background-color: theme-color("primary");
+}
+
+// All
+@import "../node_modules/bootstrap/scss/bootstrap";
