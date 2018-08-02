@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { hybrid } from 'react-syntax-highlighter/styles/hljs';
 import Navigation from '../../Navbar/Navbar';
 import Banner from '../../Banner/Banner';
 import './IntroCP.css';
@@ -11,7 +13,7 @@ class IntroCP extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1'
+      activeTab: '2'
     };
   }
 
@@ -24,6 +26,47 @@ class IntroCP extends Component {
   }
 
   render() {
+    let firstCodeBlock = `5 
+Apple
+Banana
+Orange
+Strawberry
+Peach`
+
+    let secondCodeBlock = `n = int(input())
+for i in range(n):
+    word = input()
+    print(word)`
+
+    let thirdCodeBlock = `Apple
+Banana
+Orange
+Strawberry
+Peach`
+
+    let fourthCodeBlock = `import sys
+for line in sys.stdin:
+    print(line)`
+
+    let fifthCodeBlock = `import sys
+for line in sys.stdin:
+    numbers = line.split() # split() takes a string and separates it into a  
+                           # list of strings separated by a delimiter
+a = int(numbers[0])
+b = int(numbers[1])
+c = int(numbers[2])
+d = int(numbers[3])
+e = int(numbers[4])
+
+print(a+b+c+d+e)
+`
+    let sixthCodeBlock = `import sys
+for line in sys.stdin:
+    numbers = list(map(int, line.split()))
+    total = sum(numbers)
+    print(total)
+`
+
     return (
       <div>
         <Navigation></Navigation>
@@ -298,21 +341,13 @@ class IntroCP extends Component {
                     to stdout."
                 </p>
 
-                <p>Here would be a sample input:<br />
-                  5<br />
-                  Apple<br />
-                  Banana<br />
-                  Orange<br />
-                  Strawberry<br />
-                  Peach<br />
-                </p>
+                <p>Here would be a sample input:</p>
+                <SyntaxHighlighter language='python' style={hybrid}>{firstCodeBlock}</SyntaxHighlighter>
+                 
 
                 <p>To solve this in Python, we write:</p>
-                <p>n = int(input())<br />
-                   for i in range(n):<br />
-	                 word = input()<br />
-	                 print(word)
-                </p>
+                <SyntaxHighlighter language='python' style={hybrid}>{secondCodeBlock}</SyntaxHighlighter>
+                
 
                 <p>
                   The int() function takes a piece of data and tries to convert it into an integer.
@@ -331,20 +366,11 @@ class IntroCP extends Component {
                 <p>"Jack needs to copy several words. He will receive an unspecified number of words.
                    Output those words to stdout."</p>
 
-                <p>With input looking like:<br />
-                  Apple<br />
-                  Banana<br />
-                  Orange<br />
-                  Strawberry<br />
-                  Peach
-                </p>
+                <p>With input looking like:</p>
+                <SyntaxHighlighter language='python' style={hybrid}>{thirdCodeBlock}</SyntaxHighlighter>
 
                 <p>To handle this case, we write the following Python code:</p>
-
-                <p>import sys
-                   for line in sys.stdin:
-	                 print(line)
-                </p>
+                <SyntaxHighlighter language='python' style={hybrid}>{fourthCodeBlock}</SyntaxHighlighter>
 
                 <p>The for loop basically says “give me every line from stdin, one at a time.”
                    When there are no more lines, the program terminates.</p>
@@ -357,19 +383,7 @@ class IntroCP extends Component {
                 </p>
 
                 <p>Below is one way of doing this.</p>
-
-                {/* import sys
-                  for line in sys.stdin:
-                    numbers = line.split() # split() takes a string and separates it into a  
-                      # list of strings separated by a delimiter
-                    a = int(numbers[0])
-                    b = int(numbers[1])
-                    c = int(numbers[2])
-                    d = int(numbers[3])
-                    e = int(numbers[4])
-
-                    print(a+b+c+d+e)
-                  */}
+                <SyntaxHighlighter language='python' style={hybrid}>{fifthCodeBlock}</SyntaxHighlighter>
 
                 <p>This works, but it is rather “clunky.” Certainly, we would not want
                     to keep typing numbers[x]. Furthermore, what if the number of numbers
@@ -385,13 +399,8 @@ class IntroCP extends Component {
                 </p>
 
                 <p>This forces us to use something else.</p>
-                {/* import sys
-                  for line in sys.stdin:
-                    numbers = list(map(int, line.split()))
-                    total = sum(numbers)
-                    print(total)
-                  */}
-
+                <SyntaxHighlighter language='python' style={hybrid}>{sixthCodeBlock}</SyntaxHighlighter>
+                
                 <p>The map function’s syntax is something like this: map(function, iterable),
                   where an iterable is something like a set, list, or dict.
                   It applies the function to every item in the iterable (in this case,

@@ -18,7 +18,7 @@ class Resources extends Component {
                   description="Follow along with our weekly coding puzzles here, as well as
                    the solutions that will be released after every meeting."></Resource>
           <Link to="/introToCp">
-            <Resource title="Intro to Competitive Programming" 
+            <Resource title="New Member Guide" 
                   description="New to competitive programming? Get up to speed quickly with our tutorials
                               on the basics such as I/O, commandline, etc.">
             </Resource>
