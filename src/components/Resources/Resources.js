@@ -3,6 +3,7 @@ import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import Resource from './Resource/Resource';
 import { Container, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import './Resources.css';
 
 class Resources extends Component {
@@ -16,9 +17,12 @@ class Resources extends Component {
           <Resource title="Weekly Problems and Solutions" 
                   description="Follow along with our weekly coding puzzles here, as well as
                    the solutions that will be released after every meeting."></Resource>
-          <Resource title="Intro to Competitive Programming" 
+          <Link to="/introToCp">
+            <Resource title="Intro to Competitive Programming" 
                   description="New to competitive programming? Get up to speed quickly with our tutorials
-                              on the basics such as I/O, commandline, etc."></Resource>
+                              on the basics such as I/O, commandline, etc.">
+            </Resource>
+          </Link>
           </Row>
         </Container>
       </div>

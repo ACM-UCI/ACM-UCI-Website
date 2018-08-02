@@ -5,3 +5,15 @@
   -o-transition: background-color 0.5s;
   transition: background-color 0.5s;  
 }
+
+.link { 
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  transition: color 0.5s;  
+  color: #6DB6E2;
+}
+
+.link:hover {
+  color: #02284B;
+}
