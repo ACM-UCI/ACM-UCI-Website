@@ -2,6 +2,7 @@
   "name": "acm-reactify",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://clubs.uci.edu/acm",
   "dependencies": {
     "bootstrap": "^4.1.3",
     "classnames": "^2.2.6",
