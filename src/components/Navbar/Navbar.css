@@ -6,8 +6,8 @@
   transition: color 0.5s;
 }
 
-.nav-bar {
-  height: 120px;
+.navbar {
+  padding: 40px 0px;
 }
 
 .nav-brand {
