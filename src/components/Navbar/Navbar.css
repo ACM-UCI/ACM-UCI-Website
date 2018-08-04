@@ -7,7 +7,7 @@
 }
 
 .navbar {
-  padding: 40px 0px;
+  padding: 38px 10px;
 }
 
 .nav-brand {
@@ -21,4 +21,20 @@
   position: absolute;
   top: -37px;
   left: -60px;
+}
+
+@media screen and (max-width: 767px) {
+  .nav-brand {
+    margin: 0px auto;
+    position: relative;
+    left: 30px;
+  }
+
+  #logo {
+    position: static;
+  }
+
+  .navbar {
+    padding: 10px 10px;
+  }
 }
