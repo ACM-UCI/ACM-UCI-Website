@@ -32,6 +32,7 @@
 
   #logo {
     position: static;
+    width: 140px;
   }
 
   .navbar {

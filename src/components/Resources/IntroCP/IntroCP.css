@@ -1,3 +1,12 @@
 .conclusion {
   font-size: 24px;
 }
+
+.code-text {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.problem-desc {
+  padding-left: 40px;
+  font-style: italic;
+}
