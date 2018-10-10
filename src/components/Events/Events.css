@@ -8,3 +8,20 @@
   min-height: 520px; 
   color: white;
 }
+
+.card-body {
+  color: black;
+  margin-top: 20px; 
+}
+
+.event-link {
+  color: #6DB6E2;
+  -webkit-transition: color 0.5s;
+  -moz-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  transition: color 0.5s;
+}
+
+.event-link:hover {
+  color: #02284B;
+}
