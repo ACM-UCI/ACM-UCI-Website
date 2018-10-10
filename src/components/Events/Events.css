@@ -25,3 +25,8 @@
 .event-link:hover {
   color: #02284B;
 }
+
+.event-signup-link {
+  width: 100%;
+  display: inline-block; /* allows to set width and height on element */
+}
