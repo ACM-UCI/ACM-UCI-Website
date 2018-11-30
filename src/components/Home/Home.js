@@ -13,7 +13,7 @@ class Home extends Component {
         <Container className="home-body" fluid>
           <Row>
             <div className="pseudo"></div>
-            <p className="text-center m-5">There are no requirements to join us, in fact we encourage you to
+            <p className="text-center m-5">There are no requirements to join us; in fact, we encourage you to
               join even if you have no experience. Consider attending one of our
                 meetings that we hold once or twice a week. Our chapter hosts a
                 variety of events including workshops by UCI students to share
