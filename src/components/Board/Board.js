@@ -9,6 +9,7 @@ import chinmay from '../../img/chinmay.jpg';
 import jens from '../../img/jens.jpg';
 import bryon from '../../img/bryon.jpg'
 import jacky from '../../img/jacky.jpg';
+import meta from '../../img/meta.jpg';
 import './Board.css';
 
 class Board extends Component {
@@ -30,6 +31,8 @@ class Board extends Component {
           </Row>
           <Row>
             <Col md="4"><BoardMember src={jens} name="Jens Tuyls" position="Webmaster"></BoardMember></Col>
+            <Col md="4"><BoardMember src={meta} name="Meta Novitia" position="Secretary"></BoardMember></Col>
+      
           </Row>
         </Container>
       </div>
