@@ -14,10 +14,13 @@ class Resources extends Component {
         <Banner lead="ACM Resources" leadSub="Find our weekly problems and solutions here, as well as tutorials."></Banner>
         <Container>
           <Row>
-          <Resource title="Weekly Problems and Solutions" 
-                  description="Follow along with our weekly coding puzzles here, as well as
-                   the solutions that will be released after every meeting."></Resource>
-          <Link to="/introToCp">
+          <Link className="full" to="/Puzzle">
+            <Resource title="Weekly Problems and Solutions" 
+                    description="Follow along with our weekly coding puzzles here, as well as
+                    the solutions that will be released after every meeting.">
+            </Resource>
+          </Link>
+          <Link className="full" to="/introToCp">
             <Resource title="New Member Guide" 
                   description="New to competitive programming? Get up to speed quickly with our tutorials
                               on the basics such as I/O, commandline, etc.">
@@ -25,6 +28,9 @@ class Resources extends Component {
           </Link>
           </Row>
         </Container>
+        <Row>
+          <br/><br/>
+        </Row>
       </div>
     );
   }

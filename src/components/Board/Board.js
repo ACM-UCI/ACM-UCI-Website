@@ -35,6 +35,9 @@ class Board extends Component {
       
           </Row>
         </Container>
+        <Row>
+          <br/><br/>
+        </Row>
       </div>
     );
   }

@@ -1,0 +1,17 @@
+.small {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+}
+
+.center {
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+}
+
+.space {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left:0;
+}
