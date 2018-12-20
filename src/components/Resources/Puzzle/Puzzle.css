@@ -54,13 +54,18 @@
     background-color: rgb(118, 199, 185);
 }
 
-.c {
-    color: white;
-    justify-self: center;
-    font-size: 50px;
+.thanksgiving {
+    background-image: url("../../../img/thanksgiving.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100%;
 }
 
-.s{
-    max-width : 80%;
-    background-color: #6DB6E2;
+.finals {
+    background-image: url("../../../img/finals.png");
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100%;
 }

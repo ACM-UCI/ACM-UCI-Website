@@ -18,12 +18,14 @@ class Puzzle extends Component {
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
         var quarters = ["Fall 2018", "Winter 2019", "Spring 2020"];
-        var startDates = [  new Date("October 5, 2018 03:00:00"), new Date("January 9, 2019 02:00:00"), 
-                            new Date("March 29, 2019, 02:00:00")]
-        var today = new Date();
-        var utc_ms = today.getTime() + today.getTimezoneOffset()*60*1000;
+        var startDates =    [   
+                                new Date('October 2, 2018 18:00:00 GMT+07:00').getTime(),
+                                new Date('January 8, 2019 17:00:00 GMT+08:00').getTime(),
+                                new Date('April 2, 2019 17:00:00 GMT+07:00').getTime()
+                            ]
+        var today = new Date().getTime();
         var i = 0;
-        while(i+1<startDates.length && startDates[i+1].getTime()<=utc_ms){
+        while(i+1<startDates.length && startDates[i+1]<=today){
             i+=1;
         }
         this.quarter = quarters[i];
@@ -32,28 +34,34 @@ class Puzzle extends Component {
         // calculating which week we are in (based on start time of first meeting in UTC minus 1 hour)
         // will post questions 1 hr before meeting starts
         // will post solutions right after the meeting ends
-        this.week = ((utc_ms-startDates[i].getTime())/1000/60/60/24/7+.5).toFixed(0);
-
+        this.week = ((today-startDates[i])/1000/60/60/24/7+.5).toFixed(0);
         // SESSION
         // calculating if the latest meeting session is (UTC)
-        var day = today.getUTCDay();
-        var time = today.getUTCHours();
-        var session_1 = startDates[i].getUTCDay();
-        var session_2 = session_1+2;
-        var session_time = startDates[i].getUTCHours();
-        this.session = "1";
-        if (day>session_2 || (day==session_2 && time>=session_time) || day<session_1 || (day==session_1 && time<session_time))
-        {this.session = "2";}
+        var ses = Math.floor((today-startDates[i])/1000/60/60/24)%7;
+        if(ses<2){
+            this.session = "1";
+        }else{
+            this.session = "2";
+        }
+
+        // END
+        // check if the session ended, assuming each session lasts 2 hours
+        var tm = (today-startDates[i]/1000/60/60)%24;
+        if((ses===0 || ses===2)&&tm<3){
+            this.end=false;
+        }else{
+            this.end=true;
+        }
 
         // Handling after quarter dates
         if (this.week>11){
-            this.session = 2;
-            this.week = 11;
+            this.session = "2";
+            this.week = "11";
+            this.end = true;
         }
 
         // List of quarters that will be included in past solutions
         this.quarters = quarters.slice(0,i+1);
-
     }
 
     toggle() {
@@ -64,7 +72,9 @@ class Puzzle extends Component {
         return (
         <div className = "center">
             <Navigation></Navigation>
-            <Banner lead="Weekly Problems and Solutions" leadSub="Ready to get your minds blown?"></Banner>
+            <Banner lead="Weekly Problems and Solutions" 
+                    leadSub="Ready to get your minds blown?"
+            ></Banner>
             <div className='center'>
                 <Row className="center">
                     <Alert className="easy m">
@@ -89,11 +99,21 @@ class Puzzle extends Component {
             </div>
 
             <div className = "small center">
-                <Present week={this.week} quarter={this.quarter} session={this.session}></Present>
+                <Present 
+                    end = {this.end} 
+                    week={this.week} 
+                    quarter={this.quarter} 
+                    session={this.session}
+                ></Present>
             </div>
 
             <div className = "small center">
-                <Past week={this.week} quarters={this.quarters} session={this.session} className = "center"></Past>
+                <Past 
+                    week={this.week} 
+                    quarters={this.quarters} 
+                    session={this.session} 
+                    className = "center"
+                ></Past>
             </div>
 
             <div><br/><br/></div>

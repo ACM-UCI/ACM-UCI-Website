@@ -11,6 +11,7 @@ export default class Week extends Component {
         this.state = { collapse: false };
         this.week = props.week;
         this.quarter = props.quarter;
+        this.session = props.session;
         this.rows = [];
 
         var xhr = new XMLHttpRequest();
@@ -22,40 +23,49 @@ export default class Week extends Component {
 
     processData(allText) {
         var allTextLines = allText.split(/\r\n|\n/);
-        var problems = [];
+        var problems = [[]];
         
         for (var i=1; i<allTextLines.length; i++) {
             var data = allTextLines[i].split(',');
 
-            if(i%3===1){
+            if(problems[problems.length-1].length===3){
                 problems.push([]);
             }
-
-            problems[problems.length-1].push(
-                <Col md='4' className="height">
-                    <Problem    
-                        name = {data[0]}
-                        link = {data[1]}
-                        diff = {data[2]}
-                        slink =  {data[3]}
-                        sol = {data[4]}
-                        week = {this.week}
-                        quarter = {this.quarter}
-                    >
-                    </Problem>
-                </Col>
-            );
+            if (data[4]<this.session){
+                problems[problems.length-1].push(
+                    <Col md='4' className="height">
+                        <Problem    
+                            className="center"
+                            name = {data[0]}
+                            link = {data[1]}
+                            diff = {data[2]}
+                            slink =  {data[3]}
+                            con = {data[5]}
+                            txt = "Solution"
+                            week = {this.week}
+                            quarter = {this.quarter}
+                            session = {this.session}
+                        >
+                        </Problem>
+                    </Col>
+                );
+            }
         }
 
         if(problems.length>0){
-            while(problems[problems.length-1].length<3){
-                problems[problems.length-1].push(null);
+            if(problems[problems.length-1].length===0){
+                problems.pop();
+            }
+            if(problems.length>0){
+                while(problems[problems.length-1].length<3){
+                    problems[problems.length-1].push(null);
+                }
             }
         }
 
         for (var j=0; j<problems.length; j++){
             this.rows.push(
-                <Row key={j.toString()} className="space center">
+                <Row key={j.toString()} className="space">
                     {problems[j][0]}
                     {problems[j][1]}
                     {problems[j][2]}
@@ -70,12 +80,12 @@ export default class Week extends Component {
     }
 
     render() {
-        if(this.rows.length == 0){
+        if(this.rows.length === 0){
             return null;
         }else{
             return (
                 <Container>
-                    <Button color="primary" onClick={this.toggle} 
+                    <Button className="b" onClick={this.toggle} 
                     style={{    marginTop: '1rem', width: '100%',
                                 height: '30%', justifyContent: 'center',
                                 alignItems: 'center', marginBottom: '1rem',

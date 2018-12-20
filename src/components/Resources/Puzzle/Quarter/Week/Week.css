@@ -5,7 +5,7 @@
 .space {
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left:0;
+    margin-left:0px;
     margin-right:0px;
 }
 
@@ -13,10 +13,25 @@
     justify-content: center;
     justify-items: center;
     justify-self: center;
+}
+
+.pad {
     margin-left:0;
-    padding-left:0;
+    margin-right:0;
+    padding-left:30px;
+    padding-right:30px;
 }
 
 .height{
     min-height: 100%;
+}
+
+.b{
+    background-color: rgb(41, 65, 87);
+    color: white;
+}
+
+.b:hover{
+    background-color: #02284B;
+    color: white;
 }

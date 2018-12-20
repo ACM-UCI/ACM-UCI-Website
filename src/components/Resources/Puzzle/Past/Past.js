@@ -12,7 +12,6 @@ export default class Past extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.quarters = props.quarters;
-    this.quarters.push("Winter 2019"); // comment this out when quarter starts
     this.state = {
       activeTab: (this.quarters.length-1).toString()
     };
@@ -21,14 +20,28 @@ export default class Past extends React.Component {
 
     this.navitems = [];
     this.tabcontents = [];
+    var curr = this.quarters.length-1
 
-    for(var i=0; i<this.quarters.length; i++){
+    for(var i=0; i<this.quarters.length-1; i++){
       this.tabcontents.push(
         <TabPane key = {(i).toString()} tabId={(i).toString()}>
-          <Quarter quarter={this.quarters[i]}></Quarter>
+          <Quarter 
+            session = {3} 
+            week = {11} 
+            quarter={this.quarters[i]}
+          ></Quarter>
         </TabPane>
       )
     }
+    this.tabcontents.push(
+      <TabPane key = {(curr).toString()} tabId={(curr).toString()}>
+        <Quarter 
+          session = {this.session} 
+          week = {this.week} 
+          quarter={this.quarters[curr]}
+        ></Quarter>
+      </TabPane>
+    )
 
   }
 

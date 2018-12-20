@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Container, Row, Col, Collapse, Button} from 'reactstrap';
+import { Container, Row, Col} from 'reactstrap';
 import Problem from '../Quarter/Week/Problem/Problem';
 import './Present.css';
 
@@ -13,6 +13,7 @@ export default class Present extends Component {
         this.quarter = props.quarter;
         this.session = props.session;
         this.rows = [];
+        this.end = props.end;
 
         var xhr = new XMLHttpRequest();
         xhr.open("GET", this.quarter+"/"+this.week +".csv", false);
@@ -27,12 +28,17 @@ export default class Present extends Component {
         
         for (var i=1; i<allTextLines.length; i++) {
             var data = allTextLines[i].split(',');
-
-            if(problems[problems.length-1].length==3){
+            var t = "Solution";
+            if(problems[problems.length-1].length===3){
                 problems.push([]);
             }
 
-            if (data[4]==this.session){
+            if(!this.end){
+                t = "Help";
+                data[3] = "";
+            }
+
+            if (data[4]===this.session.toString()){
                 problems[problems.length-1].push(
                     <Col md='4' className="height">
                         <Problem    
@@ -40,7 +46,11 @@ export default class Present extends Component {
                             link = {data[1]}
                             diff = {data[2]}
                             slink =  {data[3]}
-                            sol = {data[4]}
+                            con = {data[5]}
+                            week = {this.week}
+                            quarter = {this.quarter}
+                            session = {this.session}
+                            txt = {t}
                         >
                         </Problem>
                     </Col>
@@ -49,8 +59,15 @@ export default class Present extends Component {
             
         }
 
-        while(problems[problems.length-1].length<3){
-            problems[problems.length-1].push(null);
+        if(problems.length>0){
+            if(problems[problems.length-1].length===0){
+                problems.pop();
+            }
+            if(problems.length>0){
+                while(problems[problems.length-1].length<3){
+                    problems[problems.length-1].push(null);
+                }
+            }
         }
 
         for (var j=0; j<problems.length; j++){

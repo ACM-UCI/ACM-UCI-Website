@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Row, Container} from 'reactstrap';
 import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
 import fblogo from "../../../../../../img/fb.png";
+import processCon from "../processCon"
 
 var Python = (codeString) => {
   return <SyntaxHighlighter language='python' style={tomorrowNight}>{codeString}</SyntaxHighlighter>;  
@@ -25,48 +26,32 @@ export default class Solution extends Component {
         this.toggle = this.toggle.bind(this);
         this.type = (props.link.split("."));
         this.type = this.type[this.type.length-1];
+        this.link = props.link;
+        this.con = props.con;
+        this.txt = props.txt;
 
-        if(props.link.startsWith("ASK")){
-            var fb="https://www.facebook.com/groups/acmuci/";
-            if(props.link.endsWith("Karthik")){
-                fb = "https://www.facebook.com/karthik.gajulapalli.7";
-            }else if(props.link.endsWith("Chinmay")){
-                fb = "https://www.facebook.com/sauercraut";
-            }else if(props.link.endsWith("Pooya")){
-                fb = "https://www.facebook.com/khosravipooya";
-            }else if(props.link.endsWith("Bryon")){
-                fb = "https://www.facebook.com/btjanaka";
-            }else if(props.link.endsWith("Jens")){
-                fb = "https://www.facebook.com/jens.tuyls";
-            }else if(props.link.endsWith("Blake")){
-                fb = "https://www.facebook.com/blake.wakasa";
-            }else if(props.link.endsWith("Jacky")){
-                fb = "https://www.facebook.com/profile.php?id=100007416798455";
-            }else if(props.link.endsWith("Chris")){
-                fb = "https://www.facebook.com/christopher.chu.35";
-            }else if(props.link.endsWith("Meta")){
-                fb = "https://www.facebook.com/meta.novitia";
-            }else if(props.link.endsWith("Frank")){
-                fb = "https://www.facebook.com/profile.php?id=100012887927941";
-            }else if(props.link.endsWith("Tim")){
-                fb = "https://www.facebook.com/blazedspeeder";
-            }else if(props.link.endsWith("Junlin")){
-                fb = "https://www.facebook.com/jack.wang.315080";
-            }else if(props.link.endsWith("Armen")){
-                fb = "https://www.facebook.com/amouradyan";
+        if(props.link===""){
+            var fb=processCon(props.con);
+            if(this.con===""){
+                this.con = " Any Board Member";
             }
-            this.code = <Row className = "center">
-                <a href = {fb} target="_blank">
-                    <img  className='fb' src={fblogo}/>
-                </a>
-            </Row>
+            this.link="Bother "+this.con;
+            this.code = <Container>
+                <Row className = "center">
+                    <img alt={this.con+"'s photo"} className="pc" src={fb[1]}/>
+                </Row>
+                <Row className = "center">
+                    <a href = {fb[0]} target="_blank">
+                        <img  alt="facebook link" className='fb' src={fblogo}/>
+                    </a>
+                </Row>
+            </Container>
         }
         else{
-            this.link = "solutions/"+props.quarter+"/"+props.week+"/"+props.link;
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", this.link, false);
+            xhr.open("GET", "solutions/"+props.quarter+"/"+props.week+"/"+props.link, false);
             xhr.send();
-            if(this.type=='py'){
+            if(this.type==='py'){
                 this.code = Python(xhr.responseText);
             }else{
                 this.code = Cpp(xhr.responseText);
@@ -88,9 +73,9 @@ export default class Solution extends Component {
     if (true){
         return (
           <div>
-            <Button onClick={this.toggle}>Solution</Button>
+            <Button className = "btn" onClick={this.toggle}>{this.txt}</Button>
             <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
-              <ModalHeader toggle={this.toggle}>{this.props.link}</ModalHeader>
+              <ModalHeader toggle={this.toggle}>{this.link}</ModalHeader>
               <ModalBody>{this.code}</ModalBody>
             </Modal>
           </div>

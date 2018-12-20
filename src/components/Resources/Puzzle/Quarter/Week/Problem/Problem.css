@@ -13,7 +13,7 @@
 }
 
 .word :hover{
-    color: navy;
+    color: rgb(187, 187, 189);
 }
 
 .easy {
@@ -45,4 +45,22 @@
 .event {
     background-color: rgb(118, 199, 185);
     min-height: 100%;
+}
+
+.thanksgiving {
+    background-image: url("../../../../../../img/thanksgiving.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 98px;
+}
+
+.finals {
+    background-color: black;
+    background-image: url("../../../../../../img/finals.png");
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 98px;
+    padding-top:20px;
 }
