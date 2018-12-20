@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Row } from 'reactstrap';
 import './Solution.css';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
+import fblogo from "../../../../../../img/fb.png";
+
+var Python = (codeString) => {
+  return <SyntaxHighlighter language='python' style={tomorrowNight}>{codeString}</SyntaxHighlighter>;  
+}
+
+var Cpp = (codeString) => {
+    return <SyntaxHighlighter language='cpp' style={tomorrowNight}>{codeString}</SyntaxHighlighter>;  
+}
+
 
 export default class Solution extends Component {
 
@@ -11,6 +23,56 @@ export default class Solution extends Component {
             modal: false
         };
         this.toggle = this.toggle.bind(this);
+        this.type = (props.link.split("."));
+        this.type = this.type[this.type.length-1];
+
+        if(props.link.startsWith("ASK")){
+            var fb="https://www.facebook.com/groups/acmuci/";
+            if(props.link.endsWith("Karthik")){
+                fb = "https://www.facebook.com/karthik.gajulapalli.7";
+            }else if(props.link.endsWith("Chinmay")){
+                fb = "https://www.facebook.com/sauercraut";
+            }else if(props.link.endsWith("Pooya")){
+                fb = "https://www.facebook.com/khosravipooya";
+            }else if(props.link.endsWith("Bryon")){
+                fb = "https://www.facebook.com/btjanaka";
+            }else if(props.link.endsWith("Jens")){
+                fb = "https://www.facebook.com/jens.tuyls";
+            }else if(props.link.endsWith("Blake")){
+                fb = "https://www.facebook.com/blake.wakasa";
+            }else if(props.link.endsWith("Jacky")){
+                fb = "https://www.facebook.com/profile.php?id=100007416798455";
+            }else if(props.link.endsWith("Chris")){
+                fb = "https://www.facebook.com/christopher.chu.35";
+            }else if(props.link.endsWith("Meta")){
+                fb = "https://www.facebook.com/meta.novitia";
+            }else if(props.link.endsWith("Frank")){
+                fb = "https://www.facebook.com/profile.php?id=100012887927941";
+            }else if(props.link.endsWith("Tim")){
+                fb = "https://www.facebook.com/blazedspeeder";
+            }else if(props.link.endsWith("Junlin")){
+                fb = "https://www.facebook.com/jack.wang.315080";
+            }else if(props.link.endsWith("Armen")){
+                fb = "https://www.facebook.com/amouradyan";
+            }
+            this.code = <Row className = "center">
+                <a href = {fb} target="_blank">
+                    <img  className='fb' src={fblogo}/>
+                </a>
+            </Row>
+        }
+        else{
+            this.link = "solutions/"+props.quarter+"/"+props.week+"/"+props.link;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", this.link, false);
+            xhr.send();
+            if(this.type=='py'){
+                this.code = Python(xhr.responseText);
+            }else{
+                this.code = Cpp(xhr.responseText);
+            }
+        }
+        
     }
 
     toggle() {
@@ -19,21 +81,17 @@ export default class Solution extends Component {
         });
     }
 
+    
+
     render() {
 
-    if (this.show==="show"){
+    if (true){
         return (
           <div>
             <Button onClick={this.toggle}>Solution</Button>
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-              <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-              <ModalBody>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </ModalBody>
-              <ModalFooter>
-                <Button color="primary" onClick={this.toggle}>Download</Button>{' '}
-                <Button color="secondary" onClick={this.toggle}>Close</Button>
-              </ModalFooter>
+            <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
+              <ModalHeader toggle={this.toggle}>{this.props.link}</ModalHeader>
+              <ModalBody>{this.code}</ModalBody>
             </Modal>
           </div>
         );

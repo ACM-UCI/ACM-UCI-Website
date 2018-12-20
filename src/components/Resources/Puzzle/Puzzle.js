@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import {Alert, Row} from 'reactstrap';
 import Navigation from '../../Navbar/Navbar';
 import Banner from '../../Banner/Banner';
 import Past from './Past/Past';
@@ -22,7 +23,7 @@ class Puzzle extends Component {
         var today = new Date();
         var utc_ms = today.getTime() + today.getTimezoneOffset()*60*1000;
         var i = 0;
-        while(i+1<startDates.length && startDates[i+1].getTime()<utc_ms){
+        while(i+1<startDates.length && startDates[i+1].getTime()<=utc_ms){
             i+=1;
         }
         this.quarter = quarters[i];
@@ -41,16 +42,17 @@ class Puzzle extends Component {
         var session_2 = session_1+2;
         var session_time = startDates[i].getUTCHours();
         this.session = "1";
-        if (    day>session_2 || (day==session_2 && time>=session_time) || 
-                day<session_1 || (day==session_1 && time<session_time)){
-            this.session = "2";
-        }
+        if (day>session_2 || (day==session_2 && time>=session_time) || day<session_1 || (day==session_1 && time<session_time))
+        {this.session = "2";}
 
         // Handling after quarter dates
         if (this.week>11){
             this.session = 2;
             this.week = 11;
         }
+
+        // List of quarters that will be included in past solutions
+        this.quarters = quarters.slice(0,i+1);
 
     }
 
@@ -63,14 +65,38 @@ class Puzzle extends Component {
         <div className = "center">
             <Navigation></Navigation>
             <Banner lead="Weekly Problems and Solutions" leadSub="Ready to get your minds blown?"></Banner>
-            
+            <div className='center'>
+                <Row className="center">
+                    <Alert className="easy m">
+                        Easy
+                    </Alert>
+                    <Alert className="med m">
+                        Medium
+                    </Alert>
+                    <Alert className="hard m">
+                        Hard
+                    </Alert>
+                    <Alert className="icpc m">
+                        ICPC
+                    </Alert>
+                    <Alert className="codealong m">
+                        Code Along
+                    </Alert>
+                    <Alert className="event m">
+                        Event
+                    </Alert>
+                </Row>
+            </div>
+
             <div className = "small center">
                 <Present week={this.week} quarter={this.quarter} session={this.session}></Present>
             </div>
 
             <div className = "small center">
-                <Past className = "center"></Past>
+                <Past week={this.week} quarters={this.quarters} session={this.session} className = "center"></Past>
             </div>
+
+            <div><br/><br/></div>
             
 
         </div>

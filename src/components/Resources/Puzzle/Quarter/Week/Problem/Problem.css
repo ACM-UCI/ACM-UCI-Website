@@ -36,3 +36,13 @@
     background-color: rgb(25, 30, 88);
     min-height: 100%;
 }
+
+.codealong {
+    background-color: rgb(117, 121, 168);
+    min-height: 100%;
+}
+
+.event {
+    background-color: rgb(118, 199, 185);
+    min-height: 100%;
+}

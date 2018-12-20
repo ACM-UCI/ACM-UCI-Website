@@ -1,0 +1,22 @@
+.problem {
+    max-width: 20%;
+}
+
+.space {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left:0;
+    margin-right:0px;
+}
+
+.center {
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    margin-left:0;
+    padding-left:0;
+}
+
+.height{
+    min-height: 100%;
+}

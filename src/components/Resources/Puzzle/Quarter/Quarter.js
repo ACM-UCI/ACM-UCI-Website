@@ -4,23 +4,26 @@ import { Container} from 'reactstrap';
 import Week from './Week/Week';
 import './Quarter.css';
 
-class Puzzle extends Component {
+export default  class Quarter extends Component {
     constructor(props) {
         super(props);
-        this.toggle = this.toggle.bind(this);
-        this.state = { collapse: false };
+        this.quarter = props.quarter;
+        this.weeks=[]
+        for(var i=1; i<=11; i++){
+            var week = <Week key = {i} week={i.toString()} quarter={this.quarter}></Week>
+            if(week!=null){this.weeks.push(week);}
         }
+    }
 
-        toggle() {
-        this.setState({ collapse: !this.state.collapse });
-        }
     render() {
-        return (
-            <Container>
-                <Week week='2' quarter="Fall 2018"></Week>
-            </Container>
-        );
+        if(this.weeks.length==0){
+            return null;
+        }else{
+            return (
+                <Container>
+                    {this.weeks}
+                </Container>
+            );
+        }
     }
 }
-
-export default Puzzle;

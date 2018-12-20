@@ -39,30 +39,29 @@ export default class Week extends Component {
                         diff = {data[2]}
                         slink =  {data[3]}
                         sol = {data[4]}
+                        week = {this.week}
+                        quarter = {this.quarter}
                     >
                     </Problem>
                 </Col>
             );
         }
 
-        while(problems[problems.length-1].length<3){
-            problems[problems.length-1].push(null);
+        if(problems.length>0){
+            while(problems[problems.length-1].length<3){
+                problems[problems.length-1].push(null);
+            }
         }
 
         for (var j=0; j<problems.length; j++){
             this.rows.push(
-                [j,
-                <Row className="space center">
+                <Row key={j.toString()} className="space center">
                     {problems[j][0]}
                     {problems[j][1]}
                     {problems[j][2]}
-                </Row>]
+                </Row>
             );
         }
-
-        this.ls = this.rows.map((row) =>
-            <ul className = "center" key={row[0].toString()}>{row[1]}</ul>
-        );
 
     }
 
@@ -71,20 +70,24 @@ export default class Week extends Component {
     }
 
     render() {
-        return (
-            <Container>
-                <Button color="primary" onClick={this.toggle} 
-                style={{    marginTop: '1rem', width: '100%',
-                            height: '30%', justifyContent: 'center',
-                            alignItems: 'center', marginBottom: '1rem',
-                            fontSize:'26px'}}>
-                            Week {this.week}
-                </Button>
-
-                <Collapse isOpen={this.state.collapse}>
-                    {this.ls}
-                </Collapse>
-            </Container>
-        );
+        if(this.rows.length == 0){
+            return null;
+        }else{
+            return (
+                <Container>
+                    <Button color="primary" onClick={this.toggle} 
+                    style={{    marginTop: '1rem', width: '100%',
+                                height: '30%', justifyContent: 'center',
+                                alignItems: 'center', marginBottom: '1rem',
+                                fontSize:'26px'}}>
+                                Week {this.week}
+                    </Button>
+    
+                    <Collapse isOpen={this.state.collapse}>
+                        {this.rows}
+                    </Collapse>
+                </Container>
+            );
+        }
     }
 }

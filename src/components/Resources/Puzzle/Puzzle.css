@@ -15,3 +15,52 @@
     margin-bottom: 20px;
     margin-left:0;
 }
+
+.m {
+    height: 80%;
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white;
+}
+
+.easy {
+    background-color: lightblue;
+}
+
+.med {
+    background-color: rgb(86, 162, 187);
+}
+
+.hard {
+    background-color: rgb(75, 112, 190);
+}
+
+.icpc {
+    background-color: rgb(25, 30, 88);
+}
+
+.codealong {
+    background-color: rgb(117, 121, 168);
+}
+
+.event {
+    background-color: rgb(118, 199, 185);
+}
+
+.c {
+    color: white;
+    justify-self: center;
+    font-size: 50px;
+}
+
+.s{
+    max-width : 80%;
+    background-color: #6DB6E2;
+}

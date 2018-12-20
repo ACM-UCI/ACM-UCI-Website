@@ -1,0 +1,11 @@
+Name,Link,Difficulty,Solution,Session
+Need for Speed,https://open.kattis.com/problems/speed,easy,speed.py,1
+Suspension Bridges,https://open.kattis.com/problems/suspensionbridges,med,bridges.py,1
+Painter’s Partition 2,https://www.geeksforgeeks.org/painters-partition-problem-set-2/,codealong,ASK Chinmay,2
+Painter’s Partition,https://www.geeksforgeeks.org/painters-partition-problem/,codealong,ASK Chinmay,2
+Millionaire Madness,https://open.kattis.com/problems/millionairemadness,med,ASK Chinmay,2
+Glyph Recognition,https://open.kattis.com/problems/glyphrecognition,med,glyph_recog.py,2
+Euclidean TSP,https://open.kattis.com/contests/bqfu9s/problems/euclideantsp ,med,euclideantsp.py,2
+Longest Increasing Subsequence,https://leetcode.com/problems/longest-increasing-subsequence/,icpc,leetcode300.cpp,2
+Ilya and the Tree,http://codeforces.com/problemset/problem/842/C,icpc,ASK Jacky,2
+Jumbled String,http://codeforces.com/gym/101933/problem/J,icpc,jumbled_str.py,2
