@@ -73,7 +73,7 @@ export default class Solution extends Component {
     if (true){
         return (
           <div>
-            <Button className = "btn" onClick={this.toggle}>{this.txt}</Button>
+            <Button className = "btn-sol" onClick={this.toggle}>{this.txt}</Button>
             <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
               <ModalHeader toggle={this.toggle}>{this.link}</ModalHeader>
               <ModalBody>{this.code}</ModalBody>
