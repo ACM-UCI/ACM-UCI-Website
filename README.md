@@ -58,4 +58,5 @@ There are only 2 steps to add problemsets to the website:
 3. Assumed that contributers are board members, some may not have pictures
 4. Solutions must be within proper week as specified in the CSVs
 5. TIMEZONES MAY CAUSE BUGS, may have to recheck daylight saving times
-6. Not much error handling done :')
+6. Supports only python and c++ solutions :)), may add more if needed
+7. Not much error handling done :')
