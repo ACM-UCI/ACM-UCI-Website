@@ -1,11 +1,11 @@
-import acm from "../../../../../acm_logo.svg";
-import karthik from '../../../../../img/karthik.jpg';
-import blakePooya from '../../../../../img/blake-pooya.jpg';
-import chinmay from '../../../../../img/chinmay.jpg';
-import jens from '../../../../../img/jens.jpg';
-import bryon from '../../../../../img/bryon.jpg'
-import jacky from '../../../../../img/jacky.jpg';
-import meta from '../../../../../img/meta.jpg';
+import acm from "../../../../../../acm_logo.svg";
+import karthik from '../../../../../../img/karthik.jpg';
+import blakePooya from '../../../../../../img/blake-pooya.jpg';
+import chinmay from '../../../../../../img/chinmay.jpg';
+import jens from '../../../../../../img/jens.jpg';
+import bryon from '../../../../../../img/bryon.jpg'
+import jacky from '../../../../../../img/jacky.jpg';
+import meta from '../../../../../../img/meta.jpg';
 
 export default function processLink(link){
     var fb=["https://www.facebook.com/groups/acmuci/",acm];

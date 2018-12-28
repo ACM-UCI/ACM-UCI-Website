@@ -3,8 +3,8 @@ import { Button, Modal, ModalHeader, ModalBody, Row, Container} from 'reactstrap
 import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
-import fblogo from "../../../../../../img/fb.png";
-import processCon from "../processCon"
+import fblogo from "../../../../../../../img/fb.png";
+import processCon from "../processCon.js"
 
 var Python = (codeString) => {
   return <SyntaxHighlighter language='python' style={tomorrowNight}>{codeString}</SyntaxHighlighter>;  
@@ -69,20 +69,14 @@ export default class Solution extends Component {
     
 
     render() {
-
-    if (true){
         return (
-          <div>
+            <div>
             <Button className = "btn-sol" onClick={this.toggle}>{this.txt}</Button>
             <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
-              <ModalHeader toggle={this.toggle}>{this.link}</ModalHeader>
-              <ModalBody>{this.code}</ModalBody>
+                <ModalHeader toggle={this.toggle}>{this.link}</ModalHeader>
+                <ModalBody>{this.code}</ModalBody>
             </Modal>
-          </div>
+            </div>
         );
-    }else{
-        return null;
-    }
-    
   }
 }

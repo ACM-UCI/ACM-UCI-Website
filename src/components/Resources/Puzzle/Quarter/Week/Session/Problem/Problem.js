@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Col, Card, CardBody, CardTitle} from 'reactstrap';
 import './Problem.css';
 import Solution from '../Solution/Solution';
-import processCon from '../processCon';
+import processCon from '../processCon.js';
 
 export default class Problem extends Component {
 

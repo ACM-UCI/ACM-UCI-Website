@@ -107,6 +107,8 @@ class Puzzle extends Component {
                 ></Present>
             </div>
 
+            <br/>
+
             <div className = "small center">
                 <Past 
                     week={this.week} 

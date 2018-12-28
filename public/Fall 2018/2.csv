@@ -2,6 +2,11 @@ Name,Link,Difficulty,Solution,Session,Contributor
 Coin Change,https://leetcode.com/problems/coin-change/description/,easy,coin_change.cpp,1,Tim
 Flatten Binary Tree,https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/,easy,flatten_tree_to_list.py,1,Armen
 Rational Sequence,https://open.kattis.com/problems/rationalsequence3,easy,rational.py,1,Karthik
+Wormholes,https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=499,med,558.cpp,1,Jens
+Commando War,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=658&page=show_problem&problem=2829,med,uva11729.cpp,1,Bryon
+String Reduction,https://www.hackerrank.com/challenges/string-reduction/problem,med,StringReduction.py,1,Chinmay
+ICPC,If you're interested in ICPC make sure to fill out the form and watch out for updates on facebook page,announcement,,1,
+IEEEXtreme,IEEExtreme is on next Friday,announcement,,1,
 Wormholes,https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=499,med,558.cpp,2,Jens
 Commando War,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=658&page=show_problem&problem=2829,med,uva11729.cpp,2,Bryon
 String Reduction,https://www.hackerrank.com/challenges/string-reduction/problem,med,StringReduction.py,2,Chinmay
@@ -9,3 +14,5 @@ Oversized Pancake Flipper,https://code.google.com/codejam/contest/3264486/dashbo
 Compare the Triplets,https://www.hackerrank.com/challenges/compare-the-triplets/problem,easy,comp_trip.cpp,2,Blake
 First Missing Positive,https://leetcode.com/problems/first-missing-positive/description/,easy,first_missing_positive.py,2,Armen
 ICPC Problemset,https://open.kattis.com/problem-sources/2015%20I3CPC%20East-Central%20NA%20Regional%20Contest ,icpc,,2,
+ICPC,If you want to participate in ICPC make sure you are up to date with posts on Facebook group,announcement,,2,
+IEEExtreme,IEEExtreme is on the 19th,announcement,,2,

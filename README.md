@@ -37,7 +37,7 @@ There are only 2 steps to add problemsets to the website:
     * Link          : full link to the problem (*see note_1*)
     * Difficulty    : 'easy', 'med', 'hard', 'icpc' or 'codealong' (*see note_2!*)
     * Solution      : name of solution file, w/out path, w/ file type (*see note_1*)
-    * Session       : session when the problem is posted on (*see note_3*)
+    * Session       : session when the problem is posted on
 
 * note_1: 
     If no link or no solution provided, will give photo and FB link
@@ -48,9 +48,6 @@ There are only 2 steps to add problemsets to the website:
     special, and will not provide the solution button. Only those
     listed in the steps will provide a solution button. To add new
     tags, you will need to add to 2 files (Puzzle and Problem).
-* note_3:
-    If the problem is reused within the week, please set it to 
-    the last session it is used on.
 
 ## WARNINGS
 1. Assumed that the club's first week of meeting is UCI's Week 1 of each quarter (hard-coded)

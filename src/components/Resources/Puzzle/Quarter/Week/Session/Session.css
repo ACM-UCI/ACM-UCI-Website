@@ -2,8 +2,8 @@
     max-width: 20%;
 }
 
-.space {
-    margin-top: 20px;
+.topmar {
+    margin-top: 40px;
     margin-bottom: 20px;
     margin-left:0px;
     margin-right:0px;
@@ -15,9 +15,22 @@
     justify-self: center;
 }
 
-.marpad {
-    margin-right: 3%;
-    margin-left: 3%;
+.nothing {
+    background-color: transparent;
+    color: gray;
+    border: None;
+    font-size: 30px;
+}
+
+
+.back {
+    padding: 2%;
+    margin-bottom: 2%;
+    border-radius: 10%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: rgb(146, 188, 230);
+    width: 100%;
 }
 
 .pad {
@@ -26,7 +39,6 @@
     padding-left:30px;
     padding-right:30px;
 }
-
 
 .height{
     min-height: 100%;

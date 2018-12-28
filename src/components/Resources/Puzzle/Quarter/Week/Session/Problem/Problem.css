@@ -48,19 +48,19 @@
 }
 
 .thanksgiving {
-    background-image: url("../../../../../../img/thanksgiving.png");
+    background-image: url("../../../../../../../img/thanksgiving.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 98px;
+    height: 98px;
 }
 
 .finals {
     background-color: black;
-    background-image: url("../../../../../../img/finals.png");
+    background-image: url("../../../../../../../img/finals.png");
     background-size: 40%;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 98px;
+    height: 98px;
     padding-top:20px;
 }
