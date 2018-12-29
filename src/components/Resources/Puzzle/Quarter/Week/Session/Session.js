@@ -13,9 +13,13 @@ export default class Session extends Component {
         this.quarter = props.quarter;
         this.session = props.session;
         this.rows = [[]];
+        this.link = "https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/"+
+                    this.quarter.split(' ')[0] + "%20" + 
+                    this.quarter.split(' ')[1] + "/" + 
+                    this.week +".csv";
 
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", this.quarter+"/"+this.week +".csv", false);
+        xhr.open("GET", this.link, false);
         xhr.send();
         this.processData(xhr.responseText);
 

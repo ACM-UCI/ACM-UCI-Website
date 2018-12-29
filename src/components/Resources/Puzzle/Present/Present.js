@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col} from 'reactstrap';
 import Problem from '../Quarter/Week/Session/Problem/Problem';
 import Announcement from '../Quarter/Week/Session/Announcement/Announcement'
+// import '../getData';
 import './Present.css';
 
 export default class Present extends Component {
@@ -15,9 +16,13 @@ export default class Present extends Component {
         this.session = props.session;
         this.rows = [];
         this.end = props.end;
-
+        this.link = "https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/"+
+                    this.quarter.split(' ')[0] + "%20" + 
+                    this.quarter.split(' ')[1] + "/" + 
+                    this.week +".csv";
+        
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", this.quarter+"/"+this.week +".csv", false);
+        xhr.open("GET", this.link, false);
         xhr.send();
         this.processData(xhr.responseText);
 
