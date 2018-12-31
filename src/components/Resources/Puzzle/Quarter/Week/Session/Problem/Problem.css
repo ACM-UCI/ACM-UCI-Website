@@ -1,0 +1,66 @@
+.word {
+    color: white;
+}
+
+.center {
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.word :hover{
+    color: rgb(187, 187, 189);
+}
+
+.easy {
+    justify-items: center;
+    background-color: lightblue;
+    min-height: 100%;
+}
+
+.med {
+    background-color: rgb(86, 162, 187);
+    min-height: 100%;
+}
+
+.hard {
+    background-color: rgb(75, 112, 190);
+    min-height: 100%;
+}
+
+.icpc {
+    background-color: rgb(25, 30, 88);
+    min-height: 100%;
+}
+
+.codealong {
+    background-color: rgb(117, 121, 168);
+    min-height: 100%;
+}
+
+.event {
+    background-color: rgb(118, 199, 185);
+    min-height: 100%;
+}
+
+.thanksgiving {
+    background-image: url("../../../../../../../img/thanksgiving.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 98px;
+}
+
+.finals {
+    background-color: black;
+    background-image: url("../../../../../../../img/finals.png");
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 98px;
+    padding-top:20px;
+}

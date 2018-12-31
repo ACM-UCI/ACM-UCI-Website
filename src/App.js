@@ -5,6 +5,7 @@ import Resources from './components/Resources/Resources';
 import Board from './components/Board/Board';
 import Contact from './components/Contact/Contact';
 import IntroCP from './components/Resources/IntroCP/IntroCP';
+import Puzzle from './components/Resources/Puzzle/Puzzle';
 import { Route, Switch } from 'react-router-dom';
 import './scss/custom.css';
 import './App.css';
@@ -19,6 +20,7 @@ class App extends Component {
           <Route path='/board' component={Board} />
           <Route path='/contact' component={Contact} />
           <Route path='/introToCp' component={IntroCP} />
+          <Route path='/puzzle' component={Puzzle} />
         </Switch>
     );
   }

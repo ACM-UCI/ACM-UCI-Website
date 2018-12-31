@@ -31,7 +31,7 @@ class Navigation extends Component {
   render() {
     return (
       <Navbar className="navbar" color="white" dark expand="md">
-        <NavbarBrand className="nav-brand" href="/"><img src={logo} id="logo" alt="ACM@UCI logo" /></NavbarBrand>
+        <NavbarBrand className="nav-brand" href="#"><img src={logo} id="logo" alt="ACM@UCI logo" /></NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="mx-auto text-center" navbar>

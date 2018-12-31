@@ -1,0 +1,22 @@
+.big {
+    width: 80%;
+}
+.fb {
+    height: 50;
+    width: 50px;
+    margin-top: 20px;
+    margin-left:0;
+    margin-right:15px;
+  }
+
+.btn-sol {
+    background-color: white;
+}
+
+.pc{
+    min-height:490px;
+    max-height:500px;
+    position: center;
+    padding-left:0;
+    padding-right:15px;
+}

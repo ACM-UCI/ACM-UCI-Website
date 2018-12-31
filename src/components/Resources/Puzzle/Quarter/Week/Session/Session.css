@@ -1,0 +1,55 @@
+.problem {
+    max-width: 20%;
+}
+
+.topmar {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left:0px;
+    margin-right:0px;
+}
+
+.center {
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+}
+
+.nothing {
+    background-color: transparent;
+    color: gray;
+    border: None;
+    font-size: 30px;
+}
+
+
+.back {
+    padding: 2%;
+    margin-bottom: 2%;
+    border-radius: 10%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: rgb(146, 188, 230);
+    width: 100%;
+}
+
+.pad {
+    margin-left:0;
+    margin-right:0;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+.height{
+    min-height: 100%;
+}
+
+.b{
+    background-color: rgb(41, 65, 87);
+    color: white;
+}
+
+.b:hover{
+    background-color: #02284B;
+    color: white;
+}
