@@ -23,13 +23,23 @@ export default class Problem extends Component {
                             con = {this.con}
                           ></Solution>
     }
-    
-    this.link = processCon(props.con)[0];
+    this.link = props.link
     this.obj = <CardTitle>{props.name}</CardTitle>
-    if(this.link!==""){
-        this.obj =  <a className= {"word "+this.props.diff} href={this.link} target="_blank">
+    if( props.diff==="easy" || 
+        props.diff==="med" || 
+        props.diff==="hard" || 
+        props.diff==="icpc" || 
+        props.diff==="codealong" ||
+        props.diff==="event"){
+          if(props.link===""){
+            this.link = processCon(props.con)[0];
+          }
+          this.obj =  <a  className= {"word "+this.props.diff} 
+                        href={this.link} 
+                        target="_blank">
                         {this.obj}
-                    </a>
+                      </a>
+    
     }
     
   }
