@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Alert, Button, Container, Row, Modal, ModalHeader, ModalBody} from 'reactstrap';
+import {Alert, Button, Row, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import './Announcement.css';
 import processCon from '../processCon'
 import fblogo from "../../../../../../../img/fb.png";
@@ -18,7 +18,7 @@ export default class Announcement extends Component {
     this.con = props.con;
     this.cname = props.con;
     this.fb = processCon(this.con);
-    if(this.con!=""){
+    if(this.con!==""){
       this.con = 
         <Button 
             onClick={this.toggle}
