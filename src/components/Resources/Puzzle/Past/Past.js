@@ -11,6 +11,7 @@ export default class Past extends React.Component {
     super(props);
 
     this.toggle = this.toggle.bind(this);
+    // contains up to current quarter
     this.quarters = props.quarters;
     this.state = {
       activeTab: (this.quarters.length-1).toString()
@@ -22,23 +23,26 @@ export default class Past extends React.Component {
     this.tabcontents = [];
     var curr = this.quarters.length-1
 
-    for(var i=0; i<this.quarters.length-1; i++){
+    // push all quarters to the tabs except current one
+    for(var i = 0; i < this.quarters.length-1; i++) {
       this.tabcontents.push(
         <TabPane key = {(i).toString()} tabId={(i).toString()}>
           <Quarter 
             session = {3} 
             week = {11} 
-            quarter={this.quarters[i]}
+            quarter = {this.quarters[i]}
           ></Quarter>
         </TabPane>
       )
     }
+
+    // push the current quarter on to the tab pane
     this.tabcontents.push(
       <TabPane key = {(curr).toString()} tabId={(curr).toString()}>
         <Quarter 
           session = {this.session} 
           week = {this.week} 
-          quarter={this.quarters[curr]}
+          quarter = {this.quarters[curr]}
         ></Quarter>
       </TabPane>
     )
