@@ -9,13 +9,13 @@ export default  class Quarter extends Component {
         super(props);
         this.weeks = [];
         
-        for(var i=1; i<=props.week-1; i++){
+        for (var i = 1; i <= props.week-1; i++){
             var week =  <Week   key = {i} 
                                 week={i.toString()} 
                                 quarter={props.quarter}
                                 session={3}
                         ></Week>
-            if(week!=null){this.weeks.push(week);}
+            if (week!=null) {this.weeks.push(week);}
         }
 
         var last_week = <Week 
@@ -29,9 +29,9 @@ export default  class Quarter extends Component {
     }
 
     render() {
-        if(this.weeks.length===0){
+        if (this.weeks.length === 0) {
             return null;
-        }else{
+        } else {
             return (
                 <Container>
                     {this.weeks}

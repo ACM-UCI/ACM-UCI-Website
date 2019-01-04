@@ -46,11 +46,11 @@ export default class Announcement extends Component {
         <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
             <ModalHeader toggle={this.toggle}>{this.cname}</ModalHeader>
             <ModalBody>
-              <Row className = "center">
+              <Row className="center">
                   <img alt={this.con+"'s photo"} className="pc" src={this.fb[1]}/>
               </Row>
               <Row className = "center">
-                  <a href = {this.fb[0]} target="_blank">
+                  <a href={this.fb[0]} target="_blank">
                       <img  alt="facebook link" className='fb' src={fblogo}/>
                   </a>
               </Row>
