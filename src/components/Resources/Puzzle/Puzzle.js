@@ -23,7 +23,10 @@ class Puzzle extends Component {
                                 new Date('January 8, 2019 17:00:00 GMT+08:00').getTime(),
                                 new Date('April 2, 2019 17:00:00 GMT+07:00').getTime()
                             ]
+        
+        // change below for testing [ place desired date inside Date() ]
         var today = new Date().getTime();
+
         var i = 0;
         while(i+1<startDates.length && startDates[i+1]<=today){
             i+=1;

@@ -48,8 +48,12 @@ export default class Solution extends Component {
             </Container>
         }
         else{
+            var solLink =   "https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/solutions/" +
+                            props.quarter.split(' ')[0] + "%20" + 
+                            props.quarter.split(' ')[1] + "/" + 
+                            props.week +"/"+props.link;
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "solutions/"+props.quarter+"/"+props.week+"/"+props.link, false);
+            xhr.open("GET", solLink, false);
             xhr.send();
             if(this.type==='py'){
                 this.code = Python(xhr.responseText);
