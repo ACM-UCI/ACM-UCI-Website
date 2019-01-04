@@ -70,11 +70,6 @@ export default class Session extends Component {
             }
         }
 
-        // this.rows[k].push(
-        //     <Col sm="12" md={{ size: 6, offset: 3 }}>
-        //         <Alert color="dark">Session {k+1}</Alert>
-        //     </Col>
-        // )
         if(problems[0].length>0){
             
             if(problems[problems.length-1].length===0){

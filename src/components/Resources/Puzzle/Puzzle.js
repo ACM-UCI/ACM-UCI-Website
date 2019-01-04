@@ -46,7 +46,7 @@ class Puzzle extends Component {
 
         // END
         // check if the session ended, assuming each session lasts 2 hours
-        var tm = (today-startDates[i]/1000/60/60)%24;
+        var tm = ((today-startDates[i])/1000/60/60)%24;
         if((ses===0 || ses===2)&&tm<3){
             this.end=false;
         }else{
