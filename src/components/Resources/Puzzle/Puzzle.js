@@ -46,10 +46,10 @@ class Puzzle extends Component {
         var ses = Math.floor((today-startDates[i])/1000/60/60/24)%7;
         // Usually Tuesday
         if (ses < 2){
-            this.session = "1";
+            this.session = 1;
         // Usually Thursday
         } else {
-            this.session = "2";
+            this.session = 2;
         }
 
         // END
@@ -64,8 +64,8 @@ class Puzzle extends Component {
 
         // Handling after quarter dates
         if (this.week > 11) {
-            this.session = "2";
-            this.week = "11";
+            this.session = 2;
+            this.week = 11;
             this.end = true;
         }
 

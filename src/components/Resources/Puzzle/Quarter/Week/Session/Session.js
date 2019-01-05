@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Alert, Row, Col} from 'reactstrap';
 import Problem from './Problem/Problem';
 import Announcement from './Announcement/Announcement';
+import $ from 'jquery';
 import './Session.css';
 
 export default class Session extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.processData = this.processData.bind(this);
         this.state = { collapse: false };
         this.week = props.week;
         this.quarter = props.quarter;
@@ -17,12 +19,15 @@ export default class Session extends Component {
                     this.quarter.split(' ')[0] + "%20" + 
                     this.quarter.split(' ')[1] + "/" + 
                     this.week +".csv";
+    }
 
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", this.link, false);
-        xhr.send();
-        this.processData(xhr.responseText);
-
+    // NEED TO CHECK
+    componentDidMount() {
+        // should be changed to axios request, xhr is deprecated
+        $.ajax({
+            url: this.link,
+            context: document.body
+        }).done(this.processData);
     }
 
     processData(allText) {
@@ -98,6 +103,8 @@ export default class Session extends Component {
                     </Alert>
             )
         }
+
+        this.toggle();
 
     }
 
