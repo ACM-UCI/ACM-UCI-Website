@@ -64,10 +64,12 @@ export default class Solution extends Component {
     // NEED TO CHECK
     componentDidMount() {
         // should be changed to axios request, xhr is deprecated
-        $.ajax({
-            url: this.solLink,
-            context: document.body
-        }).done(this.setCode);
+        if(this.props.link!==""){
+            $.ajax({
+                url: this.solLink,
+                context: document.body
+            }).done(this.setCode);
+        }
     }
 
     setCode(data){

@@ -32,6 +32,9 @@ export default class Week extends Component {
     }
 
     render() {
+        if(this.sessions.length===0){
+            return null;
+        }
         return (
                 <Container>
                     <Button className="b" onClick={this.toggle} 

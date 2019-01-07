@@ -58,6 +58,7 @@ export default class Past extends React.Component {
   }
 
 
+  // manual input here for quarters
   render() {
     return (
       <div>
