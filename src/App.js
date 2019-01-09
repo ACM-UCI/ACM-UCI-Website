@@ -6,6 +6,7 @@ import Board from './components/Board/Board';
 import Contact from './components/Contact/Contact';
 import IntroCP from './components/Resources/IntroCP/IntroCP';
 import Puzzle from './components/Resources/Puzzle/Puzzle';
+import Donate from './components/Donate/donate';
 import { Route, Switch } from 'react-router-dom';
 import './scss/custom.css';
 import './App.css';
@@ -18,6 +19,7 @@ class App extends Component {
           <Route path='/events' component={Events} />
           <Route path='/resources' component={Resources} />
           <Route path='/board' component={Board} />
+          <Route path='/donate' component={Donate} />
           <Route path='/contact' component={Contact} />
           <Route path='/introToCp' component={IntroCP} />
           <Route path='/puzzle' component={Puzzle} />
