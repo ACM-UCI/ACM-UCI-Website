@@ -46,7 +46,7 @@ export default class Problem extends Component {
 
   render() {
     return (
-      <Card className={this.props.diff}>
+      <Card className={this.props.diff+" probcard"}>
         <CardBody>
             <Col>
                 {this.obj}

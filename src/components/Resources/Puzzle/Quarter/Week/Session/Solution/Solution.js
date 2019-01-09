@@ -4,6 +4,7 @@ import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
 import fblogo from "../../../../../../../img/fb.png";
+import $ from 'jquery';
 import processCon from "../processCon.js"
 
 var Python = (codeString) => {
@@ -21,14 +22,18 @@ export default class Solution extends Component {
         super(props);
         this.show = props.sol;
         this.state = {
-            modal: false
+            modal: false,
+            collapse: false,
         };
         this.toggle = this.toggle.bind(this);
+        this.setCode = this.setCode.bind(this);
         this.type = (props.link.split("."));
         this.type = this.type[this.type.length-1];
         this.link = props.link;
         this.con = props.con;
         this.txt = props.txt;
+        this.code = null;
+        this.solLink = "";
 
         if(props.link===""){
             var fb=processCon(props.con);
@@ -48,22 +53,42 @@ export default class Solution extends Component {
             </Container>
         }
         else{
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "solutions/"+props.quarter+"/"+props.week+"/"+props.link, false);
-            xhr.send();
-            if(this.type==='py'){
-                this.code = Python(xhr.responseText);
-            }else{
-                this.code = Cpp(xhr.responseText);
-            }
+            this.solLink =   "https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/solutions/" +
+                            props.quarter.split(' ')[0] + "%20" + 
+                            props.quarter.split(' ')[1] + "/" + 
+                            props.week +"/"+props.link;
         }
         
+    }
+
+    // NEED TO CHECK
+    componentDidMount() {
+        // should be changed to axios request, xhr is deprecated
+        if(this.props.link!==""){
+            $.ajax({
+                url: this.solLink,
+                context: document.body
+            }).done(this.setCode);
+        }
+    }
+
+    setCode(data){
+        if(this.type==='py'){
+            this.code = Python(data);
+        }else{
+            this.code = Cpp(data);
+        }
+        this.togglevis();
     }
 
     toggle() {
         this.setState({
             modal: !this.state.modal
         });
+    }
+
+    togglevis() {
+        this.setState({ collapse: !this.state.collapse });
     }
 
     

@@ -3,19 +3,20 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Problem from '../Quarter/Week/Session/Problem/Problem';
 import Announcement from '../Quarter/Week/Session/Announcement/Announcement'
+import $ from 'jquery';
 import './Present.css';
 
 export default class Present extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.processData = this.processData.bind(this);
         this.state = { collapse: false };
-        // this.week = props.week;
-        // this.quarter = props.quarter;
-        this.week = "2"
-        this.quarter = "Fall 2018"
+        this.week = props.week;
+        this.quarter = props.quarter;
         this.session = props.session;
         this.rows = [];
+        this.done = false;
         this.end = props.end;
         this.link = "https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/"+
                     this.quarter.split(' ')[0] + "%20" + 
@@ -23,12 +24,13 @@ export default class Present extends Component {
                     this.week +".csv";
     }
 
+    // NEED TO CHECK
     componentDidMount() {
         // should be changed to axios request, xhr is deprecated
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", this.link, false);
-        xhr.send();
-        this.processData(xhr.responseText);
+        $.ajax({
+            url: this.link,
+            context: document.body
+        }).done(this.processData);
     }
 
     processData(allText) {
@@ -98,22 +100,18 @@ export default class Present extends Component {
         }
 
         // make the rows of maximum 3 problems
-        for (var j = 0; j < problems.length; j++) {
+        for (var j=0; j<problems.length; j++){
             this.rows.push(
-                [j,
-                <Row className="space center">
+                <Row key={(j+100).toString()} className="space center">
                     {problems[j][0]}
                     {problems[j][1]}
                     {problems[j][2]}
-                </Row>]
+                </Row>
             );
         }
 
-        // generate the html
-        this.ls = this.rows.map((row) =>
-            <ul className = "center" key={row[0].toString()}>{row[1]}</ul>
-        );
-
+        this.rows = <div>{this.rows}</div>;     // to fix issues on displaying
+        this.toggle();                          // re-render
     }
 
     toggle() {
@@ -124,7 +122,7 @@ export default class Present extends Component {
         return (
             <Container>
                 {this.announcements}
-                {this.ls}
+                {this.rows}
             </Container>
         );
     }

@@ -28,6 +28,8 @@
     margin-left: 20px;
     margin-right: 20px;
     color: white;
+    border-color: transparent;
+    border-radius: 25px;
 }
 
 .easy {

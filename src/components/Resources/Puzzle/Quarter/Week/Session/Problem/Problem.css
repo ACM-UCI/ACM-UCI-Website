@@ -64,3 +64,8 @@
     height: 98px;
     padding-top:20px;
 }
+
+.probcard {
+    border-radius: 20px;
+    border-color: transparent;
+}
