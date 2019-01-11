@@ -5,3 +5,9 @@ Purple Rain,https://open.kattis.com/problems/purplerain,med,purplerain.cpp,1,Met
 Cloudy Day,https://www.hackerrank.com/challenges/cloudy-day/problem,hard,,1,Karthik
 Nikita and the Game,https://www.hackerrank.com/challenges/array-splitting/problem,hard,,1,Karthik
 Note,Welcome to ACM for Winter 2019. Since you all are foolish enough to open this document I may as well give a shout out to out seminar series (Free Pizza) on Thursdays from 5-6 on some weeks more updates on Facebook page. You get to listen to interesting talks. Also if you guys are doing problems for interviews and need help with any of the problems don’t feel shy asking any of the board members. They should all be able to help. Promise that problems will get more interesting as quarter progresses.,announcement,,1,Karthik
+Buy & Sell Stock,https://leetcode.com/problems/best-time-to-buy-and-sell-stock/,easy,BestTimeToBuyAndSellStock.cpp,2,Tim
+Unbounded Knapsack,https://www.hackerrank.com/challenges/unbounded-knapsack/problem,med,,2,Karthik
+Array Splitting,https://www.hackerrank.com/challenges/array-splitting/problem,hard,array_splitting.py,2,Chris
+Value of Friendship,https://www.hackerrank.com/challenges/value-of-friendship/problem,hard,val_friend.py,2,Chinmay
+Topic,Today you get to learn DP. If you have never heard of it now is a great time to learn. Many interview questions ask this and every programming competition has at least 2 DP questions. If you need an introduction to DP I’ll give one in the beginning of class or just come and pester me.,announcement,,2,Karthik
+Note,If all these problems are too easy come and I shall give you some more challenging problems.,announcement,,2,Karthik
