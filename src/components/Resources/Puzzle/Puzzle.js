@@ -25,7 +25,7 @@ class Puzzle extends Component {
                             ]
         
         // change below for testing [ place desired date inside Date() ]
-        var today = new Date().getTime();
+        var today = new Date('January 15, 2019 17:00:00 GMT-08:00').getTime();
         // index of the quarter we are in
         var i = 0;
         while (i+1 < startDates.length && startDates[i+1] <= today) {
@@ -72,6 +72,7 @@ class Puzzle extends Component {
         // List of quarters that will be included in past solutions
         // note ".slice" does not include end argument
         this.quarters = quarters.slice(0,i+1);
+        console.log(this.session, this.quarter, this.end, this.week);
     }
 
     toggle() {
