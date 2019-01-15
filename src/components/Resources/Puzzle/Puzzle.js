@@ -6,6 +6,7 @@ import Banner from '../../Banner/Banner';
 import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
+import $ from 'jquery';
 
 class Puzzle extends Component {
 
@@ -13,8 +14,42 @@ class Puzzle extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.getDate = this.getDate.bind(this);
+        this.err = this.err.bind(this);
         this.state = { collapse: false };
-        
+        this.quarter = "Winter 2019";
+        this.week = 2;
+        this.session = 1;
+        this.end = false;
+        this.quarters = ["Fall 2018","Winter 2019"];
+        this.done=false;
+        this.error=null;
+        $.ajax({
+            url: "https://24timezones.com/time-zone/utc",
+            context: document.body,
+            crossdomain: true,
+        }).done(this.getDate);
+    }
+
+    err(){
+        this.done=true;
+        this.error= <Alert color="info">We noticed that your computer's clock is not set correctly. Please set it correctly for better performance! :)</Alert>
+        this.toggle();
+    }
+
+    getDate(data){
+        data = data.split("<div id=\"cityClock\">",2)[1];
+        data = data.split("</div>",2);
+        var date = (data[1].split(", "));
+        date = date[1]+", "+date[2].split("<")[0];
+
+        var time = data[0].split(/\D+/);
+        var ampm = data[0].split(/<\/*sup>+/)[1];
+        if(ampm==="pm"){
+            time[1]=((parseInt(time[1],10)+12)%24).toString();
+        }
+        date = date+" "+time[1]+":"+time[2]+":"+time[3]+" GMT+00:00";
+
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
         var quarters = ["Fall 2018", "Winter 2019", "Spring 2020"];
@@ -25,7 +60,16 @@ class Puzzle extends Component {
                             ]
         
         // change below for testing [ place desired date inside Date() ]
-        var today = new Date('January 15, 2019 17:00:00 GMT-08:00').getTime();
+        
+        var today = new Date(date);
+        if(!(today instanceof Date) || isNaN(today)){
+            this.err()
+            return;
+        }
+
+        today = today.getTime();
+
+
         // index of the quarter we are in
         var i = 0;
         while (i+1 < startDates.length && startDates[i+1] <= today) {
@@ -72,7 +116,9 @@ class Puzzle extends Component {
         // List of quarters that will be included in past solutions
         // note ".slice" does not include end argument
         this.quarters = quarters.slice(0,i+1);
-        console.log(this.session, this.quarter, this.end, this.week);
+        // console.log(this.session, this.quarter, this.end, this.week);
+        this.done=true;
+        this.toggle();
     }
 
     toggle() {
@@ -80,59 +126,74 @@ class Puzzle extends Component {
     }
 
     render() {
+        if(this.done){
+            return (
+                <div className = "center">
+                    <Navigation></Navigation>
+                    <Banner lead="Weekly Problems and Solutions" 
+                            leadSub="Ready to get your minds blown?"
+                    ></Banner>
+                    <div className='center'>
+                        {this.error}
+                        <Row className="center">
+                            <Alert  className="easy m"
+                                    transition={{in: true, timeout: 1300}}>
+                                Easy
+                            </Alert>
+                            <Alert className="med m"
+                                    transition={{in: true, timeout: 800}}>
+                                Medium
+                            </Alert>
+                            <Alert className="hard m"
+                                    transition={{in: true, timeout: 300}}>
+                                Hard
+                            </Alert>
+                            <Alert className="icpc m"
+                                    transition={{in: true, timeout: 300}}>
+                                ICPC
+                            </Alert>
+                            <Alert className="codealong m"
+                                    transition={{in: true, timeout: 800}}>
+                                Code Along
+                            </Alert>
+                            <Alert className="event m"
+                                    transition={{in: true, timeout: 1300}}>
+                                Event
+                            </Alert>
+                        </Row>
+                    </div>
+
+                    <div className="small center">
+                        <Present 
+                            end = {this.end} 
+                            week={this.week} 
+                            quarter={this.quarter} 
+                            session={this.session}
+                        ></Present>
+                    </div>
+
+                    <br/>
+
+                    <div className="small center">
+                        <Past 
+                            week={this.week} 
+                            quarters={this.quarters} 
+                            session={this.session} 
+                            className="center"
+                        ></Past>
+                    </div>
+
+                    <div><br/><br/></div>
+                    
+
+                </div>
+            );
+        }
         return (
-            <div className = "center">
-                <Navigation></Navigation>
-                <Banner lead="Weekly Problems and Solutions" 
-                        leadSub="Ready to get your minds blown?"
-                ></Banner>
-                <div className='center'>
-                    <Row className="center">
-                        <Alert className="easy m">
-                            Easy
-                        </Alert>
-                        <Alert className="med m">
-                            Medium
-                        </Alert>
-                        <Alert className="hard m">
-                            Hard
-                        </Alert>
-                        <Alert className="icpc m">
-                            ICPC
-                        </Alert>
-                        <Alert className="codealong m">
-                            Code Along
-                        </Alert>
-                        <Alert className="event m">
-                            Event
-                        </Alert>
-                    </Row>
-                </div>
-
-                <div className="small center">
-                    <Present 
-                        end = {this.end} 
-                        week={this.week} 
-                        quarter={this.quarter} 
-                        session={this.session}
-                    ></Present>
-                </div>
-
-                <br/>
-
-                <div className="small center">
-                    <Past 
-                        week={this.week} 
-                        quarters={this.quarters} 
-                        session={this.session} 
-                        className="center"
-                    ></Past>
-                </div>
-
-                <div><br/><br/></div>
-                
-
-            </div>
+            <Alert className="med m"
+                    transition={{in: true, timeout: 100}}>
+                Fetching Data :3
+            </Alert>
         );
     }
 }
