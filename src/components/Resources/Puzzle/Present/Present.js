@@ -28,8 +28,7 @@ export default class Present extends Component {
     componentDidMount() {
         // should be changed to axios request, xhr is deprecated
         $.ajax({
-            // url: this.link,
-            url: "Winter 2019/1.csv",
+            url: this.link,
             context: document.body
         }).done(this.processData);
     }
