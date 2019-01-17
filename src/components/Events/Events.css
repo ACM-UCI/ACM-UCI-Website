@@ -34,3 +34,16 @@
 .event-line {
     border-color: #6db6e2;
 }
+
+.event-button {
+    width: 100%;
+    color: white;
+    -webkit-transition: color 0.5s;
+    -moz-transition: color 0.5s;
+    -o-transition: color 0.5s;
+    transition: color 0.5s;
+}
+
+.event-button:hover {
+    color: #02284b;
+}

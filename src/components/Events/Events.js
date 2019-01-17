@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardTitle, CardText } from 'reactstrap';
+import {
+    Container,
+    Row,
+    Col,
+    Card,
+    CardTitle,
+    CardText,
+    CardImg,
+    CardBody,
+    Button
+} from 'reactstrap';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
+import codingNights from '../../img/girl_coding_nights_event.jpg';
 import './Events.css';
 
 class Events extends Component {
@@ -50,6 +61,46 @@ class Events extends Component {
                                     marvel his front-end skills, you should
                                     visit his website.
                                 </CardText>
+                            </Card>
+
+                            <Card style={{ 'margin-top': '20px' }}>
+                                <a
+                                    href="https://www.facebook.com/events/558100287990483/"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    <CardImg
+                                        top
+                                        width="100%"
+                                        src={codingNights}
+                                        alt="girl coding nights"
+                                    />
+                                </a>
+                                <CardBody>
+                                    <CardTitle>
+                                        Girls' Coding Nights - January 23rd, DBH
+                                        4011 @ 5 - 6 pm
+                                    </CardTitle>
+                                    <CardText>
+                                        The ACM club is starting a new series
+                                        called the Girls' Coding Nights, and we
+                                        invite YOU to join! This is a good
+                                        chance to socialize with like-minded
+                                        girls and hone your technical interview
+                                        skills, all while snacking on pizza ;).
+                                        We can also help you out if you have any
+                                        questions on interview questions you are
+                                        working on! The first meeting will be an
+                                        introduction to Graph Theory.
+                                    </CardText>
+                                    <a
+                                        href="https://www.facebook.com/events/558100287990483/"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                        <Button className="event-button">
+                                            RSVP For This Event
+                                        </Button>
+                                    </a>
+                                </CardBody>
                             </Card>
 
                             {/* JACKY */}
