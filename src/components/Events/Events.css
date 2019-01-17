@@ -1,32 +1,36 @@
 .event-body {
-  background-image: url('../../img/events.jpeg'); 
-  background-repeat: no-repeat; 
-  background-position: center;
-  background-size: cover;  
-  z-index: 0;   
-  position: relative; 
-  min-height: 520px; 
-  color: white;
+    background-image: url('../../img/events.jpeg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+    position: relative;
+    min-height: 520px;
+    color: white;
 }
 
 .card-body {
-  color: black;
-  margin-top: 20px; 
+    color: black;
+    margin-top: 20px;
 }
 
 .event-link {
-  color: #6DB6E2;
-  -webkit-transition: color 0.5s;
-  -moz-transition: color 0.5s;
-  -o-transition: color 0.5s;
-  transition: color 0.5s;
+    color: #6db6e2;
+    -webkit-transition: color 0.5s;
+    -moz-transition: color 0.5s;
+    -o-transition: color 0.5s;
+    transition: color 0.5s;
 }
 
 .event-link:hover {
-  color: #02284B;
+    color: #02284b;
 }
 
 .event-signup-link {
-  width: 100%;
-  display: inline-block; /* allows to set width and height on element */
+    width: 100%;
+    display: inline-block; /* allows to set width and height on element */
+}
+
+.event-line {
+    border-color: #6db6e2;
 }
