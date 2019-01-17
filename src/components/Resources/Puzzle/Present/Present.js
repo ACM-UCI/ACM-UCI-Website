@@ -1,9 +1,8 @@
-
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import Problem from '../Quarter/Week/Session/Problem/Problem';
-import Announcement from '../Quarter/Week/Session/Announcement/Announcement'
 import $ from 'jquery';
+import Problem from '../Quarter/Week/Session/Problem/Problem';
+import Announcement from '../Quarter/Week/Session/Announcement/Announcement';
 import './Present.css';
 
 export default class Present extends Component {
@@ -18,10 +17,9 @@ export default class Present extends Component {
         this.rows = [];
         this.done = false;
         this.end = props.end;
-        this.link = "https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/"+
-                    this.quarter.split(' ')[0] + "%20" + 
-                    this.quarter.split(' ')[1] + "/" + 
-                    this.week +".csv";
+        this.link = `https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/${
+            this.quarter.split(' ')[0]
+        }%20${this.quarter.split(' ')[1]}/${this.week}.csv`;
     }
 
     // NEED TO CHECK
@@ -35,77 +33,74 @@ export default class Present extends Component {
 
     processData(allText) {
         console.log(allText);
-        var allTextLines = allText.split(/\r\n|\n/);
-        var problems = [[]];
-        this.announcements = []
-        
-        for (var i = 1; i < allTextLines.length; i++) {
-            var data = allTextLines[i].split(',');
-            var t = "Solution";
-            if (problems[problems.length-1].length === 3) {
+        const allTextLines = allText.split(/\r\n|\n/);
+        const problems = [[]];
+        this.announcements = [];
+
+        for (let i = 1; i < allTextLines.length; i++) {
+            const data = allTextLines[i].split(',');
+            let t = 'Solution';
+            if (problems[problems.length - 1].length === 3) {
                 problems.push([]);
             }
 
-            if(!this.end){
-                t = "Help";
+            if (!this.end) {
+                t = 'Help';
                 // make sure no solution is shown since session is ongoing
-                data[3] = "";
+                data[3] = '';
             }
 
             console.log(data[4], this.session);
 
             // if this entry is from the current session
-            if (data[4] === this.session.toString()){
-                if (data[2] === "announcement") {
+            if (data[4] === this.session.toString()) {
+                if (data[2] === 'announcement') {
                     this.announcements.push(
                         <Announcement
-                            key = {data[0]}
-                            name = {data[0]}
-                            desc = {data[1]}
-                            con = {data[5]}
-                        >
-                        </Announcement>
-                    )
+                            key={data[0]}
+                            name={data[0]}
+                            desc={data[1]}
+                            con={data[5]}
+                        />
+                    );
                 } else {
-                    problems[problems.length-1].push(
-                        <Col md='4' className="height">
-                            <Problem    
-                                name = {data[0]}
-                                link = {data[1]}
-                                diff = {data[2]}
-                                slink =  {data[3]}
-                                con = {data[5]}
-                                week = {this.week}
-                                quarter = {this.quarter}
-                                session = {this.session}
-                                txt = {t}
-                            >
-                            </Problem>
+                    problems[problems.length - 1].push(
+                        <Col md="4" className="height">
+                            <Problem
+                                name={data[0]}
+                                link={data[1]}
+                                diff={data[2]}
+                                slink={data[3]}
+                                con={data[5]}
+                                week={this.week}
+                                quarter={this.quarter}
+                                session={this.session}
+                                txt={t}
+                            />
                         </Col>
                     );
                 }
             }
-            
         }
 
-        if(problems.length > 0) {
+        if (problems.length > 0) {
             // if last entry is empty, pop it
-            if (problems[problems.length-1].length === 0) {
+            if (problems[problems.length - 1].length === 0) {
                 problems.pop();
             }
 
             if (problems.length > 0) {
-                while (problems[problems.length-1].length < 3) {
+                while (problems[problems.length - 1].length < 3) {
                     // make sure these don't cause out of bounds error
-                    problems[problems.length-1].push(null);
+                    problems[problems.length - 1].push(null);
                 }
             }
         }
 
         // make the rows of maximum 3 problems
-        for (var j=0; j<problems.length; j++){
+        for (let j = 0; j < problems.length; j++) {
             this.rows.push(
-                <Row key={(j+100).toString()} className="space center">
+                <Row key={(j + 100).toString()} className="space center">
                     {problems[j][0]}
                     {problems[j][1]}
                     {problems[j][2]}
@@ -113,8 +108,8 @@ export default class Present extends Component {
             );
         }
         console.log(problems);
-        this.rows = <div>{this.rows}</div>;     // to fix issues on displaying
-        this.toggle();                          // re-render
+        this.rows = <div>{this.rows}</div>; // to fix issues on displaying
+        this.toggle(); // re-render
     }
 
     toggle() {
