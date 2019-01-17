@@ -1,6 +1,5 @@
-
 import React, { Component } from 'react';
-import { Container, Collapse, Button} from 'reactstrap';
+import { Container, Collapse, Button } from 'reactstrap';
 import Session from './Session/Session';
 import './Week.css';
 
@@ -14,17 +13,16 @@ export default class Week extends Component {
         this.session = props.session;
         this.sessions = [];
 
-        for(var i=1; i<this.session; i++){
+        for (let i = 1; i < this.session; i++) {
             this.sessions.push(
                 <Session
-                    key = {i} 
-                    week={this.week} 
+                    key={i}
+                    week={this.week}
                     quarter={this.quarter}
                     session={i.toString()}
-                ></Session>
-            )
+                />
+            );
         }
-
     }
 
     toggle() {
@@ -32,23 +30,30 @@ export default class Week extends Component {
     }
 
     render() {
-        if(this.sessions.length===0){
+        if (this.sessions.length === 0) {
             return null;
         }
         return (
-                <Container>
-                    <Button className="b" onClick={this.toggle} 
-                    style={{    marginTop: '1rem', width: '100%',
-                                height: '30%', justifyContent: 'center',
-                                alignItems: 'center', marginBottom: '1rem',
-                                fontSize:'26px'}}>
-                                Week {this.week}
-                    </Button>
-    
-                    <Collapse className="marpad" isOpen={this.state.collapse}>
-                        {this.sessions}
-                    </Collapse>
-                </Container>
-            );
+            <Container>
+                <Button
+                    className="b"
+                    onClick={this.toggle}
+                    style={{
+                        marginTop: '1rem',
+                        width: '100%',
+                        height: '30%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom: '1rem',
+                        fontSize: '26px'
+                    }}>
+                    Week {this.week}
+                </Button>
+
+                <Collapse className="marpad" isOpen={this.state.collapse}>
+                    {this.sessions}
+                </Collapse>
+            </Container>
+        );
     }
 }

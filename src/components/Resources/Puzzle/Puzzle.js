@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Alert, Row } from 'reactstrap';
 import Navigation from '../../Navbar/Navbar';
@@ -9,8 +8,6 @@ import './Puzzle.css';
 import $ from 'jquery';
 
 class Puzzle extends Component {
-
-
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
@@ -52,13 +49,13 @@ class Puzzle extends Component {
 
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        var quarters = ["Fall 2018", "Winter 2019", "Spring 2020"];
-        var startDates =    [   
-                                new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
-                                new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
-                                new Date('April 2, 2019 17:00:00 GMT-07:00').getTime()
-                            ]
-        
+        const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2020'];
+        const startDates = [
+            new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
+            new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
+            new Date('April 2, 2019 17:00:00 GMT-07:00').getTime()
+        ];
+
         // change below for testing [ place desired date inside Date() ]
         
         var today = new Date(date);
@@ -71,9 +68,9 @@ class Puzzle extends Component {
 
 
         // index of the quarter we are in
-        var i = 0;
-        while (i+1 < startDates.length && startDates[i+1] <= today) {
-            i+=1;
+        let i = 0;
+        while (i + 1 < startDates.length && startDates[i + 1] <= today) {
+            i += 1;
         }
         this.quarter = quarters[i];
 
@@ -82,16 +79,20 @@ class Puzzle extends Component {
         // will post questions 1 hr before meeting starts
         // will post solutions right after the meeting ends
         // adding .5 will make sure number is rounded up
-        this.week = ((today-startDates[i])/1000/60/60/24/7+.5).toFixed(0);
+        this.week = (
+            (today - startDates[i]) / 1000 / 60 / 60 / 24 / 7 +
+            0.5
+        ).toFixed(0);
 
         // SESSION
         // calculating what the latest meeting session is (UTC)
         // mod 7 to make sure numbers stay in week range
-        var ses = Math.floor((today-startDates[i])/1000/60/60/24)%7;
+        const ses =
+            Math.floor((today - startDates[i]) / 1000 / 60 / 60 / 24) % 7;
         // Usually Tuesday
-        if (ses < 2){
+        if (ses < 2) {
             this.session = 1;
-        // Usually Thursday
+            // Usually Thursday
         } else {
             this.session = 2;
         }
@@ -99,7 +100,7 @@ class Puzzle extends Component {
         // END
         // check if the session ended, assuming each session lasts 2 hours
         // note that ses === 0 corresponds to Tuesday, and ses === 2 corresponds to Thursday
-        var tm = ((today-startDates[i])/1000/60/60)%24;
+        const tm = ((today - startDates[i]) / 1000 / 60 / 60) % 24;
         if ((ses === 0 || ses === 2) && tm < 3) {
             this.end = false;
         } else {
