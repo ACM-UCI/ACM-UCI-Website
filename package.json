@@ -29,8 +29,12 @@
         "build": "npm run build-css && react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "format": "prettier --write '**/*.{js,jsx}'",
-        "precommit": "lint-staged"
+        "format": "prettier --write '**/*.{js,jsx}'"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
     },
     "lint-staged": {
         "*.{js,jsx,json}": [
