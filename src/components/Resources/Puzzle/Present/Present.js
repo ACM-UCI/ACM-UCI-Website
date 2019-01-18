@@ -32,15 +32,14 @@ export default class Present extends Component {
     }
 
     processData(allText) {
-        console.log(allText);
-        const allTextLines = allText.split(/\r\n|\n/);
-        const problems = [[]];
-        this.announcements = [];
-
-        for (let i = 1; i < allTextLines.length; i++) {
-            const data = allTextLines[i].split(',');
-            let t = 'Solution';
-            if (problems[problems.length - 1].length === 3) {
+        var allTextLines = allText.split(/\r\n|\n/);
+        var problems = [[]];
+        this.announcements = []
+        
+        for (var i = 1; i < allTextLines.length; i++) {
+            var data = allTextLines[i].split(',');
+            var t = "Solution";
+            if (problems[problems.length-1].length === 3) {
                 problems.push([]);
             }
 
@@ -49,8 +48,6 @@ export default class Present extends Component {
                 // make sure no solution is shown since session is ongoing
                 data[3] = '';
             }
-
-            console.log(data[4], this.session);
 
             // if this entry is from the current session
             if (data[4] === this.session.toString()) {
@@ -107,9 +104,8 @@ export default class Present extends Component {
                 </Row>
             );
         }
-        console.log(problems);
-        this.rows = <div>{this.rows}</div>; // to fix issues on displaying
-        this.toggle(); // re-render
+        this.rows = <div>{this.rows}</div>;     // to fix issues on displaying
+        this.toggle();                          // re-render
     }
 
     toggle() {
