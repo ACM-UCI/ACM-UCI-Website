@@ -20,3 +20,23 @@
 .height{
     height: 100%;
 }
+
+.evnt{
+    font-size: 20px;
+    max-width: 40px;
+    text-align: center;
+    font-family: monospace;
+    /* background-color: rgb(156, 154, 154); */
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.middle{
+    align-items: center;
+    justify-items: center;
+    border: 3px solid black;
+    border-radius: 10px;
+    /* background-color: rgb(206, 203, 203); */
+    background-color: transparent;
+}

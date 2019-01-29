@@ -1,17 +1,17 @@
-Name,Link,Difficulty,Solution,Session,Contributor
-Sherlock and Array,https://www.hackerrank.com/challenges/sherlock-and-array/problem?h_r=next-challenge&h_v=legacy,codealong,,1,Chinmay
-Greedy Florist,https://www.hackerrank.com/challenges/greedy-florist/problem ,easy,florist.py,1,Karthik
-Gas Station,https://leetcode.com/problems/gas-station/description/,easy,gas_station.py,1,Blake
-Locked Treasure,http://socalcontest.org/history/2014/socal2014.pdf,med,bandits.py,1,Karthik
-Rockband,https://open.kattis.com/problems/rockband,med,rockband.cpp,1,Chinmay
-Max Subarray Sum,https://www.hackerrank.com/challenges/maximum-subarray-sum/problem,med,max_subarray_sum.py,1,Chinmay
-ICPC,Congrats to those who made it to the ICPC regionals. If you have questions come and talk to me.,announcement,,1,Karthik
-Note,IF ALL OF THIS IS TOO EASY COME UP AND I CAN TRY GIVING YOU A PROBLEM OR ASK CHINMAY TO GIVE YOU A PROBLEM,announcement,,1,Karthik
-Locked Treasure,http://socalcontest.org/history/2014/socal2014.pdf,med,bandits.py,2,Karthik
-Rockband,https://open.kattis.com/problems/rockband,med,rockband.cpp,2,Chinmay
-Max Subarray Sum,https://www.hackerrank.com/challenges/maximum-subarray-sum/problem,med,max_subarray_sum.py,2,Chinmay
-Commando War,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2829,codealong,uva11729.cpp,2,Bryon
-The Trip,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2041,easy,11100.cpp,2,Bryon
-Packmen,http://codeforces.com/contest/847/problem/E,med,cf_packman.py,2,Jacky
-ICPC,Congrats to those who made it to the ICPC regionals. If you have questions come and talk to me.,announcement,,2,Karthik
-Note,IF ALL OF THIS IS TOO EASY COME UP AND I CAN TRY GIVING YOU A PROBLEM OR ASK CHINMAY TO GIVE YOU A PROBLEM,announcement,,2,Karthik
+Name,Link,Difficulty,Solution,Session,Contributor,Note
+Sherlock and Array,https://www.hackerrank.com/challenges/sherlock-and-array/problem?h_r=next-challenge&h_v=legacy,codealong,,1,Chinmay,
+Greedy Florist,https://www.hackerrank.com/challenges/greedy-florist/problem ,easy,florist.py,1,Karthik,
+Gas Station,https://leetcode.com/problems/gas-station/description/,easy,gas_station.py,1,Blake,
+Locked Treasure,http://socalcontest.org/history/2014/socal2014.pdf,med,bandits.py,1,Karthik,
+Rockband,https://open.kattis.com/problems/rockband,med,rockband.cpp,1,Chinmay,
+Max Subarray Sum,https://www.hackerrank.com/challenges/maximum-subarray-sum/problem,med,max_subarray_sum.py,1,Chinmay,
+ICPC,Congrats to those who made it to the ICPC regionals. If you have questions come and talk to me.,announcement,,1,Karthik,
+Note,IF ALL OF THIS IS TOO EASY COME UP AND I CAN TRY GIVING YOU A PROBLEM OR ASK CHINMAY TO GIVE YOU A PROBLEM,announcement,,1,Karthik,
+Locked Treasure,http://socalcontest.org/history/2014/socal2014.pdf,med,bandits.py,2,Karthik,
+Rockband,https://open.kattis.com/problems/rockband,med,rockband.cpp,2,Chinmay,
+Max Subarray Sum,https://www.hackerrank.com/challenges/maximum-subarray-sum/problem,med,max_subarray_sum.py,2,Chinmay,
+Commando War,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2829,codealong,uva11729.cpp,2,Bryon,
+The Trip,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2041,easy,11100.cpp,2,Bryon,
+Packmen,http://codeforces.com/contest/847/problem/E,med,cf_packman.py,2,Jacky,
+ICPC,Congrats to those who made it to the ICPC regionals. If you have questions come and talk to me.,announcement,,2,Karthik,
+Note,IF ALL OF THIS IS TOO EASY COME UP AND I CAN TRY GIVING YOU A PROBLEM OR ASK CHINMAY TO GIVE YOU A PROBLEM,announcement,,2,Karthik,

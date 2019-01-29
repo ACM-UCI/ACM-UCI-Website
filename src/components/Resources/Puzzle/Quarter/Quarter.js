@@ -8,7 +8,19 @@ export default class Quarter extends Component {
         super(props);
         this.weeks = [];
 
-        for (let i = 1; i <= props.week - 1; i++) {
+        const last_week = (
+            <Week
+                key={props.week}
+                week={props.week.toString()}
+                quarter={props.quarter}
+                session={props.session}
+            />
+        );
+        if (last_week != null) {
+            this.weeks.push(last_week);
+        }
+
+        for (let i = props.week - 1; i > 0; i--) {
             const week = (
                 <Week
                     key={i}
@@ -20,18 +32,6 @@ export default class Quarter extends Component {
             if (week != null) {
                 this.weeks.push(week);
             }
-        }
-
-        const last_week = (
-            <Week
-                key={props.week}
-                week={props.week.toString()}
-                quarter={props.quarter}
-                session={props.session}
-            />
-        );
-        if (last_week != null) {
-            this.weeks.push(last_week);
         }
     }
 

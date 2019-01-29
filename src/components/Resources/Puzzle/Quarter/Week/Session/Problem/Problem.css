@@ -17,33 +17,26 @@
 }
 
 .easy {
-    justify-items: center;
-    background-color: lightblue;
     min-height: 100%;
 }
 
 .med {
-    background-color: rgb(86, 162, 187);
     min-height: 100%;
 }
 
 .hard {
-    background-color: rgb(75, 112, 190);
     min-height: 100%;
 }
 
 .icpc {
-    background-color: rgb(25, 30, 88);
     min-height: 100%;
 }
 
 .codealong {
-    background-color: rgb(117, 121, 168);
     min-height: 100%;
 }
 
 .event {
-    background-color: rgb(118, 199, 185);
     min-height: 100%;
 }
 
@@ -68,4 +61,9 @@
 .probcard {
     border-radius: 20px;
     border-color: transparent;
+}
+
+.evntcard {
+    border-radius: 0;
+    border: 3px dashed rgb(57, 119, 177);
 }

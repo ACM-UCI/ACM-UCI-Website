@@ -1,9 +1,9 @@
-Name,Link,Difficulty,Solution,Session,Contributor
-House Robber,https://leetcode.com/problems/house-robber/description/,easy,,1,Tim
-Party Game,https://open.kattis.com/problems/partygame,med,partygame.cpp,1,Meta
-Fractions Again?!,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=640&page=show_problem&problem=1917,easy,10976.cpp,1,Jens
-2-SAT (Ask Karthik),,hard,,1,Karthik
-Profitable Schemes,https://leetcode.com/problems/profitable-schemes/,hard,,2,
-Longest Mountain in Array,https://leetcode.com/problems/longest-mountain-in-array/,med,,2,
-Bertown Subway,https://codeforces.com/problemset/problem/884/C,med,884C.py,2,Jacky
-Packmen,https://codeforces.com/problemset/problem/847/E,med,cf_packman.py,2,Jacky
+Name,Link,Difficulty,Solution,Session,Contributor,Note
+House Robber,https://leetcode.com/problems/house-robber/description/,easy,,1,Tim,
+Party Game,https://open.kattis.com/problems/partygame,med,partygame.cpp,1,Meta,
+Fractions Again?!,https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=640&page=show_problem&problem=1917,easy,10976.cpp,1,Jens,
+2-SAT (Ask Karthik),,hard,,1,Karthik,
+Profitable Schemes,https://leetcode.com/problems/profitable-schemes/,hard,,2,,
+Longest Mountain in Array,https://leetcode.com/problems/longest-mountain-in-array/,med,,2,,
+Bertown Subway,https://codeforces.com/problemset/problem/884/C,med,884C.py,2,Jacky,
+Packmen,https://codeforces.com/problemset/problem/847/E,med,cf_packman.py,2,Jacky,

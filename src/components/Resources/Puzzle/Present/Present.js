@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import { Alert, Container, Row, Col } from 'reactstrap';
 import $ from 'jquery';
 import Problem from '../Quarter/Week/Session/Problem/Problem';
 import Announcement from '../Quarter/Week/Session/Announcement/Announcement';
@@ -14,6 +14,7 @@ export default class Present extends Component {
         this.week = props.week;
         this.quarter = props.quarter;
         this.session = props.session;
+        this.events = [];
         this.rows = [];
         this.done = false;
         this.end = props.end;
@@ -34,13 +35,18 @@ export default class Present extends Component {
     processData(allText) {
         var allTextLines = allText.split(/\r\n|\n/);
         var problems = [[]];
-        this.announcements = []
-        
+        var events = [[]];
+        this.announcements = [];
+
         for (var i = 1; i < allTextLines.length; i++) {
             var data = allTextLines[i].split(',');
-            var t = "Solution";
-            if (problems[problems.length-1].length === 3) {
+            var t = 'Solution';
+            if (problems[problems.length - 1].length === 3) {
                 problems.push([]);
+            }
+
+            if (events[events.length - 1].length === 3) {
+                events.push([]);
             }
 
             if (!this.end) {
@@ -59,6 +65,24 @@ export default class Present extends Component {
                             desc={data[1]}
                             con={data[5]}
                         />
+                    );
+                } else if (data[2] === 'event') {
+                    events[events.length - 1].push(
+                        <Col md="4" className="height">
+                            <Problem
+                                className="center"
+                                name={data[0]}
+                                link={data[1]}
+                                diff={data[2]}
+                                slink={data[3]}
+                                con={data[5]}
+                                txt="Info"
+                                week={this.week}
+                                quarter={this.quarter}
+                                session={this.session}
+                                evnt="yes"
+                            />
+                        </Col>
                     );
                 } else {
                     problems[problems.length - 1].push(
@@ -94,6 +118,20 @@ export default class Present extends Component {
             }
         }
 
+        if (events.length > 0) {
+            // if last entry is empty, pop it
+            if (events[events.length - 1].length === 0) {
+                events.pop();
+            }
+
+            if (events.length > 0) {
+                while (events[events.length - 1].length < 3) {
+                    // make sure these don't cause out of bounds error
+                    events[events.length - 1].push(null);
+                }
+            }
+        }
+
         // make the rows of maximum 3 problems
         for (let j = 0; j < problems.length; j++) {
             this.rows.push(
@@ -104,8 +142,33 @@ export default class Present extends Component {
                 </Row>
             );
         }
-        this.rows = <div>{this.rows}</div>;     // to fix issues on displaying
-        this.toggle();                          // re-render
+
+        for (let j = 0; j < events.length; j++) {
+            this.events.push(
+                <Row key={(j + 200).toString()} className="space center">
+                    {events[j][0]}
+                    {events[j][1]}
+                    {events[j][2]}
+                </Row>
+            );
+        }
+
+        this.rows = <div>{this.rows}</div>; // to fix issues on displaying
+
+        if (this.events.length > 0) {
+            this.events = (
+                <Row className="middle">
+                    {/* <Col className = "evnt">
+                U P C O M I N G
+            </Col> */}
+                    <Col className="evnt">E V E N T S</Col>
+                    <Col>{this.events}</Col>
+                    <Col className="evnt">E V E N T S</Col>
+                </Row>
+            );
+        }
+
+        this.toggle(); // re-render
     }
 
     toggle() {
@@ -117,6 +180,11 @@ export default class Present extends Component {
             <Container>
                 {this.announcements}
                 {this.rows}
+                <div>
+                    <br />
+                    <br />
+                </div>
+                {this.events}
             </Container>
         );
     }
