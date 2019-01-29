@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './components/Home/Home';
+import About from './components/About/About';
 import Events from './components/Events/Events';
 import Resources from './components/Resources/Resources';
 import Board from './components/Board/Board';
@@ -16,6 +17,7 @@ class App extends Component {
         return (
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route path="/about" component={About} />
                 <Route path="/events" component={Events} />
                 <Route path="/resources" component={Resources} />
                 <Route path="/board" component={Board} />

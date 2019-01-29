@@ -1,0 +1,61 @@
+[
+    {
+        "date": "1965-1967",
+        "title": "ACM@UCI is Founded",
+        "desc": "Decades before companies like Amazon or Google are founded, years before the first ICPC, and even a year before ICS becomes a department at UCI, ACM@UCI is started as a local chapter of the Association for Computing Machinery (ACM)."
+    },
+    {
+        "date": "1990-1991",
+
+        "title": "ACM@UCI Competes in World Finals for the First Time",
+        "desc": "After placing 2nd at the 1990 ICPC Southern California Regional (being beat only by a team from New Zealand), ACM@UCI advances to the ICPC World Finals, then known as the ACM Scholastic Computing Contest, held in San Antonio, Texas. The team of four ultimately places 14th."
+    },
+    {
+        "date": "2013-2014",
+
+        "title": "ACM@UCI Competes in World Finals",
+        "desc": "After placing 2nd at the 2013 ICPC Southern California Regional, ACM@UCI advances to the 2014 ICPC World Finals."
+    },
+    {
+        "date": "October 2016",
+
+        "title": "UCI 76ers Rank 1st Nationally at IEEExtreme 10.0",
+        "desc": "ACM@UCI's team UCI 76ers places 1st in the US at IEEExtreme 10.0, a 24-hour worldwide programming contest."
+    },
+    {
+        "date": "2016-2017",
+
+        "title": "filter Competes in World Finals",
+        "desc": "After finishing 1st at the 2016 ICPC Southern California Regional (including solving a problem in the last 24 seconds of the competition), ACM@UCI's team filter advances to the 2017 ICPC World Finals."
+    },
+    {
+        "date": "November 2017",
+
+        "title": "filter Places 3rd in SoCal",
+        "desc": "At the 2017 ICPC Southern California Regional, ACM@UCI's team filter pulls off another successful finish at 3rd place. Overall, ACM@UCI does extremely well, getting all 5 of its teams into the top 25."
+    },
+    {
+        "date": "Spring 2018",
+
+        "title": "First Seminar Series",
+        "desc": "ACM@UCI hosts its first seminar series, with students giving talks on computer science topics as diverse as gambling, medical imaging, and functional programming."
+    },
+    {
+        "date": "October 2018",
+
+        "title": "IEEExtreme 12.0",
+        "desc": "At IEEExtreme 12.0, ACM@UCI gets two teams, sheep and sleep24hrs, into the top 100 in the world. The two teams also rank 6th and 7th in the US, respectively."
+    },
+    {
+        "date": "November 2018",
+
+        "title": "2018 SoCal Regional",
+        "desc": "Despite losing most of its senior members, ACM@UCI teams pull off successful finishes at the 2018 SoCal Regional, with two teams, filter and iterator, ranking 7th and 9th, and all 5 teams ranking in the top 25 yet again."
+    },
+    {
+        "date": "Winter 2019",
+
+        "title": "Seminar Series v2",
+        "desc": "ACM@UCI hosts another seminar series, once again with diverse talks."
+    }
+]

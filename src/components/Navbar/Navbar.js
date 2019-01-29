@@ -45,6 +45,14 @@ class Navigation extends Component {
                         <NavItem className="mx-3">
                             <NavLink
                                 tag={Link}
+                                to="/about"
+                                className="nav-font">
+                                About
+                            </NavLink>
+                        </NavItem>
+                        <NavItem className="mx-3">
+                            <NavLink
+                                tag={Link}
                                 to="/events"
                                 className="nav-font">
                                 Events
