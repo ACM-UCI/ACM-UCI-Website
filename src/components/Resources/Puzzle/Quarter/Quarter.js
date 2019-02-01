@@ -14,6 +14,7 @@ export default class Quarter extends Component {
                 week={props.week.toString()}
                 quarter={props.quarter}
                 session={props.session}
+                data={props.data[props.week.toString()]}
             />
         );
         if (last_week != null) {
@@ -27,6 +28,7 @@ export default class Quarter extends Component {
                     week={i.toString()}
                     quarter={props.quarter}
                     session={3}
+                    data={props.data[i.toString()]}
                 />
             );
             if (week != null) {

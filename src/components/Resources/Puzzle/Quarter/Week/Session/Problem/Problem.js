@@ -28,6 +28,7 @@ export default class Problem extends Component {
                     link={props.slink}
                     quarter={props.quarter}
                     con={this.con}
+                    code={props.code}
                 />
             );
         }

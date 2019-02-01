@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import './Past.css';
 import classnames from 'classnames';
@@ -6,7 +6,7 @@ import Quarter from '../Quarter/Quarter';
 
 // ADD SPRING NAVITEMS WHEN SPRING QUARTER STARTS
 
-export default class Past extends React.Component {
+export default class Past extends Component {
     constructor(props) {
         super(props);
 
@@ -27,7 +27,12 @@ export default class Past extends React.Component {
         for (let i = 0; i < this.quarters.length - 1; i++) {
             this.tabcontents.push(
                 <TabPane key={i.toString()} tabId={i.toString()}>
-                    <Quarter session={3} week={11} quarter={this.quarters[i]} />
+                    <Quarter
+                        session={3}
+                        week={11}
+                        quarter={this.quarters[i]}
+                        data={props.data[this.quarters[i]]}
+                    />
                 </TabPane>
             );
         }
@@ -39,6 +44,7 @@ export default class Past extends React.Component {
                     session={this.session}
                     week={this.week}
                     quarter={this.quarters[curr]}
+                    data={props.data[this.quarters[curr]]}
                 />
             </TabPane>
         );

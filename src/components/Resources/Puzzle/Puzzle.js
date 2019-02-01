@@ -5,27 +5,62 @@ import Banner from '../../Banner/Banner';
 import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
+import firebase from 'firebase';
 import $ from 'jquery';
 
-class Puzzle extends Component {
+export default class Puzzle extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.processData = this.processData.bind(this);
         this.getDate = this.getDate.bind(this);
         this.err = this.err.bind(this);
+
         this.state = { collapse: false };
+
         this.quarter = 'Winter 2019';
         this.week = 2;
         this.session = 1;
         this.end = false;
         this.quarters = ['Fall 2018', 'Winter 2019'];
+
         this.done = false;
         this.error = null;
+        this.past = null;
+        this.present = null;
+
+        var ref = firebase.database().ref();
+        ref.on('value', this.processData);
+
         $.ajax({
             url: 'https://24timezones.com/time-zone/utc',
             context: document.body,
             crossdomain: true
         }).done(this.getDate);
+    }
+
+    processData(data) {
+        this.data = data.val();
+        this.past = (
+            <Past
+                week={this.week}
+                quarters={this.quarters}
+                session={this.session}
+                className="center"
+                data={this.data}
+            />
+        );
+
+        this.present = (
+            <Present
+                end={this.end}
+                week={this.week}
+                quarter={this.quarter}
+                session={this.session}
+                data={this.data[this.quarter][this.week]}
+            />
+        );
+        this.toggle();
     }
 
     err() {
@@ -47,8 +82,10 @@ class Puzzle extends Component {
 
         var time = data[0].split(/\D+/);
         var ampm = data[0].split(/<\/*sup>+/)[1];
-        if (ampm === 'pm') {
+        if (ampm === 'pm' && time[1] !== '12') {
             time[1] = ((parseInt(time[1], 10) + 12) % 24).toString();
+        } else if (ampm === 'am' && time[1] === '12') {
+            time[1] = '00';
         }
         date =
             date + ' ' + time[1] + ':' + time[2] + ':' + time[3] + ' GMT+00:00';
@@ -123,6 +160,7 @@ class Puzzle extends Component {
         // note ".slice" does not include end argument
         this.quarters = quarters.slice(0, i + 1);
         // console.log(this.session, this.quarter, this.end, this.week);
+        // console.log(new Date(date));
         this.done = true;
         this.toggle();
     }
@@ -176,25 +214,11 @@ class Puzzle extends Component {
                         </Row>
                     </div>
 
-                    <div className="small center">
-                        <Present
-                            end={this.end}
-                            week={this.week}
-                            quarter={this.quarter}
-                            session={this.session}
-                        />
-                    </div>
+                    <div className="small center">{this.present}</div>
 
                     <br />
 
-                    <div className="small center">
-                        <Past
-                            week={this.week}
-                            quarters={this.quarters}
-                            session={this.session}
-                            className="center"
-                        />
-                    </div>
+                    <div className="small center">{this.past}</div>
 
                     <div>
                         <br />
@@ -225,5 +249,3 @@ class Puzzle extends Component {
         );
     }
 }
-
-export default Puzzle;

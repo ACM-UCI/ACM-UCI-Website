@@ -9,10 +9,24 @@ import Contact from './components/Contact/Contact';
 import IntroCP from './components/Resources/IntroCP/IntroCP';
 import Puzzle from './components/Resources/Puzzle/Puzzle';
 import Donate from './components/Donate/donate';
+import firebase from 'firebase';
 import './scss/custom.css';
 import './App.css';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        var config = {
+            apiKey: 'AIzaSyCREpANPjLytuJteEai3xUzu-dkWg69FSg',
+            authDomain: 'acm-uci-website.firebaseapp.com',
+            databaseURL: 'https://acm-uci-website.firebaseio.com',
+            projectId: 'acm-uci-website',
+            storageBucket: 'acm-uci-website.appspot.com',
+            messagingSenderId: '894657849706'
+        };
+        firebase.initializeApp(config);
+    }
+
     render() {
         return (
             <Switch>

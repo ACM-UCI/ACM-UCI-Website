@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Container, Row, Col } from 'reactstrap';
-import $ from 'jquery';
+import { Container, Row, Col } from 'reactstrap';
 import Problem from '../Quarter/Week/Session/Problem/Problem';
 import Announcement from '../Quarter/Week/Session/Announcement/Announcement';
 import './Present.css';
@@ -18,88 +17,88 @@ export default class Present extends Component {
         this.rows = [];
         this.done = false;
         this.end = props.end;
-        this.link = `https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/${
-            this.quarter.split(' ')[0]
-        }%20${this.quarter.split(' ')[1]}/${this.week}.csv`;
     }
 
-    // NEED TO CHECK
     componentDidMount() {
-        // should be changed to axios request, xhr is deprecated
-        $.ajax({
-            url: this.link,
-            context: document.body
-        }).done(this.processData);
+        this.processData(this.props.data);
     }
 
-    processData(allText) {
-        var allTextLines = allText.split(/\r\n|\n/);
+    toggle() {
+        this.setState({ collapse: !this.state.collapse });
+    }
+
+    processData(myData) {
         var problems = [[]];
         var events = [[]];
         this.announcements = [];
 
-        for (var i = 1; i < allTextLines.length; i++) {
-            var data = allTextLines[i].split(',');
-            var t = 'Solution';
-            if (problems[problems.length - 1].length === 3) {
-                problems.push([]);
-            }
+        for (var key in myData) {
+            if (myData.hasOwnProperty(key)) {
+                var data = myData[key];
 
-            if (events[events.length - 1].length === 3) {
-                events.push([]);
-            }
+                var t = 'Solution';
+                if (problems[problems.length - 1].length === 3) {
+                    problems.push([]);
+                }
 
-            if (!this.end) {
-                t = 'Help';
-                // make sure no solution is shown since session is ongoing
-                data[3] = '';
-            }
+                if (events[events.length - 1].length === 3) {
+                    events.push([]);
+                }
 
-            // if this entry is from the current session
-            if (data[4] === this.session.toString()) {
-                if (data[2] === 'announcement') {
-                    this.announcements.push(
-                        <Announcement
-                            key={data[0]}
-                            name={data[0]}
-                            desc={data[1]}
-                            con={data[5]}
-                        />
-                    );
-                } else if (data[2] === 'event') {
-                    events[events.length - 1].push(
-                        <Col md="4" className="height">
-                            <Problem
-                                className="center"
-                                name={data[0]}
-                                link={data[1]}
-                                diff={data[2]}
-                                slink={data[3]}
-                                con={data[5]}
-                                txt="Info"
-                                week={this.week}
-                                quarter={this.quarter}
-                                session={this.session}
-                                evnt="yes"
+                if (!this.end && data.Session === this.session.toString()) {
+                    t = 'Help';
+                    // make sure no solution is shown since session is ongoing
+                    data.Solution = '';
+                }
+
+                // if this entry is from the current session
+                if (data.Session === this.session.toString()) {
+                    if (data.Difficulty === 'announcement') {
+                        this.announcements.push(
+                            <Announcement
+                                key={data.Name}
+                                name={data.Name}
+                                desc={data.Link}
+                                con={data.Contributor}
                             />
-                        </Col>
-                    );
-                } else {
-                    problems[problems.length - 1].push(
-                        <Col md="4" className="height">
-                            <Problem
-                                name={data[0]}
-                                link={data[1]}
-                                diff={data[2]}
-                                slink={data[3]}
-                                con={data[5]}
-                                week={this.week}
-                                quarter={this.quarter}
-                                session={this.session}
-                                txt={t}
-                            />
-                        </Col>
-                    );
+                        );
+                    } else if (data.Difficulty === 'event') {
+                        events[events.length - 1].push(
+                            <Col md="4" className="height">
+                                <Problem
+                                    className="center"
+                                    name={data.Name}
+                                    link={data.Link}
+                                    diff={data.Difficulty}
+                                    slink={data.Solution}
+                                    con={data.Contributor}
+                                    code={data.Code}
+                                    txt="Info"
+                                    week={this.week}
+                                    quarter={this.quarter}
+                                    session={this.session}
+                                    evnt="yes"
+                                />
+                            </Col>
+                        );
+                    } else {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height">
+                                <Problem
+                                    name={data.Name}
+                                    link={data.Link}
+                                    diff={data.Difficulty}
+                                    slink={data.Solution}
+                                    con={data.Contributor}
+                                    code={data.Code}
+                                    week={this.week}
+                                    quarter={this.quarter}
+                                    session={this.session}
+                                    txt={t}
+                                />
+                            </Col>
+                        );
+                    }
                 }
             }
         }
@@ -158,9 +157,6 @@ export default class Present extends Component {
         if (this.events.length > 0) {
             this.events = (
                 <Row className="middle">
-                    {/* <Col className = "evnt">
-                U P C O M I N G
-            </Col> */}
                     <Col className="evnt">E V E N T S</Col>
                     <Col>{this.events}</Col>
                     <Col className="evnt">E V E N T S</Col>
@@ -169,10 +165,6 @@ export default class Present extends Component {
         }
 
         this.toggle(); // re-render
-    }
-
-    toggle() {
-        this.setState({ collapse: !this.state.collapse });
     }
 
     render() {
