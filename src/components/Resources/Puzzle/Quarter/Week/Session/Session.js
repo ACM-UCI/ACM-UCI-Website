@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Alert, Row, Col } from 'reactstrap';
-import $ from 'jquery';
 import Problem from './Problem/Problem';
 import Announcement from './Announcement/Announcement';
 import './Session.css';
@@ -15,59 +14,53 @@ export default class Session extends Component {
         this.quarter = props.quarter;
         this.session = props.session;
         this.rows = [[]];
-        this.link = `https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/${
-            this.quarter.split(' ')[0]
-        }%20${this.quarter.split(' ')[1]}/${this.week}.csv`;
     }
 
-    // NEED TO CHECK
     componentDidMount() {
-        // should be changed to axios request, xhr is deprecated
-        $.ajax({
-            url: this.link,
-            context: document.body
-        }).done(this.processData);
+        this.processData(this.props.data);
     }
 
-    processData(allText) {
-        const allTextLines = allText.split(/\r\n|\n/);
+    processData(myData) {
         const problems = [[]];
         this.announcements = [];
 
-        for (let i = 1; i < allTextLines.length; i++) {
-            const data = allTextLines[i].split(',');
+        for (var key in myData) {
+            if (myData.hasOwnProperty(key)) {
+                const data = myData[key];
 
-            if (problems[problems.length - 1].length === 3) {
-                problems.push([]);
-            }
+                if (problems[problems.length - 1].length === 3) {
+                    problems.push([]);
+                }
 
-            if (data[4] === this.session) {
-                if (data[2] === 'announcement') {
-                    this.announcements.push(
-                        <Announcement
-                            key={data[0]}
-                            name={data[0]}
-                            desc={data[1]}
-                            con={data[5]}
-                        />
-                    );
-                } else {
-                    problems[problems.length - 1].push(
-                        <Col md="4" className="height">
-                            <Problem
-                                className="center"
-                                name={data[0]}
-                                link={data[1]}
-                                diff={data[2]}
-                                slink={data[3]}
-                                con={data[5]}
-                                txt="Solution"
-                                week={this.week}
-                                quarter={this.quarter}
-                                session={this.session}
+                if (data.Session === this.session) {
+                    if (data.Difficulty === 'announcement') {
+                        this.announcements.push(
+                            <Announcement
+                                key={data.Name}
+                                name={data.Name}
+                                desc={data.Link}
+                                con={data.Contributor}
                             />
-                        </Col>
-                    );
+                        );
+                    } else {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height">
+                                <Problem
+                                    className="center"
+                                    name={data.Name}
+                                    link={data.Link}
+                                    diff={data.Difficulty}
+                                    slink={data.Solution}
+                                    code={data.Code}
+                                    con={data.Contributor}
+                                    txt="Solution"
+                                    week={this.week}
+                                    quarter={this.quarter}
+                                    session={this.session}
+                                />
+                            </Col>
+                        );
+                    }
                 }
             }
         }
@@ -111,7 +104,7 @@ export default class Session extends Component {
     render() {
         return (
             <Row className="topmar">
-                <pre>S E S S I O N   {this.session}</pre>
+                <pre>S E S S I O N {this.session}</pre>
                 <div className="back">
                     {this.announcements}
                     {this.rows}

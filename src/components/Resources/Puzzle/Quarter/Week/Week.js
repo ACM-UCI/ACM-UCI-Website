@@ -20,6 +20,7 @@ export default class Week extends Component {
                     week={this.week}
                     quarter={this.quarter}
                     session={i.toString()}
+                    data={props.data}
                 />
             );
         }

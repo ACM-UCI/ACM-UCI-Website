@@ -5,47 +5,90 @@ import Banner from '../../Banner/Banner';
 import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
+import firebase from 'firebase';
 import $ from 'jquery';
 
-class Puzzle extends Component {
+export default class Puzzle extends Component {
     constructor(props) {
         super(props);
         this.toggle = this.toggle.bind(this);
+        this.processData = this.processData.bind(this);
         this.getDate = this.getDate.bind(this);
         this.err = this.err.bind(this);
+
         this.state = { collapse: false };
-        this.quarter = "Winter 2019";
+
+        this.quarter = 'Winter 2019';
         this.week = 2;
         this.session = 1;
         this.end = false;
-        this.quarters = ["Fall 2018","Winter 2019"];
-        this.done=false;
-        this.error=null;
+        this.quarters = ['Fall 2018', 'Winter 2019'];
+
+        this.done = false;
+        this.error = null;
+        this.past = null;
+        this.present = null;
+
+        var ref = firebase.database().ref();
+        ref.on('value', this.processData);
+
         $.ajax({
-            url: "https://24timezones.com/time-zone/utc",
+            url: 'https://24timezones.com/time-zone/utc',
             context: document.body,
-            crossdomain: true,
+            crossdomain: true
         }).done(this.getDate);
     }
 
-    err(){
-        this.done=true;
-        this.error= <Alert color="info">We noticed that your computer's clock is not set correctly. Please set it correctly for better performance! :)</Alert>
+    processData(data) {
+        this.data = data.val();
+        this.past = (
+            <Past
+                week={this.week}
+                quarters={this.quarters}
+                session={this.session}
+                className="center"
+                data={this.data}
+            />
+        );
+
+        this.present = (
+            <Present
+                end={this.end}
+                week={this.week}
+                quarter={this.quarter}
+                session={this.session}
+                data={this.data[this.quarter][this.week]}
+            />
+        );
         this.toggle();
     }
 
-    getDate(data){
-        data = data.split("<div id=\"cityClock\">",2)[1];
-        data = data.split("</div>",2);
-        var date = (data[1].split(", "));
-        date = date[1]+", "+date[2].split("<")[0];
+    err() {
+        this.done = true;
+        this.error = (
+            <Alert color="info">
+                We noticed that your computer's clock is not set correctly.
+                Please set it correctly for better performance! :)
+            </Alert>
+        );
+        this.toggle();
+    }
+
+    getDate(data) {
+        data = data.split('<div id="cityClock">', 2)[1];
+        data = data.split('</div>', 2);
+        var date = data[1].split(', ');
+        date = date[1] + ', ' + date[2].split('<')[0];
 
         var time = data[0].split(/\D+/);
         var ampm = data[0].split(/<\/*sup>+/)[1];
-        if(ampm==="pm"){
-            time[1]=((parseInt(time[1],10)+12)%24).toString();
+        if (ampm === 'pm' && time[1] !== '12') {
+            time[1] = ((parseInt(time[1], 10) + 12) % 24).toString();
+        } else if (ampm === 'am' && time[1] === '12') {
+            time[1] = '00';
         }
-        date = date+" "+time[1]+":"+time[2]+":"+time[3]+" GMT+00:00";
+        date =
+            date + ' ' + time[1] + ':' + time[2] + ':' + time[3] + ' GMT+00:00';
 
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
@@ -57,15 +100,14 @@ class Puzzle extends Component {
         ];
 
         // change below for testing [ place desired date inside Date() ]
-        
+
         var today = new Date(date);
-        if(!(today instanceof Date) || isNaN(today)){
-            this.err()
+        if (!(today instanceof Date) || isNaN(today)) {
+            this.err();
             return;
         }
 
         today = today.getTime();
-
 
         // index of the quarter we are in
         let i = 0;
@@ -116,9 +158,10 @@ class Puzzle extends Component {
 
         // List of quarters that will be included in past solutions
         // note ".slice" does not include end argument
-        this.quarters = quarters.slice(0,i+1);
+        this.quarters = quarters.slice(0, i + 1);
         // console.log(this.session, this.quarter, this.end, this.week);
-        this.done=true;
+        // console.log(new Date(date));
+        this.done = true;
         this.toggle();
     }
 
@@ -127,76 +170,82 @@ class Puzzle extends Component {
     }
 
     render() {
-        if(this.done){
+        if (this.done) {
             return (
-                <div className = "center">
-                    <Navigation></Navigation>
-                    <Banner lead="Weekly Problems and Solutions" 
-                            leadSub="Ready to get your minds blown?"
-                    ></Banner>
-                    <div className='center'>
-                        {this.error}
+                <div className="center">
+                    <Navigation />
+                    <Banner
+                        lead="Weekly Problems and Solutions"
+                        leadSub="Ready to get your minds blown?"
+                    />
+                    {this.error}
+                    <div className="center">
                         <Row className="center">
-                            <Alert  className="easy m"
-                                    transition={{in: true, timeout: 1300}}>
+                            <Alert
+                                className="easy m"
+                                transition={{ in: true, timeout: 1300 }}>
                                 Easy
                             </Alert>
-                            <Alert className="med m"
-                                    transition={{in: true, timeout: 800}}>
+                            <Alert
+                                className="med m"
+                                transition={{ in: true, timeout: 800 }}>
                                 Medium
                             </Alert>
-                            <Alert className="hard m"
-                                    transition={{in: true, timeout: 300}}>
+                            <Alert
+                                className="hard m"
+                                transition={{ in: true, timeout: 300 }}>
                                 Hard
                             </Alert>
-                            <Alert className="icpc m"
-                                    transition={{in: true, timeout: 300}}>
+                            <Alert
+                                className="icpc m"
+                                transition={{ in: true, timeout: 300 }}>
                                 ICPC
                             </Alert>
-                            <Alert className="codealong m"
-                                    transition={{in: true, timeout: 800}}>
+                            <Alert
+                                className="codealong m"
+                                transition={{ in: true, timeout: 800 }}>
                                 Code Along
                             </Alert>
-                            <Alert className="event m"
-                                    transition={{in: true, timeout: 1300}}>
+                            <Alert
+                                className="event m"
+                                transition={{ in: true, timeout: 1300 }}>
                                 Event
                             </Alert>
                         </Row>
                     </div>
 
-                    <div className="small center">
-                        <Present 
-                            end = {this.end} 
-                            week={this.week} 
-                            quarter={this.quarter} 
-                            session={this.session}
-                        ></Present>
+                    <div className="small center">{this.present}</div>
+
+                    <br />
+
+                    <div className="small center">{this.past}</div>
+
+                    <div>
+                        <br />
+                        <br />
                     </div>
-
-                    <br/>
-
-                    <div className="small center">
-                        <Past 
-                            week={this.week} 
-                            quarters={this.quarters} 
-                            session={this.session} 
-                            className="center"
-                        ></Past>
-                    </div>
-
-                    <div><br/><br/></div>
-                    
-
                 </div>
             );
         }
         return (
-            <Alert className="med m"
-                    transition={{in: true, timeout: 100}}>
-                Fetching Data :3
-            </Alert>
+            <div className="center">
+                <Navigation />
+                <Banner
+                    lead="Weekly Problems and Solutions"
+                    leadSub="Ready to get your minds blown?"
+                />
+
+                <Alert
+                    className="med m"
+                    transition={{ in: true, timeout: 100 }}>
+                    Fetching Data :3
+                </Alert>
+
+                <div>
+                    <br />
+                    <br />
+                </div>
+            </div>
         );
     }
 }
-
-export default Puzzle;

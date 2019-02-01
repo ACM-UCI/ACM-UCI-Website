@@ -14,15 +14,21 @@ export default class Problem extends Component {
             props.diff === 'med' ||
             props.diff === 'hard' ||
             props.diff === 'icpc' ||
-            props.diff === 'codealong'
+            props.diff === 'codealong' ||
+            props.diff === 'event'
         ) {
+            var txt = props.txt;
+            if (props.diff === 'event') {
+                txt = 'Info';
+            }
             this.solution = (
                 <Solution
-                    txt={props.txt}
+                    txt={txt}
                     week={props.week}
                     link={props.slink}
                     quarter={props.quarter}
                     con={this.con}
+                    code={props.code}
                 />
             );
         }
@@ -49,11 +55,17 @@ export default class Problem extends Component {
                 </a>
             );
         }
+
+        if (props.evnt !== 'yes') {
+            this.diff = props.diff + ' probcard';
+        } else {
+            this.diff = props.diff + ' evntcard';
+        }
     }
 
     render() {
         return (
-            <Card className={`${this.props.diff} probcard`}>
+            <Card className={this.diff}>
                 <CardBody>
                     <Col>
                         {this.obj}

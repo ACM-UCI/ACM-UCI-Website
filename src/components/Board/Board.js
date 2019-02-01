@@ -10,6 +10,7 @@ import jens from '../../img/jens.jpg';
 import bryon from '../../img/bryon.jpg';
 import jacky from '../../img/jacky.jpg';
 import meta from '../../img/meta.jpg';
+import frank from '../../img/frank.jpg';
 import './Board.css';
 
 class Board extends Component {
@@ -78,6 +79,13 @@ class Board extends Component {
                                 src={meta}
                                 name="Meta Novitia"
                                 position="Secretary"
+                            />
+                        </Col>
+                        <Col md="4">
+                            <BoardMember
+                                src={frank}
+                                name="Frank Shi"
+                                position="Graduate Ambassador"
                             />
                         </Col>
                     </Row>

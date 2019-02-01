@@ -10,7 +10,6 @@ import {
 import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
-import $ from 'jquery';
 import fblogo from '../../../../../../../img/fb.png';
 import processCon from '../processCon.js';
 
@@ -42,10 +41,11 @@ export default class Solution extends Component {
         this.con = props.con;
         this.txt = props.txt;
         this.code = null;
-        this.solLink = '';
+    }
 
-        if (props.link === '') {
-            const fb = processCon(props.con);
+    componentDidMount() {
+        if (this.props.code === '') {
+            const fb = processCon(this.props.con);
             if (this.con === '') {
                 this.con = ' Any Board Member';
             }
@@ -70,20 +70,8 @@ export default class Solution extends Component {
                 </Container>
             );
         } else {
-            this.solLink = `https://raw.githubusercontent.com/MetaNovitia/ACM-UCI-Website/master/public/solutions/${
-                props.quarter.split(' ')[0]
-            }%20${props.quarter.split(' ')[1]}/${props.week}/${props.link}`;
-        }
-    }
-
-    // NEED TO CHECK
-    componentDidMount() {
-        // should be changed to axios request, xhr is deprecated
-        if (this.props.link !== '') {
-            $.ajax({
-                url: this.solLink,
-                context: document.body
-            }).done(this.setCode);
+            this.setCode(this.props.code);
+            this.link = this.props.link;
         }
     }
 

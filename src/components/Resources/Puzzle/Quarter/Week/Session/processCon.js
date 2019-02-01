@@ -6,6 +6,7 @@ import jens from '../../../../../../img/jens.jpg';
 import bryon from '../../../../../../img/bryon.jpg';
 import jacky from '../../../../../../img/jacky.jpg';
 import meta from '../../../../../../img/meta.jpg';
+import frank from '../../../../../../img/frank.jpg';
 
 export default function processLink(link) {
     const fb = ['https://www.facebook.com/groups/acmuci/', acm];
@@ -40,7 +41,10 @@ export default function processLink(link) {
         return ['https://www.facebook.com/meta.novitia', meta];
     }
     if (link.endsWith('Frank')) {
-        return ['https://www.facebook.com/profile.php?id=100012887927941', acm];
+        return [
+            'https://www.facebook.com/profile.php?id=100012887927941',
+            frank
+        ];
     }
     if (link.endsWith('Tim')) {
         return ['https://www.facebook.com/blazedspeeder', acm];
