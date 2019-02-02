@@ -327,7 +327,7 @@ export default class Submit extends Component {
                             type="textarea"
                             name="text"
                             id="Note"
-                            placeholder="Optional"
+                            placeholder="Optional. Place each point in a new line"
                             onChange={evt => this.updateInputValue(evt)}
                         />
                     </Col>

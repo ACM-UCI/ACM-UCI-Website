@@ -49,6 +49,7 @@ export default class Session extends Component {
                                         className="center"
                                         name={data.Name}
                                         link={data.Link}
+                                        note={data.Note}
                                         diff={data.Difficulty}
                                         slink={data.Solution}
                                         code={data.Code}

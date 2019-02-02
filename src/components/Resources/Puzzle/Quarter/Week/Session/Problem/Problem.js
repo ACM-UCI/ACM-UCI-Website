@@ -29,6 +29,7 @@ export default class Problem extends Component {
                     quarter={props.quarter}
                     con={this.con}
                     code={props.code}
+                    note={props.note}
                 />
             );
         }

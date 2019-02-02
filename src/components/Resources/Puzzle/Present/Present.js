@@ -73,6 +73,7 @@ export default class Present extends Component {
                                         slink={data.Solution}
                                         con={data.Contributor}
                                         code={data.Code}
+                                        note={data.Note}
                                         txt="Info"
                                         week={this.week}
                                         quarter={this.quarter}
@@ -90,6 +91,7 @@ export default class Present extends Component {
                                         diff={data.Difficulty}
                                         slink={data.Solution}
                                         con={data.Contributor}
+                                        note={data.Note}
                                         code={data.Code}
                                         week={this.week}
                                         quarter={this.quarter}
