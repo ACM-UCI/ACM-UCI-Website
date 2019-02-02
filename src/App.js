@@ -9,7 +9,8 @@ import Contact from './components/Contact/Contact';
 import IntroCP from './components/Resources/IntroCP/IntroCP';
 import Puzzle from './components/Resources/Puzzle/Puzzle';
 import Donate from './components/Donate/donate';
-import firebase from 'firebase';
+import Login from './components/Login/Login';
+import firebase from 'firebase/app';
 import './scss/custom.css';
 import './App.css';
 
@@ -39,6 +40,7 @@ class App extends Component {
                 <Route path="/contact" component={Contact} />
                 <Route path="/introToCp" component={IntroCP} />
                 <Route path="/puzzle" component={Puzzle} />
+                <Route path="/login" component={Login} />
             </Switch>
         );
     }

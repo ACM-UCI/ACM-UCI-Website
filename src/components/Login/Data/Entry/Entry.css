@@ -1,0 +1,11 @@
+.solbtn{
+    background-color: transparent;
+    border: none;
+    border: 2px solid transparent;
+}
+
+.solbtn:hover{
+    background-color: transparent;
+    border: 2px dashed #02284B;
+    color: rgb(129, 122, 122);
+}

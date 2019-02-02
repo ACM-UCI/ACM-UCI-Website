@@ -90,6 +90,14 @@ class Navigation extends Component {
                                 Contact
                             </NavLink>
                         </NavItem>
+                        <NavItem className="mx-3">
+                            <NavLink
+                                tag={Link}
+                                className="nav-font"
+                                to="/login">
+                                Login
+                            </NavLink>
+                        </NavItem>
                     </Nav>
                 </Collapse>
             </Navbar>

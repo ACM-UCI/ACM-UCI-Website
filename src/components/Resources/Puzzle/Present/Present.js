@@ -35,69 +35,70 @@ export default class Present extends Component {
         for (var key in myData) {
             if (myData.hasOwnProperty(key)) {
                 var data = myData[key];
+                if (data !== null) {
+                    var t = 'Solution';
+                    if (problems[problems.length - 1].length === 3) {
+                        problems.push([]);
+                    }
 
-                var t = 'Solution';
-                if (problems[problems.length - 1].length === 3) {
-                    problems.push([]);
-                }
+                    if (events[events.length - 1].length === 3) {
+                        events.push([]);
+                    }
 
-                if (events[events.length - 1].length === 3) {
-                    events.push([]);
-                }
+                    if (!this.end && data.Session === this.session.toString()) {
+                        t = 'Help';
+                        // make sure no solution is shown since session is ongoing
+                        data.Solution = '';
+                    }
 
-                if (!this.end && data.Session === this.session.toString()) {
-                    t = 'Help';
-                    // make sure no solution is shown since session is ongoing
-                    data.Solution = '';
-                }
-
-                // if this entry is from the current session
-                if (data.Session === this.session.toString()) {
-                    if (data.Difficulty === 'announcement') {
-                        this.announcements.push(
-                            <Announcement
-                                key={data.Name}
-                                name={data.Name}
-                                desc={data.Link}
-                                con={data.Contributor}
-                            />
-                        );
-                    } else if (data.Difficulty === 'event') {
-                        events[events.length - 1].push(
-                            <Col md="4" className="height">
-                                <Problem
-                                    className="center"
+                    // if this entry is from the current session
+                    if (data.Session === this.session.toString()) {
+                        if (data.Difficulty === 'announcement') {
+                            this.announcements.push(
+                                <Announcement
+                                    key={data.Name}
                                     name={data.Name}
-                                    link={data.Link}
-                                    diff={data.Difficulty}
-                                    slink={data.Solution}
+                                    desc={data.Link}
                                     con={data.Contributor}
-                                    code={data.Code}
-                                    txt="Info"
-                                    week={this.week}
-                                    quarter={this.quarter}
-                                    session={this.session}
-                                    evnt="yes"
                                 />
-                            </Col>
-                        );
-                    } else {
-                        problems[problems.length - 1].push(
-                            <Col md="4" className="height">
-                                <Problem
-                                    name={data.Name}
-                                    link={data.Link}
-                                    diff={data.Difficulty}
-                                    slink={data.Solution}
-                                    con={data.Contributor}
-                                    code={data.Code}
-                                    week={this.week}
-                                    quarter={this.quarter}
-                                    session={this.session}
-                                    txt={t}
-                                />
-                            </Col>
-                        );
+                            );
+                        } else if (data.Difficulty === 'event') {
+                            events[events.length - 1].push(
+                                <Col md="4" className="height">
+                                    <Problem
+                                        className="center"
+                                        name={data.Name}
+                                        link={data.Link}
+                                        diff={data.Difficulty}
+                                        slink={data.Solution}
+                                        con={data.Contributor}
+                                        code={data.Code}
+                                        txt="Info"
+                                        week={this.week}
+                                        quarter={this.quarter}
+                                        session={this.session}
+                                        evnt="yes"
+                                    />
+                                </Col>
+                            );
+                        } else {
+                            problems[problems.length - 1].push(
+                                <Col md="4" className="height">
+                                    <Problem
+                                        name={data.Name}
+                                        link={data.Link}
+                                        diff={data.Difficulty}
+                                        slink={data.Solution}
+                                        con={data.Contributor}
+                                        code={data.Code}
+                                        week={this.week}
+                                        quarter={this.quarter}
+                                        session={this.session}
+                                        txt={t}
+                                    />
+                                </Col>
+                            );
+                        }
                     }
                 }
             }

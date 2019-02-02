@@ -5,7 +5,8 @@ import Banner from '../../Banner/Banner';
 import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import $ from 'jquery';
 
 export default class Puzzle extends Component {
@@ -28,9 +29,6 @@ export default class Puzzle extends Component {
         this.error = null;
         this.past = null;
         this.present = null;
-
-        var ref = firebase.database().ref();
-        ref.on('value', this.processData);
 
         $.ajax({
             url: 'https://24timezones.com/time-zone/utc',
@@ -162,6 +160,10 @@ export default class Puzzle extends Component {
         // console.log(this.session, this.quarter, this.end, this.week);
         // console.log(new Date(date));
         this.done = true;
+
+        var ref = firebase.database().ref();
+        ref.on('value', this.processData);
+
         this.toggle();
     }
 

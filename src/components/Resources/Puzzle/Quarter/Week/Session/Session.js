@@ -27,39 +27,40 @@ export default class Session extends Component {
         for (var key in myData) {
             if (myData.hasOwnProperty(key)) {
                 const data = myData[key];
+                if (data !== null) {
+                    if (problems[problems.length - 1].length === 3) {
+                        problems.push([]);
+                    }
 
-                if (problems[problems.length - 1].length === 3) {
-                    problems.push([]);
-                }
-
-                if (data.Session === this.session) {
-                    if (data.Difficulty === 'announcement') {
-                        this.announcements.push(
-                            <Announcement
-                                key={data.Name}
-                                name={data.Name}
-                                desc={data.Link}
-                                con={data.Contributor}
-                            />
-                        );
-                    } else {
-                        problems[problems.length - 1].push(
-                            <Col md="4" className="height">
-                                <Problem
-                                    className="center"
+                    if (data.Session === this.session) {
+                        if (data.Difficulty === 'announcement') {
+                            this.announcements.push(
+                                <Announcement
+                                    key={data.Name}
                                     name={data.Name}
-                                    link={data.Link}
-                                    diff={data.Difficulty}
-                                    slink={data.Solution}
-                                    code={data.Code}
+                                    desc={data.Link}
                                     con={data.Contributor}
-                                    txt="Solution"
-                                    week={this.week}
-                                    quarter={this.quarter}
-                                    session={this.session}
                                 />
-                            </Col>
-                        );
+                            );
+                        } else {
+                            problems[problems.length - 1].push(
+                                <Col md="4" className="height">
+                                    <Problem
+                                        className="center"
+                                        name={data.Name}
+                                        link={data.Link}
+                                        diff={data.Difficulty}
+                                        slink={data.Solution}
+                                        code={data.Code}
+                                        con={data.Contributor}
+                                        txt="Solution"
+                                        week={this.week}
+                                        quarter={this.quarter}
+                                        session={this.session}
+                                    />
+                                </Col>
+                            );
+                        }
                     }
                 }
             }
