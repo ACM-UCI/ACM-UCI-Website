@@ -1,0 +1,1545 @@
+{
+    "submissions": {
+        "1": {
+            "Name": "Reverse Integer",
+            "Link": "https://leetcode.com/problems/reverse-integer/description/",
+            "Difficulty": "easy",
+            "Code": "// link is https://leetcode.com/problems/reverse-integer/description/\nclass Solution {\npublic:\n    int reverse(int x) {\n        long long res = 0;\n        while(x) {\n            res = res*10 + x%10;\n            x /= 10;\n        }\n        return (res<INT_MIN || res>INT_MAX) ? 0 : res;\n    }\n};\n",
+            "Solution": "reverse_integer.cpp",
+            "Session": "",
+            "Contributor": "Tim",
+            "Note": ""
+        },
+        "2": {
+            "Name": "Reverse Integer",
+            "Link": "https://leetcode.com/problems/reverse-integer/description/",
+            "Difficulty": "easy",
+            "Code": "// link is https://leetcode.com/problems/reverse-integer/description/\nclass Solution {\npublic:\n    int reverse(int x) {\n        long long res = 0;\n        while(x) {\n            res = res*10 + x%10;\n            x /= 10;\n        }\n        return (res<INT_MIN || res>INT_MAX) ? 0 : res;\n    }\n};\n",
+            "Solution": "reverse_integer.cpp",
+            "Session": "",
+            "Contributor": "Tim",
+            "Note": ""
+        },
+        "3": {
+            "Name": "Reverse Integer",
+            "Link": "https://leetcode.com/problems/reverse-integer/description/",
+            "Difficulty": "easy",
+            "Code": "// link is https://leetcode.com/problems/reverse-integer/description/\nclass Solution {\npublic:\n    int reverse(int x) {\n        long long res = 0;\n        while(x) {\n            res = res*10 + x%10;\n            x /= 10;\n        }\n        return (res<INT_MIN || res>INT_MAX) ? 0 : res;\n    }\n};\n",
+            "Solution": "reverse_integer.cpp",
+            "Session": "",
+            "Contributor": "Tim",
+            "Note": ""
+        }
+    },
+    "Fall 2018": {
+        "1": {
+            "1": {
+                "Name": "Reverse Integer",
+                "Link": "https://leetcode.com/problems/reverse-integer/description/",
+                "Difficulty": "easy",
+                "Code": "// link is https://leetcode.com/problems/reverse-integer/description/\nclass Solution {\npublic:\n    int reverse(int x) {\n        long long res = 0;\n        while(x) {\n            res = res*10 + x%10;\n            x /= 10;\n        }\n        return (res<INT_MIN || res>INT_MAX) ? 0 : res;\n    }\n};\n",
+                "Solution": "reverse_integer.cpp",
+                "Session": "2",
+                "Contributor": "Tim",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Mini-max-sum",
+                "Link": "https://www.hackerrank.com/challenges/mini-max-sum/problem",
+                "Difficulty": "easy",
+                "Code": "//https://www.hackerrank.com/challenges/mini-max-sum/problem\n// Complete the miniMaxSum function below.\nvoid miniMaxSum(vector<int> arr) {\n    long min= arr[0],max = arr[0];\n    long total = 0;\n    for(int i =0; i<arr.size();++i){\n        if (arr[i]<min){\n            min = arr[i];\n        }\n        else if(arr[i]>max){\n            max = arr[i];\n        }\n        total+=arr[i];\n    }\n    cout<<total-max<< \" \"<<total-min<<endl;\n}\n",
+                "Solution": "min-max-sum.cpp",
+                "Session": "2",
+                "Contributor": "Blake",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Homer",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&category=655&problem=1406",
+                "Difficulty": "icpc",
+                "Code": "#include<bits/stdc++.h>\nusing namespace std;\n\nint M;\nint N;\nint T;\nint dp[10010];\n\nint main(){\n    while (scanf(\"%d %d %d\",&M,&N,&T)==3){\n\n        memset(dp, -1, sizeof(dp));\n\n        dp[M] = 1;\n        dp[N] = 1;\n        dp[0] = 0;\n\n        if (M == 1 || N ==1) {\n            printf(\"%d\n\",T);\n            continue;\n        }\n\n        for(int i=0;i<T;++i)\n            if (dp[i]>=0){\n                if (i+M <= T)\n                    dp[i+M] = max(dp[i+M],dp[i]+1);\n                if (i+N <= T)\n                    dp[i+N] = max(dp[i+N],dp[i]+1);\n            }\n\n        if(dp[T]>=0)\n        {\n            printf(\"%d\n\",dp[T]);\n            continue;\n        }\n\n        for(int i=T-1; i>-1; i--)\n            if(dp[i]>=0)\n            {\n                printf(\"%d %d\n\",dp[i],T-i);\n                break;\n            }\n    }\n\n    return 0;\n}\n",
+                "Solution": "10465(homer).cpp",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "4": {
+                "Name": "The Trip",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2041",
+                "Difficulty": "icpc",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (UVa) 11100\n\n// Based on (copied) from\n// github.com/lamphanviet/competitive-programming/uva-online-judge/accepted-solutions/11100\n// - The Trip - 2007.cpp\n\n#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n;\n  scanf(\"%d\n\", &n);\n  while (n > 0) {\n    // Make initial list of bags.\n    vector<int> bags;\n    for (int i = 0; i < n; ++i) {\n      int x;\n      scanf(\"%d\n\", &x);\n      bags.push_back(x);\n    }\n    sort(bags.begin(), bags.end());\n    bags.push_back(-1);\n\n    // The number of sets of bags needed is equal to the maximum number of\n    // one kind of bag. For instance, in the sample input for the problem,\n    // we need 3 sets because we have 3 bags of size 2.\n    int numsets = 0;\n    int tempsize = 1;\n    for (int i = 1; i <= n; ++i) {\n      if (bags[i] != bags[i - 1]) {\n        if (tempsize > numsets) numsets = tempsize;\n        tempsize = 1;\n      } else {\n        ++tempsize;\n      }\n    }\n\n    // Print output for this case -- The bags in each set are determined by\n    // simply going through the input, stepping by numsets each time. This\n    // works because the input is already sorted, so as we go through we\n    // always increase in bag size. We are guaranteed to not have repeated\n    // bag sizes because there are at most numsets bags of each size.\n    printf(\"%d\n\", numsets);\n    for (int i = 0; i < numsets; ++i) {\n      printf(\"%d\", bags[i]);\n      for (int j = i + numsets; j < n; j += numsets) {\n        printf(\" %d\", bags[j]);\n      }\n      putchar('\n');\n    }\n\n    // Get next input\n    scanf(\"%d\n\", &n);\n    if (n > 0) putchar('\n');\n  }\n  return 0;\n}\n",
+                "Solution": "11100.cpp",
+                "Session": "2",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Torus",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1768",
+                "Difficulty": "icpc",
+                "Code": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint n;\n\nint get_max_sub(vector<vector<int> > & grid) {\n    // make cumulative grid\n    int cum[2 * n][2 * n];\n    for (int i = 0; i < 2 *n; ++i) {\n        for (int j = 0; j < 2 * n; ++j) {\n            cum[i][j] = grid[i][j];\n            if (i > 0) cum[i][j] += cum[i - 1][j];\n            if (j > 0) cum[i][j] += cum[i][j - 1];\n            if (i > 0 && j > 0) cum[i][j] -= cum[i - 1][j - 1];\n        }\n    }\n\n    int result = 75 * -100;\n    // starting coordinate\n    for (int a = 0; a < 2 * n; ++a) {\n        for (int b = 0; b < 2 * n; ++b) {\n\n            // ending coordinate\n            for (int x = a; x < 2 * n && x < (a + n); ++x) {\n                for (int y = b; y < 2 * n && y < (b + n); ++y) {\n                    int temp = cum[x][y];\n                    if (a > 0) temp -= cum[a - 1][y];\n                    if (b > 0) temp -= cum[x][b - 1];\n                    if (a > 0 && b > 0) temp += cum[a - 1][b - 1];\n                    result = max(result, temp);\n                }\n            }\n\n        }\n    }\n    return result;\n}\n\nint main () {\n\n    // read input\n    int q; scanf(\"%d\", &q);\n    while (q --> 0) {\n        scanf(\"%d\", &n);\n        vector<vector<int> > grid(2*n, vector<int>(2*n));\n        for (int i = 0; i < n; ++i) {\n            for (int j = 0; j < n; ++j) {\n                scanf(\"%d\", &grid[i][j]);\n                grid[i][j + n] = grid[i][j];\n                grid[i + n][j] = grid[i][j];\n                grid[i + n][j + n] = grid[i][j];\n\n            }\n        }\n\n        cout << get_max_sub(grid) << endl;\n    }\n    return 0;\n}\n",
+                "Solution": "10827.cpp",
+                "Session": "2",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Jollo",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=611&page=show_problem&problem=3399",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "7": {
+                "Name": "How Many Knights",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=612&page=show_problem&problem=637",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Mother Bear",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=615&page=show_problem&problem=1886",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Magic Square",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=615&page=show_problem&problem=2162",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Traffic Lights",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=617&page=show_problem&problem=97",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "11": {
+                "Name": "Counterfeit Dollar",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=618&page=show_problem&problem=549",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "12": {
+                "Name": "Consanguine Calculations",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=618&page=show_problem&problem=3502",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "13": {
+                "Name": "All Integer Average",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=620&page=show_problem&problem=3212",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "14": {
+                "Name": "Mobile Casanova",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=620&page=show_problem&problem=3237",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            }
+        },
+        "2": {
+            "1": {
+                "Name": "Coin Change",
+                "Link": "https://leetcode.com/problems/coin-change/description/",
+                "Difficulty": "easy",
+                "Code": "class Solution {\npublic:\n        int coinChange(vector<int>& coins, int amount) {\n        int Max = amount + 1;\n        int coinlen = coins.size();\n        vector<int> dp(amount + 1, Max);\n        dp[0] = 0;\n        for (int i = 0; i < amount + 1; ++i)\n        {\n            for (int j = 0; j < coinlen; ++j)\n            {\n                if(coins[j] <= i)\n                    dp[i] = min(dp[i], dp[i - coins[j]] + 1);\n            }\n        }\n        return dp[amount] > amount ? -1 : dp[amount];\n\n    }\n};\n",
+                "Solution": "coin_change.cpp",
+                "Session": "1",
+                "Contributor": "Tim",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Flatten Binary Tree",
+                "Link": "https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/",
+                "Difficulty": "easy",
+                "Code": "# Definition for a binary tree node.\n# class TreeNode(object):\n#     def __init__(self, x):\n#         self.val = x\n#         self.left = None\n#         self.right = None\n\nclass Solution(object):\n    def flatten(self, root):\n        \"\"\"\n        :type root: TreeNode\n        :rtype: void Do not return anything, modify root in-place instead.\n        \"\"\"\n        stack = []\n        if root:\n            if root.right:\n                stack.append(root.right)\n            if root.left:\n                stack.append(root.left)\n            curr = root\n\n            while stack:\n                temp = stack.pop()\n                curr.right = temp\n                curr.left = None\n\n                if temp:\n                    if temp.right:\n                        stack.append(temp.right)\n                    if temp.left:\n                        stack.append(temp.left)\n\n                curr = temp\n",
+                "Solution": "flatten_tree_to_list.py",
+                "Session": "1",
+                "Contributor": "Armen",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Rational Sequence",
+                "Link": "https://open.kattis.com/problems/rationalsequence3",
+                "Difficulty": "easy",
+                "Code": "def convert_binary(n):\n    a = str(bin(n))\n    return a[2:]\n\n\n\n\ndef compute_tree(decisions):\n    p = 1\n    q = 1\n    for i in decisions[1:]:\n        if i == '1':\n            q = p + q\n        else:\n            p = p+q\n\n\n    return (p,q)\n\n\nT = int(input())\nfor _ in range(T):\n    b = [int(i) for i in input().split()]\n    decisions = convert_binary(b[1])\n    val = compute_tree(decisions)\n    print(b[0], str(val[1]) + \"/\" + str(val[0]))\n",
+                "Solution": "rational.py",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Wormholes",
+                "Link": "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=499",
+                "Difficulty": "med",
+                "Code": "#include <iostream>\n#include <tuple>\n#include <cmath>\n#include <vector>\nusing namespace std;\n\nint main () {\n    int q; scanf(\"%d\", &q);\n    while (q --> 0) {\n        int n, m;\n        scanf(\"%d %d\", &n, &m);\n        vector<tuple<int, int, int> > edges;\n        for (int i = 0; i < m; ++i) {\n            int a, b, w;\n            scanf(\"%d %d %d\", &a, &b, &w);\n            edges.push_back(make_tuple(a, b, w));\n        }\n\n        // Bellman - Ford\n        int distance[n];\n        for (int i = 0; i < n; ++i) {\n            distance[i] = INFINITY;\n        }\n        distance[0] = 0;\n\n        for (int i = 0; i < n - 1; ++i) {\n            for (auto e: edges) {\n                int a, b, w;\n                tie(a, b, w) = e;\n                distance[b] = min(distance[b], distance[a] + w);\n            }\n        }\n\n        // check for negative cycle\n        bool isNegativeCylce = false;\n        for (auto e: edges) {\n            int a, b, w;\n            tie(a, b, w) = e;\n            if (distance[a] + w < distance[b]) {\n                cout << \"possible\" << endl;\n                isNegativeCylce = true;\n                break;\n            }\n        }\n\n        if (!isNegativeCylce) cout << \"not possible\" << endl;\n\n    }\n    return 0;\n}\n",
+                "Solution": "558.cpp",
+                "Session": "1",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Commando War",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=658&page=show_problem&problem=2829",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (UVa) 11729\n#include <bits/stdc++.h>\n#define FOR(i, a, b) for (int i = a; i < b; ++i)\n#define FORe(i, a, b) for (int i = a; i <= b; ++i)\n#define PAI(arr, len) /*Print array of integers*/ \\n  {                                               \\n    for (int _i = 0; _i < len; ++_i) {            \\n      if (_i != len - 1) {                        \\n        printf(\"%d \", arr[_i]);                   \\n      } else {                                    \\n        printf(\"%d\", arr[_i]);                    \\n      }                                           \\n    }                                             \\n    putchar('\n');                                \\n  }\n#define PBS(n, len) /*Print a bitset*/ \\n  {                                    \\n    for (int _i = 0; _i < len; ++_i) { \\n      putchar(n % 2 + '0');            \\n      n /= 2;                          \\n    }                                  \\n    putchar('\n');                     \\n  }\n#define GET(x) scanf(\"%d\", &x)\n#define PLN putchar('\n')\ntypedef long long ll;\nusing namespace std;\n\n// first: briefing time\n// second: job time\npair<int, int> sd[1010];\n\n// Compare by seeing which scenario would take longer - having a or b go first.\n// If a has briefing and job time b1 and j1, and b has b2 and j2, then the time\n// with a first is b1 + max(j1, b2 + j2). The time if b goes first is b2 +\n// max(j2, b1 + j1). If a's time is less than b's time, a goes first and vice\n// versa.\nbool compare(pair<int, int> a, pair<int, int> b) {\n  int t_a = a.first + max(a.second, b.first + b.second);\n  int t_b = b.first + max(b.second, a.first + a.second);\n  return t_a < t_b;\n}\n\nint main() {\n  int n;\n  for (int ca = 1; GET(n) && n; ++ca) {\n    FOR(i, 0, n) {\n      GET(sd[i].first);\n      GET(sd[i].second);\n    }\n\n    // Sort as described above\n    sort(sd, sd + n, compare);\n\n    // Calculate total time - tot keeps track of briefing times covered so far,\n    // and fin keeps track of last time when job finishes.\n    int tot = 0;\n    int fin = 0;\n    FOR(i, 0, n) {\n      tot += sd[i].first;\n      fin = max(fin, tot + sd[i].second);\n    }\n    tot = fin;\n\n    // output\n    printf(\"Case %d: %d\n\", ca, tot);\n  }\n  return 0;\n}\n",
+                "Solution": "uva11729.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "6": {
+                "Name": "String Reduction",
+                "Link": "https://www.hackerrank.com/challenges/string-reduction/problem",
+                "Difficulty": "med",
+                "Code": "import collections\n\ndef str_reduction(a):\n    count = 0\n    map = collections.Counter(a)\n    #print([map['a'],map['b'],map['c']])\n    ls = sorted([map['a'],map['b'],map['c']])\n    count = recursive_reduce(ls)\n    return count\n\ndef recursive_reduce(list):\n    if list[0] <= 0 and list[1] <= 0:\n        return list[-1]\n    else:\n        list[-1]-=1\n        list[1]-=1\n        list[0]+=1\n        return recursive_reduce(sorted(list))\n\nfor i in range(int(input())):\n    a = input()\n    print(str_reduction(a))\n\n",
+                "Solution": "StringReduction.py",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "7": {
+                "Name": "ICPC",
+                "Link": "If you're interested in ICPC make sure to fill out the form and watch out for updates on facebook page",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "8": {
+                "Name": "IEEEXtreme",
+                "Link": "IEEExtreme is on next Friday",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Wormholes",
+                "Link": "https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=499",
+                "Difficulty": "med",
+                "Code": "#include <iostream>\n#include <tuple>\n#include <cmath>\n#include <vector>\nusing namespace std;\n\nint main () {\n    int q; scanf(\"%d\", &q);\n    while (q --> 0) {\n        int n, m;\n        scanf(\"%d %d\", &n, &m);\n        vector<tuple<int, int, int> > edges;\n        for (int i = 0; i < m; ++i) {\n            int a, b, w;\n            scanf(\"%d %d %d\", &a, &b, &w);\n            edges.push_back(make_tuple(a, b, w));\n        }\n\n        // Bellman - Ford\n        int distance[n];\n        for (int i = 0; i < n; ++i) {\n            distance[i] = INFINITY;\n        }\n        distance[0] = 0;\n\n        for (int i = 0; i < n - 1; ++i) {\n            for (auto e: edges) {\n                int a, b, w;\n                tie(a, b, w) = e;\n                distance[b] = min(distance[b], distance[a] + w);\n            }\n        }\n\n        // check for negative cycle\n        bool isNegativeCylce = false;\n        for (auto e: edges) {\n            int a, b, w;\n            tie(a, b, w) = e;\n            if (distance[a] + w < distance[b]) {\n                cout << \"possible\" << endl;\n                isNegativeCylce = true;\n                break;\n            }\n        }\n\n        if (!isNegativeCylce) cout << \"not possible\" << endl;\n\n    }\n    return 0;\n}\n",
+                "Solution": "558.cpp",
+                "Session": "2",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Commando War",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=658&page=show_problem&problem=2829",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (UVa) 11729\n#include <bits/stdc++.h>\n#define FOR(i, a, b) for (int i = a; i < b; ++i)\n#define FORe(i, a, b) for (int i = a; i <= b; ++i)\n#define PAI(arr, len) /*Print array of integers*/ \\n  {                                               \\n    for (int _i = 0; _i < len; ++_i) {            \\n      if (_i != len - 1) {                        \\n        printf(\"%d \", arr[_i]);                   \\n      } else {                                    \\n        printf(\"%d\", arr[_i]);                    \\n      }                                           \\n    }                                             \\n    putchar('\n');                                \\n  }\n#define PBS(n, len) /*Print a bitset*/ \\n  {                                    \\n    for (int _i = 0; _i < len; ++_i) { \\n      putchar(n % 2 + '0');            \\n      n /= 2;                          \\n    }                                  \\n    putchar('\n');                     \\n  }\n#define GET(x) scanf(\"%d\", &x)\n#define PLN putchar('\n')\ntypedef long long ll;\nusing namespace std;\n\n// first: briefing time\n// second: job time\npair<int, int> sd[1010];\n\n// Compare by seeing which scenario would take longer - having a or b go first.\n// If a has briefing and job time b1 and j1, and b has b2 and j2, then the time\n// with a first is b1 + max(j1, b2 + j2). The time if b goes first is b2 +\n// max(j2, b1 + j1). If a's time is less than b's time, a goes first and vice\n// versa.\nbool compare(pair<int, int> a, pair<int, int> b) {\n  int t_a = a.first + max(a.second, b.first + b.second);\n  int t_b = b.first + max(b.second, a.first + a.second);\n  return t_a < t_b;\n}\n\nint main() {\n  int n;\n  for (int ca = 1; GET(n) && n; ++ca) {\n    FOR(i, 0, n) {\n      GET(sd[i].first);\n      GET(sd[i].second);\n    }\n\n    // Sort as described above\n    sort(sd, sd + n, compare);\n\n    // Calculate total time - tot keeps track of briefing times covered so far,\n    // and fin keeps track of last time when job finishes.\n    int tot = 0;\n    int fin = 0;\n    FOR(i, 0, n) {\n      tot += sd[i].first;\n      fin = max(fin, tot + sd[i].second);\n    }\n    tot = fin;\n\n    // output\n    printf(\"Case %d: %d\n\", ca, tot);\n  }\n  return 0;\n}\n",
+                "Solution": "uva11729.cpp",
+                "Session": "2",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "11": {
+                "Name": "String Reduction",
+                "Link": "https://www.hackerrank.com/challenges/string-reduction/problem",
+                "Difficulty": "med",
+                "Code": "import collections\n\ndef str_reduction(a):\n    count = 0\n    map = collections.Counter(a)\n    #print([map['a'],map['b'],map['c']])\n    ls = sorted([map['a'],map['b'],map['c']])\n    count = recursive_reduce(ls)\n    return count\n\ndef recursive_reduce(list):\n    if list[0] <= 0 and list[1] <= 0:\n        return list[-1]\n    else:\n        list[-1]-=1\n        list[1]-=1\n        list[0]+=1\n        return recursive_reduce(sorted(list))\n\nfor i in range(int(input())):\n    a = input()\n    print(str_reduction(a))\n\n",
+                "Solution": "StringReduction.py",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "12": {
+                "Name": "Oversized Pancake Flipper",
+                "Link": "https://code.google.com/codejam/contest/3264486/dashboard",
+                "Difficulty": "codealong",
+                "Code": "def magic(pancakes, k):\n    bool_panck = []\n    for i in pancakes:\n        if i == '+':\n            bool_panck.append(1)\n        else:\n            bool_panck.append(0)\n    opt = [1 for i in range(len(bool_panck))]\n    ctr = 0\n\n    while(bool_panck != opt):\n        ctr += 1\n        index = 0\n        while bool_panck[index] == 1:\n            index += 1\n\n        if index + k > len(bool_panck):\n            return -1\n\n        else:\n            for i in range(k):\n                bool_panck[index + i] = 1 -bool_panck[index+i]\n\n    return ctr\n\n\nn = int(input())\nfor i in range(1,n+1):\n    a = input().rstrip().split()\n    pancakes = a[0]\n    k = int(a[1])\n\n    val = magic(pancakes, k)\n    if val == -1:\n        val = \"IMPOSSIBLE\"\n    else:\n        val = str(val)\n    print(\"Case #\" + str(i) + \": \" + val)\n",
+                "Solution": "pancake_flipper.py",
+                "Session": "2",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "13": {
+                "Name": "Compare the Triplets",
+                "Link": "https://www.hackerrank.com/challenges/compare-the-triplets/problem",
+                "Difficulty": "easy",
+                "Code": "// Complete the compareTriplets function below.\n//https://www.hackerrank.com/challenges/compare-the-triplets/problem\nvector<int> compareTriplets(vector<int> a, vector<int> b) {\n    int alice, bob;\n    vector<int>result;\n    alice = bob = 0;\n    for(int i = 0; i<a.size();++i){\n        if (a[i]>b[i]){\n            ++alice;\n        }\n        else if(b[i]>a[i]){\n            ++bob;\n        }\n    }\n    result.push_back(alice);\n    result.push_back(bob);\n    return result;\n}\n",
+                "Solution": "comp_trip.cpp",
+                "Session": "2",
+                "Contributor": "Blake",
+                "Note": ""
+            },
+            "14": {
+                "Name": "First Missing Positive",
+                "Link": "https://leetcode.com/problems/first-missing-positive/description/",
+                "Difficulty": "easy",
+                "Code": "class Solution(object):\n    def firstMissingPositive(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        s_nums = set(nums)\n        count = 1\n        while True:\n            if count in s_nums:\n                count += 1\n            else: return count\n",
+                "Solution": "first_missing_positive.py",
+                "Session": "2",
+                "Contributor": "Armen",
+                "Note": ""
+            },
+            "15": {
+                "Name": "ICPC Problemset",
+                "Link": "https://open.kattis.com/problem-sources/2015%20I3CPC%20East-Central%20NA%20Regional%20Contest ",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "16": {
+                "Name": "ICPC",
+                "Link": "If you want to participate in ICPC make sure you are up to date with posts on Facebook group",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "17": {
+                "Name": "IEEExtreme",
+                "Link": "IEEExtreme is on the 19th",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            }
+        },
+        "3": {
+            "1": {
+                "Name": "Sherlock and Array",
+                "Link": "https://www.hackerrank.com/challenges/sherlock-and-array/problem?h_r=next-challenge&h_v=legacy",
+                "Difficulty": "codealong",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Greedy Florist",
+                "Link": "https://www.hackerrank.com/challenges/greedy-florist/problem ",
+                "Difficulty": "easy",
+                "Code": "a = [int(i) for i in input().rstrip().split()]\nn = a[0]\nk  = a[1]\n\nc = [int(i) for i in input().rstrip().split()]\n\nc.sort()\nc = c[::-1]\ns = 0\nfor i in range(n):\n    s += (int(i/k) + 1)* c[i]\nprint(s)\n",
+                "Solution": "florist.py",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Gas Station",
+                "Link": "https://leetcode.com/problems/gas-station/description/",
+                "Difficulty": "easy",
+                "Code": "class Solution:\n    def canCompleteCircuit(self, gas, cost):\n        \"\"\"\n        :type gas: List[int]\n        :type cost: List[int]\n        :rtype: int\n        \"\"\"\n        begin = len(gas)-1\n        finish = 0\n\n        total = gas[begin]-cost[begin]\n        while(begin>finish):\n            if(total>=0):\n                total+=gas[finish]-cost[finish]\n                finish+=1\n            else:\n                begin-=1\n                total+=gas[begin] -cost[begin]\n\n        if total>=0:\n            return begin\n        else:\n            return -1\n",
+                "Solution": "gas_station.py",
+                "Session": "1",
+                "Contributor": "Blake",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Locked Treasure",
+                "Link": "http://socalcontest.org/history/2014/socal2014.pdf",
+                "Difficulty": "med",
+                "Code": "### bandit problem solution python\n\n\ndef factorial(n):\n    f = 1\n    for i in range(1,n+1):\n        f*= i\n\n    return f\n\n\ndef combinations(n,k):\n    return int(factorial(n)/(factorial(k)*factorial(n-k)))\n\n\n\ndef magic(n,m):\n    return (combinations(n,m-1), int((n-m+1)*combinations(n,m-1)/n))\n\n\ntest = int(input())\nfor i in range(test):\n    a= [int(i) for i in input().split()]\n    result = magic(a[0], a[1])\n\n    print(result[0],\n          result[1])\n",
+                "Solution": "bandits.py",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Rockband",
+                "Link": "https://open.kattis.com/problems/rockband",
+                "Difficulty": "med",
+                "Code": "#include<bits/stdc++.h>\nusing namespace std;\n\nint M;\nint S;\n\nint main(){\n    scanf(\"%d %d\",&M,&S);\n    int pref[M][S];\n    int wrst_song_rnk[S];\n    int songs_to_play[S];\n    memset(songs_to_play,0,sizeof(songs_to_play));\n    memset(wrst_song_rnk,-1,sizeof(wrst_song_rnk));\n\n    for (int m=0;m<M;++m){\n        for (int s=0;s<S;++s){\n            scanf(\"%d\",&pref[m][s]);\n            wrst_song_rnk[pref[m][s]-1] = max(wrst_song_rnk[pref[m][s]-1],s);\n        }\n    }\n\n    int num_songs = 1;\n\n    for(int cur_col=0;cur_col<num_songs;++cur_col){\n        for(int m=0;m<M;++m){\n            int song = pref[m][cur_col];\n            songs_to_play[song-1]=1;\n            num_songs = max(num_songs,wrst_song_rnk[song-1]+1);\n        }\n    }\n\n    printf(\"%d\n\",num_songs);\n\n    for(int i=0;i<S;++i)\n        if (songs_to_play[i])\n            printf(\"%d \",i+1);\n    printf(\"\n\");\n\n    return 0;\n}\n",
+                "Solution": "rockband.cpp",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Max Subarray Sum",
+                "Link": "https://www.hackerrank.com/challenges/maximum-subarray-sum/problem",
+                "Difficulty": "med",
+                "Code": "#!/bin/python3\n\nimport math\nimport os\nimport random\nimport re\nimport sys\nfrom itertools import accumulate\n\ndef maximumSum(a, m):\n\n    # logic: \"it looks simple but it's pretty complicated...\"\n    # know that finding the sum subarrays is equiv to pref[j]-pref[i] for j>i\n    # finding the max(pref[j]-pref[i])%m is equivalent to finding the pref[i]-pref[j] that is the smallest\n    # Proof:\n    # (pref[j]-pref[i]+M)%M == (M - -1*(pref[j]-pref[i]))%M == (M-(pref[i]-pref[j]))%M\n    # sorting the arr puts elements close to each other next to each other -> best way to min difference\n\n    modm = lambda x:x%m\n    cur_max = max(map(modm,a))\n    # construct the prefix arr\n    cum_sum = list(map(modm,accumulate(a)))\n    cur_max = max(cur_max,max(cum_sum))\n    # sorted by values 1st then index as mod m keeps the prefix arr no longer in sorted order\n    pref = sorted(enumerate(cum_sum),key=lambda x:(x[1],x[0]))\n    minimum = m\n\n    for i in range(1, len(a)): #determine the minimum\n        if pref[i-1][0] > pref[i][0] and (pref[i][1] - pref[i-1][1] < minimum):\n            minimum = pref[i][1] - pref[i-1][1]\n    return max(cur_max,m-minimum)\n\n\n\n\nif __name__ == '__main__':\n    fptr = open(os.environ['OUTPUT_PATH'], 'w')\n\n    q = int(input())\n\n    for q_itr in range(q):\n        nm = input().split()\n\n        n = int(nm[0])\n\n        m = int(nm[1])\n\n        a = list(map(int, input().rstrip().split()))\n\n        result = maximumSum(a, m)\n\n        fptr.write(str(result) + '\n')\n\n    fptr.close()\n",
+                "Solution": "max_subarray_sum.py",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "7": {
+                "Name": "ICPC",
+                "Link": "Congrats to those who made it to the ICPC regionals. If you have questions come and talk to me.",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Note",
+                "Link": "IF ALL OF THIS IS TOO EASY COME UP AND I CAN TRY GIVING YOU A PROBLEM OR ASK CHINMAY TO GIVE YOU A PROBLEM",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Locked Treasure",
+                "Link": "http://socalcontest.org/history/2014/socal2014.pdf",
+                "Difficulty": "med",
+                "Code": "### bandit problem solution python\n\n\ndef factorial(n):\n    f = 1\n    for i in range(1,n+1):\n        f*= i\n\n    return f\n\n\ndef combinations(n,k):\n    return int(factorial(n)/(factorial(k)*factorial(n-k)))\n\n\n\ndef magic(n,m):\n    return (combinations(n,m-1), int((n-m+1)*combinations(n,m-1)/n))\n\n\ntest = int(input())\nfor i in range(test):\n    a= [int(i) for i in input().split()]\n    result = magic(a[0], a[1])\n\n    print(result[0],\n          result[1])\n",
+                "Solution": "bandits.py",
+                "Session": "2",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Rockband",
+                "Link": "https://open.kattis.com/problems/rockband",
+                "Difficulty": "med",
+                "Code": "#include<bits/stdc++.h>\nusing namespace std;\n\nint M;\nint S;\n\nint main(){\n    scanf(\"%d %d\",&M,&S);\n    int pref[M][S];\n    int wrst_song_rnk[S];\n    int songs_to_play[S];\n    memset(songs_to_play,0,sizeof(songs_to_play));\n    memset(wrst_song_rnk,-1,sizeof(wrst_song_rnk));\n\n    for (int m=0;m<M;++m){\n        for (int s=0;s<S;++s){\n            scanf(\"%d\",&pref[m][s]);\n            wrst_song_rnk[pref[m][s]-1] = max(wrst_song_rnk[pref[m][s]-1],s);\n        }\n    }\n\n    int num_songs = 1;\n\n    for(int cur_col=0;cur_col<num_songs;++cur_col){\n        for(int m=0;m<M;++m){\n            int song = pref[m][cur_col];\n            songs_to_play[song-1]=1;\n            num_songs = max(num_songs,wrst_song_rnk[song-1]+1);\n        }\n    }\n\n    printf(\"%d\n\",num_songs);\n\n    for(int i=0;i<S;++i)\n        if (songs_to_play[i])\n            printf(\"%d \",i+1);\n    printf(\"\n\");\n\n    return 0;\n}\n",
+                "Solution": "rockband.cpp",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "11": {
+                "Name": "Max Subarray Sum",
+                "Link": "https://www.hackerrank.com/challenges/maximum-subarray-sum/problem",
+                "Difficulty": "med",
+                "Code": "#!/bin/python3\n\nimport math\nimport os\nimport random\nimport re\nimport sys\nfrom itertools import accumulate\n\ndef maximumSum(a, m):\n\n    # logic: \"it looks simple but it's pretty complicated...\"\n    # know that finding the sum subarrays is equiv to pref[j]-pref[i] for j>i\n    # finding the max(pref[j]-pref[i])%m is equivalent to finding the pref[i]-pref[j] that is the smallest\n    # Proof:\n    # (pref[j]-pref[i]+M)%M == (M - -1*(pref[j]-pref[i]))%M == (M-(pref[i]-pref[j]))%M\n    # sorting the arr puts elements close to each other next to each other -> best way to min difference\n\n    modm = lambda x:x%m\n    cur_max = max(map(modm,a))\n    # construct the prefix arr\n    cum_sum = list(map(modm,accumulate(a)))\n    cur_max = max(cur_max,max(cum_sum))\n    # sorted by values 1st then index as mod m keeps the prefix arr no longer in sorted order\n    pref = sorted(enumerate(cum_sum),key=lambda x:(x[1],x[0]))\n    minimum = m\n\n    for i in range(1, len(a)): #determine the minimum\n        if pref[i-1][0] > pref[i][0] and (pref[i][1] - pref[i-1][1] < minimum):\n            minimum = pref[i][1] - pref[i-1][1]\n    return max(cur_max,m-minimum)\n\n\n\n\nif __name__ == '__main__':\n    fptr = open(os.environ['OUTPUT_PATH'], 'w')\n\n    q = int(input())\n\n    for q_itr in range(q):\n        nm = input().split()\n\n        n = int(nm[0])\n\n        m = int(nm[1])\n\n        a = list(map(int, input().rstrip().split()))\n\n        result = maximumSum(a, m)\n\n        fptr.write(str(result) + '\n')\n\n    fptr.close()\n",
+                "Solution": "max_subarray_sum.py",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "12": {
+                "Name": "Commando War",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2829",
+                "Difficulty": "codealong",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (UVa) 11729\n#include <bits/stdc++.h>\n#define FOR(i, a, b) for (int i = a; i < b; ++i)\n#define FORe(i, a, b) for (int i = a; i <= b; ++i)\n#define PAI(arr, len) /*Print array of integers*/ \\n  {                                               \\n    for (int _i = 0; _i < len; ++_i) {            \\n      if (_i != len - 1) {                        \\n        printf(\"%d \", arr[_i]);                   \\n      } else {                                    \\n        printf(\"%d\", arr[_i]);                    \\n      }                                           \\n    }                                             \\n    putchar('\n');                                \\n  }\n#define PBS(n, len) /*Print a bitset*/ \\n  {                                    \\n    for (int _i = 0; _i < len; ++_i) { \\n      putchar(n % 2 + '0');            \\n      n /= 2;                          \\n    }                                  \\n    putchar('\n');                     \\n  }\n#define GET(x) scanf(\"%d\", &x)\n#define PLN putchar('\n')\ntypedef long long ll;\nusing namespace std;\n\n// first: briefing time\n// second: job time\npair<int, int> sd[1010];\n\n// Compare by seeing which scenario would take longer - having a or b go first.\n// If a has briefing and job time b1 and j1, and b has b2 and j2, then the time\n// with a first is b1 + max(j1, b2 + j2). The time if b goes first is b2 +\n// max(j2, b1 + j1). If a's time is less than b's time, a goes first and vice\n// versa.\nbool compare(pair<int, int> a, pair<int, int> b) {\n  int t_a = a.first + max(a.second, b.first + b.second);\n  int t_b = b.first + max(b.second, a.first + a.second);\n  return t_a < t_b;\n}\n\nint main() {\n  int n;\n  for (int ca = 1; GET(n) && n; ++ca) {\n    FOR(i, 0, n) {\n      GET(sd[i].first);\n      GET(sd[i].second);\n    }\n\n    // Sort as described above\n    sort(sd, sd + n, compare);\n\n    // Calculate total time - tot keeps track of briefing times covered so far,\n    // and fin keeps track of last time when job finishes.\n    int tot = 0;\n    int fin = 0;\n    FOR(i, 0, n) {\n      tot += sd[i].first;\n      fin = max(fin, tot + sd[i].second);\n    }\n    tot = fin;\n\n    // output\n    printf(\"Case %d: %d\n\", ca, tot);\n  }\n  return 0;\n}\n",
+                "Solution": "uva11729.cpp",
+                "Session": "2",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "13": {
+                "Name": "The Trip",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2041",
+                "Difficulty": "easy",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (UVa) 11100\n\n// Based on (copied) from\n// github.com/lamphanviet/competitive-programming/uva-online-judge/accepted-solutions/11100\n// - The Trip - 2007.cpp\n\n#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n  int n;\n  scanf(\"%d\n\", &n);\n  while (n > 0) {\n    // Make initial list of bags.\n    vector<int> bags;\n    for (int i = 0; i < n; ++i) {\n      int x;\n      scanf(\"%d\n\", &x);\n      bags.push_back(x);\n    }\n    sort(bags.begin(), bags.end());\n    bags.push_back(-1);\n\n    // The number of sets of bags needed is equal to the maximum number of\n    // one kind of bag. For instance, in the sample input for the problem,\n    // we need 3 sets because we have 3 bags of size 2.\n    int numsets = 0;\n    int tempsize = 1;\n    for (int i = 1; i <= n; ++i) {\n      if (bags[i] != bags[i - 1]) {\n        if (tempsize > numsets) numsets = tempsize;\n        tempsize = 1;\n      } else {\n        ++tempsize;\n      }\n    }\n\n    // Print output for this case -- The bags in each set are determined by\n    // simply going through the input, stepping by numsets each time. This\n    // works because the input is already sorted, so as we go through we\n    // always increase in bag size. We are guaranteed to not have repeated\n    // bag sizes because there are at most numsets bags of each size.\n    printf(\"%d\n\", numsets);\n    for (int i = 0; i < numsets; ++i) {\n      printf(\"%d\", bags[i]);\n      for (int j = i + numsets; j < n; j += numsets) {\n        printf(\" %d\", bags[j]);\n      }\n      putchar('\n');\n    }\n\n    // Get next input\n    scanf(\"%d\n\", &n);\n    if (n > 0) putchar('\n');\n  }\n  return 0;\n}\n",
+                "Solution": "11100.cpp",
+                "Session": "2",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "14": {
+                "Name": "Packmen",
+                "Link": "http://codeforces.com/contest/847/problem/E",
+                "Difficulty": "med",
+                "Code": "'''\n    Algorithm category: Binary search + greedy\n    Problem explaination: Using O(n^2) solution would lead to getting a TLE(Time\n    limit exceeded) error by comparing each P with the rest of P.\n    However, it is not hard to test if 100, for example, is one of the solutions(may\n    not be the optimal one). if 100 can not be one of the solution, how about 100/2?\n    This intuition give us a clue to use binary search on the answer and use\n    greedy algorithm to check if this answer is correct or not\n    Side Note: The online judge accept my Pyhton 2.7 solution but give TLE error\n    for my Python3's. There are places in this solution that can be optimized.\n    Try to come up and pass the online judge using Python3 if interested.\n'''\ndef solve(field,size,answer):\n    star_pos = -1\n    p_pos = -1\n    for i in range(size):\n        #print(p_pos,star_pos)\n        if field[i] == \"*\":\n            if star_pos != -1:\n                if p_pos != -1:\n                    if star_pos < p_pos and i > p_pos: #*...P.*.* star on both side of P\n                        if min(2*(p_pos-star_pos)+(i-p_pos),2*(i-p_pos)+\\n                               (p_pos-star_pos)) > answer:\n                            star_pos = i\n                            p_pos = -1\n                            continue\n                    elif i-p_pos > answer: #..P..*P when star on the right of P\n                        star_pos = i\n                        p_pos = -1\n                        continue\n            else:\n                if p_pos != -1: #P..*.P\n                    if i - p_pos > answer:\n                        p_pos = -1\n                star_pos = i\n\n        if field[i] == \"P\":\n            if p_pos != -1:\n                star_pos = -1\n            if star_pos != -1:\n                #print(\"star_pos:\",star_pos,\"current pos\",i)\n                if i - star_pos > answer:\n                    return -1\n            p_pos = i\n\n    if p_pos == -1:\n        return -1\n    return 1\n\n\n\n\nif __name__ == \"__main__\":\n    size = int(input().strip()) #Change this statement in to int(raw_input().strip()) in Python 2.7\n    field = input().strip() # Change this statement into raw_input().strip() in Python 2.7\n    first = 1\n    last = 2*size\n    best = last + 1\n    while first <= last:\n        mid = int(first + (last - first)/2)\n        if solve(field,size,mid) == -1:\n            first = mid + 1\n        else:\n            best = mid\n            last = mid - 1\n    print(best)\n\n",
+                "Solution": "cf_packman.py",
+                "Session": "2",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "15": {
+                "Name": "ICPC",
+                "Link": "Congrats to those who made it to the ICPC regionals. If you have questions come and talk to me.",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "16": {
+                "Name": "Note",
+                "Link": "IF ALL OF THIS IS TOO EASY COME UP AND I CAN TRY GIVING YOU A PROBLEM OR ASK CHINMAY TO GIVE YOU A PROBLEM",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Karthik",
+                "Note": ""
+            }
+        },
+        "4": {
+            "1": {
+                "Name": "Segments",
+                "Link": "https://codeforces.com/contest/909/problem/B",
+                "Difficulty": "codealong",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Grocery Store",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=643&page=show_problem&problem=2177",
+                "Difficulty": "easy",
+                "Code": "#include <iostream>\n#include <vector>\n#include <set>\n#include <cmath>\nusing namespace std;\n\nint main () {\n    for (int a = 1; a < 2000; ++a) {\n        if (pow(a, 4)/pow(10, 6) > 2000) break;\n        for (int b = a; b < 2000 - a; ++b) {\n            if (a * pow(b, 3)/pow(10, 6) > 2000) break;\n            for (int c = b; c < 2000 - a - b; ++c) {\n                if (a * b * pow(c, 2)/pow(10, 6) > 2000) break;\n                double d = (pow(10, 6) * (a + b + c)/(a * b * c - pow(10, 6)));\n                if (ceil(d) == floor(d) && d >= c && a + b + c + d <= 2000) {\n                    printf(\"%.2f %.2f %.2f %.2f\n\", a/100.0, b/100.0, c/100.0, d/100.0);\n                }\n            }\n        }\n    }\n    return 0;\n}\n",
+                "Solution": "11236.cpp",
+                "Session": "1",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Citizen Attention Offices",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=643&page=show_problem&problem=1601",
+                "Difficulty": "easy",
+                "Code": "#include <iostream>\n#include <climits>\nusing namespace std;\n\nint main () {\n    int q; scanf(\"%d\", &q);\n    while (q --> 0) {\n        int arr[5][5] = {0};\n        int valid[5][5] = {0};\n\n        int n; scanf(\"%d\", &n);\n        for (int i = 0; i < n; ++i) {\n            int row, col, val;\n            scanf(\"%d %d %d\", &row, &col, &val);\n            arr[row][col] = val;\n        }\n\n        long long best_dist = LLONG_MAX;\n        int result[5] = {0, 1, 2, 3, 4};\n        for (int i = 0; i < 25; ++i) {\n            for (int j = i + 1; j < 25; ++j) {\n                for (int x = j + 1; x < 25; ++x) {\n                    for (int y = x + 1; y < 25; ++y) {\n                        for (int z = y + 1; z < 25; ++z) {\n                            long long total_dist = 0;\n                            pair<int, int> offices[5] = { make_pair(i/5, i % 5), make_pair(j/5, j % 5), make_pair(x/5, x % 5), make_pair(y/5, y % 5), make_pair(z/5, z % 5) };\n                            for (int k = 0; k < 25; ++k) {\n                                int min_dist = INT_MAX;\n                                int row = k / 5;\n                                int col = k % 5;\n                                // loop through 5 offices\n                                for (int r = 0; r < 5; ++r) {\n                                    min_dist = min(min_dist, (abs(row - offices[r].first) + abs(col - offices[r].second)) * arr[row][col]);\n                                }\n                                total_dist += min_dist;\n                            }\n                            if (total_dist < best_dist) {\n                                best_dist = total_dist;\n                                result[0] = i;\n                                result[1] = j;\n                                result[2] = x;\n                                result[3] = y;\n                                result[4] = z;\n                            }\n                        }\n                    }\n                }\n            }\n        }\n        cout << result[0] << \" \" << result[1] << \" \" << result[2] << \" \" << result[3] << \" \" << result[4] << endl;\n    }\n    return 0;\n}\n",
+                "Solution": "10660.cpp",
+                "Session": "1",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Permutation Descent Counts",
+                "Link": "https://open.kattis.com/problems/permutationdescent",
+                "Difficulty": "easy",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Bicolorings",
+                "Link": "http://codeforces.com/problemset/problem/1051/D",
+                "Difficulty": "hard",
+                "Code": "//Problem @ http://codeforces.com/problemset/problem/1051/D\n//#dp\n#include<iostream>\nusing namespace std;\n#define ll long long\nconst int M = 998244353;\nll BBWW[1005][2018]; //BBWW[row#][# of components] = # of ways w/ bb or ww as last col\nll BWWB[1005][2018]; //BWWB[row#][# of components] = # of ways w/ bw or wb as last col\nint main(){\n    int n,k;\n    cin >> n >> k;\n    BBWW[1][1] = 2; //having 1 column with 1 compent has two options, either bb or ww\n    BWWB[1][2] = 2; // having 1 column with 2 compoent is only possible with bw or wb\n\n    for(int col = 2; col <= n; col++){\n        for(int j = 1; j <= 2*col; j++){ //2*col is the maximum number of components\n            //BBWW can only have BB or WW as last column.\n            //  so adding BB or WW to a BBWW can either increase the components by 1\n            //  or don't change the number of components.\n            //Adding BB or WW to a BWWB will always increase the # of comps by 1\n            //  hence, 2 options for every BWWB\n            BBWW[col][j] = (BBWW[col - 1][j - 1] + BBWW[col - 1][j] + 2* BWWB[col - 1][j]) % M;\n\n            //BWWB can only have BW or WB as the last column\n            //Adding BB or WW will increase the # of comps by 1\n            //Adding WB or BW can either increase the # of comps by 2 or none\n            BWWB[col][j] = (BWWB[col - 1][j] + BWWB[col - 1][j -2] + 2 * BBWW[col - 1][j - 1]) % M;\n        }\n    }\n\n    cout<< (BBWW[n][k] + BWWB[n][k]) % M << endl;\n\n    return 0;\n}\n",
+                "Solution": "cf_1051D.cpp",
+                "Session": "1",
+                "Contributor": "Pooya",
+                "Note": ""
+            },
+            "6": {
+                "Name": "ICPC",
+                "Link": "We’ve sent the list of people to Pattis for registration & Meridianlink for the shirts. Be on the lookout.",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Journey to the Moon",
+                "Link": "https://www.hackerrank.com/challenges/journey-to-the-moon/problem",
+                "Difficulty": "codealong",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "8": {
+                "Name": "First Bad Version",
+                "Link": "https://leetcode.com/problems/first-bad-version/description/ ",
+                "Difficulty": "easy",
+                "Code": "// https://leetcode.com/problems/first-bad-version/description/\n\n// Forward declaration of isBadVersion API.\nbool isBadVersion(int version);\n\nclass Solution {\npublic:\n    int firstBadVersion(int n) {\n        int low = 1, high = n;\n        while (low < high)\n        {\n            int mid =  low + (high - low) / 2;\n            if (isBadVersion(mid))\n                high = mid;\n            else\n                low = mid + 1;\n        }\n        return low;\n    }\n};\n",
+                "Solution": "First_Bad_Version.cpp",
+                "Session": "2",
+                "Contributor": "Tim",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Lotto",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=642&page=show_problem&problem=382",
+                "Difficulty": "med",
+                "Code": "#include <iostream>\nusing namespace std;\n\nint main () {\n    int k; scanf(\"%d\", &k);\n    while (k != 0) {\n\n        int arr[k];\n        for (int i = 0; i < k; ++i) {\n            scanf(\"%d\", &arr[i]);\n        }\n\n        for (int i = 0; i < k - 5; ++i) {\n            for (int j = i + 1; j < k - 4; ++j) {\n                for (int z = j + 1; z < k - 3; ++z) {\n                    for (int x = z + 1; x < k - 2; ++x) {\n                        for (int y = x + 1; y < k - 1; ++y) {\n                            for (int q = y + 1; q < k; ++q) {\n                                cout << arr[i] << \" \" << arr[j] << \" \" << arr[z] << \" \" << arr[x] << \" \" << arr[y] << \" \" << arr[q] << endl;\n                            }\n                        }\n                    }\n                }\n            }\n        }\n\n        scanf(\"%d\", &k);\n        if (k != 0) cout << endl;\n    }\n    return 0;\n}\n",
+                "Solution": "441.cpp",
+                "Session": "2",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Social Circles",
+                "Link": "https://codeforces.com/problemset/problem/1060/D",
+                "Difficulty": "med",
+                "Code": "## Problem @ http://codeforces.com/problemset/problem/1060/D\n## #greedy #math\nn = int(input())\nleft = []\nright = []\nfor i in range(n):\n    a,b = map(int, input().split())\n    left.append(a)\n    right.append(b)\nprint(n + sum(map(max, sorted(left), sorted(right))))\n",
+                "Solution": "cf_1060D.py",
+                "Session": "2",
+                "Contributor": "Pooya",
+                "Note": ""
+            },
+            "11": {
+                "Name": "BFFs",
+                "Link": "https://code.google.com/codejam/contest/4304486/dashboard#s=p2",
+                "Difficulty": "med",
+                "Code": "'''The first line of the input gives the number of test cases, T.\nT test cases follow. Each test case consists of two lines. The first line of a\ntest case contains a single integer N, the total number of kids in the class.\nThe second line of a test case contains N integers F1, F2, ...,\nFN, where Fi is the student ID number of the BFF of the kid with student ID i.\n'''\nimport sys\nsys.setrecursionlimit(5000)\nopen_file = open(input())\nnum_test = int(open_file.readline())\n\ndef store(open_file,friend_map):\n    num = int(open_file.readline().strip())\n    for index,i in enumerate(open_file.readline().strip().split(),1):\n        to_int = int(i)\n        if index not in friend_map:\n            friend_map[index] = {'ind':set(),'outd': 0, 'len':1}\n        friend_map[index]['outd'] = to_int\n        if to_int not in friend_map:\n            friend_map[to_int] = {'ind':set([index]),'outd':0,'len':1}\n        else:\n            friend_map[to_int]['ind'].add(index);\n    return num\n\ndef process(friend:dict,traveled:set, number:int):\n    clargest= 0\n    nclargest = 0\n    #addable = 0\n    for to_tra in range(1,number + 1):\n        if to_tra not in traveled:\n            cycle_queue = []\n            index = 0\n            cyclic = False\n            while(to_tra != friend[friend[to_tra]['outd']]['outd']):\n                if to_tra in cycle_queue:\n                    for n,i in enumerate(cycle_queue,0):\n                        if to_tra == i:\n                            index = n\n                            break\n                    cycle_queue = cycle_queue[index:]\n                    cyclic = True\n                    break\n                cycle_queue.append(to_tra)\n                to_tra = friend[to_tra]['outd'] #find the reciprocal node to start\n            if cyclic:\n                component = len(cycle_queue)\n                cyclic_recur(friend, cycle_queue[0], traveled)\n                if clargest < component:\n                    clargest = component\n            else:\n                a = find_num(friend,to_tra,0,traveled)\n                b = find_num(friend,friend[to_tra]['outd'],0,traveled)\n                component = a + b\n                nclargest += component\n\n    return (clargest,nclargest)\n\ndef cyclic_recur(friend:dict, to_recur:int, traveled:set):\n    if friend[to_recur]['ind'] == set():\n        traveled.add(to_recur)\n        return\n    for i in friend[to_recur]['ind']:\n        if i not in traveled:\n            traveled.add(i)\n            cyclic_recur(friend, i , traveled)\n\ndef find_num(friend: dict, to_recur: int,lar:int,traveled:set):\n    if friend[to_recur]['ind'] == set():\n        traveled.add(to_recur)\n        return 1\n    lolar = 0\n    for i in friend[to_recur]['ind']:\n        traveled.add(i)\n        if i == friend[to_recur]['outd']:\n            cmp = 0\n        else:\n            cmp = find_num(friend, i , lar, traveled)\n        if cmp > lolar:\n            lolar = cmp\n    return lolar+1\n\nif __name__ == '__main__':\n    for _ in range(num_test):\n        largest = 1\n        friend_map = dict()\n        traveled= set()\n        num = store(open_file,friend_map)\n        clargest,nclargest = process(friend_map, traveled, num)\n        if nclargest  > clargest:\n            largest = nclargest\n        else:\n            largest = clargest\n        print(\"Case #\" + str(_+1)+ ': ' + str(largest))\n    open_file.close()\n",
+                "Solution": "largest_BFF.py",
+                "Session": "2",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "12": {
+                "Name": "Bread Sorting",
+                "Link": "https://open.kattis.com/problems/bread",
+                "Difficulty": "hard",
+                "Code": "from collections import defaultdict\n\ns = int(input())\n\nfirst_breads = list(map(int,input().strip().split()))\nnext_breads = list(map(int,input().strip().split()))\n\nlookup = {first_breads[i]:next_breads[i] for i in range(s)}\n\neven_cycles = 0\n\nvisited = set()\nfor b in first_breads:\n    if b not in visited:\n        size = 0\n        next = lookup[b]\n        while next not in visited:\n            visited.add(next)\n            size+=1\n            next = lookup[next]\n        if size%2 == 0:\n            even_cycles +=1\n        visited.add(b)\n#print(\"even cycles: {}\".format(even_cycles))\nprint(\"Possible\" if even_cycles%2==0 else \"Impossible\")\n",
+                "Solution": "bread.py",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            }
+        },
+        "5": {
+            "1": {
+                "Name": "Note",
+                "Link": "We are going to cover Binary Search this week",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Note",
+                "Link": "We are going to cover Binary Search this week",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Need for Speed",
+                "Link": "https://open.kattis.com/problems/speed",
+                "Difficulty": "easy",
+                "Code": "n,t = map(int,input().split())\nmin_c = -1e10\nmax_c = 1e10\n\ncurr_c = lambda: (max_c+min_c)/2\n\nsegments = []\n\nfor a in range(n):\n    d,s = map(int,input().split())\n    segments.append((d,s))\n\ndef calc_total_time(c):\n    return 1e10 if min([s for d,s in segments])+c <= 0 else sum([d/(s+c) for d,s in segments])\n\nwhile max_c-min_c > 10**-7:\n    curr_c = (max_c+min_c)/2\n    tmp = calc_total_time(curr_c)\n    if tmp < t:\n        max_c = curr_c\n    else:\n        min_c = curr_c\n\nprint('{:.7f}'.format((max_c+min_c)/2))\n",
+                "Solution": "speed.py",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Suspension Bridges",
+                "Link": "https://open.kattis.com/problems/suspensionbridges",
+                "Difficulty": "med",
+                "Code": "import math\n\nd,s = map(int,input().split())\n\nmin_a = 0.0\nmax_a = 10**10\n\ndef calc(a):\n    tmp = math.e**(d/a)\n    return s-(a*.5*((tmp+1)/(tmp**.5))-a)\n\n\nwhile abs(calc((max_a+min_a)/2)) > 10**-6:\n    if calc((max_a+min_a)/2) < 0:\n        min_a = (max_a+min_a)/2\n    else:\n        max_a = (max_a+min_a)/2\na = (max_a+min_a)/2\nprint(2*a*math.sinh(d/(2*a)))\n",
+                "Solution": "bridges.py",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Painter’s Partition 2",
+                "Link": "https://www.geeksforgeeks.org/painters-partition-problem-set-2/",
+                "Difficulty": "codealong",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Painter’s Partition",
+                "Link": "https://www.geeksforgeeks.org/painters-partition-problem/",
+                "Difficulty": "codealong",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Millionaire Madness",
+                "Link": "https://open.kattis.com/problems/millionairemadness",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Glyph Recognition",
+                "Link": "https://open.kattis.com/problems/glyphrecognition",
+                "Difficulty": "med",
+                "Code": "import math\n\nn = int(input())\npts = []\n\nfor i in range(n):\n    x,y = map(int,input().strip().split())\n    pts.append((x,y))\n\ndef gen_vertices(sides, pos_leg):\n    vertices = [(pos_leg,0)]\n    jmp = 2*math.pi/sides\n    cur = jmp\n    while 2*math.pi-cur > 10**-7:\n        vertices.append((pos_leg*math.cos(cur),pos_leg*math.sin(cur)))\n        cur += jmp\n    return vertices\n\npts_dist = lambda a,b: ((b[1]-a[1])**2+(b[0]-a[0])**2)**0.5\n\ndef tri_area(tri):\n    a = pts_dist(tri[0],tri[1])\n    b = pts_dist(tri[1],tri[2])\n    c = pts_dist(tri[0],tri[2])\n    s = (a+b+c)/2.0\n    return (s*(s-a)*(s-b)*(s-c))**0.5\n\ndef triangle_contained(tri,pt):\n    pt_pairs = [(0,1),(1,2),(0,2)]\n    pt_area = 0\n    for v1,v2 in pt_pairs:\n        pt_area+=tri_area([pt,tri[v1],tri[v2]])\n    return abs(pt_area - tri_area(tri)) < 10**-3\n\ndef contained(n,radii,pt):\n    pt_angle = (math.atan2(pt[1],pt[0])%(2*math.pi))\n    cw_vert = int(pt_angle//(2*math.pi/n))\n    pt_dist_to_cent = pts_dist((0,0),pt)\n    vert_angle = 2*math.pi/n*cw_vert\n    opp_angle = math.pi*(n-2)/(2*n)\n    angle_diff = pt_angle-vert_angle\n    remaining_angle = math.pi-angle_diff-opp_angle\n    return math.sin(opp_angle)*radii>=pt_dist_to_cent*math.sin(remaining_angle)\n\ndef poly_area(sides,rad):\n    return 0.5*rad**2*sides*math.sin(2*math.pi/sides)\n\ndef bs_outer(beg,end,err,sides,pts):\n    mid = lambda : (beg+end)/2.0\n    while end-beg > err:\n        if all([contained(sides,mid(),pt) for pt in pts]):\n            end = mid()\n        else:\n            beg = mid()\n    return mid()\n\ndef bs_inner(beg,end,err,sides,pts):\n    mid = lambda : (beg+end)/2.0\n    while end-beg > err:\n        if any([contained(sides,mid(),pt) for pt in pts]):\n            end = mid()\n        else:\n            beg = mid()\n    return mid()\n\nhigh_score = (0,0)\n\nfor num_sides in range(3,9):\n    outer_radii = bs_outer(0,10**7,10**-8,num_sides,pts)\n    inner_radii = bs_inner(0,10**7,10**-8,num_sides,pts)\n\n    score = poly_area(num_sides,inner_radii)/poly_area(num_sides,outer_radii)\n    if score > high_score[0]:\n        high_score = (score,num_sides)\n\nprint(high_score[1],high_score[0])\n",
+                "Solution": "glyph_recog.py",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Glyph Recognition",
+                "Link": "https://open.kattis.com/problems/glyphrecognition",
+                "Difficulty": "med",
+                "Code": "import math\n\nn = int(input())\npts = []\n\nfor i in range(n):\n    x,y = map(int,input().strip().split())\n    pts.append((x,y))\n\ndef gen_vertices(sides, pos_leg):\n    vertices = [(pos_leg,0)]\n    jmp = 2*math.pi/sides\n    cur = jmp\n    while 2*math.pi-cur > 10**-7:\n        vertices.append((pos_leg*math.cos(cur),pos_leg*math.sin(cur)))\n        cur += jmp\n    return vertices\n\npts_dist = lambda a,b: ((b[1]-a[1])**2+(b[0]-a[0])**2)**0.5\n\ndef tri_area(tri):\n    a = pts_dist(tri[0],tri[1])\n    b = pts_dist(tri[1],tri[2])\n    c = pts_dist(tri[0],tri[2])\n    s = (a+b+c)/2.0\n    return (s*(s-a)*(s-b)*(s-c))**0.5\n\ndef triangle_contained(tri,pt):\n    pt_pairs = [(0,1),(1,2),(0,2)]\n    pt_area = 0\n    for v1,v2 in pt_pairs:\n        pt_area+=tri_area([pt,tri[v1],tri[v2]])\n    return abs(pt_area - tri_area(tri)) < 10**-3\n\ndef contained(n,radii,pt):\n    pt_angle = (math.atan2(pt[1],pt[0])%(2*math.pi))\n    cw_vert = int(pt_angle//(2*math.pi/n))\n    pt_dist_to_cent = pts_dist((0,0),pt)\n    vert_angle = 2*math.pi/n*cw_vert\n    opp_angle = math.pi*(n-2)/(2*n)\n    angle_diff = pt_angle-vert_angle\n    remaining_angle = math.pi-angle_diff-opp_angle\n    return math.sin(opp_angle)*radii>=pt_dist_to_cent*math.sin(remaining_angle)\n\ndef poly_area(sides,rad):\n    return 0.5*rad**2*sides*math.sin(2*math.pi/sides)\n\ndef bs_outer(beg,end,err,sides,pts):\n    mid = lambda : (beg+end)/2.0\n    while end-beg > err:\n        if all([contained(sides,mid(),pt) for pt in pts]):\n            end = mid()\n        else:\n            beg = mid()\n    return mid()\n\ndef bs_inner(beg,end,err,sides,pts):\n    mid = lambda : (beg+end)/2.0\n    while end-beg > err:\n        if any([contained(sides,mid(),pt) for pt in pts]):\n            end = mid()\n        else:\n            beg = mid()\n    return mid()\n\nhigh_score = (0,0)\n\nfor num_sides in range(3,9):\n    outer_radii = bs_outer(0,10**7,10**-8,num_sides,pts)\n    inner_radii = bs_inner(0,10**7,10**-8,num_sides,pts)\n\n    score = poly_area(num_sides,inner_radii)/poly_area(num_sides,outer_radii)\n    if score > high_score[0]:\n        high_score = (score,num_sides)\n\nprint(high_score[1],high_score[0])\n",
+                "Solution": "glyph_recog.py",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Euclidean TSP",
+                "Link": "https://open.kattis.com/contests/bqfu9s/problems/euclideantsp",
+                "Difficulty": "med",
+                "Code": "import math\n\nn,p,s,v = (map(float,input().split()))\n\ndef fun(c):\n    result = (math.log(n)/math.log(2))**((2**.5)*c)\n    result*= n\n    result /= (p*(10**9))\n    result += (s/v)\n    result += (s/(v*c))\n    return result\n\nmin = .1\nmax = 200\nwhile max-min > 10**-6:\n    third = (max-min)/3\n    low = min+third\n    high = max-third\n    l_r = fun(low)\n    h_r = fun(high)\n    #print(l_r,h_r)\n    if l_r < h_r:\n        max = high\n    else:\n        min = low\n\nc = (max+min)/2\nprint(fun(c),c)\n",
+                "Solution": "euclideantsp.py",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "11": {
+                "Name": "LIS",
+                "Link": "https://leetcode.com/problems/longest-increasing-subsequence/",
+                "Difficulty": "icpc",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Leetcode) 300\n\n// O(n^2) solution\nclass Solution {\n public:\n  int lengthOfLIS(vector<int>& nums) {\n    if (nums.size() == 0) return 0;\n\n    vector<int> dp(nums.size(), 0);\n    dp[0] = 1;\n    for (int i = 1; i < nums.size(); ++i) {\n      int max_len = 0;\n      for (int j = 0; j < i; ++j) {\n        if (nums[j] < nums[i]) max_len = max(dp[j], max_len);\n      }\n      dp[i] = max_len + 1;\n    }\n    int res = 0;\n    for (int i = 0; i < nums.size(); ++i) {\n      res = max(res, dp[i]);\n    }\n    return res;\n  }\n};\n\n// O(n log n) solution\nclass Solution {\n public:\n  int lengthOfLIS(vector<int>& nums) {\n    if (nums.size() == 0) return 0;\n\n    vector<int> dp(1, nums[0]);\n    for (int i = 1; i < nums.size(); ++i) {\n      auto loc = lower_bound(dp.begin(), dp.end(), nums[i]);\n      if (loc == dp.end()) {\n        dp.push_back(nums[i]);\n      } else {\n        *loc = nums[i];\n      }\n    }\n    return dp.size();\n  }\n};\n",
+                "Solution": "leetcode300.cpp",
+                "Session": "2",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "12": {
+                "Name": "Ilya and the Tree",
+                "Link": "http://codeforces.com/problemset/problem/842/C",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "13": {
+                "Name": "Jumbled String",
+                "Link": "http://codeforces.com/gym/101933/problem/J",
+                "Difficulty": "icpc",
+                "Code": "a,b,c,d = map(int,input().split())\n\nlookup = {0:-1}\ncur = 0\nfor i in range(1,10**5+10):\n    cur+=i\n    lookup[cur]=i+1\n\nif a not in lookup or d not in lookup:\n    print(\"impossible\")\n    exit(0)\n\nnum0 = lookup[a]\nnum1 = lookup[d]\n\nif num0 == -1:\n    num0 = 1 if b+c > 0 else 0\nif num1 == -1:\n    num1 = 1 if b+c > 0 else 0\n\ntot_len = num0+num1\nif a+b+c+d == 0:\n    print(\"1\")\n    exit(0)\n\nif (tot_len*(tot_len-1))/2 != a+b+c+d:\n    #print(num0,num1)\n    print(\"impossible\")\n    exit(0)\n\nif num0 == 0 or num1 == 0:\n    print(\"0\"*num0+\"1\"*num1)\n    exit(0)\n\nf1 = c//num0\nl1 = b//num0\n\nif f1+l1 == num1:\n    print(\"1\"*f1+\"0\"*num0+\"1\"*l1)\nelif f1+l1 == num1-1:\n    f0 = b%num0\n    print(\"1\"*f1+\"0\"*f0+\"1\"+\"0\"*(num0-f0)+\"1\"*l1)\nelse:\n    exit(1)\n",
+                "Solution": "jumbled_str.py",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            }
+        },
+        "6": {
+            "1": {
+                "Name": "Atlantis",
+                "Link": "https://open.kattis.com/problems/atlantis",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Lost Map",
+                "Link": "https://open.kattis.com/problems/lostmap",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Pokemon Go Go",
+                "Link": "https://open.kattis.com/problems/pokemongogo",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Racing Around the Alphabet",
+                "Link": "https://open.kattis.com/problems/racingalphabet",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Smooth Array",
+                "Link": "https://open.kattis.com/problems/smootharray",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Stoichiometry",
+                "Link": "https://open.kattis.com/problems/stoichiometry",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Urban Design",
+                "Link": "https://open.kattis.com/problems/urbandesign",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Zebras and Ocelots",
+                "Link": "https://open.kattis.com/problems/zebrasocelots",
+                "Difficulty": "icpc",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "9": {
+                "Name": "ACM Social",
+                "Link": "",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            }
+        },
+        "7": {
+            "1": {
+                "Name": "Lowest Common Ancestor",
+                "Link": "https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=trees",
+                "Difficulty": "easy",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Trees",
+                "Link": "https://www.hackerrank.com/challenges/ctci-is-binary-search-tree/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=trees",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Roads and Libraries",
+                "Link": "https://www.hackerrank.com/challenges/torque-and-development/problem",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Kruskal MST",
+                "Link": "https://www.hackerrank.com/challenges/kruskalmstrsub/problem",
+                "Difficulty": "med",
+                "Code": "#!/bin/python3\n\nimport math\nimport os\nimport random\nimport re\nimport sys\nimport heapq\n\n#\n# Complete the 'kruskals' function below.\n#\n# The function is expected to return an INTEGER.\n# The function accepts WEIGHTED_INTEGER_GRAPH g as parameter.\n#\n\n#\n# For the weighted graph, <name>:\n#\n# 1. The number of nodes is <name>_nodes.\n# 2. The number of edges is <name>_edges.\n# 3. An edge exists between <name>_from[i] and <name>_to[i]. The weight of the edge is <name>_weight[i].\n#\n#\n\ndef kruskals(g_nodes, g_from, g_to, g_weight):\n    edges = []\n    for i in range(len(g_from)):\n        edges.append((g_weight[i],g_from[i],g_to[i]))\n    heapq.heapify(edges)\n    reached = []\n    num_edges = 0\n    size = 0\n    while num_edges+1 != g_nodes:\n        w,t,f = heapq.heappop(edges)\n        t_r = -1\n        f_r = -1\n        for i in range(len(reached)):\n            if t in reached[i]:\n                t_r = i\n            if f in reached[i]:\n                f_r = i\n        if t_r == -1 and f_r == -1:\n            reached.append({t,f})\n            size+=w\n            num_edges+=1\n        elif t_r == f_r:\n            continue\n        elif t_r == -1:\n            reached[f_r].add(t)\n            size+=w\n            num_edges+=1\n        elif f_r == -1:\n            reached[t_r].add(f)\n            size+=w\n            num_edges+=1\n        else:\n            low = min(t_r,f_r)\n            high = max(t_r,f_r)\n            reached[low] = reached[low]|reached[high]\n            del reached[high]\n            size+=w\n            num_edges+=1\n\n    return size\n\nif __name__ == '__main__':\n    fptr = open(os.environ['OUTPUT_PATH'], 'w')\n\n    g_nodes, g_edges = map(int, input().rstrip().split())\n\n    g_from = [0] * g_edges\n    g_to = [0] * g_edges\n    g_weight = [0] * g_edges\n\n    for i in range(g_edges):\n        g_from[i], g_to[i], g_weight[i] = map(int, input().rstrip().split())\n\n    res = kruskals(g_nodes, g_from, g_to, g_weight)\n\n    # Write your code here.\n    fptr.write(\"{}\".format(res))\n\n    fptr.close()\n",
+                "Solution": "kruskalmstrsub.py",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Rust & Murderer",
+                "Link": "https://www.hackerrank.com/challenges/rust-murderer/problem",
+                "Difficulty": "med",
+                "Code": "#!/bin/python3\n\nimport os\nimport sys\nfrom collections import defaultdict\n\n\n#\n# Complete the rustMurdered function below.\n#\ndef rustMurderer(n, roads, src):\n    dists = [1]*n\n    edges = defaultdict(set)\n    for s,d in roads:\n        edges[s].add(d)\n        edges[d].add(s)\n    to_visit = edges[src]\n    cur_dist = 2\n    while len(to_visit) > 0:\n        new_reach = set()\n        for node in to_visit:\n            if len(edges[node]|to_visit) != n:\n                dists[node-1] = cur_dist\n                new_reach.add(node)\n        to_visit = to_visit-new_reach\n        cur_dist+=1\n\n    del dists[src-1]\n    return dists\n\nif __name__ == '__main__':\n    fptr = open(os.environ['OUTPUT_PATH'], 'w')\n\n    t = int(input())\n\n    for t_itr in range(t):\n        nm = input().split()\n\n        n = int(nm[0])\n\n        m = int(nm[1])\n\n        roads = []\n\n        for _ in range(m):\n            roads.append(list(map(int, input().rstrip().split())))\n\n        s = int(input())\n\n        result = rustMurderer(n, roads, s)\n\n        fptr.write(' '.join(map(str, result)))\n        fptr.write('\n')\n\n    fptr.close()\n",
+                "Solution": "rust_murder.py",
+                "Session": "1",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Bertown Subway",
+                "Link": "http://codeforces.com/problemset/problem/884/C",
+                "Difficulty": "med",
+                "Code": "'''\n    Bertwon Subway (recursion ver)\n    A side note about this recursion version of solution is that this\n    solution might exit when input number gets too large while using iterative\n    method would not cause this problem. Python is weak of recursion, switch to\n    Java or C++ when you find runtime error with large input\n    Source: http://codeforces.com/problemset/problem/884/C\n'''\nfrom math import factorial\nimport sys\nsys.setrecursionlimit(100000)\ndef solve(subway):\n    max1,max2 =0,0\n    explored = set()\n    summation = 0\n    for i in subway:\n        temp = dfs(subway,explored,i)\n        if temp > max1:\n            if max2 != 0:\n                max2 = max1\n            max1 = temp\n        elif temp > max2:\n            max2 = temp\n\n        summation += temp*temp\n        #print(temp)\n\n    summation -= max1*max1\n    summation -= max2*max2\n    summation += (max1 + max2)**2\n    #print(max1,max2,conp_list)\n    print(summation)\ndef dfs(subway,explored,node):\n    if node in explored:\n        return 0\n    explored.add(node)\n    return 1 + dfs(subway,explored,subway[node])\n\nif __name__ == '__main__':\n    num = int(input().strip())\n    subway = dict()\n    num_list = input().strip().split()\n    for index,i in enumerate(num_list,1):\n        subway[index] = int(i)\n    solve(subway)\n\n\n",
+                "Solution": "884C.py",
+                "Session": "2",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Lost Map",
+                "Link": "https://open.kattis.com/problems/lostmap",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Peculiar Apple-Tree",
+                "Link": "https://codeforces.com/problemset/problem/930/A",
+                "Difficulty": "med",
+                "Code": "'''\n    Peculiar apple-tree\n    Source: http://codeforces.com/problemset/problem/931/D\n'''\nfrom collections import defaultdict\ndef solve(tree):\n    summation = 1\n    to_count = [1]\n    while to_count != []:\n        temp = []\n        for i in to_count:\n            temp += tree[i]\n        summation += len(temp)%2\n        to_count = temp\n    return summation\n\nif __name__ == '__main__':\n    num = int(input().strip())\n    tree = defaultdict(list)\n    for index,parent in enumerate(input().strip().split(),2):\n        tree[int(parent)].append(index)\n    print(solve(tree))\n",
+                "Solution": "931D.py",
+                "Session": "2",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Police Stations",
+                "Link": "https://codeforces.com/problemset/problem/796/D",
+                "Difficulty": "hard",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Junlin",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Note",
+                "Link": "First two problems on trees. Next three problems on graphs. Come and ask questions on how to implement graph and some algorithms for it.",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            }
+        },
+        "8": {
+            "1": {
+                "Name": "",
+                "Link": "",
+                "Difficulty": "thanksgiving",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "2": {
+                "Name": "",
+                "Link": "",
+                "Difficulty": "thanksgiving",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Alumni Seminar",
+                "Link": "https://www.facebook.com/events/330113671053378/",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            }
+        },
+        "9": {
+            "1": {
+                "Name": "House Robber",
+                "Link": "https://leetcode.com/problems/house-robber/description/",
+                "Difficulty": "easy",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Tim",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Party Game",
+                "Link": "https://open.kattis.com/problems/partygame",
+                "Difficulty": "med",
+                "Code": "#include <iostream>\n#include <vector>\n\nusing namespace std;\n\nint main(){\n\n  int t,n;\n  cin >> t;\n  while(t--){\n    bool c=true;\n    cin >> n;\n    vector<int> v(n+1);\n    for(int i=0; i<n; i++){\n      cin >> v[i+1];\n    }\n\n    for(int i=1; i<=n; i++){\n      int ct=1,j=i;\n      while(v[j]!=i){\n        int temp = j;\n        j = v[j];\n        ct++;\n        v[temp] = temp;\n      }\n      v[j]=j;\n      int x = 0;\n      while((ct | 1<<x) != ct){\n        x++;\n      }\n\n      if((ct ^ (1<<x)) != 0){\n        cout << \"Some starve.\" << endl;\n        c = false;\n        break;\n      }\n    }\n    if(c){\n      cout << \"All can eat.\" << endl;\n    }\n\n  }\n  return 0;\n}\n",
+                "Solution": "partygame.cpp",
+                "Session": "1",
+                "Contributor": "Meta",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Fractions Again?!",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=640&page=show_problem&problem=1917",
+                "Difficulty": "easy",
+                "Code": "#include <iostream>\n#include <set>\n#include <vector>\n#include <cmath>\n#include <type_traits>\nusing namespace std;\n\nint main () {\n    double k;\n    while (scanf(\"%lf\n\", &k) != EOF) {\n        vector<pair<double, pair<double, double> > > sol;\n        set<double> included;\n        double x = k + 1;\n        double end = 1/(1/k - 1/x);\n        int counter = 0;\n        while (x <= end) {\n            double y = (k * x)/(x - k);\n            end = y;\n            if (y == floor(y)) {\n                sol.push_back(make_pair(k, make_pair(x, y)));\n                included.insert(y);\n                ++counter;\n            }\n            ++x;\n        }\n\n        cout << counter << endl;\n        for (auto p: sol) {\n            int k = p.first;\n            int x = p.second.first;\n            int y = p.second.second;\n            printf(\"1/%d = 1/%d + 1/%d\n\", k, y, x);\n        }\n    }\n    return 0;\n}\n",
+                "Solution": "10976.cpp",
+                "Session": "1",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "4": {
+                "Name": "2-SAT (Ask Karthik)",
+                "Link": "",
+                "Difficulty": "hard",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Profitable Schemes",
+                "Link": "https://leetcode.com/problems/profitable-schemes/",
+                "Difficulty": "hard",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Longest Mountain in Array",
+                "Link": "https://leetcode.com/problems/longest-mountain-in-array/",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Bertown Subway",
+                "Link": "https://codeforces.com/problemset/problem/884/C",
+                "Difficulty": "med",
+                "Code": "'''\n    Bertwon Subway (recursion ver)\n    A side note about this recursion version of solution is that this\n    solution might exit when input number gets too large while using iterative\n    method would not cause this problem. Python is weak of recursion, switch to\n    Java or C++ when you find runtime error with large input\n    Source: http://codeforces.com/problemset/problem/884/C\n'''\nfrom math import factorial\nimport sys\nsys.setrecursionlimit(100000)\ndef solve(subway):\n    max1,max2 =0,0\n    explored = set()\n    summation = 0\n    for i in subway:\n        temp = dfs(subway,explored,i)\n        if temp > max1:\n            if max2 != 0:\n                max2 = max1\n            max1 = temp\n        elif temp > max2:\n            max2 = temp\n\n        summation += temp*temp\n        #print(temp)\n\n    summation -= max1*max1\n    summation -= max2*max2\n    summation += (max1 + max2)**2\n    #print(max1,max2,conp_list)\n    print(summation)\ndef dfs(subway,explored,node):\n    if node in explored:\n        return 0\n    explored.add(node)\n    return 1 + dfs(subway,explored,subway[node])\n\nif __name__ == '__main__':\n    num = int(input().strip())\n    subway = dict()\n    num_list = input().strip().split()\n    for index,i in enumerate(num_list,1):\n        subway[index] = int(i)\n    solve(subway)\n\n\n",
+                "Solution": "884C.py",
+                "Session": "2",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Packmen",
+                "Link": "https://codeforces.com/problemset/problem/847/E",
+                "Difficulty": "med",
+                "Code": "'''\n    Algorithm category: Binary search + greedy\n    Problem explaination: Using O(n^2) solution would lead to getting a TLE(Time\n    limit exceeded) error by comparing each P with the rest of P.\n    However, it is not hard to test if 100, for example, is one of the solutions(may\n    not be the optimal one). if 100 can not be one of the solution, how about 100/2?\n    This intuition give us a clue to use binary search on the answer and use\n    greedy algorithm to check if this answer is correct or not\n    Side Note: The online judge accept my Pyhton 2.7 solution but give TLE error\n    for my Python3's. There are places in this solution that can be optimized.\n    Try to come up and pass the online judge using Python3 if interested.\n'''\ndef solve(field,size,answer):\n    star_pos = -1\n    p_pos = -1\n    for i in range(size):\n        #print(p_pos,star_pos)\n        if field[i] == \"*\":\n            if star_pos != -1:\n                if p_pos != -1:\n                    if star_pos < p_pos and i > p_pos: #*...P.*.* star on both side of P\n                        if min(2*(p_pos-star_pos)+(i-p_pos),2*(i-p_pos)+\\n                               (p_pos-star_pos)) > answer:\n                            star_pos = i\n                            p_pos = -1\n                            continue\n                    elif i-p_pos > answer: #..P..*P when star on the right of P\n                        star_pos = i\n                        p_pos = -1\n                        continue\n            else:\n                if p_pos != -1: #P..*.P\n                    if i - p_pos > answer:\n                        p_pos = -1\n                star_pos = i\n\n        if field[i] == \"P\":\n            if p_pos != -1:\n                star_pos = -1\n            if star_pos != -1:\n                #print(\"star_pos:\",star_pos,\"current pos\",i)\n                if i - star_pos > answer:\n                    return -1\n            p_pos = i\n\n    if p_pos == -1:\n        return -1\n    return 1\n\n\n\n\nif __name__ == \"__main__\":\n    size = int(input().strip()) #Change this statement in to int(raw_input().strip()) in Python 2.7\n    field = input().strip() # Change this statement into raw_input().strip() in Python 2.7\n    first = 1\n    last = 2*size\n    best = last + 1\n    while first <= last:\n        mid = int(first + (last - first)/2)\n        if solve(field,size,mid) == -1:\n            first = mid + 1\n        else:\n            best = mid\n            last = mid - 1\n    print(best)\n\n",
+                "Solution": "cf_packman.py",
+                "Session": "2",
+                "Contributor": "Jacky",
+                "Note": ""
+            }
+        },
+        "10": {
+            "1": {
+                "Name": "MOVIE NIGHT",
+                "Link": "https://www.facebook.com/events/288178678473859/",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "2": {
+                "Name": "HOLIDAY BASH",
+                "Link": "https://www.facebook.com/events/276047016386197/",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            }
+        },
+        "11": {
+            "1": {
+                "Name": "",
+                "Link": "",
+                "Difficulty": "finals",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "2": {
+                "Name": "",
+                "Link": "",
+                "Difficulty": "finals",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "",
+                "Note": ""
+            }
+        }
+    },
+    "Winter 2019": {
+        "1": {
+            "1": {
+                "Name": "Angry Professor",
+                "Link": "https://www.hackerrank.com/challenges/angry-professor/problem",
+                "Difficulty": "easy",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "2": {
+                "Name": "ShellSort",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=1093",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (UVa) 10152\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\nint main() {\n  ios_base::sync_with_stdio(false);\n  cin.tie(NULL);\n\n  int ca;\n  cin >> ca;\n  int n;\n  while (ca--) {\n    cin >> n;\n    cin.get();\n    vector<string> cur(n);\n    vector<string> des(n);\n    unordered_map<string, int> destoi;\n    string s;\n    for (int i = 0; i < n; ++i) getline(cin, cur[i]);\n    for (int i = 0; i < n; ++i) getline(cin, des[i]);\n    for (int i = 0; i < n; ++i) destoi[des[i]] = i;\n\n    // find last one that is out of order\n    int last = 0;  // index we are looking for next\n    int out = -1;  // last out of order\n    for (int i = 0; i < n; ++i) {\n      int cur_i = destoi[cur[i]];\n      if (cur_i == last) {\n        ++last;\n      } else if (cur_i > last) {\n        last = cur_i + 1;\n        out = last - 2;\n      }\n      // do nothing if cur_i < last\n    }\n\n    // output\n    for (int i = out; i >= 0; --i) {\n      printf(\"%s\n\", des[i].c_str());\n    }\n    printf(\"\n\");\n  }\n  return 0;\n}\n",
+                "Solution": "10152.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Purple Rain",
+                "Link": "https://open.kattis.com/problems/purplerain",
+                "Difficulty": "med",
+                "Code": "#include <iostream>\n#include <cmath>\n#include <iomanip>\n\nusing namespace std;\n\nint main(){\n    string s;\n    cin >> s;\n    long a[s.size()+1];\n    a[0] = 0;\n    for (int i=0; i<s.size(); i++)\n    {\n        if(s[i]=='B'){\n            a[i+1] = a[i]+1;\n        }\n        else{\n            a[i+1] = a[i]-1;\n        }\n    }\n    long m = -100000, m2 = 100000;\n    int k,k2;\n    for (int i=0; i<s.size()+1; i++)\n    {\n        if(m<a[i])\n        {\n            m = a[i];\n            k = i;\n        }\n        if(m2>a[i])\n        {\n            m2 = a[i];\n            k2 = i;\n        }\n    }\n    if(k<k2)\n    {\n        cout << k+1 << \" \" << k2 << endl;\n    }\n    else{\n        cout << k2+1 << \" \" << k << endl;\n    }\n    return 0;\n}\n",
+                "Solution": "purplerain.cpp",
+                "Session": "1",
+                "Contributor": "Meta",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Cloudy Day",
+                "Link": "https://www.hackerrank.com/challenges/cloudy-day/problem",
+                "Difficulty": "hard",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Nikita and the Game",
+                "Link": "https://www.hackerrank.com/challenges/array-splitting/problem",
+                "Difficulty": "hard",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Note",
+                "Link": "Welcome to ACM for Winter 2019. Since you all are foolish enough to open this document I may as well give a shout out to out seminar series (Free Pizza) on Thursdays from 5-6 on some weeks more updates on Facebook page. You get to listen to interesting talks. Also if you guys are doing problems for interviews and need help with any of the problems don’t feel shy asking any of the board members. They should all be able to help. Promise that problems will get more interesting as quarter progresses.",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Buy & Sell Stock",
+                "Link": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+                "Difficulty": "easy",
+                "Code": "//https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/\nclass Solution {\npublic:\n    int maxProfit(vector<int>& prices) {\n        int min_so_far = 0x0f0f0f0f;\n        int profit = 0;\n        for (auto price : prices) {\n            int profit_today = price - min_so_far;\n            profit = max(profit, profit_today);\n            min_so_far = min(min_so_far, price);\n        }\n        return profit;\n    }\n};\n",
+                "Solution": "BestTimeToBuyAndSellStock.cpp",
+                "Session": "2",
+                "Contributor": "Tim",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Unbounded Knapsack",
+                "Link": "https://www.hackerrank.com/challenges/unbounded-knapsack/problem",
+                "Difficulty": "med",
+                "Code": "#include <bits/stdc++.h>\n\nusing namespace std;\n\nvector<string> split_string(string);\n\n// Complete the unboundedKnapsack function below.\nint unboundedKnapsack(int k, vector<int> arr) {\n    bool sum[k+1];\n    sum[0]=true;\n    for(int i=1; i<=k; i++){\n        sum[i]=false;\n        for(int j=0; j<arr.size(); j++){\n            int k=i-arr[j];\n            if(k>=0){\n                if(sum[k]){\n                    sum[i]=true;\n                    break;\n                }\n            }\n        }\n    }\n    while(!sum[k]){\n        k--;\n    }return k;\n}\n\nint main()\n{\n    ofstream fout(getenv(\"OUTPUT_PATH\"));\n\n    int t,n,k;\n    cin >> t;\n\n    while(t--){\n\n        cin >> n >> k;\n        vector<int> arr(n,0);\n\n\n        for(int i=0; i<n; i++){\n            cin >> arr[i];\n        }\n\n        fout << unboundedKnapsack(k, arr) << \"\n\";\n    }\n\n    fout.close();\n\n    return 0;\n}\n",
+                "Solution": "knapsack.cpp",
+                "Session": "2",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Array Splitting",
+                "Link": "https://www.hackerrank.com/challenges/array-splitting/problem",
+                "Difficulty": "hard",
+                "Code": "#!/bin/python3\n\nimport os\nimport sys\ndef binSearch(arr, i, j, offset):\n    goal = arr[j] - offset\n    if(goal%2 == 1):    return -1\n    goal = goal // 2 + offset\n    while i <= j:\n        mid = (i+j) // 2\n        if(arr[mid] >= goal):   j = mid - 1\n        else:                   i = mid + 1\n    if i < len(arr) and arr[i] == goal:  return i\n    return -1\n\n#\n# Complete the arraySplitting function below.\n#\ndef arraySplitting(arr):\n    if(len(arr) == 1):    return 0\n    sumFromLeft = [arr[0] for _ in range(len(arr))]\n    for i in range(1, len(arr)):    sumFromLeft[i] = sumFromLeft[i-1]+arr[i]\n    maxDepth = 0\n    stack = [(0, len(sumFromLeft)-1, 0)]\n\n    while(len(stack) > 0):\n        i, j, depth = stack.pop()\n        if depth > maxDepth:\n            maxDepth = depth\n        if(i == j):  continue\n\n        offset = sumFromLeft[i-1] if (i > 0) else 0\n        split = binSearch(sumFromLeft, i, j, offset)\n        if split == -1:     continue\n        else:\n            stack.append((i, split, depth+1))\n            stack.append((split+1, j, depth+1))\n\n    return maxDepth\n\nif __name__ == '__main__':\n    fptr = open(os.environ['OUTPUT_PATH'], 'w')\n\n    t = int(input())\n\n    for t_itr in range(t):\n        arr_count = int(input())\n\n        arr = list(map(int, input().rstrip().split()))\n\n        result = arraySplitting(arr)\n\n        fptr.write(str(result) + '\n')\n\n    fptr.close()\n",
+                "Solution": "array_splitting.py",
+                "Session": "2",
+                "Contributor": "Chris",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Value of Friendship",
+                "Link": "https://www.hackerrank.com/challenges/value-of-friendship/problem",
+                "Difficulty": "hard",
+                "Code": "#!/bin/python3\n\nimport os\nimport sys\n\nfrom collections import defaultdict\n\ndef valueOfFriendsship(n, friendships,m):\n    # 1st get num of connected components, just need to know which sizes occur & number\n    ppl = [0]*(n+1)\n    grp = 1\n    cc = [0]\n    for i in range(1,n+1):\n        if ppl[i] == 0:\n            q = [i]\n            while len(q) > 0:\n                cur = q.pop()\n                if ppl[cur] == 0:\n                    ppl[cur] = grp\n                    for p in friendships[cur]:\n                        if ppl[p] == 0:\n                            q.append(p)\n                    cc[grp-1]+=1\n            grp+=1\n            cc.append(0)\n\n    # get num of redundant edges (edges which don't contribute to any new connected components)\n    grp_sizes = defaultdict(int)\n    for size in cc[:-1]:\n        grp_sizes[size]+=1\n    non_red_edges = sum([(grp_sz-1)*grp_sizes[grp_sz] for grp_sz in grp_sizes])\n    tot = (m-non_red_edges)\n\n    # imp insight! if there are mult connected components, smallest should be dismantled 1st\n    asc_cc = sorted(filter(lambda x: x>1,cc))\n\n    # keep track of how many rounds there are b4 a connected component gets dismantled\n    cc_lifes = [tot]*len(asc_cc)\n    for i in range(1,len(cc_lifes)):\n        cc_lifes[i] = cc_lifes[i-1]+asc_cc[i-1]-1\n\n    # now once we know the connected components and how many rounds they last before they get broken up we add up the friendship value of each \"clique\"\n    tot = 0\n    for i in range(len(cc_lifes)):\n        sz = asc_cc[i]\n        tot+=(cc_lifes[i]*sz*(sz-1))\n        tot+=((sz**3-sz)//3)\n\n    return tot\n\nif __name__ == '__main__':\n    fptr = open(os.environ['OUTPUT_PATH'], 'w')\n\n    q = int(input())\n    for q_itr in range(q):\n        n,m = map(int,input().split())\n\n        f = defaultdict(list)\n\n\n        for _ in range(m):\n            f1,f2 = map(int, input().split())\n            f[f1].append(f2)\n            f[f2].append(f1)\n\n        ans = valueOfFriendsship(n,f,m)\n\n        fptr.write(str(ans) + '\n')\n\n    fptr.close()\n",
+                "Solution": "val_friend.py",
+                "Session": "2",
+                "Contributor": "Chinmay",
+                "Note": ""
+            },
+            "11": {
+                "Name": "Topic",
+                "Link": "Today you get to learn DP. If you have never heard of it now is a great time to learn. Many interview questions ask this and every programming competition has at least 2 DP questions. If you need an introduction to DP I’ll give one in the beginning of class or just come and pester me. If all these problems are too easy come and I shall give you some more challenging problems.",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Karthik",
+                "Note": ""
+            },
+            "12": {
+                "Name": "Internal Competition",
+                "Link": "ACM will be having internal competitions for practice. Those that place in the top 5 will get a shirt and those in top 3 will get some nice other goodies. These competitions will occur weeks 2 4 and 7 on Tuesday from 6-8 PM at ICS 432.",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "13": {
+                "Name": "Girls' Coding Nights",
+                "Link": "https://www.facebook.com/events/558100287990483/",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Meta",
+                "Note": ""
+            }
+        },
+        "2": {
+            "1": {
+                "Name": "Beat the Spread",
+                "Link": "https://open.kattis.com/problems/beatspread",
+                "Difficulty": "easy",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) beatspread\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\n// simple absolute value:\n// x + y = sum\n// |x - y| = diff\n// just make sure to validate at every step\nint main() {\n  int ca;\n  GET(ca);\n  while (ca--) {\n    int s, d;\n    GET(s);\n    GET(d);\n    int x, y;\n    x = (s + d) / 2;\n    y = s - x;\n    if (x >= 0 && y >= 0 && x + y == s && abs(x - y) == d) {\n      printf(\"%d %d\n\", max(x, y), min(x, y));\n    } else {\n      x = (s - d) / 2;\n      y = s - x;\n      if (x >= 0 && y >= 0 && x + y == s && abs(x - y) == d) {\n        printf(\"%d %d\n\", max(x, y), min(x, y));\n      } else {\n        printf(\"impossible\n\");\n      }\n    }\n  }\n  return 0;\n}\n",
+                "Solution": "beatspread.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Closest Sums",
+                "Link": "https://open.kattis.com/problems/closestsums",
+                "Difficulty": "easy",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) closestsums\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\nint a[1010];\n\n// simply try all pairs of numbers and see which pair has the closest sum\nint main() {\n  int n;\n  for (int ca = 1; GET(n) > 0; ++ca) {\n    printf(\"Case %d:\n\", ca);\n\n    for (int i = 0; i < n; ++i) {\n      GET(a[i]);\n    }\n\n    int m;\n    GET(m);\n    while (m--) {\n      int q;\n      GET(q);\n      int res = a[0] + a[1];\n      for (int i = 0; i < n; ++i) {\n        for (int j = i + 1; j < n; ++j) {\n          if (abs(a[i] + a[j] - q) < abs(res - q)) {\n            res = a[i] + a[j];\n          }\n        }\n      }\n      printf(\"Closest sum to %d is %d.\n\", q, res);\n    }\n  }\n  return 0;\n}\n",
+                "Solution": "closestsums.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "3": {
+                "Name": "ACM Contest Scoring",
+                "Link": "https://open.kattis.com/problems/acm",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) acm\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\n// using a class makes it easier to keep track of things\nstruct problem {\n  int penalty;\n  bool solved;\n  problem() : penalty(0), solved(false) {}\n};\n\n// implementation problem, process all input lines and update our problem data\n// gradually\nint main() {\n  int t;\n  vector<problem> problems(26);\n\n  // get each line\n  while (GET(t) && t != -1) {\n    char ch, ans[10];\n    scanf(\" %c %s\", &ch, ans);\n    bool right = strcmp(ans, \"right\") == 0;\n    int prob = ch - 'A';\n\n    // only do something if the problem is not already solved\n    if (problems[prob].solved) {\n      continue;\n    } else {\n      if (right) {\n        problems[prob].penalty += t;\n        problems[prob].solved = true;\n      } else {\n        problems[prob].penalty += 20;\n      }\n    }\n  }\n\n  // find the solution by counting up solved and penalty\n  int tot = 0;    // solved\n  int tot_t = 0;  // penalty time\n  for_each(problems.begin(), problems.end(), [&](problem& p) {\n    if (p.solved) {\n      ++tot;\n      tot_t += p.penalty;\n    }\n  });\n\n  // print out the solution\n  printf(\"%d %d\n\", tot, tot_t);\n\n  return 0;\n}\n",
+                "Solution": "acm.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Exact Change",
+                "Link": "https://open.kattis.com/problems/exactchange2",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) exactchange2\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\n// this problem is coin change with limited coins (specifically only one of\n// each)\nint main() {\n  int ca;\n  GET(ca);\n  int dp[20001];\n  int c[110];\n  while (ca--) {\n    // input\n    int p;\n    GET(p);\n    int n;\n    GET(n);\n    for (int i = 0; i < n; ++i) GET(c[i]);\n\n    // generate dp table - go backwards through the values to avoid repeating\n    // coins - i.e. we can only use each coin once\n    memset(dp, -1, sizeof(dp));\n    dp[0] = 0;\n    for (int j = 0; j < n; ++j) {\n      for (int i = 20000; i >= 0; --i) {\n        if (dp[i] == -1) continue;\n        int next = i + c[j];\n        if (next > 20000) continue;\n        if (dp[next] == -1)\n          dp[next] = dp[i] + 1;\n        else\n          dp[next] = min(dp[next], dp[i] + 1);\n      }\n    }\n\n    // find nearest price in our dp array and output it\n    int res;\n    for (res = p; dp[res] == -1; ++res)\n      ;\n    printf(\"%d %d\n\", res, dp[res]);\n  }\n  return 0;\n}\n",
+                "Solution": "exactchange2.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "5": {
+                "Name": "God Save the ith-Queen",
+                "Link": "https://open.kattis.com/problems/ith",
+                "Difficulty": "hard",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) ith\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\n// type of queen\nenum qtype {\n  Q,   // full queen\n  RO,  // row only\n  UD,  // diagonal going up\n  DD,  // diagonal going down\n};\n\n// idea is to move across the board from left to right while keeping track of\n// which squares would be available - but we also have to add extra\n// \"semi-queens\" to the left of the queens so the squares that the queen affects\n// on its left before actually getting to them\n//\n// namely, we have to add 3 extra queens to the left of each queen:\n// - a row only queen\n// - an \"up diagonal\" queen\n// - a \"down diagonal\" queen\n//\n// DD\n//   \\n//    \\n// RO--Q\n//    /\n//   /\n// UD\nint main() {\n  int rows, cols, n;\n  while (scanf(\"%d %d %d\", &rows, &cols, &n) && (rows || cols || n)) {\n    // gives row and type of queens that are in each column\n    vector<set<pair<int, enum qtype>>> queens(cols);\n\n    // add queens\n    int rk, ck;\n    for (int i = 0; i < n; ++i) {\n      GET(rk);\n      GET(ck);\n      --rk;\n      --ck;\n      queens[ck].insert({rk, Q});  // add the actual queen\n      queens[0].insert({rk, RO});  // add the queen at the beginning of the row\n\n      // add the queen with diagonal going down\n      if (ck > rk)\n        queens[ck - rk].insert({0, DD});\n      else\n        queens[0].insert({rk - ck, DD});\n\n      // add the queen with the diagonal going up\n      int rrem = rows - rk - 1;\n      if (ck > rrem)\n        queens[ck - rrem].insert({rows - 1, UD});\n      else\n        queens[0].insert({rk + ck, UD});\n    }\n\n    // debugging\n    // for (int i = 0; i < cols; ++i) {\n    //   printf(\"%d:\", i);\n    //   for (const pair<int, enum qtype>& p : queens[i]) {\n    //     printf(\" %d(\", p.first);\n    //     switch (p.second) {\n    //       case Q:\n    //         printf(\"Q\");\n    //         break;\n    //       case RO:\n    //         printf(\"RO\");\n    //         break;\n    //       case UD:\n    //         printf(\"UD\");\n    //         break;\n    //       case DD:\n    //         printf(\"DD\");\n    //         break;\n    //     }\n    //     printf(\")\");\n    //   }\n    //   printf(\"\n\");\n    // }\n\n    // vectors store bitsets (DON'T use bools - it's too slow)\n    // 0: full\n    // 1: RO\n    // 2: UD\n    // 3: DD\n\n    // squares that are not affected\n    int tot = 0;\n\n    // two vectors for storing the board - we just switch between them between\n    // iterations instead of having one vector, creating a new one, and copying\n    // the results to it\n    vector<int> cur1(rows, 0);\n    vector<int> cur2(rows, 0);\n\n    // go across the board column by column\n    for (int c = 0; c < cols; ++c) {\n      vector<int>& cur = c % 2 == 0 ? cur1 : cur2;\n      vector<int>& next = c % 2 == 0 ? cur2 : cur1;\n\n      // add in queens that are in the current col\n      bool has_col = false;  // tells if the current column had a full queen\n      for (const pair<int, enum qtype>& p : queens[c]) {\n        int r = p.first;\n        cur[r] |= 1;  // full\n        switch (p.second) {\n          case Q:\n            cur[r] |= (1 << 4) - 1;  // turns on bits 0 to 3\n            has_col = true;\n            break;\n          case RO:\n            cur[r] |= (1 << 1);\n            break;\n          case UD:\n            cur[r] |= (1 << 2);\n            break;\n          case DD:\n            cur[r] |= (1 << 3);\n            break;\n        }\n      }\n\n      // count empty spots in cur - no spots if there are queens in this column\n      if (!has_col) {\n        for (int r = 0; r < rows; ++r) {\n          // no bits on if there is truly nothing here\n          if (!cur[r]) {\n            ++tot;\n          }\n        }\n      }\n\n      // fill next column - each row of the next column is affected by three\n      // cells in the current column\n      // cur \\n      // cur - next\n      // cur /\n      if (c != cols - 1) {\n        for (int r = 0; r < rows; ++r) {\n          next[r] = 0;\n          next[r] |= cur[r] & (1 << 1);                        // row\n          if (r < rows - 1) next[r] |= cur[r + 1] & (1 << 2);  // ud\n          if (r > 0) next[r] |= cur[r - 1] & (1 << 3);         // dd\n          if (next[r]) next[r] |= 1;\n        }\n      }\n    }\n\n    // print result once everything is summed up\n    printf(\"%d\n\", tot);\n  }\n  return 0;\n}\n",
+                "Solution": "ith.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Competition",
+                "Link": "These are the questions/solutions for Internal Series Competition 1",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Internal Competition 1",
+                "Link": "https://open.kattis.com/contests/quzbxw",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Bryon",
+                "Note": ""
+            }
+        },
+        "3": {
+            "1": {
+                "Name": "Median of Two Sorted Arrays",
+                "Link": "https://leetcode.com/problems/median-of-two-sorted-arrays/",
+                "Difficulty": "easy",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Blake",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Jolly Jumpers",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=979",
+                "Difficulty": "easy",
+                "Code": "/*****************************************\n*   UVA #10038 : Jolly Jumpers            *\n*   Labels     : Hashing                  *\n******************************************/\n\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nint main()\n{\n  int n;\n  while(cin >> n){\n    bool arr[3001]={};\n    int x,y;\n    string s=\"Jolly\";\n    cin >> x;\n    for(int i=0; i<n-1; i++){\n      y = x;\n      cin >> x;\n      int diff = max(x,y)-min(x,y);\n      if(arr[diff] || diff>n-1 || diff<1){\n        s = \"Not jolly\";\n      }\n      arr[diff]=true;\n    }\n    cout << s << endl;;\n  }\n\n  return 0;\n}\n",
+                "Solution": "uva10038.cpp",
+                "Session": "1",
+                "Contributor": "Meta",
+                "Note": ""
+            },
+            "3": {
+                "Name": "Merge k Sorted Lists",
+                "Link": "https://leetcode.com/problems/merge-k-sorted-lists/",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Junlin",
+                "Note": ""
+            },
+            "4": {
+                "Name": "Forming a Magic Square",
+                "Link": "https://www.hackerrank.com/challenges/magic-square-forming/problem?isFullScreen=false",
+                "Difficulty": "easy",
+                "Code": "#include <bits/stdc++.h>\n\nusing namespace std;\n\nbool checkMagicSquare(vector<vector<int> > & arr) {\n    int sum = arr[0][0] + arr[0][1] + arr[0][2];\n    return (arr[0][0] + arr[1][0] + arr[2][0] == sum &&\n            arr[0][1] + arr[1][1] + arr[2][1] == sum &&\n            arr[0][2] + arr[1][2] + arr[2][2] == sum &&\n            arr[1][0] + arr[1][1] + arr[1][2] == sum &&\n            arr[2][0] + arr[2][1] + arr[2][2] == sum &&\n            arr[0][0] + arr[1][1] + arr[2][2] == sum &&\n            arr[0][2] + arr[1][1] + arr[2][0] == sum);\n}\n\nset<vector<vector<int> > > generateMagicSquares() {\n    int arr[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n    set<vector<vector<int> > > magicSquares;\n    vector<vector<int> > tempArr(3, vector<int>(3));\n    do {\n        tempArr = {{arr[0], arr[1], arr[2]}, {arr[3], arr[4], arr[5]}, {arr[6], arr[7], arr[8]}};\n        if (checkMagicSquare(tempArr)) {\n            magicSquares.insert(tempArr);\n        }\n    } while (next_permutation(arr, arr+9));\n    return magicSquares;\n}\n\nint calculateDifference(const vector<vector<int> > & magic, vector<vector<int> > & original) {\n    int diff = 0;\n    for (int i = 0; i < 3; ++i) {\n        for (int j = 0; j < 3; ++j) {\n            diff += abs(magic[i][j] - original[i][j]);\n        }\n    }\n    return diff;\n}\n\n// Complete the formingMagicSquare function below.\nint formingMagicSquare(vector<vector<int> > s) {\n    set<vector<vector<int> > > allMagicSquares = generateMagicSquares();\n    int result = 100;\n    for (set<vector<vector<int> > >::iterator it=allMagicSquares.begin(); it!=allMagicSquares.end(); ++it) {\n        result = min(result, calculateDifference(*it, s));\n    }\n    return result;\n}\n\nint main()\n{\n    ofstream fout(getenv(\"OUTPUT_PATH\"));\n\n    vector<vector<int>> s(3);\n    for (int i = 0; i < 3; i++) {\n        s[i].resize(3);\n\n        for (int j = 0; j < 3; j++) {\n            cin >> s[i][j];\n        }\n\n        cin.ignore(numeric_limits<streamsize>::max(), '\n');\n    }\n\n    int result = formingMagicSquare(s);\n\n    fout << result << \"\n\";\n\n    fout.close();\n\n    return 0;\n}\n",
+                "Solution": "magic.cpp",
+                "Session": "1",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Ayoub and Lost Array",
+                "Link": "http://codeforces.com/contest/1105/problem/C",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Frank",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Sliding Window Maximum",
+                "Link": "https://leetcode.com/problems/sliding-window-maximum/ ",
+                "Difficulty": "med",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Tim",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Short Story Competition",
+                "Link": "https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&category=24&problem=3926&mosmsg=Submission+received+with+ID+22639424",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (UVa) 12482\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\nint main() {\n  ios_base::sync_with_stdio(false);\n  cin.tie(NULL);\n  int N, L, C;\n  string s;\n  while (cin >> N >> L >> C) {\n    int lines = 1;\n    int cur_line = 0;\n    for (int i = 0; i < N; ++i) {\n      cin >> s;\n      if (cur_line + (cur_line != 0) + s.size() > C) {\n        ++lines;\n        cur_line = s.size();\n      } else {\n        cur_line += (cur_line != 0) + s.size();\n      }\n    }\n\n    printf(\"%d\n\", lines / L + (lines % L != 0));\n  }\n  return 0;\n}\n",
+                "Solution": "uva12482.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Substring Removal",
+                "Link": "https://codeforces.com/contest/1096/problem/B",
+                "Difficulty": "med",
+                "Code": "def tri(n):\n\treturn (n*(n+1))//2\n\nfrom collections import Counter\n\ninput()\ns = input()\nct = Counter(s)\nans = 0\n\nif len(ct.most_common(3)) == 1:\n\tans = tri(len(s))\nelse:\n\tleft = 1\n\tright = 1\n\tlc = s[0]\n\trc = s[-1]\n\twhile(s[left] == lc):\n\t\tleft += 1\n\twhile(s[len(s)-1-right] == rc):\n\t\tright += 1\n\t# print(left,right)\n\tif lc == rc:\n\t\tans = (left+1) * (right+1)\n\telse:\n\t\tans = left+right+1\n\nprint(ans % 998244353)\n",
+                "Solution": "codeforces1096b.py",
+                "Session": "1",
+                "Contributor": "Chris",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Polygon for the Angle",
+                "Link": "https://codeforces.com/contest/1096/problem/C",
+                "Difficulty": "med",
+                "Code": "def gcd(a,b):\n\tif a == 0 or b == 0:\n\t\treturn max(a,b)\n\treturn gcd(b, a%b)\n\nt = int(input())\nfor _ in range(t):\n\tang = int(input())\n\tgc = gcd(180, ang)\n\tn = 180 // gc\n\tif ang // gc + 1 == n:\n\t\tn *= 2\n\tprint(n)\n",
+                "Solution": "codeforces1096c.py",
+                "Session": "1",
+                "Contributor": "Chris",
+                "Note": ""
+            },
+            "10": {
+                "Name": "Note",
+                "Link": " The problemset will be for the whole week. The difficulty is not accurate and will be updated after Thursday meeting ;)",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "",
+                "Note": ""
+            },
+            "11": {
+                "Name": "Unzipping Your Genes with Machine Learning",
+                "Link": "http://clubs.uci.edu/acm/#/events",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Jacky",
+                "Note": ""
+            },
+            "12": {
+                "Name": "Girls’ Coding Nights",
+                "Link": "https://www.facebook.com/events/558100287990483/",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Meta",
+                "Note": ""
+            }
+        },
+        "4": {
+            "1": {
+                "Name": "Arithmetic",
+                "Link": "https://open.kattis.com/problems/arithmetic",
+                "Difficulty": "easy",
+                "Code": "# Author: Bryon Tjanaka\n# Problem: (Kattis) arithmetic\nprint(hex(int(input().strip(), base=8))[2:].upper())\n",
+                "Solution": "arithmetic.py",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "2": {
+                "Name": "Code Cleanups",
+                "Link": "https://open.kattis.com/problems/codecleanups",
+                "Difficulty": "easy",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) codecleanups\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\nint d[370];\n\nint main() {\n  int n;\n  // allow multiple inputs for debugging\n  while (GET(n) > 0) {\n    for (int i = 0; i < n; ++i) {\n      GET(d[i]);\n      --d[i];\n    }\n    sort(d, d + n);\n\n    // go through days\n    int di = 0;\n    int cur_increase = 0;\n    int cur_d = 0;\n    int res = 0;\n    for (int i = 0; i < 365; ++i) {\n      while (i == d[di]) {\n        ++cur_increase;\n        ++di;\n      }\n      if (cur_d + cur_increase > 19) {\n        ++res;\n        cur_d = 0;\n        cur_increase = 0;\n      }\n      cur_d += cur_increase;\n    }\n    if (cur_increase > 0) ++res;\n\n    printf(\"%d\n\", res);\n  }\n  return 0;\n}\n",
+                "Solution": "codecleanups.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": "Bryon Tjanaka is a sleep-deprived second-year computer science major at UCI.\nIn addition to being a board member of ACM@UCI, he is an undergraduate researcher in the Mobley Lab.\nAfter using the force to help him graduate, he will pursue a career as a Jedi master."
+            },
+            "3": {
+                "Name": "Bing It On",
+                "Link": "https://open.kattis.com/problems/bing",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) bing\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\n// each node tells whether it has a next element for each letter\nstruct node {\n  int count;\n  vector<node*> next;\n  node() : count(0), next(26, nullptr) {}\n};\n\n// this is a classic trie problem (a trie is a type of data structure somewhat\n// similar to a graph)\nstruct Trie {\n  node* head;\n  Trie() : head(new node()) {}\n\n  int count(const string& s) {\n    node* itr = head;\n    for (int i = 0; i < s.size(); ++i) {\n      int ni = s[i] - 'a';\n      if (itr->next[ni] == nullptr) {\n        return 0;\n      }\n      itr = itr->next[ni];\n    }\n    return itr->count;\n  }\n\n  void insert(const string& s) {\n    node* itr = head;\n    for (int i = 0; i < s.size(); ++i) {\n      int ni = s[i] - 'a';\n      if (itr->next[ni] == nullptr) {\n        itr->next[ni] = new node();\n      }\n      ++itr->count;\n      itr = itr->next[ni];\n    }\n    ++itr->count;\n  }\n};\n\nint main() {\n  Trie tr;\n  int n;\n  GET(n);\n  string s;\n  while (n--) {\n    cin >> s;\n    printf(\"%d\n\", tr.count(s));\n    tr.insert(s);\n  }\n  return 0;\n}\n",
+                "Solution": "bing.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "4": {
+                "Name": "The Trip",
+                "Link": "https://open.kattis.com/problems/trip",
+                "Difficulty": "med",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) trip\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\nint c[10010];\n\nint main() {\n  int n;\n  while (GET(n) && n) {\n    int tot = 0;\n    for (int i = 0; i < n; ++i) {\n      int b, d;\n      scanf(\"%d.%d\", &b, &d);\n      c[i] = b * 100 + d;\n      tot += c[i];\n    }\n    int avg = tot / n;\n    int rem =\n        tot - avg * n;  // tells number of people who will have an extra cent\n    sort(c, c + n);  // IMPORTANT! - this way everyone who loses money will be\n                     // at the end\n\n    // greedily remove as much money as we can from the people who have above\n    // average - first remove from people who will have an extra cent and then\n    // from people who will not\n    int res = 0;\n    for (int i = n - 1; i >= n - rem; --i) {\n      if (c[i] > (avg + 1)) res += c[i] - (avg + 1);\n    }\n    for (int i = n - rem - 1; i >= 0; --i) {\n      if (c[i] > avg) res += c[i] - avg;\n    }\n    printf(\"$%d.%02d\n\", res / 100, res % 100);\n  }\n  return 0;\n}\n",
+                "Solution": "trip.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "5": {
+                "Name": "Collecting Beepers",
+                "Link": "https://open.kattis.com/problems/beepers",
+                "Difficulty": "hard",
+                "Code": "// Author: btjanaka (Bryon Tjanaka)\n// Problem: (Kattis) beepers\n#include <bits/stdc++.h>\n#define GET(x) scanf(\"%d\", &x)\n#define GED(x) scanf(\"%lf\", &x)\ntypedef long long ll;\nusing namespace std;\ntypedef pair<int, int> ii;\n\n// this solution uses TSP (traveling salesperson) but the input is small enough\n// that you can just go through all permutations of the beeper orderings and\n// find the one that requires the least traveling\n\nint n;\nint dist[15][15];\nint dp[15][1 << 15];\nint pos[15][2];\n\n// cur is a bitset which tells which pos we have already visited\nint tsp(int pos, int cur) {\n  // if all nodes are visited the distance is just the distance to pos 0\n  if (cur == (1 << n) - 1) return dist[pos][0];\n  if (dp[pos][cur] != -1) return dp[pos][cur];  // check dp table\n\n  // find minimum distance when going through rest of positions\n  dp[pos][cur] = INT_MAX;\n  for (int nxt = 0; nxt < n; ++nxt) {\n    if (!(cur & (1 << nxt)))\n      dp[pos][cur] =\n          min(dp[pos][cur], dist[pos][nxt] + tsp(nxt, cur | (1 << nxt)));\n  }\n  return dp[pos][cur];\n}\n\nint main() {\n  int ca;\n  GET(ca);\n  while (ca--) {\n    int x, y;\n    GET(x);\n    GET(y);\n    GET(pos[0][0]);\n    GET(pos[0][1]);\n    --pos[0][0];\n    --pos[0][1];\n    GET(n);\n    ++n;\n\n    for (int i = 1; i < n; ++i) {\n      GET(pos[i][0]);\n      GET(pos[i][1]);\n      --pos[i][0];\n      --pos[i][1];\n    }\n\n    for (int i = 0; i < n; ++i)\n      for (int j = 0; j < n; ++j)\n        dist[i][j] = abs(pos[i][0] - pos[j][0]) + abs(pos[i][1] - pos[j][1]);\n\n    memset(dp, -1, sizeof(dp));\n    printf(\"%d\n\", tsp(0, 1));\n  }\n  return 0;\n}\n",
+                "Solution": "beepers.cpp",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "6": {
+                "Name": "Competition",
+                "Link": "These are the questions/solutions for Internal Series Competition 2",
+                "Difficulty": "announcement",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "7": {
+                "Name": "Internal Series Competition 2 (LINK)",
+                "Link": "https://open.kattis.com/",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Bryon",
+                "Note": ""
+            },
+            "8": {
+                "Name": "Machine learning: Do we really understand it?",
+                "Link": "http://clubs.uci.edu/acm/#/events",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "1",
+                "Contributor": "Jens",
+                "Note": ""
+            },
+            "9": {
+                "Name": "Machine learning: Do we really understand it?",
+                "Link": "http://clubs.uci.edu/acm/#/events",
+                "Difficulty": "event",
+                "Code": "",
+                "Solution": "",
+                "Session": "2",
+                "Contributor": "Jens",
+                "Note": "Jens is a junior studying computer science and engineering.\nAlong with being extremely interested in machine learning and algorithms, he is also the tallest Belgian on campus."
+            }
+        },
+        "5": {},
+        "6": {},
+        "7": {},
+        "8": {},
+        "9": {},
+        "10": {},
+        "11": {}
+    }
+}

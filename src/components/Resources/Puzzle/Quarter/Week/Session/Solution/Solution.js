@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {
+    Alert,
+    Col,
     Button,
     Modal,
     ModalHeader,
     ModalBody,
-    Row,
-    Container
+    Row
 } from 'reactstrap';
 import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -14,13 +15,13 @@ import fblogo from '../../../../../../../img/fb.png';
 import processCon from '../processCon.js';
 
 const Python = codeString => (
-    <SyntaxHighlighter language="python" style={tomorrowNight}>
+    <SyntaxHighlighter key="mycode" language="python" style={tomorrowNight}>
         {codeString}
     </SyntaxHighlighter>
 );
 
 const Cpp = codeString => (
-    <SyntaxHighlighter language="cpp" style={tomorrowNight}>
+    <SyntaxHighlighter key="mycode" language="cpp" style={tomorrowNight}>
         {codeString}
     </SyntaxHighlighter>
 );
@@ -40,20 +41,72 @@ export default class Solution extends Component {
         this.link = props.link;
         this.con = props.con;
         this.txt = props.txt;
-        this.code = null;
+        this.code = [];
+        this.notes = [];
+        var notes = props.note.split(/\n+/);
+        for (var i = 0; i < notes.length; i++) {
+            if (notes[i] !== '') {
+                this.notes.push(
+                    <Alert color="dark" key={i}>
+                        {notes[i]}
+                    </Alert>
+                );
+            }
+        }
     }
 
     componentDidMount() {
-        if (this.props.code === '') {
-            const fb = processCon(this.props.con);
-            if (this.con === '') {
-                this.con = ' Any Board Member';
-            }
-            this.link = `Bother ${this.con}`;
-            this.code = (
-                <Container>
-                    <Row className="center">
-                        <img alt={`${this.con}'s`} className="pc" src={fb[1]} />
+        const fb = processCon(this.props.con);
+        if (this.con === '') {
+            this.con = ' Any Board Member';
+        }
+        this.link = `Bother ${this.con}`;
+
+        if (this.props.note === '') {
+            this.code.push(
+                <div
+                    style={{ marginBottom: '20px' }}
+                    className="center"
+                    key="contrib">
+                    <Row
+                        style={{
+                            objectFit: 'contain'
+                        }}>
+                        <img
+                            alt={`${this.con}'s`}
+                            className="pc"
+                            src={fb[1]}
+                            style={{
+                                width: '100%'
+                            }}
+                        />
+                    </Row>
+                    <a href={fb[0]} target="_blank" rel="noopener noreferrer">
+                        <img alt="facebook link" className="fb" src={fblogo} />
+                    </a>
+                </div>
+            );
+        } else {
+            this.code.push(
+                <div style={{ marginBottom: '20px' }}>
+                    <Row>
+                        <Col style={{ width: '50%' }}>
+                            <Row className="center">
+                                <div
+                                    style={{
+                                        objectFit: 'contain'
+                                    }}>
+                                    <img
+                                        alt={`${this.con}'s`}
+                                        src={fb[1]}
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                    />
+                                </div>
+                            </Row>
+                        </Col>
+                        <Col>{this.notes}</Col>
                     </Row>
                     <Row className="center">
                         <a
@@ -67,19 +120,19 @@ export default class Solution extends Component {
                             />
                         </a>
                     </Row>
-                </Container>
+                </div>
             );
-        } else {
+        }
+        if (this.props.code !== '') {
             this.setCode(this.props.code);
-            this.link = this.props.link;
         }
     }
 
     setCode(data) {
         if (this.type === 'py') {
-            this.code = Python(data);
+            this.code.push(Python(data));
         } else {
-            this.code = Cpp(data);
+            this.code.push(Cpp(data));
         }
         this.togglevis();
     }

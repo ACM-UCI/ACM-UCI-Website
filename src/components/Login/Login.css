@@ -1,0 +1,62 @@
+.loginbutton{
+    background: #02284B;
+    color: #fff;
+    text-decoration: none;
+    font-family: Verdana,sans-serif;
+    display: inline-block;
+    font-size: 16px;
+    width: 130px;
+    height: 50px;
+    margin: 40px;
+    border-width: 0px;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 0 #011c34;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+.loginbutton:hover{
+    background-color: rgb(25, 72, 117);
+}
+
+.logincontainer{
+    text-align: center;
+}
+
+.welcome{
+    background-color: rgb(71, 159, 214);
+    color: white;
+    padding: 10px;
+    margin-top: 40px;
+    font-family: Verdana,sans-serif;
+}
+
+.loginactivebtn{
+    background: transparent;
+    color: #02284B;
+    text-decoration: none;
+    font-family: Verdana,sans-serif;
+    display: inline-block;
+    font-size: 16px;
+    width: 130px;
+    height: 50px;
+    margin: 40px;
+    border: 5px solid #02284B;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 0 #011c34;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.loginactivebtn:hover{
+    background: transparent;
+    color: #02284B;
+    text-decoration: none;
+    font-family: Verdana,sans-serif;
+    display: inline-block;
+    font-size: 16px;
+    width: 130px;
+    height: 50px;
+    margin: 40px;
+    border: 5px solid #02284B;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 0 #011c34;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}

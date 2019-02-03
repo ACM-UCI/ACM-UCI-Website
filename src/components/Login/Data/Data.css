@@ -1,0 +1,8 @@
+.problinkdata{
+    color: black;
+    text-align: left;
+}
+
+.problinkdata:hover{
+    color: rgb(158, 150, 150);
+}

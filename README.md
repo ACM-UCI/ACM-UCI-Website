@@ -30,30 +30,38 @@
     *Cycle to number 1*
 
 ## Uploading Solution
-There are only 2 steps to add problemsets to the website:
-1. Add solutions to folder in the correct quarter and week inside public/solutions
-2. Fill in the csv file in the proper quarter and week inside public including:
+You will need to be a current board member (hard coded XD) to submit solutions.
+
+1. Log in in the Login tab using your uci.edu email.
+2. Fill in the form and click submit:
     * Name          : problem name, please make it short and identifiable
-    * Link          : full link to the problem (*see note_1*)
-    * Difficulty    : 'easy', 'med', 'hard', 'icpc' or 'codealong' (*see note_2!*)
-    * Solution      : name of solution file, w/out path, w/ file type (*see note_1*)
-    * Session       : session when the problem is posted on
+    * Link          : full link to the problem, without additional queries (*see note_1*)
+    * Difficulty    : select one from 'easy', 'med', 'hard', 'icpc' or 'codealong' (*see note_2!*)
+    * Solution      : Upload file for solution (only accepts .py and .cpp) (*see note_1*)
+    * Note          : optional note, place each point in a new line
 
 * note_1: 
     If no link or no solution provided, will give photo and FB link
     of board member who contributed the problem. If no contributor
     assigned, then will give ACM logo and link to ACM page.
 * note_2:
-    There are extra tags (such as 'event' and 'finals') that are 
-    special, and will not provide the solution button. Only those
-    listed in the steps will provide a solution button. To add new
-    tags, you will need to add to 2 files (Puzzle and Problem).
+    Events and announcements can only be added by web dev team.
+
+Why you can't submit:
+- Name cannot be blank or more than 200 characters
+- Link must start with a valid site (e.g. http://open.katis.com) [hard coded]
+- Link must be unique (not submitted before)
+- Must select a difficulty 
+- Each board member can submit a maximum of 5 problems a week!
+
+The Data tab will contain all submissions, including the problems that are used.
+For now, only the web dev team and Karthik can set problems to sessions.
 
 ## WARNINGS
 1. Assumed that the club's first week of meeting is UCI's Week 1 of each quarter (hard-coded)
 2. Assumed that the length of each meeting is 2 hours
-3. Assumed that contributers are board members, some may not have pictures
-4. Solutions must be within proper week as specified in the CSVs
+3. Assumed that contributors are board members, some may not have pictures
+4. Assumed that board members are those listed on the google spreadsheet in team drive
 5. TIMEZONES MAY CAUSE BUGS, may have to recheck daylight saving times
 6. Supports only python and c++ solutions :)), may add more if needed
 7. Not much error handling done :')

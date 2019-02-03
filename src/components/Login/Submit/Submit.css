@@ -1,0 +1,53 @@
+.submitlabel{
+    width: 180px;
+    height: 38px;
+    text-align: left;
+    font-size: 16px;
+    align-content: center;
+    color: #02284B;
+    border: 1px solid #6DB6E2;
+    border-radius: 3px;
+    font-family: Verdana,sans-serif;
+}
+
+.submitlabel:hover{
+    width: 180px;
+    height: 38px;
+    text-align: left;
+    font-size: 16px;
+    align-content: center;
+    color: #02284B;
+    background-color: transparent;
+    font-family: Verdana,sans-serif;
+}
+
+.submitcol{
+    max-width:200px;
+    max-height:38px;
+}
+
+.submitbtn{
+    background: #02284B;
+    color: #fff;
+    text-decoration: none;
+    font-family: Verdana,sans-serif;
+    display: inline-block;
+    font-size: 16px;
+    width: 100px;
+    height: 40px;
+    border-width: 0px;
+    border-radius: 10px;
+    box-shadow: 0 1px 0 0 #011c34;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.submitbtn:hover{
+    background: rgb(4, 63, 117);
+}
+
+.formsubmit{
+    border: 10px solid rgb(4, 63, 117);
+    padding: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
+}
