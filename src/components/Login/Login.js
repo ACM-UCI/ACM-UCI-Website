@@ -181,6 +181,7 @@ export default class Login extends Component {
         this.name = user.displayName;
         this.email = user.email;
         this.owner = owners[m];
+        // this.owner = "Meta";
 
         this.show = (
             <Container key="board">

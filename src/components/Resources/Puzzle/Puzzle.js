@@ -58,6 +58,11 @@ export default class Puzzle extends Component {
                 quarter={this.quarter}
                 session={this.session}
                 data={this.data[this.quarter][this.week]}
+                // end={false}
+                // week={"5"}
+                // quarter={this.quarter}
+                // session={1}
+                // data={this.data[this.quarter]["5"]}
             />
         );
         this.toggle();

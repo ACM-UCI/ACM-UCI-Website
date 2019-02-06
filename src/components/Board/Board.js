@@ -11,6 +11,10 @@ import bryon from '../../img/bryon.jpg';
 import jacky from '../../img/jacky.jpg';
 import meta from '../../img/meta.jpg';
 import frank from '../../img/frank.jpg';
+import junlin from '../../img/junlin.jpg';
+import armen from '../../img/armen.jpg';
+import tim from '../../img/tim.jpg';
+import chris from '../../img/chris.jpg';
 import './Board.css';
 
 class Board extends Component {
@@ -86,6 +90,38 @@ class Board extends Component {
                                 src={frank}
                                 name="Frank Shi"
                                 position="Graduate Ambassador"
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md="4">
+                            <BoardMember
+                                src={tim}
+                                name="Tim Yao"
+                                position="Vice President of external affairs"
+                            />
+                        </Col>
+                        <Col md="4">
+                            <BoardMember
+                                src={junlin}
+                                name="Junlin Wang"
+                                position="AI and ML SIG lead"
+                            />
+                        </Col>
+                        <Col md="4">
+                            <BoardMember
+                                src={chris}
+                                name="Chris Chu"
+                                position="Ambassador"
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md="4">
+                            <BoardMember
+                                src={armen}
+                                name="Armen Mouradyan"
+                                position="Director of Social Life"
                             />
                         </Col>
                     </Row>

@@ -7,6 +7,11 @@ import bryon from '../../../../../../img/bryon.jpg';
 import jacky from '../../../../../../img/jacky.jpg';
 import meta from '../../../../../../img/meta.jpg';
 import frank from '../../../../../../img/frank.jpg';
+import tim from '../../../../../../img/tim.jpg';
+import armen from '../../../../../../img/armen.jpg';
+import junlin from '../../../../../../img/junlin.jpg';
+import arne from '../../../../../../img/arne.jpg';
+import chris from '../../../../../../img/chris.jpg';
 
 export default function processLink(link) {
     const fb = ['https://www.facebook.com/groups/acmuci/', acm];
@@ -47,13 +52,16 @@ export default function processLink(link) {
         ];
     }
     if (link.endsWith('Tim')) {
-        return ['https://www.facebook.com/blazedspeeder', acm];
+        return ['https://www.facebook.com/blazedspeeder', tim];
     }
     if (link.endsWith('Junlin')) {
-        return ['https://www.facebook.com/jack.wang.315080', acm];
+        return ['https://www.facebook.com/jack.wang.315080', junlin];
     }
     if (link.endsWith('Armen')) {
-        return ['https://www.facebook.com/amouradyan', acm];
+        return ['https://www.facebook.com/amouradyan', armen];
+    }
+    if (link.endsWith('Arne')) {
+        return ['https://www.facebook.com/arne.philipeit', arne];
     }
     return fb;
 }

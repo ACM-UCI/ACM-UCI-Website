@@ -92,7 +92,7 @@ export default class Entry extends Component {
     }
 
     setProblem() {
-        if (this.props.owner === 'Meta') {
+        if (this.props.owner === 'Karthik' || this.props.owner === 'Meta') {
             this.data.Session = this.session;
             var newPostKey = firebase
                 .database()
