@@ -40,7 +40,7 @@ export default function processLink(link) {
         ];
     }
     if (link.endsWith('Chris')) {
-        return ['https://www.facebook.com/christopher.chu.35', acm];
+        return ['https://www.facebook.com/christopher.chu.35', chris];
     }
     if (link.endsWith('Meta')) {
         return ['https://www.facebook.com/meta.novitia', meta];

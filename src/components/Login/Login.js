@@ -181,7 +181,6 @@ export default class Login extends Component {
         this.name = user.displayName;
         this.email = user.email;
         this.owner = owners[m];
-        // this.owner = "Meta";
 
         this.show = (
             <Container key="board">
@@ -316,7 +315,11 @@ export default class Login extends Component {
                         onClick={this.login}>
                         Logout
                     </Button>
-                    <Submit data={this.data} owner={this.owner} />
+                    <Submit
+                        week={this.week}
+                        data={this.data}
+                        owner={this.owner}
+                    />
                 </Container>
             );
         }

@@ -17,8 +17,8 @@ export default class Submit extends Component {
         };
         this.data = {};
 
-        var ref = firebase.database().ref();
-        ref.on('value', this.processData);
+        this.ref = firebase.database().ref();
+        this.ref.on('value', this.processData);
 
         this.status = [];
 
@@ -37,6 +37,21 @@ export default class Submit extends Component {
 
     processData(data) {
         this.data = data.val();
+        var board = this.data['board'];
+        if (board['Week'] !== this.props.week) {
+            var updates = {};
+            updates['/board/Week'] = this.props.week;
+            for (var key in board) {
+                if (board.hasOwnProperty(key) && key !== 'Week') {
+                    updates['/board/' + key] = 0;
+                }
+            }
+            firebase
+                .database()
+                .ref()
+                .update(updates);
+        }
+
         this.setState({
             tog: false
         });
