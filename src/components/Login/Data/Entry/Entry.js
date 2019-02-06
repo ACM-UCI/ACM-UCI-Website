@@ -37,6 +37,13 @@ export default class Entry extends Component {
         this.toggle2 = this.toggle2.bind(this);
         this.toggle3 = this.toggle3.bind(this);
         this.session = props.session;
+        if (this.session === 1) {
+            this.optses1 = '1';
+            this.optses2 = '2';
+        } else {
+            this.optses1 = '2';
+            this.optses2 = '1';
+        }
         this.week = props.week;
         this.avail = 'Available';
         this.state = {
@@ -247,17 +254,8 @@ export default class Entry extends Component {
                                             }
                                             name="select"
                                             id="Session">
-                                            <option>
-                                                {this.props.session}
-                                            </option>
-                                            <option>
-                                                {((parseInt(
-                                                    this.props.session
-                                                ) +
-                                                    1) %
-                                                    2) +
-                                                    2}
-                                            </option>
+                                            <option>{this.optses1}</option>
+                                            <option>{this.optses2}</option>
                                         </Input>
                                     </td>
                                 </tr>
