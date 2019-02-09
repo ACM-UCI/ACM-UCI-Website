@@ -47,7 +47,10 @@ export default class Solution extends Component {
         for (var i = 0; i < notes.length; i++) {
             if (notes[i] !== '') {
                 this.notes.push(
-                    <Alert color="dark" key={i}>
+                    <Alert
+                        color="light"
+                        style={{ borderLeft: '3px solid black' }}
+                        key={i}>
                         {notes[i]}
                     </Alert>
                 );
@@ -89,7 +92,7 @@ export default class Solution extends Component {
         } else {
             this.code.push(
                 <div style={{ marginBottom: '20px' }}>
-                    <Row>
+                    <Row className="center">
                         <Col style={{ width: '50%' }}>
                             <Row className="center">
                                 <div
@@ -106,7 +109,7 @@ export default class Solution extends Component {
                                 </div>
                             </Row>
                         </Col>
-                        <Col>{this.notes}</Col>
+                        <Col style={{ textAlign: 'left' }}>{this.notes}</Col>
                     </Row>
                     <Row className="center">
                         <a
@@ -123,7 +126,7 @@ export default class Solution extends Component {
                 </div>
             );
         }
-        if (this.props.code !== '') {
+        if (this.props.link !== '') {
             this.setCode(this.props.code);
         }
     }

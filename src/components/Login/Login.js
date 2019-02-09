@@ -315,7 +315,11 @@ export default class Login extends Component {
                         onClick={this.login}>
                         Logout
                     </Button>
-                    <Submit data={this.data} owner={this.owner} />
+                    <Submit
+                        week={this.week}
+                        data={this.data}
+                        owner={this.owner}
+                    />
                 </Container>
             );
         }
