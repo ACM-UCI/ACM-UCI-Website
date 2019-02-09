@@ -5,6 +5,7 @@ import Banner from '../Banner/Banner';
 import { Timeline, TimelineItem } from 'vertical-timeline-component-for-react';
 import './About.css';
 import TimelineData from './timeline.json';
+import Images from './img/index';
 
 let about_timeline_header = {
     background: '#02284B',
@@ -16,6 +17,23 @@ class About extends Component {
         super(props);
         this.events = [];
         for (let i = TimelineData.length - 1; i >= 0; --i) {
+            let img = null;
+            if (TimelineData[i].img !== undefined) {
+                img = (
+                    <figure>
+                        <img
+                            src={Images[TimelineData[i].img]}
+                            alt={TimelineData[i].caption}
+                            width="100%"
+                        />
+                        <figcaption>
+                            <center>
+                                <i>{TimelineData[i].caption}</i>
+                            </center>
+                        </figcaption>
+                    </figure>
+                );
+            }
             this.events.push(
                 <TimelineItem
                     key={i}
@@ -23,10 +41,12 @@ class About extends Component {
                     dateInnerStyle={about_timeline_header}>
                     <h3>{TimelineData[i].title}</h3>
                     <p>{TimelineData[i].desc}</p>
+                    {img}
                 </TimelineItem>
             );
         }
     }
+
     render() {
         return (
             <div>
