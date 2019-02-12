@@ -91,7 +91,7 @@ export default class Solution extends Component {
             );
         } else {
             this.code.push(
-                <div style={{ marginBottom: '20px' }}>
+                <div style={{ marginBottom: '20px' }} key={'withnotes'}>
                     <Row className="center">
                         <Col style={{ width: '50%' }}>
                             <Row className="center">

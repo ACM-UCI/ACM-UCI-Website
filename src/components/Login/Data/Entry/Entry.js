@@ -104,7 +104,7 @@ export default class Entry extends Component {
             this.props.owner === 'Meta' ||
             this.props.owner === 'Bryon'
         ) {
-            this.data.Session = this.session;
+            this.data.Session = this.session.toString();
             var newPostKey = firebase
                 .database()
                 .ref()
