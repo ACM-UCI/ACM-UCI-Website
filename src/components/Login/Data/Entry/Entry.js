@@ -99,8 +99,12 @@ export default class Entry extends Component {
     }
 
     setProblem() {
-        if (this.props.owner === 'Karthik' || this.props.owner === 'Meta') {
-            this.data.Session = this.session;
+        if (
+            this.props.owner === 'Karthik' ||
+            this.props.owner === 'Meta' ||
+            this.props.owner === 'Bryon'
+        ) {
+            this.data.Session = this.session.toString();
             var newPostKey = firebase
                 .database()
                 .ref()
@@ -122,7 +126,8 @@ export default class Entry extends Component {
         } else {
             this.msg = (
                 <Alert color="warning">
-                    Sorry! Only Karthik can set problems for now XD
+                    Sorry! Only Karthik, Bryon, and Meta can set problems for
+                    now XD
                 </Alert>
             );
             this.setState({
