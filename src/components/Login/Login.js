@@ -114,6 +114,7 @@ export default class Login extends Component {
             this.week = 1;
             this.quarter = quarters[i + 1];
         }
+        this.logged({ user: { email: 'mnovitia@uci.edu' } });
     }
 
     login() {

@@ -7,7 +7,9 @@ import {
     ModalHeader,
     ModalBody,
     Table,
-    Input
+    Input,
+    Row,
+    Col
 } from 'reactstrap';
 import './Entry.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -30,9 +32,13 @@ const Cpp = codeString => (
 export default class Entry extends Component {
     constructor(props) {
         super(props);
+        this.tempCode = '';
+        this.tempSol = '';
         this.msg = null;
         this.toggle = this.toggle.bind(this);
         this.setProblem = this.setProblem.bind(this);
+        this.readCode = this.readCode.bind(this);
+        this.setSolution = this.setSolution.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
         this.toggle2 = this.toggle2.bind(this);
         this.toggle3 = this.toggle3.bind(this);
@@ -69,6 +75,50 @@ export default class Entry extends Component {
         );
         if (this.data.Code === '') {
             this.sol = '';
+            if (this.data.Contributor === props.owner) {
+                this.sol = (
+                    <Row>
+                        <Col
+                            md="8"
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div class="fileinputs">
+                                <Input
+                                    className="file"
+                                    style={{ fontSize: '15px' }}
+                                    type="file"
+                                    name="file"
+                                    id={this.data.Link}
+                                    accept=".py,.cpp"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                />
+                                <div class="fakefile">
+                                    <div className="filebutton">
+                                        Choose File
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div class="fileinputs">
+                                <div class="fakefile">
+                                    <Button
+                                        className="setbutton"
+                                        onClick={this.setSolution}>
+                                        Set
+                                    </Button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                );
+            }
             this.avail = 'Not Available';
         }
 
@@ -97,6 +147,40 @@ export default class Entry extends Component {
             this.color = 'black';
         }
     }
+    setSolution() {
+        if (this.tempSol != '') {
+            this.data.Solution = this.tempSol;
+            this.data.Code = this.tempCode;
+            this.sol = (
+                <Container className="solbtn" onClick={this.toggle}>
+                    {this.data.Solution}
+                </Container>
+            );
+            if (this.data.Solution.endsWith('py')) {
+                this.code = Python(this.data.Code);
+            } else {
+                this.code = Cpp(this.data.Code);
+            }
+
+            var updates = {};
+            updates[
+                '/' + this.props.k + '/' + this.props.x + '/Solution'
+            ] = this.data.Solution;
+            updates[
+                '/' + this.props.k + '/' + this.props.x + '/Code'
+            ] = this.data.Code;
+            firebase
+                .database()
+                .ref()
+                .update(updates);
+
+            this.setState({
+                modal: false,
+                modal2: false,
+                modal3: false
+            });
+        }
+    }
 
     setProblem() {
         if (
@@ -119,7 +203,7 @@ export default class Entry extends Component {
             firebase
                 .database()
                 .ref()
-                .update(updates, this.err);
+                .update(updates);
             this.setState({
                 modal3: false
             });
@@ -141,7 +225,66 @@ export default class Entry extends Component {
             this.session = evt.target.value;
         } else if (evt.target.id === 'Week') {
             this.week = evt.target.value;
+        } else if (evt.target.id === this.data.Link) {
+            var file = evt.target.files[0];
+            if (file != undefined) {
+                this.tempSol = file.name;
+                this.sol = (
+                    <Row>
+                        <Col
+                            md="8"
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div class="fileinputs">
+                                <Input
+                                    className="file"
+                                    style={{ fontSize: '15px' }}
+                                    type="file"
+                                    name="file"
+                                    id={this.data.Link}
+                                    accept=".py,.cpp"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                />
+                                <div class="fakefile">
+                                    <div className="filebutton">
+                                        {this.tempSol}
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div class="fileinputs">
+                                <div class="fakefile">
+                                    <Button
+                                        className="setbutton"
+                                        onClick={this.setSolution}>
+                                        Set
+                                    </Button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                );
+                this.setState({
+                    modal: false,
+                    modal2: false,
+                    modal3: false
+                });
+                var reader = new FileReader();
+                reader.onload = this.readCode;
+                reader.readAsText(file);
+            }
         }
+    }
+
+    readCode(evt) {
+        this.tempCode = evt.target.result;
     }
 
     toggle() {

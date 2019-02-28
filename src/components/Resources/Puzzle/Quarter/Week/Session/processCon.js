@@ -1,6 +1,6 @@
 import acm from '../../../../../../acm_logo.svg';
 import karthik from '../../../../../../img/karthik.jpg';
-import blakePooya from '../../../../../../img/blake-pooya.jpg';
+import blakePooya from '../../../../../../img/blake.jpg';
 import chinmay from '../../../../../../img/chinmay.jpg';
 import jens from '../../../../../../img/jens.jpg';
 import bryon from '../../../../../../img/bryon.jpg';

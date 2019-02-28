@@ -91,6 +91,7 @@ export default class Data extends Component {
                                         quarter={this.quarter}
                                         session={this.session}
                                         owner={this.props.owner}
+                                        k={'submissions'}
                                     />
                                 );
                             }
