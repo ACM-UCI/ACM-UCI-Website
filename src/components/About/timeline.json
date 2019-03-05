@@ -20,19 +20,32 @@
         "date": "October 2016",
 
         "title": "UCI 76ers Rank 1st Nationally at IEEExtreme 10.0",
-        "desc": "ACM@UCI's team UCI 76ers places 1st in the US at IEEExtreme 10.0, a 24-hour worldwide programming contest."
+        "desc": "ACM@UCI's team UCI 76ers places 1st in the US at IEEExtreme 10.0.",
+        "img": "ieeextreme-10-76ers.jpg",
+        "caption": "UCI 76ers shortly after IEEExtreme 10.0"
     },
     {
         "date": "2016-2017",
 
         "title": "filter Competes in World Finals",
-        "desc": "After finishing 1st at the 2016 ICPC Southern California Regional (including solving a problem in the last 24 seconds of the competition), ACM@UCI's team filter advances to the 2017 ICPC World Finals."
+        "desc": "After finishing 1st at the 2016 ICPC Southern California Regional (including solving a problem in the last 24 seconds of the competition), ACM@UCI's team filter advances to the 2017 ICPC World Finals.",
+        "img": "icpc-socal-2016-filter.jpg",
+        "caption": "Team filter after winning the 2016 SoCal Regional"
+    },
+    {
+        "date": "October 2017",
+        "title": "UCI 76ers Rank 2nd Nationally at IEEExtreme 11.0",
+        "desc": "ACM@UCI's team UCI 76ers places 2nd in the US at IEEExtreme 11.0.",
+        "img": "ieeextreme-11.jpg",
+        "caption": "Students competing at IEEExtreme 11.0"
     },
     {
         "date": "November 2017",
 
         "title": "filter Places 3rd in SoCal",
-        "desc": "At the 2017 ICPC Southern California Regional, ACM@UCI's team filter pulls off another successful finish at 3rd place. Overall, ACM@UCI does extremely well, getting all 5 of its teams into the top 25."
+        "desc": "At the 2017 ICPC Southern California Regional, ACM@UCI's team filter pulls off another successful finish at 3rd place. Overall, ACM@UCI does extremely well, getting all 5 of its teams into the top 25.",
+        "img": "icpc-socal-2017.jpg",
+        "caption": "ACM@UCI members at the 2017 ICPC SoCal Regional"
     },
     {
         "date": "Spring 2018",
@@ -44,18 +57,24 @@
         "date": "October 2018",
 
         "title": "IEEExtreme 12.0",
-        "desc": "At IEEExtreme 12.0, ACM@UCI gets two teams, sheep and sleep24hrs, into the top 100 in the world. The two teams also rank 6th and 7th in the US, respectively."
+        "desc": "At IEEExtreme 12.0, a 24-hour worldwide programming contest, ACM@UCI gets two teams, sheep and sleep24hrs, into the top 100 in the world. The two teams also rank 6th and 7th in the US, respectively.",
+        "img": "ieeextreme-12-sleep24hrs.jpg",
+        "caption": "sleep24hrs shortly after IEEExtreme 12.0"
     },
     {
         "date": "November 2018",
 
         "title": "2018 SoCal Regional",
-        "desc": "Despite losing most of its senior members, ACM@UCI teams pull off successful finishes at the 2018 SoCal Regional, with two teams, filter and iterator, ranking 7th and 9th, and all 5 teams ranking in the top 25 yet again."
+        "desc": "Despite losing most of its senior members, ACM@UCI teams pull off successful finishes at the 2018 SoCal Regional, with two teams, filter and iterator, ranking 7th and 9th, and all 5 teams ranking in the top 25 yet again.",
+        "img": "icpc-socal-2018.jpg",
+        "caption": "ACM@UCI members at the 2018 ICPC SoCal Regional"
     },
     {
         "date": "Winter 2019",
 
         "title": "Seminar Series v2",
-        "desc": "ACM@UCI hosts another seminar series, once again with diverse talks."
+        "desc": "ACM@UCI hosts another seminar series, once again with diverse talks.",
+        "img": "seminar-winter-2019.jpg",
+        "caption": "Karthik Gajulapalli presenting for the ACM Seminar Series, Winter 2019"
     }
 ]
