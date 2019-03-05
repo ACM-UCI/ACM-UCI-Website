@@ -148,7 +148,7 @@ export default class Entry extends Component {
         }
     }
     setSolution() {
-        if (this.tempSol != '') {
+        if (this.tempSol !== '') {
             this.data.Solution = this.tempSol;
             this.data.Code = this.tempCode;
             this.sol = (
@@ -227,7 +227,7 @@ export default class Entry extends Component {
             this.week = evt.target.value;
         } else if (evt.target.id === this.data.Link) {
             var file = evt.target.files[0];
-            if (file != undefined) {
+            if (file !== undefined) {
                 this.tempSol = file.name;
                 this.sol = (
                     <Row>

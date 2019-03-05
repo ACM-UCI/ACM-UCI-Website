@@ -7,6 +7,9 @@ import './Submit.css';
 export default class Submit extends Component {
     constructor(props) {
         super(props);
+        this.quarter = props.quarter;
+        this.week = props.week;
+        this.owner = props.owner;
         this.updateInputValue = this.updateInputValue.bind(this);
         this.processData = this.processData.bind(this);
         this.upload = this.upload.bind(this);
@@ -37,20 +40,31 @@ export default class Submit extends Component {
 
     processData(data) {
         this.data = data.val();
-        var board = this.data['board'];
-        if (board['Week'] !== this.props.week) {
-            var updates = {};
-            updates['/board/Week'] = this.props.week;
-            for (var key in board) {
-                if (board.hasOwnProperty(key) && key !== 'Week') {
-                    updates['/board/' + key] = 0;
+        // /* this is code for initializing logs in firebase to 0 BE CAREFUL
+        var okay = true;
+        if (okay) {
+            var u = {};
+            for (var b in this.data['board']) {
+                console.log(b, this.data['logs'].hasOwnProperty(b));
+                if (
+                    this.data['board'].hasOwnProperty(b) &&
+                    b !== 'Week' &&
+                    !this.data['logs'].hasOwnProperty(b)
+                ) {
+                    // uncomment this to initialize all
+                    for (var i = 1; i <= 11; i++) {
+                        u['/logs/' + b + '/Fall 2018/' + i.toString()] = 0;
+                        u['/logs/' + b + '/Winter 2019/' + i.toString()] = 0;
+                        u['/logs/' + b + '/Spring 2019/' + i.toString()] = 0;
+                    }
                 }
             }
             firebase
                 .database()
                 .ref()
-                .update(updates);
+                .update(u);
         }
+        // */
 
         this.setState({
             tog: false
@@ -190,7 +204,7 @@ export default class Submit extends Component {
             }
         }
 
-        if (this.data['board'][this.props.owner] > 4) {
+        if (this.data['logs'][this.owner][this.quarter][this.week] > 4) {
             errors.push(
                 <li key={errors.length}>
                     Uhh you've submitted 5 problems already this week
@@ -215,8 +229,9 @@ export default class Submit extends Component {
                 .push().key;
             var updates = {};
             updates['/submissions/' + newPostKey] = s;
-            updates['/board/' + this.props.owner] =
-                this.data['board'][this.props.owner] + 1;
+            updates[
+                '/logs/' + this.owner + '/' + this.quarter + '/' + this.week
+            ] = this.data['logs'][this.owner][this.quarter][this.week] + 1;
             firebase
                 .database()
                 .ref()

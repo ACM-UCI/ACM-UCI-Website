@@ -4,44 +4,10 @@ import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import Submit from './Submit/Submit';
 import Data from './Data/Data';
+import Log from './Log/Log';
 import firebase from 'firebase/app';
-import 'firebase/database';
 import 'firebase/auth';
 import './Login.css';
-
-const emails = [
-    'amourady@uci.edu',
-    'btjanaka@uci.edu',
-    'craut@uci.edu',
-    'jtuyls@uci.edu',
-    'junliw1@uci.edu',
-    'satoks@uci.edu',
-    'kgajulap@uci.edu',
-    'pooyak@uci.edu',
-    'timothy4@uci.edu',
-    'cdipalma@uci.edu',
-    'mnovitia@uci.edu',
-    'bwakasa@uci.edu',
-    'renjied@uci.edu',
-    'zhonghas@uci.edu'
-];
-
-const owners = [
-    'Armen',
-    'Bryon',
-    'Chinmay',
-    'Jens',
-    'Junlin',
-    'Kaleo',
-    'Karthik',
-    'Pooya',
-    'Tim',
-    'Chris',
-    'Meta',
-    'Blake',
-    'Jacky',
-    'Frank'
-];
 
 export default class Login extends Component {
     constructor(props) {
@@ -51,9 +17,12 @@ export default class Login extends Component {
         this.lout = this.lout.bind(this);
         this.lin = this.lin.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.processData = this.processData.bind(this);
         this.state = {
             status: 'Login'
         };
+        this.emails = [];
+        this.owners = [];
         this.name = '';
         this.email = '';
         this.owner = '';
@@ -66,9 +35,12 @@ export default class Login extends Component {
             </Button>
         ];
 
+        this.ref = firebase.database().ref();
+        this.ref.on('value', this.processData);
+
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2020'];
+        const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2019'];
         const startDates = [
             new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
             new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
@@ -114,7 +86,19 @@ export default class Login extends Component {
             this.week = 1;
             this.quarter = quarters[i + 1];
         }
-        this.logged({ user: { email: 'mnovitia@uci.edu' } });
+
+        // uncomment below for debugging
+        // this.logged({ user: { email: 'mnovitia@uci.edu' } });
+    }
+
+    processData(data) {
+        data = data.val()['logs'];
+        for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+                this.emails.push(data[key]['email']);
+                this.owners.push(key);
+            }
+        }
     }
 
     login() {
@@ -164,7 +148,7 @@ export default class Login extends Component {
         // var token = result.credential.accessToken;
         // // The signed-in user info.
         var user = result.user;
-        var m = emails.indexOf(user.email);
+        var m = this.emails.indexOf(user.email);
         if (m === -1) {
             this.show[1] = (
                 <Alert key="notboard" color="info">
@@ -181,7 +165,7 @@ export default class Login extends Component {
 
         this.name = user.displayName;
         this.email = user.email;
-        this.owner = owners[m];
+        this.owner = this.owners[m];
 
         this.show = (
             <Container key="board">
@@ -202,6 +186,15 @@ export default class Login extends Component {
                 </Button>
 
                 <Button
+                    key="logbutton"
+                    className="loginbutton"
+                    onClick={() => {
+                        this.toggle('Log');
+                    }}>
+                    Log
+                </Button>
+
+                <Button
                     key="databutton"
                     className="loginbutton"
                     onClick={() => {
@@ -216,11 +209,11 @@ export default class Login extends Component {
                     onClick={this.login}>
                     Logout
                 </Button>
+                {/* <Log quarter={this.quarter} week={this.week}/> */}
                 <Submit
                     week={this.week}
                     quarter={this.quarter}
                     session={this.session}
-                    data={this.data}
                     owner={this.owner}
                 />
             </Container>
@@ -260,6 +253,15 @@ export default class Login extends Component {
                     </Button>
 
                     <Button
+                        key="logbutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Log');
+                        }}>
+                        Log
+                    </Button>
+
+                    <Button
                         key="databutton"
                         className="loginactivebtn"
                         onClick={() => {
@@ -278,6 +280,56 @@ export default class Login extends Component {
                         week={this.week}
                         quarter={this.quarter}
                         session={this.session}
+                        owner={this.owner}
+                    />
+                </Container>
+            );
+        } else if (ntab === 'Log') {
+            this.show = (
+                <Container key="board">
+                    <Row className="welcome">
+                        <Col style={{ textAlign: 'left' }}>
+                            Welcome {this.name}! ^^
+                        </Col>
+                        <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                    </Row>
+
+                    <Button
+                        key="submitbutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Submit');
+                        }}>
+                        Submit
+                    </Button>
+
+                    <Button
+                        key="logbutton"
+                        className="loginactivebtn"
+                        onClick={() => {
+                            this.toggle('Log');
+                        }}>
+                        Log
+                    </Button>
+
+                    <Button
+                        key="databutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Data');
+                        }}>
+                        Data
+                    </Button>
+
+                    <Button
+                        key="logoutbutton"
+                        className="loginbutton"
+                        onClick={this.login}>
+                        Logout
+                    </Button>
+                    <Log
+                        week={this.week}
+                        quarter={this.quarter}
                         owner={this.owner}
                     />
                 </Container>
@@ -302,6 +354,15 @@ export default class Login extends Component {
                     </Button>
 
                     <Button
+                        key="logbutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Log');
+                        }}>
+                        Log
+                    </Button>
+
+                    <Button
                         key="databutton"
                         className="loginbutton"
                         onClick={() => {
@@ -318,8 +379,9 @@ export default class Login extends Component {
                     </Button>
                     <Submit
                         week={this.week}
-                        data={this.data}
+                        quarter={this.quarter}
                         owner={this.owner}
+                        session={this.session}
                     />
                 </Container>
             );
