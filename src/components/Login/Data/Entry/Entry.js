@@ -7,125 +7,62 @@ import {
     ModalHeader,
     ModalBody,
     Table,
-    Input,
-    Row,
-    Col
+    Input
 } from 'reactstrap';
 import './Entry.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
+import Submit from '../../Submit/Submit';
+import filter from './filter.js';
 
-const Python = codeString => (
-    <SyntaxHighlighter language="python" style={tomorrowNight}>
-        {codeString}
-    </SyntaxHighlighter>
-);
+const lang = {
+    py: 'python',
+    cpp: 'cpp'
+};
 
-const Cpp = codeString => (
-    <SyntaxHighlighter language="cpp" style={tomorrowNight}>
-        {codeString}
-    </SyntaxHighlighter>
-);
+const shouldDisplay = ['none', undefined];
 
 export default class Entry extends Component {
     constructor(props) {
         super(props);
-        this.tempCode = '';
-        this.tempSol = '';
-        this.msg = null;
-        this.toggle = this.toggle.bind(this);
-        this.setProblem = this.setProblem.bind(this);
-        this.readCode = this.readCode.bind(this);
-        this.setSolution = this.setSolution.bind(this);
+
+        // bindings
         this.updateInputValue = this.updateInputValue.bind(this);
-        this.toggle2 = this.toggle2.bind(this);
-        this.toggle3 = this.toggle3.bind(this);
+
+        this.avail = '';
+        this.sol = '';
+        this.txt = '';
+        this.code = '';
+        this.tempSol = '';
+        this.edit = null;
+        this.msg = null;
+        this.data = props.data;
+
         this.session = props.session;
+        this.quarter = props.quarter;
+        this.filters = props.filters;
+        this.optses1 = '2';
+        this.optses2 = '1';
         if (this.session === 1) {
             this.optses1 = '1';
             this.optses2 = '2';
-        } else {
-            this.optses1 = '2';
-            this.optses2 = '1';
         }
+
         this.week = props.week;
-        this.avail = 'Available';
         this.state = {
-            modal: false,
-            modal2: false,
-            modal3: false
+            // see solution, see note, set problem, edit
+            modal: [false, false, false, false]
         };
 
-        this.data = props.data;
-        this.txt = (
-            <Container className="solbtn" onClick={this.toggle2}>
-                Open
-            </Container>
-        );
-        if (this.data.Note === '') {
-            this.txt = '-';
-        }
-
-        this.sol = (
-            <Container className="solbtn" onClick={this.toggle}>
-                {this.data.Solution}
-            </Container>
-        );
-        if (this.data.Code === '') {
-            this.sol = '';
-            if (this.data.Contributor === props.owner) {
-                this.sol = (
-                    <Row>
-                        <Col
-                            md="8"
-                            style={{
-                                alignItems: 'center',
-                                justifyItems: 'center'
-                            }}>
-                            <div class="fileinputs">
-                                <Input
-                                    className="file"
-                                    style={{ fontSize: '15px' }}
-                                    type="file"
-                                    name="file"
-                                    id={this.data.Link}
-                                    accept=".py,.cpp"
-                                    onChange={evt => this.updateInputValue(evt)}
-                                />
-                                <div class="fakefile">
-                                    <div className="filebutton">
-                                        Choose File
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                        <Col
-                            style={{
-                                alignItems: 'center',
-                                justifyItems: 'center'
-                            }}>
-                            <div class="fileinputs">
-                                <div class="fakefile">
-                                    <Button
-                                        className="setbutton"
-                                        onClick={this.setSolution}>
-                                        Set
-                                    </Button>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                );
-            }
-            this.avail = 'Not Available';
-        }
-
+        // set session
         if (this.data.Session === '') {
             this.ses = (
                 <Button
-                    onClick={this.toggle3}
+                    onClick={() => {
+                        this.toggle(2);
+                    }}
                     style={{
                         color: 'white'
                     }}>
@@ -136,49 +73,16 @@ export default class Entry extends Component {
             this.ses = props.k + '/' + this.data.Session;
         }
 
-        if (this.data.Solution.endsWith('py')) {
-            this.code = Python(this.data.Code);
-        } else {
-            this.code = Cpp(this.data.Code);
-        }
-
-        this.color = 'white';
-        if (this.data.Difficulty === 'announcement') {
-            this.color = 'black';
-        }
-    }
-    setSolution() {
-        if (this.tempSol !== '') {
-            this.data.Solution = this.tempSol;
-            this.data.Code = this.tempCode;
-            this.sol = (
-                <Container className="solbtn" onClick={this.toggle}>
-                    {this.data.Solution}
-                </Container>
+        if (props.owner === this.data.Contributor) {
+            this.edit = (
+                <Button
+                    className="editbutton"
+                    onClick={() => {
+                        this.toggle(3);
+                    }}>
+                    Edit
+                </Button>
             );
-            if (this.data.Solution.endsWith('py')) {
-                this.code = Python(this.data.Code);
-            } else {
-                this.code = Cpp(this.data.Code);
-            }
-
-            var updates = {};
-            updates[
-                '/' + this.props.k + '/' + this.props.x + '/Solution'
-            ] = this.data.Solution;
-            updates[
-                '/' + this.props.k + '/' + this.props.x + '/Code'
-            ] = this.data.Code;
-            firebase
-                .database()
-                .ref()
-                .update(updates);
-
-            this.setState({
-                modal: false,
-                modal2: false,
-                modal3: false
-            });
         }
     }
 
@@ -205,7 +109,7 @@ export default class Entry extends Component {
                 .ref()
                 .update(updates);
             this.setState({
-                modal3: false
+                modal: [false, false, false, false]
             });
         } else {
             this.msg = (
@@ -225,94 +129,66 @@ export default class Entry extends Component {
             this.session = evt.target.value;
         } else if (evt.target.id === 'Week') {
             this.week = evt.target.value;
-        } else if (evt.target.id === this.data.Link) {
-            var file = evt.target.files[0];
-            if (file !== undefined) {
-                this.tempSol = file.name;
-                this.sol = (
-                    <Row>
-                        <Col
-                            md="8"
-                            style={{
-                                alignItems: 'center',
-                                justifyItems: 'center'
-                            }}>
-                            <div class="fileinputs">
-                                <Input
-                                    className="file"
-                                    style={{ fontSize: '15px' }}
-                                    type="file"
-                                    name="file"
-                                    id={this.data.Link}
-                                    accept=".py,.cpp"
-                                    onChange={evt => this.updateInputValue(evt)}
-                                />
-                                <div class="fakefile">
-                                    <div className="filebutton">
-                                        {this.tempSol}
-                                    </div>
-                                </div>
-                            </div>
-                        </Col>
-                        <Col
-                            style={{
-                                alignItems: 'center',
-                                justifyItems: 'center'
-                            }}>
-                            <div class="fileinputs">
-                                <div class="fakefile">
-                                    <Button
-                                        className="setbutton"
-                                        onClick={this.setSolution}>
-                                        Set
-                                    </Button>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                );
-                this.setState({
-                    modal: false,
-                    modal2: false,
-                    modal3: false
-                });
-                var reader = new FileReader();
-                reader.onload = this.readCode;
-                reader.readAsText(file);
-            }
         }
     }
 
-    readCode(evt) {
-        this.tempCode = evt.target.result;
-    }
-
-    toggle() {
+    toggle(i) {
+        var newM = this.state.modal;
+        newM[i] = !newM[i];
         this.setState({
-            modal: !this.state.modal,
-            modal2: false,
-            modal3: false
-        });
-    }
-    toggle2() {
-        this.setState({
-            modal: false,
-            modal2: !this.state.modal2,
-            modal3: false
-        });
-    }
-    toggle3() {
-        this.setState({
-            modal: false,
-            modal2: false,
-            modal3: !this.state.modal3
+            modal: newM
         });
     }
 
     render() {
-        var problem = this.data;
+        var problem = this.props.data;
+
+        // set solution name, button, and availability
+        this.avail = 'Available';
+        this.sol = (
+            <Container
+                className="solbtn"
+                onClick={() => {
+                    this.toggle(0);
+                }}>
+                {problem.Solution}
+            </Container>
+        );
+        if (problem.Solution === '') {
+            this.sol = '';
+            this.avail = 'Not Available';
+        }
+
+        // set code
+        var ext = problem.Solution.split('.').slice(-1)[0];
+        this.code = (
+            <SyntaxHighlighter language={lang[ext]} style={tomorrowNight}>
+                {problem.Code}
+            </SyntaxHighlighter>
+        );
+
+        // set notes
+        this.txt = '-';
+        if (problem.Note !== '') {
+            this.txt = (
+                <Container
+                    className="solbtn"
+                    onClick={() => {
+                        this.toggle(1);
+                    }}>
+                    Open
+                </Container>
+            );
+        }
+
         return (
-            <tr>
+            <tr
+                style={{
+                    display:
+                        shouldDisplay[
+                            filter(problem, this.quarter, this.filters)
+                        ]
+                }}>
                 <th scope="row" style={{ textAlign: 'left' }}>
                     <a
                         className="problinkdata"
@@ -325,7 +201,7 @@ export default class Entry extends Component {
                 <td>
                     <button
                         className={problem.Difficulty}
-                        style={{ color: this.color }}
+                        style={{ color: 'white' }}
                         disabled>
                         {problem.Difficulty}
                     </button>
@@ -334,23 +210,44 @@ export default class Entry extends Component {
                 <td>{this.txt}</td>
                 <td>{problem.Contributor}</td>
                 <td>{this.ses}</td>
-                <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>
+                <td>{this.edit}</td>
+                <Modal
+                    size="lg"
+                    isOpen={this.state.modal[0]}
+                    toggle={() => {
+                        this.toggle(0);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(0);
+                        }}>
                         {problem.Solution}
                     </ModalHeader>
                     <ModalBody>{this.code}</ModalBody>
                 </Modal>
                 <Modal
                     size="lg"
-                    isOpen={this.state.modal2}
-                    toggle={this.toggle2}>
-                    <ModalHeader toggle={this.toggle2}>
+                    isOpen={this.state.modal[1]}
+                    toggle={() => {
+                        this.toggle(1);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(1);
+                        }}>
                         {problem.Contributor}
                     </ModalHeader>
                     <ModalBody>{problem.Note}</ModalBody>
                 </Modal>
-                <Modal isOpen={this.state.modal3} toggle={this.toggle3}>
-                    <ModalHeader toggle={this.toggle3}>
+                <Modal
+                    isOpen={this.state.modal[2]}
+                    toggle={() => {
+                        this.toggle(2);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(2);
+                        }}>
                         {problem.Name}
                     </ModalHeader>
                     <ModalBody>
@@ -414,6 +311,28 @@ export default class Entry extends Component {
                             <Button onClick={this.setProblem}>Set</Button>
                         </div>
                     </ModalBody>
+                </Modal>
+                <Modal
+                    size="lg"
+                    isOpen={this.state.modal[3]}
+                    toggle={() => {
+                        this.toggle(3);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(3);
+                        }}>
+                        Edit
+                    </ModalHeader>
+                    <Submit
+                        week={this.props.wk}
+                        quarter={this.props.qrt}
+                        owner={this.props.owner}
+                        session={this.props.ses}
+                        data={problem}
+                        k={this.props.k}
+                        x={this.props.x}
+                    />
                 </Modal>
             </tr>
         );

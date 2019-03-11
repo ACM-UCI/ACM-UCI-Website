@@ -8,11 +8,13 @@ import 'firebase/database';
 export default class Data extends Component {
     constructor(props) {
         super(props);
-        this.diffs = 'Difficulty';
-        this.cons = 'Contributor';
-        this.solf = 'Solution';
-        this.sess = 'Session';
-        this.note = 'Notes';
+        this.filters = {
+            diffs: 'Difficulty',
+            cons: 'Contributor',
+            solf: 'Solution',
+            sess: 'Session',
+            note: 'Notes'
+        };
         this.processData = this.processData.bind(this);
         this.state = {
             tog: false
@@ -31,15 +33,15 @@ export default class Data extends Component {
 
     updateInputValue(evt) {
         if (evt.target.id === 'difffilter') {
-            this.diffs = evt.target.value;
+            this.filters.diffs = evt.target.value;
         } else if (evt.target.id === 'solfilter') {
-            this.solf = evt.target.value;
+            this.filters.solf = evt.target.value;
         } else if (evt.target.id === 'confilter') {
-            this.cons = evt.target.value;
+            this.filters.cons = evt.target.value;
         } else if (evt.target.id === 'sessfilter') {
-            this.sess = evt.target.value;
+            this.filters.sess = evt.target.value;
         } else if (evt.target.id === 'notefilter') {
-            this.note = evt.target.value;
+            this.filters.note = evt.target.value;
         }
         this.processData(this.data);
     }
@@ -48,105 +50,63 @@ export default class Data extends Component {
         this.data = data;
         this.body = [];
         var submissions = data.val();
-        var problem = null;
 
         for (var q in submissions) {
             if (q === 'submissions') {
                 var s = submissions[q];
                 for (var key in s) {
-                    if (s.hasOwnProperty(key)) {
-                        problem = s[key];
-                        if (problem != null) {
-                            if (
-                                ((this.diffs === 'Difficulty' &&
-                                    (problem.Difficulty === 'easy' ||
-                                        problem.Difficulty === 'med' ||
-                                        problem.Difficulty === 'hard' ||
-                                        problem.Difficulty === 'codealong' ||
-                                        problem.Difficulty === 'icpc')) ||
-                                    this.diffs === problem.Difficulty) &&
-                                (this.solf === 'Solution' ||
-                                    (this.solf === 'No Solution' &&
-                                        problem.Code === '') ||
-                                    (this.solf === 'Has Solution' &&
-                                        problem.Code !== '')) &&
-                                (this.cons === 'Contributor' ||
-                                    this.cons === problem.Contributor) &&
-                                (this.sess === 'Session' ||
-                                    (this.sess === 'Not Used' &&
-                                        problem.Session === '') ||
-                                    this.sess === q) &&
-                                (this.note === 'Notes' ||
-                                    (this.note === 'No Notes' &&
-                                        problem.Note === '') ||
-                                    (this.note === 'Has Notes' &&
-                                        problem.Note !== ''))
-                            ) {
-                                this.body.push(
-                                    <Entry
-                                        key={key}
-                                        x={key}
-                                        data={problem}
-                                        week={this.week}
-                                        quarter={this.quarter}
-                                        session={this.session}
-                                        owner={this.props.owner}
-                                        k={'submissions'}
-                                    />
-                                );
-                            }
-                        }
+                    if (s.hasOwnProperty(key) && s[key] != null) {
+                        this.body.push(
+                            <Entry
+                                key={key}
+                                // current time
+                                wk={this.props.week}
+                                qrt={this.props.quarter}
+                                ses={this.props.session}
+                                // data
+                                data={s[key]}
+                                filters={this.filters}
+                                owner={this.props.owner}
+                                // paths
+                                week={this.week}
+                                quarter={this.quarter}
+                                session={this.session}
+                                k={'submissions'}
+                                x={key}
+                            />
+                        );
                     }
                 }
-            } else if (submissions.hasOwnProperty(q) && q !== 'board') {
+            } else if (
+                submissions.hasOwnProperty(q) &&
+                q !== 'board' &&
+                q !== 'logs'
+            ) {
                 var quarter = submissions[q];
                 for (var w in quarter) {
                     if (quarter.hasOwnProperty(w)) {
                         var week = quarter[w];
                         for (var keys in week) {
-                            if (week.hasOwnProperty(keys)) {
-                                problem = week[keys];
-                                if (problem != null) {
-                                    if (
-                                        ((this.diffs === 'Difficulty' &&
-                                            (problem.Difficulty === 'easy' ||
-                                                problem.Difficulty === 'med' ||
-                                                problem.Difficulty === 'hard' ||
-                                                problem.Difficulty ===
-                                                    'codealong' ||
-                                                problem.Difficulty ===
-                                                    'icpc')) ||
-                                            this.diffs ===
-                                                problem.Difficulty) &&
-                                        (this.solf === 'Solution' ||
-                                            (this.solf === 'No Solution' &&
-                                                problem.Code === '') ||
-                                            (this.solf === 'Has Solution' &&
-                                                problem.Code !== '')) &&
-                                        (this.cons === 'Contributor' ||
-                                            this.cons ===
-                                                problem.Contributor) &&
-                                        (this.sess === 'Session' ||
-                                            (this.sess === 'Not Used' &&
-                                                problem.Session === '') ||
-                                            this.sess === q) &&
-                                        (this.note === 'Notes' ||
-                                            (this.note === 'No Notes' &&
-                                                problem.Note === '') ||
-                                            (this.note === 'Has Notes' &&
-                                                problem.Note !== ''))
-                                    ) {
-                                        this.body.push(
-                                            <Entry
-                                                owner={this.props.owner}
-                                                key={q + '/' + w + '/' + keys}
-                                                x={keys}
-                                                data={problem}
-                                                k={q + '/' + w}
-                                            />
-                                        );
-                                    }
-                                }
+                            if (
+                                week.hasOwnProperty(keys) &&
+                                week[keys] != null
+                            ) {
+                                this.body.push(
+                                    <Entry
+                                        key={q + '/' + w + '/' + keys}
+                                        // current time
+                                        wk={this.props.week}
+                                        qrt={this.props.quarter}
+                                        ses={this.props.session}
+                                        // data
+                                        data={week[keys]}
+                                        filters={this.filters}
+                                        owner={this.props.owner}
+                                        // paths
+                                        k={q + '/' + w}
+                                        x={keys}
+                                    />
+                                );
                             }
                         }
                     }
@@ -236,6 +196,7 @@ export default class Data extends Component {
                                 <option>Not Used</option>
                             </Input>
                         </th>
+                        <th />
                     </tr>
                 </thead>
                 <tbody>{this.body}</tbody>

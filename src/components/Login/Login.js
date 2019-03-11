@@ -86,18 +86,20 @@ export default class Login extends Component {
             this.week = 1;
             this.quarter = quarters[i + 1];
         }
-
-        // uncomment below for debugging
-        // this.logged({ user: { email: 'mnovitia@uci.edu' } });
     }
 
     processData(data) {
-        data = data.val()['logs'];
-        for (var key in data) {
-            if (data.hasOwnProperty(key)) {
-                this.emails.push(data[key]['email']);
-                this.owners.push(key);
+        if (this.state.status === 'Login') {
+            data = data.val()['logs'];
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    this.emails.push(data[key]['email']);
+                    this.owners.push(key);
+                }
             }
+
+            // uncomment below for debugging
+            // this.logged({ user: { email: 'mnovitia@uci.edu' } });
         }
     }
 
@@ -215,6 +217,17 @@ export default class Login extends Component {
                     quarter={this.quarter}
                     session={this.session}
                     owner={this.owner}
+                    data={{
+                        Name: '',
+                        Link: '',
+                        Difficulty: 'Select one',
+                        Note: '',
+                        Solution: '',
+                        Contributor: this.owner,
+                        Session: '',
+                        Code: '',
+                        SubmitDate: ''
+                    }}
                 />
             </Container>
         );
@@ -382,6 +395,17 @@ export default class Login extends Component {
                         quarter={this.quarter}
                         owner={this.owner}
                         session={this.session}
+                        data={{
+                            Name: '',
+                            Link: '',
+                            Difficulty: 'Select one',
+                            Note: '',
+                            Solution: '',
+                            Contributor: this.owner,
+                            Session: '',
+                            Code: '',
+                            SubmitDate: ''
+                        }}
                     />
                 </Container>
             );

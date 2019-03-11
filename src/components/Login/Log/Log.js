@@ -132,7 +132,6 @@ export default class Log extends Component {
 
     render() {
         if (this.done) {
-            console.log(this.data, this.columns);
             return (
                 <div>
                     <div

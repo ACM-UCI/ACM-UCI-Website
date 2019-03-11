@@ -1,0 +1,138 @@
+// if there's demand for better solution upload button
+
+if (this.data.Contributor === props.owner) {
+                this.sol = (
+                    <Row>
+                        <Col
+                            md="8"
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div className="fileinputs">
+                                <Input
+                                    className="file"
+                                    style={{ fontSize: '15px' }}
+                                    type="file"
+                                    name="file"
+                                    id={this.data.Link}
+                                    accept=".py,.cpp"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                />
+                                <div className="fakefile">
+                                    <div className="filebutton">
+                                        Choose File
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div className="fileinputs">
+                                <div className="fakefile">
+                                    <Button
+                                        className="setbutton"
+                                        onClick={this.setSolution}>
+                                        Set
+                                    </Button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                );
+            }
+
+setSolution() {
+        if (this.tempSol !== '') {
+            this.data.Solution = this.tempSol;
+            this.data.Code = this.tempCode;
+            this.sol = (
+                <Container className="solbtn" onClick={() => { this.toggle(0);}}>
+                    {this.data.Solution}
+                </Container>
+            );
+            var ext = this.data.Solution.split('.').slice(-1)[0];
+            this.code = 
+                <SyntaxHighlighter language={lang[ext]} style={tomorrowNight}>
+                    {this.data.Code}
+                </SyntaxHighlighter>
+
+            var updates = {};
+            updates[
+                '/' + this.props.k + '/' + this.props.x + '/Solution'
+            ] = this.data.Solution;
+            updates[
+                '/' + this.props.k + '/' + this.props.x + '/Code'
+            ] = this.data.Code;
+            firebase
+                .database()
+                .ref()
+                .update(updates);
+
+            this.setState({
+                modal: [false,false,false,false]
+            });
+        }
+    }
+
+readCode(evt) {
+        this.tempCode = evt.target.result;
+    }
+
+else if (evt.target.id === this.data.Link) {
+            var file = evt.target.files[0];
+            if (file !== undefined) {
+                this.tempSol = file.name;
+                this.sol = (
+                    <Row>
+                        <Col
+                            md="8"
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div className="fileinputs">
+                                <Input
+                                    className="file"
+                                    style={{ fontSize: '15px' }}
+                                    type="file"
+                                    name="file"
+                                    id={this.data.Link}
+                                    accept=".py,.cpp"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                />
+                                <div className="fakefile">
+                                    <div className="filebutton">
+                                        {this.tempSol}
+                                    </div>
+                                </div>
+                            </div>
+                        </Col>
+                        <Col
+                            style={{
+                                alignItems: 'center',
+                                justifyItems: 'center'
+                            }}>
+                            <div className="fileinputs">
+                                <div className="fakefile">
+                                    <Button
+                                        className="setbutton"
+                                        onClick={this.setSolution}>
+                                        Set
+                                    </Button>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
+                );
+                this.setState({
+                    modal: [false,false,false,false]
+                });
+                var reader = new FileReader();
+                reader.onload = this.readCode;
+                reader.readAsText(file);
+            }
+        }

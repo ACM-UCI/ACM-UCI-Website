@@ -66,3 +66,13 @@ input.file {
 	opacity: 0;
 	z-index: 2;
 }
+
+.editbutton{
+    background-color: transparent;
+    border: 2px solid #6DB6E2
+}
+
+.editbutton:hover{
+    background-color: rgb(181, 212, 231) ;
+    border: 2px solid #6DB6E2
+}
