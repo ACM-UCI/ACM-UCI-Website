@@ -4,44 +4,10 @@ import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import Submit from './Submit/Submit';
 import Data from './Data/Data';
+import Log from './Log/Log';
 import firebase from 'firebase/app';
-import 'firebase/database';
 import 'firebase/auth';
 import './Login.css';
-
-const emails = [
-    'amourady@uci.edu',
-    'btjanaka@uci.edu',
-    'craut@uci.edu',
-    'jtuyls@uci.edu',
-    'junliw1@uci.edu',
-    'satoks@uci.edu',
-    'kgajulap@uci.edu',
-    'pooyak@uci.edu',
-    'timothy4@uci.edu',
-    'cdipalma@uci.edu',
-    'mnovitia@uci.edu',
-    'bwakasa@uci.edu',
-    'renjied@uci.edu',
-    'zhonghas@uci.edu'
-];
-
-const owners = [
-    'Armen',
-    'Bryon',
-    'Chinmay',
-    'Jens',
-    'Junlin',
-    'Kaleo',
-    'Karthik',
-    'Pooya',
-    'Tim',
-    'Chris',
-    'Meta',
-    'Blake',
-    'Jacky',
-    'Frank'
-];
 
 export default class Login extends Component {
     constructor(props) {
@@ -51,12 +17,12 @@ export default class Login extends Component {
         this.lout = this.lout.bind(this);
         this.lin = this.lin.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.processData = this.processData.bind(this);
         this.state = {
             status: 'Login'
         };
-        this.name = '';
-        this.email = '';
-        this.owner = '';
+        this.emails = {};
+        this.owner = {};
         this.show = [
             <Button
                 key="loginbutton"
@@ -66,9 +32,12 @@ export default class Login extends Component {
             </Button>
         ];
 
+        this.ref = firebase.database().ref();
+        this.ref.on('value', this.processData);
+
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2020'];
+        const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2019'];
         const startDates = [
             new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
             new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
@@ -116,6 +85,15 @@ export default class Login extends Component {
         }
     }
 
+    processData(data) {
+        if (this.state.status === 'Login') {
+            this.emails = data.val()['logs'];
+
+            // uncomment below for debugging
+            // this.logged({ user: { email: 'mnovitia@uci.edu' } });
+        }
+    }
+
     login() {
         if (this.state.status === 'Login') {
             var provider = new firebase.auth.GoogleAuthProvider();
@@ -145,12 +123,10 @@ export default class Login extends Component {
                     Login
                 </Button>,
                 <Alert key="notboard" color="info">
-                    See you next time {this.name.split(' ')[0]}!
+                    See you next time {this.owner.displayName.split(' ')[0]}!
                 </Alert>
             ];
-            this.name = '';
-            this.email = '';
-            this.owner = '';
+            this.owner = {};
             this.setState({
                 status: 'Login',
                 tab: 'Submit'
@@ -163,13 +139,13 @@ export default class Login extends Component {
         // var token = result.credential.accessToken;
         // // The signed-in user info.
         var user = result.user;
-        var m = emails.indexOf(user.email);
-        if (m === -1) {
+        var email = user.email.split('@');
+        if (email[1] !== 'uci.edu' && user.email !== 'acmuciguest@gmail.com') {
             this.show[1] = (
                 <Alert key="notboard" color="info">
                     Hello {user.displayName}, welcome to the ACM website ^^ .
-                    Unfortunately, this feature is only for board members at the
-                    moment!
+                    Unfortunately, this feature is only for UCI students and
+                    faculty at the moment!
                 </Alert>
             );
             this.setState({
@@ -178,17 +154,28 @@ export default class Login extends Component {
             return;
         }
 
-        this.name = user.displayName;
-        this.email = user.email;
-        this.owner = owners[m];
+        if (!this.emails.hasOwnProperty(email[0])) {
+            var u = {};
+            for (var i = 1; i <= 11; i++) {
+                u['/logs/' + email[0] + '/Winter 2019/' + i.toString()] = 0;
+                u['/logs/' + email[0] + '/Spring 2019/' + i.toString()] = 0;
+            }
+            firebase
+                .database()
+                .ref()
+                .update(u);
+            u['/logs/' + email[0] + '/Name'] = user.displayName;
+        }
+
+        this.owner = user;
 
         this.show = (
             <Container key="board">
                 <Row className="welcome">
                     <Col style={{ textAlign: 'left' }}>
-                        Welcome {this.name}! ^^
+                        Welcome {this.owner.displayName}! ^^
                     </Col>
-                    <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                    <Col style={{ textAlign: 'right' }}>{this.owner.email}</Col>
                 </Row>
 
                 <Button
@@ -198,6 +185,15 @@ export default class Login extends Component {
                         this.toggle('Submit');
                     }}>
                     Submit
+                </Button>
+
+                <Button
+                    key="logbutton"
+                    className="loginbutton"
+                    onClick={() => {
+                        this.toggle('Log');
+                    }}>
+                    Log
                 </Button>
 
                 <Button
@@ -215,12 +211,23 @@ export default class Login extends Component {
                     onClick={this.login}>
                     Logout
                 </Button>
+                {/* <Log quarter={this.quarter} week={this.week}/> */}
                 <Submit
                     week={this.week}
                     quarter={this.quarter}
                     session={this.session}
-                    data={this.data}
-                    owner={this.owner}
+                    owner={this.owner.email.split('@')[0]}
+                    data={{
+                        Name: '',
+                        Link: '',
+                        Difficulty: 'Select one',
+                        Note: '',
+                        Solution: '',
+                        Contributor: this.owner.email.split(' ')[0],
+                        Session: '',
+                        Code: '',
+                        SubmitDate: ''
+                    }}
                 />
             </Container>
         );
@@ -244,9 +251,11 @@ export default class Login extends Component {
                 <Container key="board">
                     <Row className="welcome">
                         <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.name}! ^^
+                            Welcome {this.owner.displayName}! ^^
                         </Col>
-                        <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                        <Col style={{ textAlign: 'right' }}>
+                            {this.owner.email}
+                        </Col>
                     </Row>
 
                     <Button
@@ -256,6 +265,15 @@ export default class Login extends Component {
                             this.toggle('Submit');
                         }}>
                         Submit
+                    </Button>
+
+                    <Button
+                        key="logbutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Log');
+                        }}>
+                        Log
                     </Button>
 
                     <Button
@@ -277,7 +295,59 @@ export default class Login extends Component {
                         week={this.week}
                         quarter={this.quarter}
                         session={this.session}
-                        owner={this.owner}
+                        owner={this.owner.email.split('@')[0]}
+                    />
+                </Container>
+            );
+        } else if (ntab === 'Log') {
+            this.show = (
+                <Container key="board">
+                    <Row className="welcome">
+                        <Col style={{ textAlign: 'left' }}>
+                            Welcome {this.owner.displayName}! ^^
+                        </Col>
+                        <Col style={{ textAlign: 'right' }}>
+                            {this.owner.email}
+                        </Col>
+                    </Row>
+
+                    <Button
+                        key="submitbutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Submit');
+                        }}>
+                        Submit
+                    </Button>
+
+                    <Button
+                        key="logbutton"
+                        className="loginactivebtn"
+                        onClick={() => {
+                            this.toggle('Log');
+                        }}>
+                        Log
+                    </Button>
+
+                    <Button
+                        key="databutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Data');
+                        }}>
+                        Data
+                    </Button>
+
+                    <Button
+                        key="logoutbutton"
+                        className="loginbutton"
+                        onClick={this.login}>
+                        Logout
+                    </Button>
+                    <Log
+                        week={this.week}
+                        quarter={this.quarter}
+                        owner={this.owner.email.split('@')[0]}
                     />
                 </Container>
             );
@@ -286,9 +356,11 @@ export default class Login extends Component {
                 <Container key="board">
                     <Row className="welcome">
                         <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.name}! ^^
+                            Welcome {this.owner.displayName}! ^^
                         </Col>
-                        <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                        <Col style={{ textAlign: 'right' }}>
+                            {this.owner.email}
+                        </Col>
                     </Row>
 
                     <Button
@@ -298,6 +370,15 @@ export default class Login extends Component {
                             this.toggle('Submit');
                         }}>
                         Submit
+                    </Button>
+
+                    <Button
+                        key="logbutton"
+                        className="loginbutton"
+                        onClick={() => {
+                            this.toggle('Log');
+                        }}>
+                        Log
                     </Button>
 
                     <Button
@@ -317,8 +398,20 @@ export default class Login extends Component {
                     </Button>
                     <Submit
                         week={this.week}
-                        data={this.data}
-                        owner={this.owner}
+                        quarter={this.quarter}
+                        owner={this.owner.email.split('@')[0]}
+                        session={this.session}
+                        data={{
+                            Name: '',
+                            Link: '',
+                            Difficulty: 'Select one',
+                            Note: '',
+                            Solution: '',
+                            Contributor: this.owner.email.split(' ')[0],
+                            Session: '',
+                            Code: '',
+                            SubmitDate: ''
+                        }}
                     />
                 </Container>
             );

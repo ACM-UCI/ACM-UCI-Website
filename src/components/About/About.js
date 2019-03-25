@@ -58,16 +58,17 @@ class About extends Component {
                             md={{ size: 8, offset: 2 }}
                             className="text-center">
                             <p style={{ fontSize: '20px', marginTop: '20px' }}>
-                                Since its inception, ACM@UCI has provided
-                                numerous opportunities for students to enhance
-                                their computer science education. Today, through
-                                regular meetings and competitions such as the
-                                ICPC (International Collegiate Programming
-                                Contest) and IEEExtreme, ACM@UCI enhances
-                                students' problem solving skills. Meanwhile,
-                                through events like the Seminar Series, it
-                                disseminates knowledge on a wide variety of
-                                computer science topics.
+                                Since its inception, ACM@UCI (Association for
+                                Computing Machinery at University of California,
+                                Irvine) has provided numerous opportunities for
+                                students to enhance their computer science
+                                education. Today, through regular meetings and
+                                competitions such as the ICPC (International
+                                Collegiate Programming Contest) and IEEExtreme,
+                                ACM@UCI enhances students' problem solving
+                                skills. Meanwhile, through events like the
+                                Seminar Series, it disseminates knowledge on a
+                                wide variety of computer science topics.
                             </p>
                             <br />
                             <hr />

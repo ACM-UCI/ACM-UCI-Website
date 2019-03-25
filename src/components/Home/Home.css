@@ -5,7 +5,8 @@
     background-size: cover;  
     z-index: 0;   
     position: relative; 
-    min-height: 520px; 
+    min-height: 80vh;  
+    max-height: 80vh; 
 }
 
 .home-body p {

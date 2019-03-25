@@ -14,68 +14,55 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
+import Submit from '../../Submit/Submit';
+import filter from './filter.js';
 
-const Python = codeString => (
-    <SyntaxHighlighter language="python" style={tomorrowNight}>
-        {codeString}
-    </SyntaxHighlighter>
-);
+const lang = {
+    py: 'python',
+    cpp: 'cpp'
+};
 
-const Cpp = codeString => (
-    <SyntaxHighlighter language="cpp" style={tomorrowNight}>
-        {codeString}
-    </SyntaxHighlighter>
-);
+const shouldDisplay = ['none', undefined];
 
 export default class Entry extends Component {
     constructor(props) {
         super(props);
-        this.msg = null;
-        this.toggle = this.toggle.bind(this);
-        this.setProblem = this.setProblem.bind(this);
+
+        // bindings
         this.updateInputValue = this.updateInputValue.bind(this);
-        this.toggle2 = this.toggle2.bind(this);
-        this.toggle3 = this.toggle3.bind(this);
+        this.setProblem = this.setProblem.bind(this);
+
+        this.avail = '';
+        this.sol = '';
+        this.txt = '';
+        this.code = '';
+        this.tempSol = '';
+        this.edit = null;
+        this.msg = null;
+        this.data = props.data;
+
         this.session = props.session;
+        this.filters = props.filters;
+        this.optses1 = '2';
+        this.optses2 = '1';
         if (this.session === 1) {
             this.optses1 = '1';
             this.optses2 = '2';
-        } else {
-            this.optses1 = '2';
-            this.optses2 = '1';
         }
+
         this.week = props.week;
-        this.avail = 'Available';
         this.state = {
-            modal: false,
-            modal2: false,
-            modal3: false
+            // see solution, see note, set problem, edit
+            modal: [false, false, false, false]
         };
 
-        this.data = props.data;
-        this.txt = (
-            <Container className="solbtn" onClick={this.toggle2}>
-                Open
-            </Container>
-        );
-        if (this.data.Note === '') {
-            this.txt = '-';
-        }
-
-        this.sol = (
-            <Container className="solbtn" onClick={this.toggle}>
-                {this.data.Solution}
-            </Container>
-        );
-        if (this.data.Code === '') {
-            this.sol = '';
-            this.avail = 'Not Available';
-        }
-
+        // set session
         if (this.data.Session === '') {
             this.ses = (
                 <Button
-                    onClick={this.toggle3}
+                    onClick={() => {
+                        this.toggle(2);
+                    }}
                     style={{
                         color: 'white'
                     }}>
@@ -86,23 +73,24 @@ export default class Entry extends Component {
             this.ses = props.k + '/' + this.data.Session;
         }
 
-        if (this.data.Solution.endsWith('py')) {
-            this.code = Python(this.data.Code);
-        } else {
-            this.code = Cpp(this.data.Code);
-        }
-
-        this.color = 'white';
-        if (this.data.Difficulty === 'announcement') {
-            this.color = 'black';
+        if (props.owner === this.data.Contributor) {
+            this.edit = (
+                <Button
+                    className="editbutton"
+                    onClick={() => {
+                        this.toggle(3);
+                    }}>
+                    Edit
+                </Button>
+            );
         }
     }
 
     setProblem() {
         if (
-            this.props.owner === 'Karthik' ||
-            this.props.owner === 'Meta' ||
-            this.props.owner === 'Bryon'
+            this.props.owner === 'mnovitia' ||
+            this.props.owner === 'btjanaka' ||
+            this.props.owner === 'jtuyls'
         ) {
             this.data.Session = this.session.toString();
             var newPostKey = firebase
@@ -119,15 +107,15 @@ export default class Entry extends Component {
             firebase
                 .database()
                 .ref()
-                .update(updates, this.err);
+                .update(updates);
             this.setState({
-                modal3: false
+                modal: [false, false, false, false]
             });
         } else {
             this.msg = (
                 <Alert color="warning">
-                    Sorry! Only Karthik, Bryon, and Meta can set problems for
-                    now XD
+                    Sorry! Only Bryon, Jens, and Meta can set problems for now
+                    XD
                 </Alert>
             );
             this.setState({
@@ -144,32 +132,67 @@ export default class Entry extends Component {
         }
     }
 
-    toggle() {
+    toggle(i) {
+        var newM = this.state.modal;
+        newM[i] = !newM[i];
         this.setState({
-            modal: !this.state.modal,
-            modal2: false,
-            modal3: false
-        });
-    }
-    toggle2() {
-        this.setState({
-            modal: false,
-            modal2: !this.state.modal2,
-            modal3: false
-        });
-    }
-    toggle3() {
-        this.setState({
-            modal: false,
-            modal2: false,
-            modal3: !this.state.modal3
+            modal: newM
         });
     }
 
     render() {
-        var problem = this.data;
+        var problem = this.props.data;
+
+        // set solution name, button, and availability
+        this.avail = 'Available';
+        this.sol = (
+            <Container
+                className="solbtn"
+                onClick={() => {
+                    this.toggle(0);
+                }}>
+                {problem.Solution}
+            </Container>
+        );
+        if (problem.Solution === '') {
+            this.sol = '';
+            this.avail = 'Not Available';
+        }
+
+        // set code
+        var ext = problem.Solution.split('.').slice(-1)[0];
+        this.code = (
+            <SyntaxHighlighter language={lang[ext]} style={tomorrowNight}>
+                {problem.Code}
+            </SyntaxHighlighter>
+        );
+
+        // set notes
+        this.txt = '-';
+        if (problem.Note !== '') {
+            this.txt = (
+                <Container
+                    className="solbtn"
+                    onClick={() => {
+                        this.toggle(1);
+                    }}>
+                    Open
+                </Container>
+            );
+        }
+
         return (
-            <tr>
+            <tr
+                style={{
+                    display:
+                        shouldDisplay[
+                            filter(
+                                problem,
+                                this.props.k.split('/')[0],
+                                this.filters
+                            )
+                        ]
+                }}>
                 <th scope="row" style={{ textAlign: 'left' }}>
                     <a
                         className="problinkdata"
@@ -182,7 +205,7 @@ export default class Entry extends Component {
                 <td>
                     <button
                         className={problem.Difficulty}
-                        style={{ color: this.color }}
+                        style={{ color: 'white' }}
                         disabled>
                         {problem.Difficulty}
                     </button>
@@ -191,23 +214,44 @@ export default class Entry extends Component {
                 <td>{this.txt}</td>
                 <td>{problem.Contributor}</td>
                 <td>{this.ses}</td>
-                <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>
+                <td>{this.edit}</td>
+                <Modal
+                    size="lg"
+                    isOpen={this.state.modal[0]}
+                    toggle={() => {
+                        this.toggle(0);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(0);
+                        }}>
                         {problem.Solution}
                     </ModalHeader>
                     <ModalBody>{this.code}</ModalBody>
                 </Modal>
                 <Modal
                     size="lg"
-                    isOpen={this.state.modal2}
-                    toggle={this.toggle2}>
-                    <ModalHeader toggle={this.toggle2}>
+                    isOpen={this.state.modal[1]}
+                    toggle={() => {
+                        this.toggle(1);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(1);
+                        }}>
                         {problem.Contributor}
                     </ModalHeader>
                     <ModalBody>{problem.Note}</ModalBody>
                 </Modal>
-                <Modal isOpen={this.state.modal3} toggle={this.toggle3}>
-                    <ModalHeader toggle={this.toggle3}>
+                <Modal
+                    isOpen={this.state.modal[2]}
+                    toggle={() => {
+                        this.toggle(2);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(2);
+                        }}>
                         {problem.Name}
                     </ModalHeader>
                     <ModalBody>
@@ -271,6 +315,28 @@ export default class Entry extends Component {
                             <Button onClick={this.setProblem}>Set</Button>
                         </div>
                     </ModalBody>
+                </Modal>
+                <Modal
+                    size="lg"
+                    isOpen={this.state.modal[3]}
+                    toggle={() => {
+                        this.toggle(3);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(3);
+                        }}>
+                        Edit
+                    </ModalHeader>
+                    <Submit
+                        week={this.props.wk}
+                        quarter={this.props.qrt}
+                        owner={this.props.owner}
+                        session={this.props.ses}
+                        data={problem}
+                        k={this.props.k}
+                        x={this.props.x}
+                    />
                 </Modal>
             </tr>
         );

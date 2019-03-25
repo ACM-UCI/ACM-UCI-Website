@@ -1,0 +1,208 @@
+{
+    "2019-2020": {
+        "craut": {
+            "name": "Chinmay Raut",
+            "position": "President"
+        },
+        "btjanaka": {
+            "name": "Bryon Tjanaka",
+            "position": "Vice President and Director of Innovation"
+        },
+        "jtuyls": {
+            "name": "Jens Tuyls",
+            "position": "Vice President"
+        },
+        "kgajulap": {
+            "name": "Karthik Gajulapalli",
+            "position": "President Emeritus"
+        },
+        "pooyak": {
+            "name": "Pooya Khosravi",
+            "position": "Treasurer"
+        },
+        "mnovitia": {
+            "name": "Meta Novitia",
+            "position": "Webmistress"
+        },
+        "bwakasa": {
+            "name": "Blake Wakasa",
+            "position": "Public Relations"
+        },
+        "renjied": {
+            "name": "Jacky Dai",
+            "position": "AI and ML SIG Lead"
+        },
+        "junliw1": {
+            "name": "Junlin Wang",
+            "position": "AI and ML SIG Lead"
+        },
+        "aphilipe": {
+            "name": "Arne Philipeit",
+            "position": "Foreign Ambassador"
+        },
+        "pattis": {
+            "name": "Richard E. Pattis",
+            "position": "Faculty Advisor"
+        }
+    },
+    "2018-2019": {
+        "kgajulap": {
+            "name": "Karthik Gajulapalli",
+            "position": "President"
+        },
+        "pooyak": {
+            "name": "Pooya Khosravi",
+            "position": "Treasurer"
+        },
+        "craut": {
+            "name": "Chinmay Raut",
+            "position": "Vice President"
+        },
+        "bwakasa": {
+            "name": "Blake Wakasa",
+            "position": "Ambassador"
+        },
+        "btjanaka": {
+            "name": "Bryon Tjanaka",
+            "position": "Assistant ICPC Coach and Director of Innovation"
+        },
+        "renjied": {
+            "name": "Jacky Dai",
+            "position": "General SIG Lead"
+        },
+        "jtuyls": {
+            "name": "Jens Tuyls",
+            "position": "Webmaster"
+        },
+        "mnovitia": {
+            "name": "Meta Novitia",
+            "position": "Secretary"
+        },
+        "zhonghas": {
+            "name": "Frank Shi",
+            "position": "Graduate Ambassador"
+        },
+        "timothy4": {
+            "name": "Tim Yao",
+            "position": "Vice President of external affairs"
+        },
+        "junliw1": {
+            "name": "Junlin Wang",
+            "position": "AI and ML SIG lead"
+        },
+        "cdipalma": {
+            "name": "Chris Chu",
+            "position": "Ambassador"
+        },
+        "amourady": {
+            "name": "Armen Mouradyan",
+            "position": "Director of Social Life"
+        },
+        "pattis": {
+            "name": "Richard E. Pattis",
+            "position": "Faculty Advisor"
+        }
+    },
+    "2017-2018": {
+        "tujohnso": {
+            "name": "Timothy Johnson",
+            "position": "President Emeritus"
+        },
+        "pashak": {
+            "name": "Pasha Khosravi",
+            "position": "President"
+        },
+        "jtuyls": {
+            "name": "Jens Tuyls",
+            "position": "Webmaster"
+        },
+        "chult": {
+            "name": "Linh Chu",
+            "position": "Resource Acquisition"
+        },
+        "wangka1": {
+            "name": "Kevin Wang",
+            "position": "Internal VP and director of innovation"
+        },
+        "craut": {
+            "name": "Chinmay Raut",
+            "position": "Competition Officer"
+        },
+        "kgajulap": {
+            "name": "Karthik Gajulapalli",
+            "position": "Treasurer"
+        },
+        "junliw1": {
+            "name": "Junlin Wang",
+            "position": "AI and ML SIG lead"
+        },
+        "pattis": {
+            "name": "Richard E. Pattis",
+            "position": "Faculty Advisor"
+        }
+    },
+    "2016-2017": {
+        "tujohnso": {
+            "name": "Timothy Johnson",
+            "position": "President"
+        },
+        "arvind": {
+            "name": "Arvind Sontha",
+            "position": "Vice President"
+        },
+        "ofri": {
+            "name": "Ofri Harlev",
+            "position": "Treasurer"
+        },
+        "wangka1": {
+            "name": "Kevin Wang",
+            "position": "Inovator"
+        },
+        "allen": {
+            "name": "Allen Sallinger",
+            "position": "Corporate Outreach"
+        },
+        "pashak": {
+            "name": "Pasha Khosravi",
+            "position": "Community Outreach & Webmaster"
+        },
+        "kgajulap": {
+            "name": "Karthik Gajulapalli",
+            "position": "Game Master"
+        },
+        "pattis": {
+            "name": "Richard E. Pattis",
+            "position": "Faculty Advisor"
+        }
+    },
+    "2015-2016": {
+        "tujohnso": {
+            "name": "Timothy Johnson",
+            "position": "President"
+        },
+        "shaun": {
+            "name": "Shaun McThomas",
+            "position": "Vice Chair"
+        },
+        "wangka1": {
+            "name": "Kevin Wang",
+            "position": "Inovator"
+        },
+        "allen": {
+            "name": "Allen Sallinger",
+            "position": "Corporate Outreach"
+        },
+        "ofri": {
+            "name": "Ofri Harlev",
+            "position": "Student Ambassador"
+        },
+        "arvind": {
+            "name": "Arvind Sontha",
+            "position": "Student Ambassador"
+        },
+        "pattis": {
+            "name": "Richard E. Pattis",
+            "position": "Faculty Advisor"
+        }
+    }
+}

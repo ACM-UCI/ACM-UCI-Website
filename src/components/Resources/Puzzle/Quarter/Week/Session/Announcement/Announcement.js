@@ -14,7 +14,7 @@ export default class Announcement extends Component {
         this.name = props.name;
         this.desc = props.desc;
         this.con = props.con;
-        this.cname = props.con;
+        this.conName = props.conName;
         this.fb = processCon(this.con);
         if (this.con !== '') {
             this.con = (
@@ -26,7 +26,7 @@ export default class Announcement extends Component {
                         fontSize: '10px',
                         color: 'white'
                     }}>
-                    {this.con}
+                    {this.conName.split(' ')[0]}
                 </Button>
             );
         }
@@ -45,7 +45,9 @@ export default class Announcement extends Component {
                     {this.name}:{this.desc} {this.con}
                 </Alert>
                 <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
-                    <ModalHeader toggle={this.toggle}>{this.cname}</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>
+                        {this.conName}
+                    </ModalHeader>
                     <ModalBody>
                         <Row className="center">
                             <img

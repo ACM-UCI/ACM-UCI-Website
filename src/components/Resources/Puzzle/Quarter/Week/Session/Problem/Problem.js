@@ -7,7 +7,6 @@ import processCon from '../processCon.js';
 export default class Problem extends Component {
     constructor(props) {
         super(props);
-        this.con = props.con;
         this.solution = null;
         if (
             props.diff === 'easy' ||
@@ -27,7 +26,8 @@ export default class Problem extends Component {
                     week={props.week}
                     link={props.slink}
                     quarter={props.quarter}
-                    con={this.con}
+                    con={props.con}
+                    conName={props.conName}
                     code={props.code}
                     note={props.note}
                 />

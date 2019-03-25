@@ -2,130 +2,69 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
+import board from './board.json';
 import BoardMember from './BoardMember/BoardMember';
-import karthik from '../../img/karthik.jpg';
-import blakePooya from '../../img/blake-pooya.jpg';
-import chinmay from '../../img/chinmay.jpg';
-import jens from '../../img/jens.jpg';
-import bryon from '../../img/bryon.jpg';
-import jacky from '../../img/jacky.jpg';
-import meta from '../../img/meta.jpg';
-import frank from '../../img/frank.jpg';
-import junlin from '../../img/junlin.jpg';
-import armen from '../../img/armen.jpg';
-import tim from '../../img/tim.jpg';
-import chris from '../../img/chris.jpg';
+import Images from './index.js';
 import './Board.css';
 
 class Board extends Component {
+    constructor(props) {
+        super(props);
+        this.rows = [];
+        this.cols = [];
+        for (var t in board) {
+            this.rows.push(
+                <Row
+                    className="jumbotron-header"
+                    style={{
+                        color: 'black',
+                        textAlign: 'center',
+                        fontSize: '30px',
+                        marginTop: '5%'
+                    }}
+                    key={this.rows.length.toString()}>
+                    <Col md="4" />
+                    <Col md="4">{t}</Col>
+                    <Col md="4" />
+                </Row>
+            );
+            for (var k in board[t]) {
+                var key = board[t][k];
+                this.cols.push(
+                    <Col md="4" key={'current ' + k}>
+                        <BoardMember
+                            src={Images[k]}
+                            name={key.name}
+                            position={key.position}
+                        />
+                    </Col>
+                );
+                if (this.cols.length === 3) {
+                    this.rows.push(
+                        <Row key={'current ' + this.rows.length.toString()}>
+                            {this.cols}
+                        </Row>
+                    );
+                    this.cols = [];
+                }
+            }
+            if (this.cols.length !== 0) {
+                this.rows.push(
+                    <Row key={'current ' + this.rows.length.toString()}>
+                        {this.cols}
+                    </Row>
+                );
+                this.cols = [];
+            }
+        }
+    }
+
     render() {
         return (
             <div>
                 <Navigation />
                 <Banner lead="The Board" leadSub="Agents of ACM" />
-                <Container>
-                    <Row>
-                        <Col md="4">
-                            <BoardMember
-                                src={karthik}
-                                name="Karthik Gajulapalli"
-                                position="President"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={blakePooya}
-                                name="Pooya Khosravi"
-                                position="Treasurer"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={chinmay}
-                                name="Chinmay Raut"
-                                position="Vice President"
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md="4">
-                            <BoardMember
-                                src={blakePooya}
-                                name="Blake Wakasa"
-                                position="Ambassador"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={bryon}
-                                name="Bryon Tjanaka"
-                                position="Assistant ICPC Coach and Director of Innovation"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={jacky}
-                                name="Jacky Dai"
-                                position="General SIG Lead"
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md="4">
-                            <BoardMember
-                                src={jens}
-                                name="Jens Tuyls"
-                                position="Webmaster"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={meta}
-                                name="Meta Novitia"
-                                position="Secretary"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={frank}
-                                name="Frank Shi"
-                                position="Graduate Ambassador"
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md="4">
-                            <BoardMember
-                                src={tim}
-                                name="Tim Yao"
-                                position="Vice President of external affairs"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={junlin}
-                                name="Junlin Wang"
-                                position="AI and ML SIG lead"
-                            />
-                        </Col>
-                        <Col md="4">
-                            <BoardMember
-                                src={chris}
-                                name="Chris Chu"
-                                position="Ambassador"
-                            />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md="4">
-                            <BoardMember
-                                src={armen}
-                                name="Armen Mouradyan"
-                                position="Director of Social Life"
-                            />
-                        </Col>
-                    </Row>
-                </Container>
+                <Container>{this.rows}</Container>
                 <Row>
                     <br />
                     <br />
