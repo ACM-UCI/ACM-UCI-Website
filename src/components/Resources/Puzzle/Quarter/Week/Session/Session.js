@@ -116,7 +116,7 @@ export default class Session extends Component {
     render() {
         return (
             <Row className="topmar">
-                <pre>S E S S I O N {this.session}</pre>
+                <pre>S E S S I O N {'  ' + this.session}</pre>
                 <div className="back">
                     {this.announcements}
                     {this.rows}

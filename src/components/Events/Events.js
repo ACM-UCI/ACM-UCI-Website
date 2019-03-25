@@ -13,6 +13,14 @@ import {
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import codingNights from '../../img/girl_coding_nights_event.jpg';
+import arnetalk from '../../img/arnetalk.jpg';
+import karthiktalk from '../../img/karthiktalk.jpg';
+import jenstalk from '../../img/jenstalk.jpg';
+import bryontalk from '../../img/bryontalk.jpg';
+import chinmaytalk from '../../img/chinmaytalk.jpg';
+import jackytalk from '../../img/jackytalk.jpg';
+import junlintalk from '../../img/junlintalk.jpg';
+import pooyatalk from '../../img/pooyatalk.jpg';
 import './Events.css';
 
 class Events extends Component {
@@ -27,8 +35,14 @@ class Events extends Component {
                 <Container className="event-body" fluid>
                     <Row>
                         <div className="pseudo" />
-                        <Col md={{ size: 7, offset: 1 }}>
-                            <h2 className="mt-3">Upcoming Events</h2>
+                        <Col
+                            style={{
+                                maxWidth: '65%',
+                                padding: '2%',
+                                marginLeft: '5%',
+                                paddingRight: '5%'
+                            }}>
+                            <h2 className="mt-3">Winter 2019 Events</h2>
 
                             {/* KARTHIK */}
                             <Card body className="card-body">
@@ -42,6 +56,14 @@ class Events extends Component {
                                     </i>
                                 </CardTitle>
                                 <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={karthiktalk}
+                                        alt=""
+                                    />
                                     <hr className="event-line" />
                                     The central question that has shaped much of
                                     computer science research is P vs NP. Do we
@@ -115,6 +137,14 @@ class Events extends Component {
                                 </CardTitle>
                                 <CardText>
                                     <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={jackytalk}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
                                     Bioinformatics is an interdisciplinary
                                     subject involving Biology, Computer Science,
                                     and Social Science. An important part of
@@ -145,6 +175,14 @@ class Events extends Component {
                                 </CardTitle>
                                 <CardText>
                                     <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={jenstalk}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
                                     Many machine learning models that are being
                                     applied today can grow very complex. This is
                                     why many of the models become harder and
@@ -174,6 +212,14 @@ class Events extends Component {
                                     </i>
                                 </CardTitle>
                                 <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={arnetalk}
+                                        alt=""
+                                    />
                                     <hr className="event-line" />
                                     Go has been gaining traction recently
                                     because of its ease of use and value to
@@ -206,6 +252,14 @@ class Events extends Component {
                                 </CardTitle>
                                 <CardText>
                                     <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={chinmaytalk}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
                                     Algorithms aren't only in books or CS
                                     lectures. They are everywhere! From the ants
                                     swarming on the ground to mold crawling in
@@ -234,6 +288,14 @@ class Events extends Component {
                                     </i>
                                 </CardTitle>
                                 <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={bryontalk}
+                                        alt=""
+                                    />
                                     <hr className="event-line" />
                                     Molecular dynamics (MD) simulations are an
                                     important part of the drug discovery
@@ -270,6 +332,14 @@ class Events extends Component {
                                 </CardTitle>
                                 <CardText>
                                     <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={pooyatalk}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
                                     In recent years, the number of automobiles
                                     in California has increased dramatically,
                                     presenting a serious problem of heavy
@@ -302,6 +372,14 @@ class Events extends Component {
                                 </CardTitle>
                                 <CardText>
                                     <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={junlintalk}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
                                     Machine Learning models can be easily fooled
                                     by data that's slightly twisted/modified.
                                     Especially if the data inputted is outside
@@ -323,19 +401,27 @@ class Events extends Component {
                                 </CardText>
                             </Card>
                         </Col>
-                        <Col md="4">
-                            <h2 className="mt-3">Weekly Schedule</h2>
-                            <Card body className="card-body">
-                                <CardTitle>
-                                    ACM Practice - Winter 2019
-                                </CardTitle>
-                                <CardText>
-                                    <strong>Tuesday: </strong>
-                                    ICS 432, 6:00 - 8:00 pm <br />
-                                    <strong>Thursday: </strong>
-                                    DBH 4011, 6:00 - 8:00 pm
-                                </CardText>
-                            </Card>
+                        <Col
+                            style={{
+                                maxWidth: '30%',
+                                padding: '2%',
+                                marginRight: '5%',
+                                paddingLeft: '1%'
+                            }}>
+                            <div>
+                                <h2 className="mt-3">Weekly Schedule</h2>
+                                <Card body className="card-body">
+                                    <CardTitle>
+                                        ACM Practice - Winter 2019
+                                    </CardTitle>
+                                    <CardText>
+                                        <strong>Tuesday: </strong>
+                                        ICS 432, 6:00 - 8:00 pm <br />
+                                        <strong>Thursday: </strong>
+                                        DBH 4011, 6:00 - 8:00 pm
+                                    </CardText>
+                                </Card>
+                            </div>
                         </Col>
                     </Row>
                 </Container>

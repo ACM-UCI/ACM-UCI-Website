@@ -4,6 +4,7 @@ import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import Konami from 'react-konami-code';
 import kevin from '../../img/kevin.mp4';
+import Footer from '../Footer/Footer';
 import './Home.css';
 
 class Home extends Component {
