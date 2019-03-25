@@ -22,7 +22,7 @@ class Events extends Component {
                 <Navigation />
                 <Banner
                     lead="Events"
-                    leadSub="Compete in intercollegiate competitions."
+                    leadSub="Let's Learn and Compete Together"
                 />
                 <Container className="event-body" fluid>
                     <Row>

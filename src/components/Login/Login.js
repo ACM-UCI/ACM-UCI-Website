@@ -21,11 +21,8 @@ export default class Login extends Component {
         this.state = {
             status: 'Login'
         };
-        this.emails = [];
-        this.owners = [];
-        this.name = '';
-        this.email = '';
-        this.owner = '';
+        this.emails = {};
+        this.owner = {};
         this.show = [
             <Button
                 key="loginbutton"
@@ -90,13 +87,7 @@ export default class Login extends Component {
 
     processData(data) {
         if (this.state.status === 'Login') {
-            data = data.val()['logs'];
-            for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    this.emails.push(data[key]['email']);
-                    this.owners.push(key);
-                }
-            }
+            this.emails = data.val()['logs'];
 
             // uncomment below for debugging
             // this.logged({ user: { email: 'mnovitia@uci.edu' } });
@@ -132,12 +123,10 @@ export default class Login extends Component {
                     Login
                 </Button>,
                 <Alert key="notboard" color="info">
-                    See you next time {this.name.split(' ')[0]}!
+                    See you next time {this.owner.displayName.split(' ')[0]}!
                 </Alert>
             ];
-            this.name = '';
-            this.email = '';
-            this.owner = '';
+            this.owner = {};
             this.setState({
                 status: 'Login',
                 tab: 'Submit'
@@ -150,13 +139,13 @@ export default class Login extends Component {
         // var token = result.credential.accessToken;
         // // The signed-in user info.
         var user = result.user;
-        var m = this.emails.indexOf(user.email);
-        if (m === -1) {
+        var email = user.email.split('@');
+        if (email[1] !== 'uci.edu' && user.email !== 'acmuciguest@gmail.com') {
             this.show[1] = (
                 <Alert key="notboard" color="info">
                     Hello {user.displayName}, welcome to the ACM website ^^ .
-                    Unfortunately, this feature is only for board members at the
-                    moment!
+                    Unfortunately, this feature is only for UCI students and
+                    faculty at the moment!
                 </Alert>
             );
             this.setState({
@@ -165,17 +154,28 @@ export default class Login extends Component {
             return;
         }
 
-        this.name = user.displayName;
-        this.email = user.email;
-        this.owner = this.owners[m];
+        if (!this.emails.hasOwnProperty(email[0])) {
+            var u = {};
+            for (var i = 1; i <= 11; i++) {
+                u['/logs/' + email[0] + '/Winter 2019/' + i.toString()] = 0;
+                u['/logs/' + email[0] + '/Spring 2019/' + i.toString()] = 0;
+            }
+            firebase
+                .database()
+                .ref()
+                .update(u);
+            u['/logs/' + email[0] + '/Name'] = user.displayName;
+        }
+
+        this.owner = user;
 
         this.show = (
             <Container key="board">
                 <Row className="welcome">
                     <Col style={{ textAlign: 'left' }}>
-                        Welcome {this.name}! ^^
+                        Welcome {this.owner.displayName}! ^^
                     </Col>
-                    <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                    <Col style={{ textAlign: 'right' }}>{this.owner.email}</Col>
                 </Row>
 
                 <Button
@@ -216,14 +216,14 @@ export default class Login extends Component {
                     week={this.week}
                     quarter={this.quarter}
                     session={this.session}
-                    owner={this.owner}
+                    owner={this.owner.email.split('@')[0]}
                     data={{
                         Name: '',
                         Link: '',
                         Difficulty: 'Select one',
                         Note: '',
                         Solution: '',
-                        Contributor: this.owner,
+                        Contributor: this.owner.email.split(' ')[0],
                         Session: '',
                         Code: '',
                         SubmitDate: ''
@@ -251,9 +251,11 @@ export default class Login extends Component {
                 <Container key="board">
                     <Row className="welcome">
                         <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.name}! ^^
+                            Welcome {this.owner.displayName}! ^^
                         </Col>
-                        <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                        <Col style={{ textAlign: 'right' }}>
+                            {this.owner.email}
+                        </Col>
                     </Row>
 
                     <Button
@@ -293,7 +295,7 @@ export default class Login extends Component {
                         week={this.week}
                         quarter={this.quarter}
                         session={this.session}
-                        owner={this.owner}
+                        owner={this.owner.email.split('@')[0]}
                     />
                 </Container>
             );
@@ -302,9 +304,11 @@ export default class Login extends Component {
                 <Container key="board">
                     <Row className="welcome">
                         <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.name}! ^^
+                            Welcome {this.owner.displayName}! ^^
                         </Col>
-                        <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                        <Col style={{ textAlign: 'right' }}>
+                            {this.owner.email}
+                        </Col>
                     </Row>
 
                     <Button
@@ -343,7 +347,7 @@ export default class Login extends Component {
                     <Log
                         week={this.week}
                         quarter={this.quarter}
-                        owner={this.owner}
+                        owner={this.owner.email.split('@')[0]}
                     />
                 </Container>
             );
@@ -352,9 +356,11 @@ export default class Login extends Component {
                 <Container key="board">
                     <Row className="welcome">
                         <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.name}! ^^
+                            Welcome {this.owner.displayName}! ^^
                         </Col>
-                        <Col style={{ textAlign: 'right' }}>{this.email}</Col>
+                        <Col style={{ textAlign: 'right' }}>
+                            {this.owner.email}
+                        </Col>
                     </Row>
 
                     <Button
@@ -393,7 +399,7 @@ export default class Login extends Component {
                     <Submit
                         week={this.week}
                         quarter={this.quarter}
-                        owner={this.owner}
+                        owner={this.owner.email.split('@')[0]}
                         session={this.session}
                         data={{
                             Name: '',
@@ -401,7 +407,7 @@ export default class Login extends Component {
                             Difficulty: 'Select one',
                             Note: '',
                             Solution: '',
-                            Contributor: this.owner,
+                            Contributor: this.owner.email.split(' ')[0],
                             Session: '',
                             Code: '',
                             SubmitDate: ''

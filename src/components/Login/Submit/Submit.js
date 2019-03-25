@@ -48,7 +48,7 @@ export default class Submit extends Component {
 
     processData(data) {
         this.data = data.val();
-        // /* this is code for initializing logs in firebase to 0 BE CAREFUL
+        /* this is code for initializing logs in firebase to 0 BE CAREFUL
         var okay = true;
         if (okay) {
             var u = {};

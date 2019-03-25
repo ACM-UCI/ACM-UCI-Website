@@ -30,6 +30,7 @@ export default class Entry extends Component {
 
         // bindings
         this.updateInputValue = this.updateInputValue.bind(this);
+        this.setProblem = this.setProblem.bind(this);
 
         this.avail = '';
         this.sol = '';
@@ -41,7 +42,6 @@ export default class Entry extends Component {
         this.data = props.data;
 
         this.session = props.session;
-        this.quarter = props.quarter;
         this.filters = props.filters;
         this.optses1 = '2';
         this.optses2 = '1';
@@ -88,9 +88,9 @@ export default class Entry extends Component {
 
     setProblem() {
         if (
-            this.props.owner === 'Karthik' ||
-            this.props.owner === 'Meta' ||
-            this.props.owner === 'Bryon'
+            this.props.owner === 'mnovitia' ||
+            this.props.owner === 'btjanaka' ||
+            this.props.owner === 'jtuyls'
         ) {
             this.data.Session = this.session.toString();
             var newPostKey = firebase
@@ -114,8 +114,8 @@ export default class Entry extends Component {
         } else {
             this.msg = (
                 <Alert color="warning">
-                    Sorry! Only Karthik, Bryon, and Meta can set problems for
-                    now XD
+                    Sorry! Only Bryon, Jens, and Meta can set problems for now
+                    XD
                 </Alert>
             );
             this.setState({
@@ -186,7 +186,11 @@ export default class Entry extends Component {
                 style={{
                     display:
                         shouldDisplay[
-                            filter(problem, this.quarter, this.filters)
+                            filter(
+                                problem,
+                                this.props.k.split('/')[0],
+                                this.filters
+                            )
                         ]
                 }}>
                 <th scope="row" style={{ textAlign: 'left' }}>

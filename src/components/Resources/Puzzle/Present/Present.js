@@ -51,6 +51,14 @@ export default class Present extends Component {
                         data.Solution = '';
                     }
 
+                    var conName = '';
+                    if (
+                        this.props.contributors.hasOwnProperty(data.Contributor)
+                    ) {
+                        conName = this.props.contributors[data.Contributor]
+                            .Name;
+                    }
+
                     // if this entry is from the current session
                     if (data.Session === this.session.toString()) {
                         if (data.Difficulty === 'announcement') {
@@ -60,11 +68,12 @@ export default class Present extends Component {
                                     name={data.Name}
                                     desc={data.Link}
                                     con={data.Contributor}
+                                    conName={conName}
                                 />
                             );
                         } else if (data.Difficulty === 'event') {
                             events[events.length - 1].push(
-                                <Col md="4" className="height">
+                                <Col md="4" className="height space">
                                     <Problem
                                         className="center"
                                         name={data.Name}
@@ -72,6 +81,7 @@ export default class Present extends Component {
                                         diff={data.Difficulty}
                                         slink={data.Solution}
                                         con={data.Contributor}
+                                        conName={conName}
                                         code={data.Code}
                                         note={data.Note}
                                         txt="Info"
@@ -84,13 +94,14 @@ export default class Present extends Component {
                             );
                         } else {
                             problems[problems.length - 1].push(
-                                <Col md="4" className="height">
+                                <Col md="4" className="height space">
                                     <Problem
                                         name={data.Name}
                                         link={data.Link}
                                         diff={data.Difficulty}
                                         slink={data.Solution}
                                         con={data.Contributor}
+                                        conName={conName}
                                         note={data.Note}
                                         code={data.Code}
                                         week={this.week}
@@ -137,7 +148,7 @@ export default class Present extends Component {
         // make the rows of maximum 3 problems
         for (let j = 0; j < problems.length; j++) {
             this.rows.push(
-                <Row key={(j + 100).toString()} className="space center">
+                <Row key={(j + 100).toString()} className="center">
                     {problems[j][0]}
                     {problems[j][1]}
                     {problems[j][2]}
@@ -147,7 +158,7 @@ export default class Present extends Component {
 
         for (let j = 0; j < events.length; j++) {
             this.events.push(
-                <Row key={(j + 200).toString()} className="space center">
+                <Row key={(j + 200).toString()} className="center">
                     {events[j][0]}
                     {events[j][1]}
                     {events[j][2]}

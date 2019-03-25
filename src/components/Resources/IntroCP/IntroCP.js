@@ -166,20 +166,6 @@ for line in sys.stdin:
                                         </a>
                                         for more)
                                     </p>
-                                    <h4>Meridian Link</h4>
-                                    <p>
-                                        Meridian Link makes software for the
-                                        financial industry, such as to help
-                                        companies that make loans. They are the
-                                        main sponsor for ACM@UCI. Find out more
-                                        at{' '}
-                                        <a
-                                            href="https://www.meridianlink.com/company/"
-                                            className="link">
-                                            merdianlink
-                                        </a>
-                                        .
-                                    </p>
 
                                     {/** ******** COMPETITIONS ********* */}
 

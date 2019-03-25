@@ -47,6 +47,12 @@ export default class Log extends Component {
 
         this.processData = this.processData.bind(this);
 
+        this.quarter = props.quarter;
+        this.week = props.week;
+
+        this.quarter = 'Winter 2019';
+        this.week = 11;
+
         this.state = {
             tog: false
         };
@@ -95,6 +101,7 @@ export default class Log extends Component {
         var d = {};
         var tot;
         var mins = [];
+        this.data = [];
 
         // for each board member
         for (var key in logs) {
@@ -104,21 +111,28 @@ export default class Log extends Component {
 
                 // for each week
                 for (var i = 1; i <= 11; i++) {
-                    d[i] = logs[key][this.props.quarter][i];
+                    d[i] = logs[key][this.quarter][i];
 
                     // get the total score
                     tot += d[i];
                 }
-                if (mins.indexOf(tot - this.props.week * 2) === -1) {
-                    mins.push(tot - this.props.week * 2);
+
+                // For Wall of Shame:
+                // if (mins.indexOf(tot - this.week * 2) === -1) {
+                //     mins.push(tot - this.week * 2);
+                // }
+                //d['tot'] = tot - this.week * 2;
+
+                if (mins.indexOf(tot) === -1) {
+                    mins.push(tot);
                 }
-                d['tot'] = tot - this.props.week * 2;
+                d['tot'] = tot;
                 this.data.push(d);
             }
         }
 
         mins.sort(function(a, b) {
-            return a - b;
+            return b - a;
         });
         mins.splice(3, mins.length - 3);
         m = mins;
@@ -140,7 +154,7 @@ export default class Log extends Component {
                             fontSize: '50px',
                             fontFamily: 'Verdana'
                         }}>
-                        Wall of Shame
+                        Wall of Fame
                     </div>
                     <Paper>
                         <Grid rows={this.data} columns={this.columns}>

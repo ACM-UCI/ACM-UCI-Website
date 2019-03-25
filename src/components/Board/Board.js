@@ -24,7 +24,7 @@ class Board extends Component {
                     }}
                     key={this.rows.length.toString()}>
                     <Col md="4" />
-                    <Col md="4">~ {t} ~</Col>
+                    <Col md="4">{t}</Col>
                     <Col md="4" />
                 </Row>
             );
@@ -42,7 +42,7 @@ class Board extends Component {
                 if (this.cols.length === 3) {
                     this.rows.push(
                         <Row key={'current ' + this.rows.length.toString()}>
-                            {this.cols};
+                            {this.cols}
                         </Row>
                     );
                     this.cols = [];

@@ -32,6 +32,7 @@ export default class Past extends Component {
                         week={11}
                         quarter={this.quarters[i]}
                         data={props.data[this.quarters[i]]}
+                        contributors={props.data['logs']}
                     />
                 </TabPane>
             );
@@ -45,6 +46,7 @@ export default class Past extends Component {
                     week={this.week}
                     quarter={this.quarters[curr]}
                     data={props.data[this.quarters[curr]]}
+                    contributors={props.data['logs']}
                 />
             </TabPane>
         );
@@ -85,6 +87,18 @@ export default class Past extends Component {
                             {this.quarters[1]}
                         </NavLink>
                     </NavItem>
+                    {/* Uncomment before week 1 */}
+                    {/* <NavItem>
+                        <NavLink
+                            className={classnames({
+                                active: this.state.activeTab === '2'
+                            })}
+                            onClick={() => {
+                                this.toggle('2');
+                            }}>
+                            {this.quarters[2]}
+                        </NavLink>
+                    </NavItem> */}
                 </Nav>
 
                 <TabContent activeTab={this.state.activeTab}>

@@ -20,11 +20,11 @@ export default class Puzzle extends Component {
 
         this.state = { collapse: false };
 
-        this.quarter = 'Winter 2019';
-        this.week = 2;
+        this.quarter = 'Spring 2019';
+        this.week = 1;
         this.session = 1;
         this.end = false;
-        this.quarters = ['Fall 2018', 'Winter 2019'];
+        this.quarters = ['Fall 2018', 'Winter 2019', 'Spring 2019'];
 
         this.done = false;
         this.error = null;
@@ -58,11 +58,12 @@ export default class Puzzle extends Component {
                 quarter={this.quarter}
                 session={this.session}
                 data={this.data[this.quarter][this.week]}
+                contributors={this.data['logs']}
                 // end={false}
-                // week={"5"}
-                // quarter={this.quarter}
+                // week={"2"}
+                // quarter={"Winter 2019"}
                 // session={1}
-                // data={this.data[this.quarter]["5"]}
+                // data={this.data[this.quarter]["2"]}
             />
         );
         this.toggle();

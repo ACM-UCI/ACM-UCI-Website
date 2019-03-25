@@ -40,6 +40,7 @@ export default class Solution extends Component {
         this.type = this.type[this.type.length - 1];
         this.link = props.link;
         this.con = props.con;
+        this.conName = props.conName.split(' ')[0];
         this.txt = props.txt;
         this.code = [];
         this.notes = [];
@@ -61,9 +62,9 @@ export default class Solution extends Component {
     componentDidMount() {
         const fb = processCon(this.props.con);
         if (this.con === '') {
-            this.con = ' Any Board Member';
+            this.conName = ' Any Board Member';
         }
-        this.link = `Bother ${this.con}`;
+        this.link = `Bother ${this.conName}`;
 
         if (this.props.note === '') {
             this.code.push(

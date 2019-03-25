@@ -15,52 +15,52 @@ import chris from '../../../../../../img/chris.jpg';
 
 export default function processLink(link) {
     const fb = ['https://www.facebook.com/groups/acmuci/', acm];
-    if (link.endsWith('Karthik')) {
+    if (link === 'kgajulap') {
         return ['https://www.facebook.com/karthik.gajulapalli.7', karthik];
     }
-    if (link.endsWith('Chinmay')) {
+    if (link === 'craut') {
         return ['https://www.facebook.com/sauercraut', chinmay];
     }
-    if (link.endsWith('Pooya')) {
+    if (link === 'pooyak') {
         return ['https://www.facebook.com/khosravipooya', blakePooya];
     }
-    if (link.endsWith('Bryon')) {
+    if (link === 'btjanaka') {
         return ['https://www.facebook.com/btjanaka', bryon];
     }
-    if (link.endsWith('Jens')) {
+    if (link === 'jtuyls') {
         return ['https://www.facebook.com/jens.tuyls', jens];
     }
-    if (link.endsWith('Blake')) {
+    if (link === 'bwakasa') {
         return ['https://www.facebook.com/blake.wakasa', blakePooya];
     }
-    if (link.endsWith('Jacky')) {
+    if (link === 'renjied') {
         return [
             'https://www.facebook.com/profile.php?id=100007416798455',
             jacky
         ];
     }
-    if (link.endsWith('Chris')) {
+    if (link === 'cdipalma') {
         return ['https://www.facebook.com/christopher.chu.35', chris];
     }
-    if (link.endsWith('Meta')) {
+    if (link === 'mnovitia') {
         return ['https://www.facebook.com/meta.novitia', meta];
     }
-    if (link.endsWith('Frank')) {
+    if (link === 'zhonghas') {
         return [
             'https://www.facebook.com/profile.php?id=100012887927941',
             frank
         ];
     }
-    if (link.endsWith('Tim')) {
+    if (link === 'timothy4') {
         return ['https://www.facebook.com/blazedspeeder', tim];
     }
-    if (link.endsWith('Junlin')) {
+    if (link === 'junliw1') {
         return ['https://www.facebook.com/jack.wang.315080', junlin];
     }
-    if (link.endsWith('Armen')) {
+    if (link === 'amourady') {
         return ['https://www.facebook.com/amouradyan', armen];
     }
-    if (link.endsWith('Arne')) {
+    if (link === 'aphilipe') {
         return ['https://www.facebook.com/arne.philipeit', arne];
     }
     return fb;

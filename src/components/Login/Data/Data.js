@@ -24,6 +24,7 @@ export default class Data extends Component {
         this.session = props.session;
         this.data = {};
         this.body = [];
+        this.cons = [<option key="con">Contributor</option>];
     }
 
     componentDidMount() {
@@ -50,7 +51,6 @@ export default class Data extends Component {
         this.data = data;
         this.body = [];
         var submissions = data.val();
-
         for (var q in submissions) {
             if (q === 'submissions') {
                 var s = submissions[q];
@@ -114,6 +114,13 @@ export default class Data extends Component {
             }
         }
 
+        this.cons = [<option key="con">Contributor</option>];
+        for (var user in submissions['logs']) {
+            if (submissions['logs'].hasOwnProperty(user)) {
+                this.cons.push(<option key={user}>{user}</option>);
+            }
+        }
+
         this.setState({
             tog: !this.state.tog
         });
@@ -167,21 +174,7 @@ export default class Data extends Component {
                                 onChange={evt => this.updateInputValue(evt)}
                                 name="select"
                                 id="confilter">
-                                <option>Contributor</option>
-                                <option>Armen</option>
-                                <option>Blake</option>
-                                <option>Bryon</option>
-                                <option>Chinmay</option>
-                                <option>Chris</option>
-                                <option>Frank</option>
-                                <option>Jacky</option>
-                                <option>Jens</option>
-                                <option>Junlin</option>
-                                <option>Kaleo</option>
-                                <option>Karthik</option>
-                                <option>Meta</option>
-                                <option>Pooya</option>
-                                <option>Tim</option>
+                                {this.cons}
                             </Input>
                         </th>
                         <th>

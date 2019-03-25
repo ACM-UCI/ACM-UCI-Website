@@ -21,6 +21,7 @@ export default class Week extends Component {
                     quarter={this.quarter}
                     session={i.toString()}
                     data={props.data}
+                    contributors={props.contributors}
                 />
             );
         }
