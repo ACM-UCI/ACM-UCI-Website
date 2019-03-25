@@ -7,6 +7,11 @@ import './Submit.css';
 export default class Submit extends Component {
     constructor(props) {
         super(props);
+
+        this.quarter = props.quarter;
+        this.week = props.week;
+        this.owner = props.owner;
+
         this.updateInputValue = this.updateInputValue.bind(this);
         this.processData = this.processData.bind(this);
         this.upload = this.upload.bind(this);
@@ -15,46 +20,58 @@ export default class Submit extends Component {
         this.state = {
             tog: false
         };
+
+        this.prompt = 'Upload';
+        if (props.data.Link !== '' && props.data.Link !== undefined) {
+            this.prompt = 'Save';
+        }
+
         this.data = {};
+        if (props.data.Solution !== undefined && props.data.Solution !== '') {
+            this.filename = (
+                <FormText color="muted" style={{ textAlign: 'left' }}>
+                    Current Submission: {props.data.Solution}
+                </FormText>
+            );
+        }
 
         this.ref = firebase.database().ref();
         this.ref.on('value', this.processData);
 
         this.status = [];
 
-        this.submission = {
-            Name: '',
-            Link: '',
-            Difficulty: 'Select one',
-            Note: '',
-            Solution: '',
-            Contributor: props.owner,
-            Session: '',
-            Code: '',
-            SubmitDate: ''
-        };
+        this.submission = {};
+        for (var key in props.data) {
+            this.submission[key] = props.data[key];
+        }
     }
 
     processData(data) {
         this.data = data.val();
-        var board = this.data['board'];
-        if (board['Week'] !== this.props.week) {
-            var updates = {};
-            updates['/board/Week'] = this.props.week;
-            for (var key in board) {
-                if (board.hasOwnProperty(key) && key !== 'Week') {
-                    updates['/board/' + key] = 0;
+        /* this is code for initializing logs in firebase to 0 BE CAREFUL
+        var okay = true;
+        if (okay) {
+            var u = {};
+            for (var b in this.data['board']) {
+                if (
+                    this.data['board'].hasOwnProperty(b) &&
+                    b !== 'Week' &&
+                    !this.data['logs'].hasOwnProperty(b)
+                ) {
+                    // uncomment this to initialize all
+                    for (var i = 1; i <= 11; i++) {
+                        u['/logs/' + b + '/Fall 2018/' + i.toString()] = 0;
+                        u['/logs/' + b + '/Winter 2019/' + i.toString()] = 0;
+                        u['/logs/' + b + '/Spring 2019/' + i.toString()] = 0;
+                    }
                 }
             }
             firebase
                 .database()
                 .ref()
-                .update(updates);
+                .update(u);
         }
-
-        this.setState({
-            tog: false
-        });
+        // */
     }
 
     updateInputValue(e) {
@@ -74,6 +91,9 @@ export default class Submit extends Component {
                 this.submission['Link'] = str.slice(0, str.length - 1);
             }
         }
+        this.setState({
+            tog: false
+        });
     }
 
     readCode(evt) {
@@ -95,19 +115,21 @@ export default class Submit extends Component {
             );
         }
 
-        if (
-            !s.Link.startsWith('https://leetcode.com/problems/') &&
-            !s.Link.startsWith('https://www.hackerrank.com/') &&
-            !s.Link.startsWith('https://projecteuler.net/') &&
-            !s.Link.startsWith('https://uva.onlinejudge.org/') &&
-            !s.Link.startsWith('https://open.kattis.com/problems/') &&
-            !s.Link.startsWith('https://drive.google.com/file/') &&
-            !s.Link.startsWith('https://codeforces.com/') &&
-            !s.Link.startsWith('http://socalcontest.org/') &&
-            !s.Link.startsWith('https://www.codechef.com/')
-        ) {
-            errors.push(<li key={errors.length}>Problem Link is not valid</li>);
-        }
+        // No link checks for now
+        // if (
+        //     !s.Link.startsWith('https://leetcode.com/problems/') &&
+        //     !s.Link.startsWith('https://www.hackerrank.com/') &&
+        //     !s.Link.startsWith('https://projecteuler.net/') &&
+        //     !s.Link.startsWith('https://uva.onlinejudge.org/') &&
+        //     !s.Link.startsWith('http://uva.onlinejudge.org/') &&
+        //     !s.Link.startsWith('https://open.kattis.com/problems/') &&
+        //     !s.Link.startsWith('https://drive.google.com/file/') &&
+        //     !s.Link.startsWith('https://codeforces.com/') &&
+        //     !s.Link.startsWith('http://socalcontest.org/') &&
+        //     !s.Link.startsWith('https://www.codechef.com/')
+        // ) {
+        //     errors.push(<li key={errors.length}>Problem Link is not valid</li>);
+        // }
 
         if (s.Difficulty === 'Select one') {
             errors.push(
@@ -130,7 +152,6 @@ export default class Submit extends Component {
         }
 
         var stop = false;
-
         var problem = null;
         for (var q in this.data) {
             if (q === 'submissions') {
@@ -140,12 +161,13 @@ export default class Submit extends Component {
                         problem = sub[key];
                         if (problem != null) {
                             if (
-                                s.Link === problem.Link ||
-                                s.Link + '/' === problem.Link
+                                (s.Link === problem.Link ||
+                                    s.Link + '/' === problem.Link) &&
+                                problem.Link !== this.props.data.Link
                             ) {
                                 errors.push(
                                     <li key={errors.length}>
-                                        Oof someone else submitted that already!
+                                        Oof someone submitted that already!
                                     </li>
                                 );
                                 stop = true;
@@ -154,7 +176,11 @@ export default class Submit extends Component {
                         }
                     }
                 }
-            } else if (this.data.hasOwnProperty(q) && q !== 'board') {
+            } else if (
+                this.data.hasOwnProperty(q) &&
+                q !== 'board' &&
+                q !== 'logs'
+            ) {
                 var quarter = this.data[q];
                 for (var w in quarter) {
                     if (quarter.hasOwnProperty(w)) {
@@ -164,8 +190,9 @@ export default class Submit extends Component {
                                 problem = week[keys];
                                 if (problem != null) {
                                     if (
-                                        s.Link === problem.Link ||
-                                        s.Link + '/' === problem.Link
+                                        (s.Link === problem.Link ||
+                                            s.Link + '/' === problem.Link) &&
+                                        problem.Link !== this.props.data.Link
                                     ) {
                                         errors.push(
                                             <li key={errors.length}>
@@ -190,7 +217,7 @@ export default class Submit extends Component {
             }
         }
 
-        if (this.data['board'][this.props.owner] > 4) {
+        if (this.data['logs'][this.owner][this.quarter][this.week] > 4) {
             errors.push(
                 <li key={errors.length}>
                     Uhh you've submitted 5 problems already this week
@@ -205,28 +232,43 @@ export default class Submit extends Component {
                     {errors}
                 </Alert>
             );
+            this.setState({
+                tog: false
+            });
         } else {
             s.SubmitDate = Date().toString();
-
-            var newPostKey = firebase
-                .database()
-                .ref()
-                .child('submissions')
-                .push().key;
             var updates = {};
-            updates['/submissions/' + newPostKey] = s;
-            updates['/board/' + this.props.owner] =
-                this.data['board'][this.props.owner] + 1;
-            firebase
-                .database()
-                .ref()
-                .update(updates, this.err);
-            this.err(null);
-        }
+            if (
+                this.props.data.Link !== '' &&
+                this.props.data.Link !== undefined
+            ) {
+                updates[this.props.k + '/' + this.props.x] = s;
+                firebase
+                    .database()
+                    .ref()
+                    .update(updates, this.err);
+                this.err(null);
+            } else {
+                var newPostKey = firebase
+                    .database()
+                    .ref()
+                    .child('submissions')
+                    .push().key;
+                updates['/submissions/' + newPostKey] = s;
+                updates[
+                    '/logs/' + this.owner + '/' + this.quarter + '/' + this.week
+                ] = this.data['logs'][this.owner][this.quarter][this.week] + 1;
+                firebase
+                    .database()
+                    .ref()
+                    .update(updates, this.err);
+                this.err(null);
 
-        this.setState({
-            tog: false
-        });
+                this.setState({
+                    tog: false
+                });
+            }
+        }
     }
 
     err(error) {
@@ -236,6 +278,9 @@ export default class Submit extends Component {
                     Failed to upload :( Please contact web dev team!
                 </Alert>
             );
+            this.setState({
+                tog: false
+            });
         } else {
             this.status = (
                 <Alert color="success" style={{ textAlign: 'left' }}>
@@ -243,10 +288,6 @@ export default class Submit extends Component {
                 </Alert>
             );
         }
-
-        this.setState({
-            tog: false
-        });
     }
 
     render() {
@@ -268,6 +309,7 @@ export default class Submit extends Component {
                         <Input
                             onChange={evt => this.updateInputValue(evt)}
                             id="Name"
+                            defaultValue={this.props.data.Name}
                             placeholder="Plz don't make it too long"
                         />
                     </Col>
@@ -290,6 +332,7 @@ export default class Submit extends Component {
                         <Input
                             onChange={evt => this.updateInputValue(evt)}
                             id="Link"
+                            defaultValue={this.props.data.Link}
                             placeholder="Don't include additional queries at the end"
                         />
                     </Col>
@@ -311,6 +354,7 @@ export default class Submit extends Component {
                     <Col>
                         <Input
                             type="select"
+                            defaultValue={this.props.data.Difficulty}
                             onChange={evt => this.updateInputValue(evt)}
                             name="select"
                             id="Difficulty">
@@ -341,6 +385,7 @@ export default class Submit extends Component {
                         <Input
                             type="textarea"
                             name="text"
+                            defaultValue={this.props.data.Notes}
                             id="Note"
                             placeholder="Optional. Place each point in a new line"
                             onChange={evt => this.updateInputValue(evt)}
@@ -369,6 +414,7 @@ export default class Submit extends Component {
                             accept=".py,.cpp"
                             onChange={evt => this.updateInputValue(evt)}
                         />
+                        {this.filename}
                         <FormText color="muted" style={{ textAlign: 'left' }}>
                             If you don't have the solution right now, you can
                             upload later.
@@ -380,7 +426,7 @@ export default class Submit extends Component {
                 {this.status}
 
                 <Button onClick={this.upload} className="submitbtn">
-                    Upload
+                    {this.prompt}
                 </Button>
             </Form>
         );

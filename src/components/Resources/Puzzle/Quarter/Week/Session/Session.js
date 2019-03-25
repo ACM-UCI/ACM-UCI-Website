@@ -32,6 +32,14 @@ export default class Session extends Component {
                         problems.push([]);
                     }
 
+                    var conName = '';
+                    if (
+                        this.props.contributors.hasOwnProperty(data.Contributor)
+                    ) {
+                        conName = this.props.contributors[data.Contributor]
+                            .Name;
+                    }
+
                     if (data.Session === this.session) {
                         if (data.Difficulty === 'announcement') {
                             this.announcements.push(
@@ -40,11 +48,12 @@ export default class Session extends Component {
                                     name={data.Name}
                                     desc={data.Link}
                                     con={data.Contributor}
+                                    conName={conName}
                                 />
                             );
                         } else {
                             problems[problems.length - 1].push(
-                                <Col md="4" className="height">
+                                <Col md="4" className="height space">
                                     <Problem
                                         className="center"
                                         name={data.Name}
@@ -54,6 +63,7 @@ export default class Session extends Component {
                                         slink={data.Solution}
                                         code={data.Code}
                                         con={data.Contributor}
+                                        conName={conName}
                                         txt="Solution"
                                         week={this.week}
                                         quarter={this.quarter}
@@ -79,7 +89,7 @@ export default class Session extends Component {
 
             for (let j = 0; j < problems.length; j++) {
                 this.rows.push(
-                    <Row key={j.toString()} className="space center">
+                    <Row key={j.toString()} className="center">
                         {problems[j][0]}
                         {problems[j][1]}
                         {problems[j][2]}
@@ -106,7 +116,7 @@ export default class Session extends Component {
     render() {
         return (
             <Row className="topmar">
-                <pre>S E S S I O N {this.session}</pre>
+                <pre>S E S S I O N {'  ' + this.session}</pre>
                 <div className="back">
                     {this.announcements}
                     {this.rows}

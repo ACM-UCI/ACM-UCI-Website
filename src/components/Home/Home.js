@@ -1,13 +1,30 @@
 import React, { Component } from 'react';
-import { Container, Row, Button } from 'reactstrap';
+import { Container, Row, Button, Modal } from 'reactstrap';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import Konami from 'react-konami-code';
+import kevin from '../../img/kevin.mp4';
+import Footer from '../Footer/Footer';
 import './Home.css';
 
 class Home extends Component {
-    easterEgg() {
-        alert('I <3 ACM@UCI!');
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    // easterEgg() {
+    //     this.toggle();
+    // }
+
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
     }
 
     render() {
@@ -42,7 +59,21 @@ class Home extends Component {
                         </Button>
                     </Row>
                 </Container>
-                <Konami action={this.easterEgg} />
+                <Modal
+                    size="lg"
+                    isOpen={this.state.modal}
+                    toggle={this.toggle}
+                    className={this.props.className}>
+                    <video
+                        width="100%"
+                        height="auto"
+                        controls
+                        style={{ justifySelf: 'center' }}>
+                        <source src={kevin} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </Modal>
+                <Konami action={this.toggle} />
             </div>
         );
     }
