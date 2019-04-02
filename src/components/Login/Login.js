@@ -41,7 +41,7 @@ export default class Login extends Component {
         const startDates = [
             new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
             new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
-            new Date('April 2, 2019 17:00:00 GMT-07:00').getTime()
+            new Date('April 2, 2019 18:00:00 GMT-07:00').getTime()
         ];
 
         var today = new Date().getTime();
