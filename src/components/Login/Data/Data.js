@@ -186,6 +186,7 @@ export default class Data extends Component {
                                 <option>Session</option>
                                 <option>Fall 2018</option>
                                 <option>Winter 2019</option>
+                                <option>Spring 2019</option>
                                 <option>Not Used</option>
                             </Input>
                         </th>

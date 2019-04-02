@@ -223,7 +223,7 @@ export default class Login extends Component {
                         Difficulty: 'Select one',
                         Note: '',
                         Solution: '',
-                        Contributor: this.owner.email.split(' ')[0],
+                        Contributor: this.owner.email.split('@')[0],
                         Session: '',
                         Code: '',
                         SubmitDate: ''
@@ -407,7 +407,7 @@ export default class Login extends Component {
                             Difficulty: 'Select one',
                             Note: '',
                             Solution: '',
-                            Contributor: this.owner.email.split(' ')[0],
+                            Contributor: this.owner.email.split('@')[0],
                             Session: '',
                             Code: '',
                             SubmitDate: ''
