@@ -144,19 +144,37 @@ export default class Entry extends Component {
         var problem = this.props.data;
 
         // set solution name, button, and availability
-        this.avail = 'Available';
-        this.sol = (
-            <Container
-                className="solbtn"
-                onClick={() => {
-                    this.toggle(0);
-                }}>
-                {problem.Solution}
-            </Container>
-        );
-        if (problem.Solution === '') {
-            this.sol = '';
-            this.avail = 'Not Available';
+        this.sol = '';
+        this.avail = 'Not Available';
+        if (problem.Solution !== '') {
+            this.avail = 'Available';
+            this.sol = (
+                <Button
+                    className="solbtn"
+                    onClick={() => {
+                        this.toggle(0);
+                    }}>
+                    {problem.Solution}
+                </Button>
+            );
+            if (
+                problem.Session === '' &&
+                problem.Contributor !== this.props.owner &&
+                this.props.owner !== 'mnovitia' &&
+                this.props.owner !== 'btjanaka' &&
+                this.props.owner !== 'jtuyls'
+            ) {
+                this.sol = (
+                    <Button
+                        disabled
+                        className="solbtn"
+                        onClick={() => {
+                            this.toggle(0);
+                        }}>
+                        {problem.Solution}
+                    </Button>
+                );
+            }
         }
 
         // set code

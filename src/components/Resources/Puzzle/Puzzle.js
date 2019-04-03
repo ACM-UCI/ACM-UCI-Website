@@ -102,13 +102,12 @@ export default class Puzzle extends Component {
         const startDates = [
             new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
             new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
-            new Date('April 2, 2019 17:00:00 GMT-07:00').getTime()
+            new Date('April 2, 2019 18:00:00 GMT-07:00').getTime()
         ];
 
         // change below for testing [ place desired date inside Date() ]
-
         var today = new Date(date);
-        // var today = new Date('February 12, 2019 20:00:00 GMT-08:00');
+        // var today = new Date('April 2, 2019 21:00:00 GMT-07:00');
         if (!(today instanceof Date) || isNaN(today)) {
             this.err();
             return;
@@ -167,7 +166,8 @@ export default class Puzzle extends Component {
         // note ".slice" does not include end argument
         this.quarters = quarters.slice(0, i + 1);
         // console.log(this.session, this.quarter, this.end, this.week);
-        // console.log(new Date(date));
+        console.log(new Date(date));
+        console.log(Date());
         this.done = true;
 
         var ref = firebase.database().ref();
