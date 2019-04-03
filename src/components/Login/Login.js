@@ -39,9 +39,9 @@ export default class Login extends Component {
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
         const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2019'];
         const startDates = [
-            new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
-            new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
-            new Date('April 2, 2019 18:00:00 GMT-07:00').getTime()
+            new Date('October 2, 2018 17:30:00 GMT-07:00').getTime(),
+            new Date('January 8, 2019 16:30:00 GMT-08:00').getTime(),
+            new Date('April 2, 2019 17:30:00 GMT-07:00').getTime()
         ];
 
         var today = new Date().getTime();

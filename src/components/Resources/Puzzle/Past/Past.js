@@ -87,8 +87,7 @@ export default class Past extends Component {
                             {this.quarters[1]}
                         </NavLink>
                     </NavItem>
-                    {/* Uncomment before week 1 */}
-                    {/* <NavItem>
+                    <NavItem>
                         <NavLink
                             className={classnames({
                                 active: this.state.activeTab === '2'
@@ -98,7 +97,7 @@ export default class Past extends Component {
                             }}>
                             {this.quarters[2]}
                         </NavLink>
-                    </NavItem> */}
+                    </NavItem>
                 </Nav>
 
                 <TabContent activeTab={this.state.activeTab}>
