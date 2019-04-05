@@ -50,9 +50,6 @@ export default class Log extends Component {
         this.quarter = props.quarter;
         this.week = props.week;
 
-        this.quarter = 'Winter 2019';
-        this.week = 11;
-
         this.state = {
             tog: false
         };
