@@ -62,7 +62,7 @@ class Navigation extends Component {
                                 </DropdownItem>
                                 <DropdownItem>
                                     <NavLink tag={Link} to="/board">
-                                        Board
+                                        Our Board
                                     </NavLink>
                                 </DropdownItem>
                             </DropdownMenu>
@@ -91,22 +91,27 @@ class Navigation extends Component {
                                 Resources
                             </NavLink>
                         </NavItem>
-                        <NavItem className="mx-3">
-                            <NavLink
-                                tag={Link}
+                        <UncontrolledDropdown className="mx-3">
+                            <DropdownToggle
+                                nav
+                                caret
                                 className="nav-font"
-                                to="/donate">
-                                Donate
-                            </NavLink>
-                        </NavItem>
-                        <NavItem className="mx-3">
-                            <NavLink
-                                tag={Link}
-                                className="nav-font"
-                                to="/contact">
+                                style={{ color: '#6DB6E2' }}>
                                 Contact
-                            </NavLink>
-                        </NavItem>
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>
+                                    <NavLink tag={Link} to="/contact">
+                                        Contact Us
+                                    </NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink tag={Link} to="/donate">
+                                        Donate
+                                    </NavLink>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
                         <NavItem className="mx-3">
                             <NavLink
                                 tag={Link}
