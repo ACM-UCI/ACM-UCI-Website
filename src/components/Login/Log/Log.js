@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Container, Row } from 'reactstrap';
+import { Input, Row } from 'reactstrap';
 import './Log.css';
+import board from '../../Board/board.json';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import Paper from '@material-ui/core/Paper';
@@ -44,8 +45,9 @@ export default class Log extends Component {
         super(props);
 
         this.done = false;
-
+        this.filter = 'All Members';
         this.processData = this.processData.bind(this);
+        this.updateInputValue = this.updateInputValue.bind(this);
 
         this.quarter = props.quarter;
         this.week = props.week;
@@ -89,6 +91,10 @@ export default class Log extends Component {
     }
 
     componentDidMount() {
+        this.callFirebase();
+    }
+
+    callFirebase() {
         var ref = firebase.database().ref();
         ref.on('value', this.processData);
     }
@@ -100,9 +106,17 @@ export default class Log extends Component {
         var mins = [];
         this.data = [];
 
-        // for each board member
+        // for each member
         for (var key in logs) {
-            if (logs.hasOwnProperty(key)) {
+            if (
+                logs.hasOwnProperty(key) &&
+                key != 'pattis' &&
+                (this.filter === 'All Members' ||
+                    (this.filter === 'Board' &&
+                        board['2019-2020'].hasOwnProperty(key)) ||
+                    (this.filter === 'Non-Board' &&
+                        !board['2019-2020'].hasOwnProperty(key)))
+            ) {
                 d = { Name: key };
                 tot = 0;
 
@@ -141,10 +155,15 @@ export default class Log extends Component {
         });
     }
 
+    updateInputValue(e) {
+        this.filter = e.target.value;
+        this.callFirebase();
+    }
+
     render() {
         if (this.done) {
             return (
-                <div>
+                <div style={{ position: 'relative' }}>
                     <div
                         style={{
                             textAlign: 'center',
@@ -153,7 +172,28 @@ export default class Log extends Component {
                         }}>
                         Wall of Fame
                     </div>
-                    <Paper>
+                    <Input
+                        style={{
+                            marginTop: '2%',
+                            marginBottom: '2%',
+                            width: '20%',
+                            position: 'absolute',
+                            right: '0'
+                        }}
+                        type="select"
+                        defaultValue={'All Members'}
+                        onChange={evt => this.updateInputValue(evt)}
+                        name="select"
+                        id="Board">
+                        <option>All Members</option>
+                        <option>Board</option>
+                        <option>Non-Board</option>
+                    </Input>
+                    <Paper
+                        style={{
+                            marginTop: '8%',
+                            marginBottom: '2%'
+                        }}>
                         <Grid rows={this.data} columns={this.columns}>
                             <SortingState
                                 defaultSorting={[
