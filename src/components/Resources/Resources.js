@@ -17,13 +17,6 @@ class Resources extends Component {
                 />
                 <Container>
                     <Row>
-                        <Link className="full" to="/Puzzle">
-                            <Resource
-                                title="Weekly Problems and Solutions"
-                                description="Follow along with our weekly coding puzzles here, as well as
-                    the solutions that will be released after every meeting."
-                            />
-                        </Link>
                         <Link className="full" to="/introToCp">
                             <Resource
                                 title="New Member Guide"

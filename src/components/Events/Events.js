@@ -79,28 +79,30 @@ class Events extends Component {
     }
 
     scroll() {
-        this.y = document
-            .getElementById('meetingtimes')
-            .getBoundingClientRect().top;
-        if (this.y < 10) {
-            this.meeting = (
-                <Col
-                    id="meetingtimes"
-                    style={{
-                        maxWidth: '30%',
-                        padding: '2%',
-                        paddingTop: (0 - this.y).toString() + 'px',
-                        paddingBottom: '0',
-                        marginRight: '5%',
-                        paddingLeft: '1%'
-                    }}>
-                    {this.content}
-                </Col>
-            );
+        if (document.getElementById('meetingtimes') !== null) {
+            this.y = document
+                .getElementById('meetingtimes')
+                .getBoundingClientRect().top;
+            if (this.y < 10) {
+                this.meeting = (
+                    <Col
+                        id="meetingtimes"
+                        style={{
+                            maxWidth: '30%',
+                            padding: '2%',
+                            paddingTop: (0 - this.y).toString() + 'px',
+                            paddingBottom: '0',
+                            marginRight: '5%',
+                            paddingLeft: '1%'
+                        }}>
+                        {this.content}
+                    </Col>
+                );
+            }
+            this.setState({
+                tog: true
+            });
         }
-        this.setState({
-            tog: true
-        });
     }
 
     render() {

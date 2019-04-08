@@ -9,7 +9,11 @@ import {
     NavLink,
     NavbarBrand,
     Collapse,
-    NavbarToggler
+    NavbarToggler,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from 'reactstrap';
 
 class Navigation extends Component {
@@ -42,14 +46,27 @@ class Navigation extends Component {
                                 Home
                             </NavLink>
                         </NavItem>
-                        <NavItem className="mx-3">
-                            <NavLink
-                                tag={Link}
-                                to="/about"
-                                className="nav-font">
+                        <UncontrolledDropdown className="mx-3">
+                            <DropdownToggle
+                                nav
+                                caret
+                                className="nav-font"
+                                style={{ color: '#6DB6E2' }}>
                                 About
-                            </NavLink>
-                        </NavItem>
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>
+                                    <NavLink tag={Link} to="/about">
+                                        About Us
+                                    </NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink tag={Link} to="/board">
+                                        Board
+                                    </NavLink>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
                         <NavItem className="mx-3">
                             <NavLink
                                 tag={Link}
@@ -62,16 +79,16 @@ class Navigation extends Component {
                             <NavLink
                                 tag={Link}
                                 className="nav-font"
-                                to="/resources">
-                                Resources
+                                to="/Puzzle">
+                                Problems
                             </NavLink>
                         </NavItem>
                         <NavItem className="mx-3">
                             <NavLink
                                 tag={Link}
                                 className="nav-font"
-                                to="/board">
-                                Board
+                                to="/resources">
+                                Resources
                             </NavLink>
                         </NavItem>
                         <NavItem className="mx-3">
