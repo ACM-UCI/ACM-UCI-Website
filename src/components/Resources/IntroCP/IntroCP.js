@@ -81,7 +81,7 @@ for line in sys.stdin:
                 <Navigation />
                 <Banner
                     lead="New Member Guide"
-                    leadSub="Designed by the utterly clueless for the utterly clueless"
+                    leadSub="Designed for the utterly clueless, by the utterly clueless"
                 />
                 <Container className="mt-4">
                     <Nav tabs>

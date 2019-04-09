@@ -53,17 +53,17 @@ export default class Puzzle extends Component {
 
         this.present = (
             <Present
-                end={this.end}
-                week={this.week}
-                quarter={this.quarter}
-                session={this.session}
-                data={this.data[this.quarter][this.week]}
+                // end={this.end}
+                // week={this.week}
+                // quarter={this.quarter}
+                // session={this.session}
+                // data={this.data[this.quarter][this.week]}
                 contributors={this.data['logs']}
-                // end={false}
-                // week={"2"}
-                // quarter={"Winter 2019"}
-                // session={1}
-                // data={this.data[this.quarter]["2"]}
+                end={false}
+                week={'2'}
+                quarter={'Spring 2019'}
+                session={1}
+                data={this.data[this.quarter]['2']}
             />
         );
         this.toggle();

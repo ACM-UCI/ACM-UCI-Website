@@ -40,6 +40,30 @@ var TableRow = ({ row, ...restProps }) => (
     />
 );
 
+const HighlightedCell = ({ value, style, ...restProps }) => (
+    <Table.Cell
+        {...restProps}
+        style={{
+            backgroundColor: value < 0 ? 'red' : undefined,
+            ...style
+        }}>
+        <span
+            style={{
+                color: value < 0 ? 'white' : undefined
+            }}>
+            {value}
+        </span>
+    </Table.Cell>
+);
+
+const Cell = props => {
+    const { column } = props;
+    if (column.name === 'score') {
+        return <HighlightedCell {...props} />;
+    }
+    return <Table.Cell {...props} />;
+};
+
 export default class Log extends Component {
     constructor(props) {
         super(props);
@@ -62,6 +86,10 @@ export default class Log extends Component {
                 width: 170
             },
             {
+                columnName: 'score',
+                align: 'center'
+            },
+            {
                 columnName: 'tot',
                 align: 'center'
             }
@@ -78,9 +106,14 @@ export default class Log extends Component {
             this.extcolumns.push({
                 columnName: i.toString(),
                 // align: "center",
-                width: 70
+                width: 60
             });
         }
+
+        this.columns.push({
+            name: 'score',
+            title: 'Board Score'
+        });
 
         this.columns.push({
             name: 'tot',
@@ -113,7 +146,8 @@ export default class Log extends Component {
                 key != 'pattis' &&
                 (this.filter === 'All Members' ||
                     (this.filter === 'Board' &&
-                        board['2019-2020'].hasOwnProperty(key)) ||
+                        board['2019-2020'].hasOwnProperty(key) &&
+                        key != 'kgajulap') ||
                     (this.filter === 'Non-Board' &&
                         !board['2019-2020'].hasOwnProperty(key)))
             ) {
@@ -138,6 +172,12 @@ export default class Log extends Component {
                     mins.push(tot);
                 }
                 d['tot'] = tot;
+                if (
+                    board['2019-2020'].hasOwnProperty(key) &&
+                    key != 'kgajulap'
+                ) {
+                    d['score'] = tot - (this.week - 1) * 2;
+                }
                 this.data.push(d);
             }
         }
@@ -202,6 +242,7 @@ export default class Log extends Component {
                             />
                             <IntegratedSorting />
                             <Table
+                                cellComponent={Cell}
                                 rowComponent={TableRow}
                                 columnExtensions={this.extcolumns}
                             />
