@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Alert, Col, Row, Button, Form, Input, FormText } from 'reactstrap';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import board from '../../Board/board.json';
 import './Submit.css';
+
+const vars = {
+    difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
+    extras: ['event', 'announcment', 'finals', 'thanksgiving']
+};
 
 export default class Submit extends Component {
     constructor(props) {
@@ -33,6 +39,17 @@ export default class Submit extends Component {
                     Current Submission: {props.data.Solution}
                 </FormText>
             );
+        }
+
+        this.diffSel = [];
+        var i = 0;
+        for (i = 0; i < vars.difficulties.length; i++) {
+            this.diffSel.push(<option>{vars.difficulties[i]}</option>);
+        }
+        if (props.owner === 'mnovitia') {
+            for (i = 0; i < vars.extras.length; i++) {
+                this.diffSel.push(<option>{vars.extras[i]}</option>);
+            }
         }
 
         this.ref = firebase.database().ref();
@@ -103,91 +120,81 @@ export default class Submit extends Component {
     upload() {
         var s = this.submission;
         var errors = [];
-        if (s.Name === '') {
-            errors.push(
-                <li key={errors.length}>Problem Name cannot be blank</li>
-            );
-        } else if (s.Name.length > 200) {
-            errors.push(
-                <li key={errors.length}>
-                    Problem Name cannot be more than 200 characters
-                </li>
-            );
-        }
 
-        // No link checks for now
-        // if (
-        //     !s.Link.startsWith('https://leetcode.com/problems/') &&
-        //     !s.Link.startsWith('https://www.hackerrank.com/') &&
-        //     !s.Link.startsWith('https://projecteuler.net/') &&
-        //     !s.Link.startsWith('https://uva.onlinejudge.org/') &&
-        //     !s.Link.startsWith('http://uva.onlinejudge.org/') &&
-        //     !s.Link.startsWith('https://open.kattis.com/problems/') &&
-        //     !s.Link.startsWith('https://drive.google.com/file/') &&
-        //     !s.Link.startsWith('https://codeforces.com/') &&
-        //     !s.Link.startsWith('http://socalcontest.org/') &&
-        //     !s.Link.startsWith('https://www.codechef.com/')
-        // ) {
-        //     errors.push(<li key={errors.length}>Problem Link is not valid</li>);
-        // }
+        if (
+            vars.difficulties.indexOf(s.Difficulty) !== -1 ||
+            s.Difficulty === 'event'
+        ) {
+            if (s.Name === '') {
+                errors.push(
+                    <li key={errors.length}>Problem Name cannot be blank</li>
+                );
+            } else if (s.Name.length > 200) {
+                errors.push(
+                    <li key={errors.length}>
+                        Problem Name cannot be more than 200 characters
+                    </li>
+                );
+            }
 
-        if (s.Difficulty === 'Select one') {
-            errors.push(
-                <li key={errors.length}>Please choose a Difficulty</li>
-            );
-        }
-
-        if (s.Note.length > 1000) {
-            errors.push(
-                <li key={errors.length}>
-                    Notes cannot be more than 1000 characters
-                </li>
-            );
-        }
-
-        if (s.Solution !== '' && s.Code === '') {
-            errors.push(
-                <li key={errors.length}>Please wait! Still reading file :)</li>
-            );
-        }
-
-        var stop = false;
-        var problem = null;
-        for (var q in this.data) {
-            if (q === 'submissions') {
-                var sub = this.data[q];
-                for (var key in sub) {
-                    if (sub.hasOwnProperty(key)) {
-                        problem = sub[key];
-                        if (problem != null) {
-                            if (
-                                (s.Link === problem.Link ||
-                                    s.Link + '/' === problem.Link) &&
-                                problem.Link !== this.props.data.Link
-                            ) {
-                                errors.push(
-                                    <li key={errors.length}>
-                                        Oof someone submitted that already!
-                                    </li>
-                                );
-                                stop = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-            } else if (
-                this.data.hasOwnProperty(q) &&
-                q !== 'board' &&
-                q !== 'logs'
+            // No link checks for now
+            if (
+                // !s.Link.startsWith('https://leetcode.com/problems/') &&
+                // !s.Link.startsWith('https://www.hackerrank.com/') &&
+                // !s.Link.startsWith('https://projecteuler.net/') &&
+                // !s.Link.startsWith('https://uva.onlinejudge.org/') &&
+                // !s.Link.startsWith('http://uva.onlinejudge.org/') &&
+                // !s.Link.startsWith('https://open.kattis.com/problems/') &&
+                // !s.Link.startsWith('https://drive.google.com/file/') &&
+                // !s.Link.startsWith('https://codeforces.com/') &&
+                // !s.Link.startsWith('http://socalcontest.org/') &&
+                // !s.Link.startsWith('https://www.codechef.com/') &&
+                s.Link === ''
             ) {
-                var quarter = this.data[q];
-                for (var w in quarter) {
-                    if (quarter.hasOwnProperty(w)) {
-                        var week = quarter[w];
-                        for (var keys in week) {
-                            if (week.hasOwnProperty(keys)) {
-                                problem = week[keys];
+                errors.push(
+                    <li key={errors.length}>Problem Link is not valid</li>
+                );
+            }
+
+            if (s.Difficulty === 'Select one') {
+                errors.push(
+                    <li key={errors.length}>Please choose a Difficulty</li>
+                );
+            }
+
+            if (s.Note.length > 1000) {
+                errors.push(
+                    <li key={errors.length}>
+                        Notes cannot be more than 1000 characters
+                    </li>
+                );
+            }
+
+            if (s.Solution !== '' && s.Code === '') {
+                errors.push(
+                    <li key={errors.length}>
+                        Please wait! Still reading file :) Submit again in a
+                        sec!
+                    </li>
+                );
+            }
+
+            if (s.Solution === '' && s.Difficulty !== 'event') {
+                errors.push(
+                    <li key={errors.length}>Please submit a solution!</li>
+                );
+            }
+
+            // current problem collision checker
+            if (s.Difficulty !== 'event') {
+                var stop = false;
+                var problem = null;
+                for (var q in this.data) {
+                    if (q === 'submissions') {
+                        var sub = this.data[q];
+                        for (var key in sub) {
+                            if (sub.hasOwnProperty(key)) {
+                                problem = sub[key];
                                 if (problem != null) {
                                     if (
                                         (s.Link === problem.Link ||
@@ -196,7 +203,7 @@ export default class Submit extends Component {
                                     ) {
                                         errors.push(
                                             <li key={errors.length}>
-                                                Oof someone else submitted that
+                                                Oof someone submitted that
                                                 already!
                                             </li>
                                         );
@@ -206,18 +213,55 @@ export default class Submit extends Component {
                                 }
                             }
                         }
-                        if (stop) {
-                            break;
+                    } else if (
+                        this.data.hasOwnProperty(q) &&
+                        q !== 'board' &&
+                        q !== 'logs'
+                    ) {
+                        var quarter = this.data[q];
+                        for (var w in quarter) {
+                            if (quarter.hasOwnProperty(w)) {
+                                var week = quarter[w];
+                                for (var keys in week) {
+                                    if (week.hasOwnProperty(keys)) {
+                                        problem = week[keys];
+                                        if (problem != null) {
+                                            if (
+                                                (s.Link === problem.Link ||
+                                                    s.Link + '/' ===
+                                                        problem.Link) &&
+                                                problem.Link !==
+                                                    this.props.data.Link
+                                            ) {
+                                                errors.push(
+                                                    <li key={errors.length}>
+                                                        Oof someone else
+                                                        submitted that already!
+                                                    </li>
+                                                );
+                                                stop = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (stop) {
+                                    break;
+                                }
+                            }
                         }
+                    }
+                    if (stop) {
+                        break;
                     }
                 }
             }
-            if (stop) {
-                break;
-            }
         }
 
-        if (this.data['logs'][this.owner][this.quarter][this.week] > 4) {
+        if (
+            !board['2019-2020'].hasOwnProperty(this.owner) &&
+            this.data['logs'][this.owner][this.quarter][this.week] >= 2
+        ) {
             errors.push(
                 <li key={errors.length}>
                     Uhh you've submitted 5 problems already this week
@@ -255,9 +299,20 @@ export default class Submit extends Component {
                     .child('submissions')
                     .push().key;
                 updates['/submissions/' + newPostKey] = s;
-                updates[
-                    '/logs/' + this.owner + '/' + this.quarter + '/' + this.week
-                ] = this.data['logs'][this.owner][this.quarter][this.week] + 1;
+
+                if (vars.difficulties.indexOf(s.Difficulty) !== -1) {
+                    updates[
+                        '/logs/' +
+                            this.owner +
+                            '/' +
+                            this.quarter +
+                            '/' +
+                            this.week
+                    ] =
+                        this.data['logs'][this.owner][this.quarter][this.week] +
+                        1;
+                }
+
                 firebase
                     .database()
                     .ref()
@@ -359,11 +414,7 @@ export default class Submit extends Component {
                             name="select"
                             id="Difficulty">
                             <option>Select one</option>
-                            <option>easy</option>
-                            <option>med</option>
-                            <option>hard</option>
-                            <option>icpc</option>
-                            <option>codealong</option>
+                            {this.diffSel}
                         </Input>
                     </Col>
                 </Row>
@@ -416,8 +467,7 @@ export default class Submit extends Component {
                         />
                         {this.filename}
                         <FormText color="muted" style={{ textAlign: 'left' }}>
-                            If you don't have the solution right now, you can
-                            upload later.
+                            You have to submit solutions for your problem!
                         </FormText>
                     </Col>
                 </Row>

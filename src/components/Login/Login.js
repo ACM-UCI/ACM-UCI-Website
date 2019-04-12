@@ -90,7 +90,7 @@ export default class Login extends Component {
             this.emails = data.val()['logs'];
 
             // uncomment below for debugging
-            // this.logged({ user: { email: 'craut@uci.edu' } });
+            // this.logged({ user: { email: 'mnovitia@uci.edu' } });
         }
     }
 

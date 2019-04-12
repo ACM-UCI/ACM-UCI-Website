@@ -48,7 +48,7 @@ export default class Problem extends Component {
             }
             this.obj = (
                 <a
-                    className={`word ${this.props.diff}`}
+                    className={`minh word ${this.props.diff}`}
                     href={this.link}
                     target="_blank"
                     rel="noopener noreferrer">
@@ -58,9 +58,9 @@ export default class Problem extends Component {
         }
 
         if (props.evnt !== 'yes') {
-            this.diff = props.diff + ' probcard';
+            this.diff = props.diff + ' probcard minh';
         } else {
-            this.diff = props.diff + ' evntcard';
+            this.diff = props.diff + ' evntcard minh';
         }
     }
 

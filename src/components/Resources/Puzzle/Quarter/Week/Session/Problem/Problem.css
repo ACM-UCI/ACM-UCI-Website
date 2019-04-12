@@ -16,32 +16,11 @@
     color: rgb(187, 187, 189);
 }
 
-.easy {
-    min-height: 100%;
-}
-
-.med {
-    min-height: 100%;
-}
-
-.hard {
-    min-height: 100%;
-}
-
-.icpc {
-    min-height: 100%;
-}
-
-.codealong {
-    min-height: 100%;
-}
-
-.event {
+.minh {
     min-height: 100%;
 }
 
 .thanksgiving {
-    background-image: url("../../../../../../../img/thanksgiving.png");
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -50,7 +29,6 @@
 
 .finals {
     background-color: black;
-    background-image: url("../../../../../../../img/finals.png");
     background-size: 40%;
     background-repeat: no-repeat;
     background-position: center;
