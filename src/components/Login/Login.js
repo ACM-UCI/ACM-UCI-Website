@@ -160,11 +160,11 @@ export default class Login extends Component {
                 u['/logs/' + email[0] + '/Winter 2019/' + i.toString()] = 0;
                 u['/logs/' + email[0] + '/Spring 2019/' + i.toString()] = 0;
             }
+            u['/logs/' + email[0] + '/Name'] = user.displayName;
             firebase
                 .database()
                 .ref()
                 .update(u);
-            u['/logs/' + email[0] + '/Name'] = user.displayName;
         }
 
         console.log(user.displayName);
