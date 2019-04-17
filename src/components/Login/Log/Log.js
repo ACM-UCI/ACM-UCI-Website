@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Row } from 'reactstrap';
+import { Input } from 'reactstrap';
 import './Log.css';
 import board from '../../Board/board.json';
 import firebase from 'firebase/app';
@@ -143,11 +143,11 @@ export default class Log extends Component {
         for (var key in logs) {
             if (
                 logs.hasOwnProperty(key) &&
-                key != 'pattis' &&
+                key !== 'pattis' &&
                 (this.filter === 'All Members' ||
                     (this.filter === 'Board' &&
                         board['2019-2020'].hasOwnProperty(key) &&
-                        key != 'kgajulap') ||
+                        key !== 'kgajulap') ||
                     (this.filter === 'Non-Board' &&
                         !board['2019-2020'].hasOwnProperty(key)))
             ) {
@@ -174,7 +174,7 @@ export default class Log extends Component {
                 d['tot'] = tot;
                 if (
                     board['2019-2020'].hasOwnProperty(key) &&
-                    key != 'kgajulap'
+                    key !== 'kgajulap'
                 ) {
                     d['score'] = tot - (this.week - 1) * 2;
                 }

@@ -34,13 +34,13 @@ export default class Solution extends Component {
             modal: false,
             collapse: false
         };
+
         this.toggle = this.toggle.bind(this);
         this.setCode = this.setCode.bind(this);
         this.type = props.link.split('.');
         this.type = this.type[this.type.length - 1];
         this.link = props.link;
-        this.con = props.con;
-        this.conName = props.con.split(' ')[0];
+        this.conName = props.conName.split(' ')[0];
         this.txt = props.txt;
         this.code = [];
         this.notes = [];

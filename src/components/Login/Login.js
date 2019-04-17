@@ -167,6 +167,8 @@ export default class Login extends Component {
             u['/logs/' + email[0] + '/Name'] = user.displayName;
         }
 
+        console.log(user.displayName);
+
         this.owner = user;
 
         this.show = (
