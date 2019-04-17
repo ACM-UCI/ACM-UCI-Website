@@ -40,7 +40,7 @@ export default class Solution extends Component {
         this.type = this.type[this.type.length - 1];
         this.link = props.link;
         this.con = props.con;
-        this.conName = props.conName.split(' ')[0];
+        this.conName = props.con.split(' ')[0];
         this.txt = props.txt;
         this.code = [];
         this.notes = [];
