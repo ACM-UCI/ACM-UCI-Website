@@ -34,23 +34,8 @@ class Events extends Component {
         };
         this.content = (
             <div>
-                <h2 className="mt-3">Next Event</h2>
-                <Card body className="card-body">
-                    <img src={uipath} alt="uipath logo" />
-                    <CardTitle>UiPath Recruiting Event</CardTitle>
+                {/* <h2 className="mt-3">Next Event</h2> */}
 
-                    <CardText>
-                        <strong>Event Location: </strong>
-                        DBH 4011
-                        <br />
-                        <strong>Date: </strong>
-                        Tuesday, April 9, 2019
-                        <br />
-                        <strong>Time: </strong>
-                        6:30PM - 8PM
-                        <br />
-                    </CardText>
-                </Card>
                 <h2 className="mt-3">Weekly Schedule</h2>
                 <Card body className="card-body">
                     <CardTitle>ACM Practice - Spring 2019</CardTitle>
@@ -124,6 +109,47 @@ class Events extends Component {
                                 marginLeft: '5%',
                                 paddingRight: '5%'
                             }}>
+                            <h2 className="mt-3">Spring 2019 Events</h2>
+
+                            {/* UiPath Event */}
+                            <Card body className="card-body">
+                                <CardTitle>
+                                    UiPath Recruiting Event
+                                    <br />
+                                    <i>
+                                        Tuesday, April 9th, DBH 4011 @ 6:30 - 8
+                                        pm
+                                    </i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={uipath}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    Still looking for internships for this
+                                    summer and full time offers?? Bring your
+                                    resumes to our UiPath event. UiPath is a
+                                    leading Robotic Process Automation vendor
+                                    providing a complete software platform to
+                                    help organizations efficiently automate
+                                    business processes. They are also a Unicorn
+                                    company.
+                                    <br />
+                                    <br />
+                                    <strong>They're hiring:</strong> <br />
+                                    FULLTIME, INTERN - Software Engineer
+                                    <br />
+                                    INTERN - Business Development
+                                    <br />
+                                    INTERN - Data Engineering
+                                </CardText>
+                            </Card>
+
                             <h2 className="mt-3">Winter 2019 Events</h2>
 
                             {/* JUNLIN */}

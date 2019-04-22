@@ -121,6 +121,12 @@ export default class Submit extends Component {
         var s = this.submission;
         var errors = [];
 
+        if (s.Difficulty === 'Select one') {
+            errors.push(
+                <li key={errors.length}>Please choose a Difficulty</li>
+            );
+        }
+
         if (
             vars.difficulties.indexOf(s.Difficulty) !== -1 ||
             s.Difficulty === 'event'
@@ -153,12 +159,6 @@ export default class Submit extends Component {
             ) {
                 errors.push(
                     <li key={errors.length}>Problem Link is not valid</li>
-                );
-            }
-
-            if (s.Difficulty === 'Select one') {
-                errors.push(
-                    <li key={errors.length}>Please choose a Difficulty</li>
                 );
             }
 

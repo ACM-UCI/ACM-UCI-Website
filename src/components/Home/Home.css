@@ -1,12 +1,12 @@
 .home-body {
-    background-image: url('../../img/jumbo-img.png'); 
+    background-image: url('../../img/acm_meeting.jpg'); 
     background-repeat: no-repeat; 
     background-position: center;
     background-size: cover;  
     z-index: 0;   
     position: relative; 
-    min-height: 80vh;  
-    max-height: 80vh; 
+    min-height: 100vh;  
+    max-height: 100vh; 
 }
 
 .home-body p {
