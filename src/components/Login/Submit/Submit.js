@@ -436,9 +436,9 @@ export default class Submit extends Component {
                         <Input
                             type="textarea"
                             name="text"
-                            defaultValue={this.props.data.Notes}
-                            id="Note"
                             placeholder="Optional. Place each point in a new line"
+                            value={this.submission.Note}
+                            id="Note"
                             onChange={evt => this.updateInputValue(evt)}
                         />
                     </Col>
