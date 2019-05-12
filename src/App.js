@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home/Home';
 import About from './components/About/About';
 import Events from './components/Events/Events';
@@ -30,18 +30,20 @@ class App extends Component {
 
     render() {
         return (
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/about" component={About} />
-                <Route path="/events" component={Events} />
-                <Route path="/resources" component={Resources} />
-                <Route path="/board" component={Board} />
-                <Route path="/donate" component={Donate} />
-                <Route path="/contact" component={Contact} />
-                <Route path="/introToCp" component={IntroCP} />
-                <Route path="/puzzle" component={Puzzle} />
-                <Route path="/login" component={Login} />
-            </Switch>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/about" component={About} />
+                    <Route path="/events" component={Events} />
+                    <Route path="/resources" component={Resources} />
+                    <Route path="/board" component={Board} />
+                    <Route path="/donate" component={Donate} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/introToCp" component={IntroCP} />
+                    <Route path="/puzzle" component={Puzzle} />
+                    <Route path="/login" component={Login} />
+                </Switch>
+            </BrowserRouter>
         );
     }
 }
