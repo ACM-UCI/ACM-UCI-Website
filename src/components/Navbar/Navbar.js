@@ -35,7 +35,7 @@ class Navigation extends Component {
     render() {
         return (
             <Navbar className="navbar" color="white" dark expand="md">
-                <NavbarBrand className="nav-brand" href="#">
+                <NavbarBrand className="nav-brand" tag={Link} to="/">
                     <img src={logo} id="logo" alt="ACM@UCI logo" />
                 </NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
