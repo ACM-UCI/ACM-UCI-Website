@@ -64,7 +64,7 @@ export default class Solution extends Component {
         if (this.con === '') {
             this.conName = ' Any Board Member';
         }
-        this.link = `Bother ${this.conName}`;
+        this.link = `Ask ${this.conName} for help`;
 
         if (this.props.note === '') {
             this.code.push(

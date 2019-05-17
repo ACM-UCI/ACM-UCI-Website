@@ -188,7 +188,7 @@ export default class Puzzle extends Component {
                     <Navigation />
                     <Banner
                         lead="Weekly Problems and Solutions"
-                        leadSub="Ready to get your minds blown?"
+                        leadSub="Ready to have your minds blown?"
                     />
                     {this.error}
                     <div className="center">
@@ -244,7 +244,7 @@ export default class Puzzle extends Component {
                 <Navigation />
                 <Banner
                     lead="Weekly Problems and Solutions"
-                    leadSub="Ready to get your minds blown?"
+                    leadSub="Ready to have your minds blown?"
                 />
 
                 <Alert
