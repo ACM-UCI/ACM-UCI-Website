@@ -158,7 +158,6 @@ export default class Entry extends Component {
                 </Button>
             );
             if (
-                problem.Session === '' &&
                 problem.Contributor !== this.props.owner &&
                 this.props.owner !== 'mnovitia' &&
                 this.props.owner !== 'btjanaka' &&

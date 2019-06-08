@@ -98,6 +98,17 @@ export default class Past extends Component {
                             {this.quarters[2]}
                         </NavLink>
                     </NavItem>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({
+                                active: this.state.activeTab === '3'
+                            })}
+                            onClick={() => {
+                                this.toggle('3');
+                            }}>
+                            {this.quarters[3]}
+                        </NavLink>
+                    </NavItem>
                 </Nav>
 
                 <TabContent activeTab={this.state.activeTab}>

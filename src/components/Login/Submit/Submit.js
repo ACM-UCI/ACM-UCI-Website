@@ -44,11 +44,17 @@ export default class Submit extends Component {
         this.diffSel = [];
         var i = 0;
         for (i = 0; i < vars.difficulties.length; i++) {
-            this.diffSel.push(<option>{vars.difficulties[i]}</option>);
+            this.diffSel.push(
+                <option key={'opt' + i.toString()}>
+                    {vars.difficulties[i]}
+                </option>
+            );
         }
         if (props.owner === 'mnovitia') {
             for (i = 0; i < vars.extras.length; i++) {
-                this.diffSel.push(<option>{vars.extras[i]}</option>);
+                this.diffSel.push(
+                    <option key={'ex' + i.toString()}>{vars.extras[i]}</option>
+                );
             }
         }
 
@@ -65,21 +71,21 @@ export default class Submit extends Component {
 
     processData(data) {
         this.data = data.val();
-        /* this is code for initializing logs in firebase to 0 BE CAREFUL
+        // /* this is code for initializing logs in firebase to 0 BE CAREFUL
         var okay = true;
         if (okay) {
             var u = {};
-            for (var b in this.data['board']) {
-                if (
-                    this.data['board'].hasOwnProperty(b) &&
-                    b !== 'Week' &&
-                    !this.data['logs'].hasOwnProperty(b)
-                ) {
+            for (var b in this.data['logs']) {
+                if (this.data['logs'].hasOwnProperty(b)) {
+                    // u['/logs/' + b + '/LinkedIn'] = null;
+                    // u['/logs/' + b + '/GitHub'] = null;
+                    // u['/logs/' + b + '/Facebook'] = null;
                     // uncomment this to initialize all
                     for (var i = 1; i <= 11; i++) {
-                        u['/logs/' + b + '/Fall 2018/' + i.toString()] = 0;
-                        u['/logs/' + b + '/Winter 2019/' + i.toString()] = 0;
-                        u['/logs/' + b + '/Spring 2019/' + i.toString()] = 0;
+                        // u['/logs/' + b + '/Fall 2018/' + i.toString()] = 0;
+                        // u['/logs/' + b + '/Winter 2019/' + i.toString()] = 0;
+                        // u['/logs/' + b + '/Spring 2019/' + i.toString()] = 0;
+                        u['/logs/' + b + '/Fall 2019/' + i.toString()] = 0;
                     }
                 }
             }

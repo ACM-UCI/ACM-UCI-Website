@@ -24,7 +24,14 @@ export default class Puzzle extends Component {
         this.week = 1;
         this.session = 1;
         this.end = false;
-        this.quarters = ['Fall 2018', 'Winter 2019', 'Spring 2019'];
+        this.quarters = [
+            'Fall 2018',
+            'Winter 2019',
+            'Spring 2019',
+            'Fall 2019',
+            'Winter 2020',
+            'Spring 2020'
+        ];
 
         this.done = false;
         this.error = null;
@@ -98,16 +105,26 @@ export default class Puzzle extends Component {
 
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2019'];
+        const quarters = [
+            'Fall 2018',
+            'Winter 2019',
+            'Spring 2019',
+            'Fall 2019',
+            'Winter 2020',
+            'Spring 2020'
+        ];
         const startDates = [
             new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
             new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
-            new Date('April 2, 2019 18:00:00 GMT-07:00').getTime()
+            new Date('April 2, 2019 18:00:00 GMT-07:00').getTime(),
+            new Date('October 1, 2019 18:00:00 GMT-07:00').getTime(),
+            new Date('January 7, 2020 18:00:00 GMT-07:00').getTime(),
+            new Date('March 31, 2020 18:00:00 GMT-07:00').getTime()
         ];
 
         // change below for testing [ place desired date inside Date() ]
         var today = new Date(date);
-        // var today = new Date('April 2, 2019 21:00:00 GMT-07:00');
+        // var today = new Date('October 1, 2019 21:00:00 GMT-07:00');
         if (!(today instanceof Date) || isNaN(today)) {
             this.err();
             return;
@@ -195,12 +212,12 @@ export default class Puzzle extends Component {
                         <Row className="center">
                             <Alert
                                 className="easy m"
-                                transition={{ in: true, timeout: 1300 }}>
+                                transition={{ in: true, timeout: 300 }}>
                                 Easy
                             </Alert>
                             <Alert
                                 className="med m"
-                                transition={{ in: true, timeout: 800 }}>
+                                transition={{ in: true, timeout: 300 }}>
                                 Medium
                             </Alert>
                             <Alert
@@ -214,13 +231,18 @@ export default class Puzzle extends Component {
                                 ICPC
                             </Alert>
                             <Alert
+                                className="competition m"
+                                transition={{ in: true, timeout: 300 }}>
+                                Competition
+                            </Alert>
+                            <Alert
                                 className="codealong m"
-                                transition={{ in: true, timeout: 800 }}>
+                                transition={{ in: true, timeout: 300 }}>
                                 Code Along
                             </Alert>
                             <Alert
                                 className="event m"
-                                transition={{ in: true, timeout: 1300 }}>
+                                transition={{ in: true, timeout: 300 }}>
                                 Event
                             </Alert>
                         </Row>

@@ -14,7 +14,8 @@ export default class Problem extends Component {
             props.diff === 'hard' ||
             props.diff === 'icpc' ||
             props.diff === 'codealong' ||
-            props.diff === 'event'
+            props.diff === 'event' ||
+            props.diff === 'competition'
         ) {
             var txt = props.txt;
             if (props.diff === 'event') {
@@ -41,7 +42,8 @@ export default class Problem extends Component {
             props.diff === 'hard' ||
             props.diff === 'icpc' ||
             props.diff === 'codealong' ||
-            props.diff === 'event'
+            props.diff === 'event' ||
+            props.diff === 'competition'
         ) {
             if (props.link === '') {
                 this.link = processCon(props.con)[0];

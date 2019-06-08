@@ -5,9 +5,17 @@ import Banner from '../Banner/Banner';
 import Submit from './Submit/Submit';
 import Data from './Data/Data';
 import Log from './Log/Log';
+import Profile from './Profile/Profile';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import './Login.css';
+
+const tabI = {
+    Submit: 0,
+    Log: 1,
+    Data: 2,
+    Profile: 3
+};
 
 export default class Login extends Component {
     constructor(props) {
@@ -17,6 +25,7 @@ export default class Login extends Component {
         this.lout = this.lout.bind(this);
         this.lin = this.lin.bind(this);
         this.toggle = this.toggle.bind(this);
+        this.setTab = this.setTab.bind(this);
         this.processData = this.processData.bind(this);
         this.state = {
             status: 'Login'
@@ -37,11 +46,21 @@ export default class Login extends Component {
 
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        const quarters = ['Fall 2018', 'Winter 2019', 'Spring 2019'];
+        const quarters = [
+            'Fall 2018',
+            'Winter 2019',
+            'Spring 2019',
+            'Fall 2019',
+            'Winter 2020',
+            'Spring 2020'
+        ];
         const startDates = [
-            new Date('October 2, 2018 17:30:00 GMT-07:00').getTime(),
-            new Date('January 8, 2019 16:30:00 GMT-08:00').getTime(),
-            new Date('April 2, 2019 17:30:00 GMT-07:00').getTime()
+            new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
+            new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
+            new Date('April 2, 2019 18:00:00 GMT-07:00').getTime(),
+            new Date('October 1, 2019 18:00:00 GMT-07:00').getTime(),
+            new Date('January 7, 2020 18:00:00 GMT-07:00').getTime(),
+            new Date('March 31, 2020 18:00:00 GMT-07:00').getTime()
         ];
 
         var today = new Date().getTime();
@@ -165,6 +184,7 @@ export default class Login extends Component {
             for (var i = 1; i <= 11; i++) {
                 u['/logs/' + email[0] + '/Winter 2019/' + i.toString()] = 0;
                 u['/logs/' + email[0] + '/Spring 2019/' + i.toString()] = 0;
+                u['/logs/' + email[0] + '/Fall 2019/' + i.toString()] = 0;
             }
             u['/logs/' + email[0] + '/Name'] = user.displayName;
             firebase
@@ -173,9 +193,64 @@ export default class Login extends Component {
                 .update(u);
         }
 
-        console.log(user.displayName);
-
         this.owner = user;
+
+        this.setTab('Profile');
+
+        this.lout();
+    }
+
+    lin() {
+        this.setState({
+            status: 'Login'
+        });
+    }
+
+    lout() {
+        this.setState({
+            status: 'Logout'
+        });
+    }
+
+    setTab(ntab) {
+        var tabStyle = [
+            'loginbutton',
+            'loginbutton',
+            'loginbutton',
+            'loginbutton'
+        ];
+        tabStyle[tabI[ntab]] = 'loginactivebtn';
+        var allTabs = [
+            <Submit
+                week={this.week}
+                quarter={this.quarter}
+                owner={this.owner.email.split('@')[0]}
+                session={this.session}
+                data={{
+                    Name: '',
+                    Link: '',
+                    Difficulty: 'Select one',
+                    Note: '',
+                    Solution: '',
+                    Contributor: this.owner.email.split('@')[0],
+                    Session: '',
+                    Code: '',
+                    SubmitDate: ''
+                }}
+            />,
+            <Log
+                week={this.week}
+                quarter={this.quarter}
+                owner={this.owner.email.split('@')[0]}
+            />,
+            <Data
+                week={this.week}
+                quarter={this.quarter}
+                session={this.session}
+                owner={this.owner.email.split('@')[0]}
+            />,
+            <Profile owner={this.owner.email.split('@')[0]} />
+        ];
 
         this.show = (
             <Container key="board">
@@ -188,7 +263,7 @@ export default class Login extends Component {
 
                 <Button
                     key="submitbutton"
-                    className="loginactivebtn"
+                    className={tabStyle[0]}
                     onClick={() => {
                         this.toggle('Submit');
                     }}>
@@ -197,7 +272,7 @@ export default class Login extends Component {
 
                 <Button
                     key="logbutton"
-                    className="loginbutton"
+                    className={tabStyle[1]}
                     onClick={() => {
                         this.toggle('Log');
                     }}>
@@ -206,11 +281,20 @@ export default class Login extends Component {
 
                 <Button
                     key="databutton"
-                    className="loginbutton"
+                    className={tabStyle[2]}
                     onClick={() => {
                         this.toggle('Data');
                     }}>
                     Data
+                </Button>
+
+                <Button
+                    key="profilebutton"
+                    className={tabStyle[3]}
+                    onClick={() => {
+                        this.toggle('Profile');
+                    }}>
+                    Profile
                 </Button>
 
                 <Button
@@ -219,211 +303,13 @@ export default class Login extends Component {
                     onClick={this.login}>
                     Logout
                 </Button>
-                {/* <Log quarter={this.quarter} week={this.week}/> */}
-                <Submit
-                    week={this.week}
-                    quarter={this.quarter}
-                    session={this.session}
-                    owner={this.owner.email.split('@')[0]}
-                    data={{
-                        Name: '',
-                        Link: '',
-                        Difficulty: 'Select one',
-                        Note: '',
-                        Solution: '',
-                        Contributor: this.owner.email.split('@')[0],
-                        Session: '',
-                        Code: '',
-                        SubmitDate: ''
-                    }}
-                />
+                {allTabs[tabI[ntab]]}
             </Container>
         );
-
-        this.lout();
-    }
-    lin() {
-        this.setState({
-            status: 'Login'
-        });
-    }
-    lout() {
-        this.setState({
-            status: 'Logout'
-        });
     }
 
     toggle(ntab) {
-        if (ntab === 'Data') {
-            this.show = (
-                <Container key="board">
-                    <Row className="welcome">
-                        <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.owner.displayName}! ^^
-                        </Col>
-                        <Col style={{ textAlign: 'right' }}>
-                            {this.owner.email}
-                        </Col>
-                    </Row>
-
-                    <Button
-                        key="submitbutton"
-                        className="loginbutton"
-                        onClick={() => {
-                            this.toggle('Submit');
-                        }}>
-                        Submit
-                    </Button>
-
-                    <Button
-                        key="logbutton"
-                        className="loginbutton"
-                        onClick={() => {
-                            this.toggle('Log');
-                        }}>
-                        Log
-                    </Button>
-
-                    <Button
-                        key="databutton"
-                        className="loginactivebtn"
-                        onClick={() => {
-                            this.toggle('Data');
-                        }}>
-                        Data
-                    </Button>
-
-                    <Button
-                        key="logoutbutton"
-                        className="loginbutton"
-                        onClick={this.login}>
-                        Logout
-                    </Button>
-                    <Data
-                        week={this.week}
-                        quarter={this.quarter}
-                        session={this.session}
-                        owner={this.owner.email.split('@')[0]}
-                    />
-                </Container>
-            );
-        } else if (ntab === 'Log') {
-            this.show = (
-                <Container key="board">
-                    <Row className="welcome">
-                        <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.owner.displayName}! ^^
-                        </Col>
-                        <Col style={{ textAlign: 'right' }}>
-                            {this.owner.email}
-                        </Col>
-                    </Row>
-
-                    <Button
-                        key="submitbutton"
-                        className="loginbutton"
-                        onClick={() => {
-                            this.toggle('Submit');
-                        }}>
-                        Submit
-                    </Button>
-
-                    <Button
-                        key="logbutton"
-                        className="loginactivebtn"
-                        onClick={() => {
-                            this.toggle('Log');
-                        }}>
-                        Log
-                    </Button>
-
-                    <Button
-                        key="databutton"
-                        className="loginbutton"
-                        onClick={() => {
-                            this.toggle('Data');
-                        }}>
-                        Data
-                    </Button>
-
-                    <Button
-                        key="logoutbutton"
-                        className="loginbutton"
-                        onClick={this.login}>
-                        Logout
-                    </Button>
-                    <Log
-                        week={this.week}
-                        quarter={this.quarter}
-                        owner={this.owner.email.split('@')[0]}
-                    />
-                </Container>
-            );
-        } else {
-            this.show = (
-                <Container key="board">
-                    <Row className="welcome">
-                        <Col style={{ textAlign: 'left' }}>
-                            Welcome {this.owner.displayName}! ^^
-                        </Col>
-                        <Col style={{ textAlign: 'right' }}>
-                            {this.owner.email}
-                        </Col>
-                    </Row>
-
-                    <Button
-                        key="submitbutton"
-                        className="loginactivebtn"
-                        onClick={() => {
-                            this.toggle('Submit');
-                        }}>
-                        Submit
-                    </Button>
-
-                    <Button
-                        key="logbutton"
-                        className="loginbutton"
-                        onClick={() => {
-                            this.toggle('Log');
-                        }}>
-                        Log
-                    </Button>
-
-                    <Button
-                        key="databutton"
-                        className="loginbutton"
-                        onClick={() => {
-                            this.toggle('Data');
-                        }}>
-                        Data
-                    </Button>
-
-                    <Button
-                        key="logoutbutton"
-                        className="loginbutton"
-                        onClick={this.login}>
-                        Logout
-                    </Button>
-                    <Submit
-                        week={this.week}
-                        quarter={this.quarter}
-                        owner={this.owner.email.split('@')[0]}
-                        session={this.session}
-                        data={{
-                            Name: '',
-                            Link: '',
-                            Difficulty: 'Select one',
-                            Note: '',
-                            Solution: '',
-                            Contributor: this.owner.email.split('@')[0],
-                            Session: '',
-                            Code: '',
-                            SubmitDate: ''
-                        }}
-                    />
-                </Container>
-            );
-        }
+        this.setTab(ntab);
         this.setState({
             tab: ntab
         });
