@@ -10,6 +10,7 @@ import IntroCP from './components/Resources/IntroCP/IntroCP';
 import Puzzle from './components/Resources/Puzzle/Puzzle';
 import Donate from './components/Donate/donate';
 import Login from './components/Login/Login';
+import config from './firebase-config.js';
 import './scss/custom.css';
 import './App.css';
 
@@ -17,15 +18,7 @@ const firebase = require('firebase');
 // Required for side-effects
 require('firebase/firestore');
 // Initialize Cloud Firestore through Firebase
-firebase.initializeApp({
-    //apiKey: 'AIzaSyCREpANPjLytuJteEai3xUzu-dkWg69FSg',
-    apiKey: 'AIzaSyAnvTIkqX39_Ih-UlgdfPiJAgVDbzUgyd0',
-    authDomain: 'acm-uci-website-test.firebaseapp.com',
-    projectId: 'acm-uci-website-test',
-    databaseURL: 'https://acm-uci-website-test.firebaseio.com',
-    storageBucket: 'acm-uci-website-test.appspot.com',
-    messagingSenderId: '894657849706'
-});
+firebase.initializeApp(config);
 
 class App extends Component {
     render() {
