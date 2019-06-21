@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Collapse, Button } from 'reactstrap';
 import Session from './Session/Session';
+import drop from './drop.png';
+import raise from './raise.png';
 import './Week.css';
 
 export default class Week extends Component {
@@ -19,9 +21,8 @@ export default class Week extends Component {
                     key={i}
                     week={this.week}
                     quarter={this.quarter}
-                    session={i.toString()}
+                    session={i}
                     data={props.data}
-                    contributors={props.contributors}
                 />
             );
         }
@@ -34,6 +35,10 @@ export default class Week extends Component {
     render() {
         if (this.sessions.length === 0) {
             return null;
+        }
+        var src = drop;
+        if (this.state.collapse) {
+            src = raise;
         }
         return (
             <Container>
@@ -49,7 +54,8 @@ export default class Week extends Component {
                         marginBottom: '1rem',
                         fontSize: '26px'
                     }}>
-                    Week {this.week}
+                    Week {this.week + ' '}{' '}
+                    <img style={{ height: '10px' }} src={src} alt="" />
                 </Button>
 
                 <Collapse className="marpad" isOpen={this.state.collapse}>

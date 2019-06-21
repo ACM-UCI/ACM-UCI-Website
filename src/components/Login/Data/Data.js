@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Table } from 'reactstrap';
 import Entry from './Entry/Entry';
+import config from '../../config.js';
 import './Data.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -15,6 +16,27 @@ export default class Data extends Component {
             sess: 'Session',
             note: 'Notes'
         };
+        this.sessoptions = [
+            <option key="sessopt">Session</option>,
+            <option key="sessoptnotused">Not Used</option>
+        ];
+
+        var quarters = config['quarters'];
+        for (var i in quarters) {
+            for (var j = 1; j <= 11; j++) {
+                this.sessoptions.push(
+                    <option key={'sessopt' + quarters[i] + j.toString() + '/1'}>
+                        {quarters[i] + '/' + j.toString() + '/1'}
+                    </option>
+                );
+                this.sessoptions.push(
+                    <option key={'sessopt' + quarters[i] + j.toString() + '/2'}>
+                        {quarters[i] + '/' + j.toString() + '/2'}
+                    </option>
+                );
+            }
+        }
+
         this.processData = this.processData.bind(this);
         this.state = {
             tog: false
@@ -50,73 +72,31 @@ export default class Data extends Component {
     processData(data) {
         this.data = data;
         this.body = [];
-        var submissions = data.val();
-        for (var q in submissions) {
-            if (q === 'submissions') {
-                var s = submissions[q];
-                for (var key in s) {
-                    if (s.hasOwnProperty(key) && s[key] != null) {
-                        this.body.push(
-                            <Entry
-                                key={key}
-                                // current time
-                                wk={this.props.week}
-                                qrt={this.props.quarter}
-                                ses={this.props.session}
-                                // data
-                                data={s[key]}
-                                filters={this.filters}
-                                owner={this.props.owner}
-                                // paths
-                                week={this.week}
-                                quarter={this.quarter}
-                                session={this.session}
-                                k={'submissions'}
-                                x={key}
-                            />
-                        );
-                    }
-                }
-            } else if (
-                submissions.hasOwnProperty(q) &&
-                q !== 'board' &&
-                q !== 'logs'
-            ) {
-                var quarter = submissions[q];
-                for (var w in quarter) {
-                    if (quarter.hasOwnProperty(w)) {
-                        var week = quarter[w];
-                        for (var keys in week) {
-                            if (
-                                week.hasOwnProperty(keys) &&
-                                week[keys] != null
-                            ) {
-                                this.body.push(
-                                    <Entry
-                                        key={q + '/' + w + '/' + keys}
-                                        // current time
-                                        wk={this.props.week}
-                                        qrt={this.props.quarter}
-                                        ses={this.props.session}
-                                        // data
-                                        data={week[keys]}
-                                        filters={this.filters}
-                                        owner={this.props.owner}
-                                        // paths
-                                        k={q + '/' + w}
-                                        x={keys}
-                                    />
-                                );
-                            }
-                        }
-                    }
-                }
+        var submissions = data.val()['submissions'];
+        for (var key in submissions) {
+            if (submissions.hasOwnProperty(key) && submissions[key] != null) {
+                this.body.push(
+                    <Entry
+                        key={key}
+                        // current time
+                        wk={this.props.week}
+                        qrt={this.props.quarter}
+                        sess={this.props.session}
+                        // data
+                        data={submissions[key]}
+                        filters={this.filters}
+                        owner={this.props.owner}
+                        // paths
+                        x={key}
+                    />
+                );
             }
         }
 
+        var logs = data.val()['logs'];
         this.cons = [<option key="con">Contributor</option>];
-        for (var user in submissions['logs']) {
-            if (submissions['logs'].hasOwnProperty(user)) {
+        for (var user in logs) {
+            if (logs.hasOwnProperty(user)) {
                 this.cons.push(<option key={user}>{user}</option>);
             }
         }
@@ -183,11 +163,7 @@ export default class Data extends Component {
                                 onChange={evt => this.updateInputValue(evt)}
                                 name="select"
                                 id="sessfilter">
-                                <option>Session</option>
-                                <option>Fall 2018</option>
-                                <option>Winter 2019</option>
-                                <option>Spring 2019</option>
-                                <option>Not Used</option>
+                                {this.sessoptions}
                             </Input>
                         </th>
                         <th />

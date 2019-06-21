@@ -7,7 +7,8 @@ import {
     ModalHeader,
     ModalBody,
     Table,
-    Input
+    Input,
+    Row
 } from 'reactstrap';
 import './Entry.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
@@ -19,7 +20,17 @@ import filter from './filter.js';
 
 const lang = {
     py: 'python',
-    cpp: 'cpp'
+    cpp: 'cpp',
+    js: 'javascript',
+    c: 'cpp',
+    go: 'go',
+    swift: 'swift',
+    java: 'java',
+    rb: 'ruby',
+    cs: 'cs',
+    php: 'php',
+    kt: 'kotlin',
+    m: 'objectivec'
 };
 
 const shouldDisplay = ['none', undefined];
@@ -41,7 +52,14 @@ export default class Entry extends Component {
         this.msg = null;
         this.data = props.data;
 
-        this.session = props.session;
+        this.selectedSess = '';
+
+        this.allweeks = [];
+        for (var w = 1; w <= 11; w++) {
+            this.allweeks.push(<option key={'w' + w.toString()}>{w}</option>);
+        }
+
+        this.session = props.sess;
         this.filters = props.filters;
         this.optses1 = '2';
         this.optses2 = '1';
@@ -50,30 +68,16 @@ export default class Entry extends Component {
             this.optses2 = '2';
         }
 
-        this.week = props.week;
+        this.week = props.wk;
         this.state = {
-            // see solution, see note, set problem, edit
-            modal: [false, false, false, false]
+            // see solution, see note, set problem, edit, remove session
+            modal: [false, false, false, false, false]
         };
 
-        // set session
-        if (this.data.Session === '') {
-            this.ses = (
-                <Button
-                    onClick={() => {
-                        this.toggle(2);
-                    }}
-                    style={{
-                        color: 'white'
-                    }}>
-                    Not Used
-                </Button>
-            );
-        } else {
-            this.ses = props.k + '/' + this.data.Session;
-        }
-
-        if (props.owner === this.data.Contributor) {
+        if (
+            this.data.Contributor !== undefined &&
+            this.data.Contributor.indexOf(this.props.owner) !== -1
+        ) {
             this.edit = (
                 <Button
                     className="editbutton"
@@ -86,31 +90,116 @@ export default class Entry extends Component {
         }
     }
 
-    setProblem() {
+    remove() {
+        // change this to position !!!!!
         if (
             this.props.owner === 'mnovitia' ||
             this.props.owner === 'btjanaka' ||
             this.props.owner === 'jtuyls'
         ) {
-            this.data.Session = this.session.toString();
-            var newPostKey = firebase
-                .database()
-                .ref()
-                .child(this.props.quarter)
-                .child(this.week)
-                .push().key;
-            var updates = {};
-            updates[
-                '/' + this.props.quarter + '/' + this.week + '/' + newPostKey
-            ] = this.data;
-            updates['/submissions/' + this.props.x] = null;
-            firebase
-                .database()
-                .ref()
-                .update(updates);
+            // if removing from this quarter
+            if (this.selectedSess.startsWith(this.props.qrt)) {
+                var sessionIndex = this.data.Session.indexOf(this.selectedSess);
+                this.data.Session.splice(sessionIndex, 1);
+                var updates = {};
+                updates[this.selectedSess + '/' + this.props.x] = null;
+                updates[
+                    '/submissions/' + this.props.x + '/Session'
+                ] = this.data.Session;
+                firebase
+                    .database()
+                    .ref()
+                    .update(updates);
+
+                this.setState({
+                    modal: [false, false, false, false, false]
+                });
+            } else {
+                this.msg = (
+                    <Alert color="warning">
+                        Sorry! This session is from a different quarter! ^^
+                    </Alert>
+                );
+
+                this.setState({
+                    modal: this.state.modal
+                });
+            }
+        } else {
+            this.msg = (
+                <Alert color="warning">
+                    Sorry! Only Bryon, Jens, and Meta can remove problems for
+                    now XD
+                </Alert>
+            );
             this.setState({
-                modal: [false, false, false, false]
+                modal: this.state.modal
             });
+        }
+    }
+
+    setProblem() {
+        // change this to position !!!!!
+        if (
+            this.props.owner === 'mnovitia' ||
+            this.props.owner === 'btjanaka' ||
+            this.props.owner === 'jtuyls'
+        ) {
+            if (this.data.Session === undefined) {
+                this.data.Session = [];
+            }
+
+            var sess =
+                this.props.qrt +
+                '/' +
+                this.week +
+                '/' +
+                this.session.toString();
+
+            // if adding a new session
+            if (this.data.Session.indexOf(sess) === -1) {
+                this.data.Session.push(
+                    this.props.qrt +
+                        '/' +
+                        this.week +
+                        '/' +
+                        this.session.toString()
+                );
+                var updates = {};
+                updates[
+                    '/' +
+                        this.props.qrt +
+                        '/' +
+                        this.week +
+                        '/' +
+                        this.session.toString() +
+                        '/' +
+                        this.props.x
+                ] = {
+                    tag: ''
+                };
+                updates[
+                    '/submissions/' + this.props.x + '/Session'
+                ] = this.data.Session;
+                firebase
+                    .database()
+                    .ref()
+                    .update(updates);
+
+                this.setState({
+                    modal: [false, false, false, false, false]
+                });
+            } else {
+                this.msg = (
+                    <Alert color="warning">
+                        Sorry! This problem is already used in that session! ^^
+                    </Alert>
+                );
+
+                this.setState({
+                    modal: this.state.modal
+                });
+            }
         } else {
             this.msg = (
                 <Alert color="warning">
@@ -157,6 +246,7 @@ export default class Entry extends Component {
                     {problem.Solution}
                 </Button>
             );
+            // !!!!! position
             if (
                 problem.Contributor !== this.props.owner &&
                 this.props.owner !== 'mnovitia' &&
@@ -188,27 +278,47 @@ export default class Entry extends Component {
         this.txt = '-';
         if (problem.Note !== '') {
             this.txt = (
-                <Container
+                <Button
                     className="solbtn"
                     onClick={() => {
                         this.toggle(1);
                     }}>
                     Open
-                </Container>
+                </Button>
+            );
+        }
+
+        // set contributors
+        this.contributors = [];
+        for (var i in this.data.Contributor) {
+            var c = this.data.Contributor[i];
+            if (i > 0) {
+                c = ', ' + c;
+            }
+            this.contributors.push(c);
+        }
+
+        // set sessions
+        this.sessions = [];
+        for (var i in this.data.Session) {
+            this.sessions.push(
+                <Button
+                    id={this.data.Session[i]}
+                    key={'sessbtn' + i.toString()}
+                    className="solbtn"
+                    onClick={e => {
+                        this.selectedSess = e.target.id;
+                        this.toggle(4);
+                    }}>
+                    {this.data.Session[i]}
+                </Button>
             );
         }
 
         return (
             <tr
                 style={{
-                    display:
-                        shouldDisplay[
-                            filter(
-                                problem,
-                                this.props.k.split('/')[0],
-                                this.filters
-                            )
-                        ]
+                    display: shouldDisplay[filter(problem, this.filters)]
                 }}>
                 <th scope="row" style={{ textAlign: 'left' }}>
                     <a
@@ -229,8 +339,21 @@ export default class Entry extends Component {
                 </td>
                 <td>{this.sol}</td>
                 <td>{this.txt}</td>
-                <td>{problem.Contributor}</td>
-                <td>{this.ses}</td>
+                <td>{this.contributors}</td>
+                <td>{this.sessions}</td>
+                <td>
+                    <Button
+                        onClick={() => {
+                            this.toggle(2);
+                        }}
+                        style={{
+                            color: 'white',
+                            borderRadius: '50%',
+                            fontSize: '14px'
+                        }}>
+                        +
+                    </Button>
+                </td>
                 <td>{this.edit}</td>
                 <Modal
                     size="lg"
@@ -288,25 +411,20 @@ export default class Entry extends Component {
                                 </tr>
                                 <tr>
                                     <th>Quarter</th>
-                                    <td>: {this.props.quarter}</td>
+                                    <td>: {this.props.qrt}</td>
                                 </tr>
                                 <tr>
                                     <th>Week</th>
                                     <td>
                                         <Input
                                             type="select"
+                                            value={this.props.wk}
                                             onChange={evt =>
                                                 this.updateInputValue(evt)
                                             }
                                             name="select"
                                             id="Week">
-                                            <option>{this.props.week}</option>
-                                            <option>
-                                                {parseInt(this.props.week) + 1}
-                                            </option>
-                                            <option>
-                                                {parseInt(this.props.week) + 2}
-                                            </option>
+                                            {this.allweeks}
                                         </Input>
                                     </td>
                                 </tr>
@@ -349,11 +467,43 @@ export default class Entry extends Component {
                         week={this.props.wk}
                         quarter={this.props.qrt}
                         owner={this.props.owner}
-                        session={this.props.ses}
+                        session={this.props.sess}
                         data={problem}
-                        k={this.props.k}
                         x={this.props.x}
                     />
+                </Modal>
+                <Modal
+                    size="sm"
+                    isOpen={this.state.modal[4]}
+                    toggle={() => {
+                        this.toggle(4);
+                    }}>
+                    <ModalHeader
+                        toggle={() => {
+                            this.toggle(4);
+                        }}>
+                        Remove Session
+                    </ModalHeader>
+                    <Row
+                        style={{
+                            textAlign: 'center',
+                            justifyContent: 'center'
+                        }}>
+                        <Button
+                            onClick={() => {
+                                this.toggle(4);
+                            }}
+                            style={{ width: '25%', margin: '5%' }}>
+                            Cancel
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                this.remove();
+                            }}
+                            style={{ width: '25%', margin: '5%' }}>
+                            Remove
+                        </Button>
+                    </Row>
                 </Modal>
             </tr>
         );

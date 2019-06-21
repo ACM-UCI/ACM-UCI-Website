@@ -11,11 +11,10 @@ export default class Quarter extends Component {
         const last_week = (
             <Week
                 key={props.week}
-                week={props.week.toString()}
+                week={props.week}
                 quarter={props.quarter}
                 session={props.session}
-                data={props.data[props.week.toString()]}
-                contributors={props.contributors}
+                data={props.data}
             />
         );
         if (last_week != null) {
@@ -26,11 +25,10 @@ export default class Quarter extends Component {
             const week = (
                 <Week
                     key={i}
-                    week={i.toString()}
+                    week={i}
                     quarter={props.quarter}
                     session={3}
-                    data={props.data[i.toString()]}
-                    contributors={props.contributors}
+                    data={props.data}
                 />
             );
             if (week != null) {

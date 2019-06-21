@@ -1,4 +1,4 @@
-export default function filter(problem, q, filters) {
+export default function filter(problem, filters) {
     if (
         ((filters.diffs === 'Difficulty' &&
             (problem.Difficulty === 'easy' ||
@@ -11,10 +11,12 @@ export default function filter(problem, q, filters) {
             (filters.solf === 'No Solution' && problem.Code === '') ||
             (filters.solf === 'Has Solution' && problem.Code !== '')) &&
         (filters.cons === 'Contributor' ||
-            filters.cons === problem.Contributor) &&
+            (problem.Contributor !== undefined &&
+                problem.Contributor.indexOf(filters.cons) !== -1)) &&
         (filters.sess === 'Session' ||
-            (filters.sess === 'Not Used' && problem.Session === '') ||
-            filters.sess === q) &&
+            (filters.sess === 'Not Used' && problem.Session === undefined) ||
+            (problem.Session !== undefined &&
+                problem.Session.indexOf(filters.sess) !== -1)) &&
         (filters.note === 'Notes' ||
             (filters.note === 'No Notes' && problem.Note === '') ||
             (filters.note === 'Has Notes' && problem.Note !== ''))

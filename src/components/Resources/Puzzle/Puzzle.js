@@ -5,10 +5,10 @@ import Banner from '../../Banner/Banner';
 import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
-// import dataconst from '../../Login/Data/d.json';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import $ from 'jquery';
+import config from '../../config.js';
 
 export default class Puzzle extends Component {
     constructor(props) {
@@ -24,20 +24,14 @@ export default class Puzzle extends Component {
         this.week = 1;
         this.session = 1;
         this.end = false;
-        this.quarters = [
-            'Fall 2018',
-            'Winter 2019',
-            'Spring 2019',
-            'Fall 2019',
-            'Winter 2020',
-            'Spring 2020'
-        ];
+        this.quarters = config['quarters'];
 
         this.done = false;
         this.error = null;
         this.past = null;
         this.present = null;
 
+        // tricky stuff, may change if website changes
         $.ajax({
             url: 'https://24timezones.com/time-zone/utc',
             context: document.body,
@@ -48,6 +42,7 @@ export default class Puzzle extends Component {
     processData(data) {
         this.data = data.val();
         // this.data = data;
+
         this.past = (
             <Past
                 week={this.week}
@@ -64,8 +59,7 @@ export default class Puzzle extends Component {
                 week={this.week}
                 quarter={this.quarter}
                 session={this.session}
-                data={this.data[this.quarter][this.week]}
-                contributors={this.data['logs']}
+                data={this.data}
                 // end={false}
                 // week={'2'}
                 // quarter={'Spring 2019'}
@@ -105,22 +99,8 @@ export default class Puzzle extends Component {
 
         // QUARTER
         // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        const quarters = [
-            'Fall 2018',
-            'Winter 2019',
-            'Spring 2019',
-            'Fall 2019',
-            'Winter 2020',
-            'Spring 2020'
-        ];
-        const startDates = [
-            new Date('October 2, 2018 18:00:00 GMT-07:00').getTime(),
-            new Date('January 8, 2019 17:00:00 GMT-08:00').getTime(),
-            new Date('April 2, 2019 18:00:00 GMT-07:00').getTime(),
-            new Date('October 1, 2019 18:00:00 GMT-07:00').getTime(),
-            new Date('January 7, 2020 18:00:00 GMT-07:00').getTime(),
-            new Date('March 31, 2020 18:00:00 GMT-07:00').getTime()
-        ];
+        const quarters = config['quarters'];
+        const startDates = config['dates'];
 
         // change below for testing [ place desired date inside Date() ]
         var today = new Date(date);
@@ -189,7 +169,6 @@ export default class Puzzle extends Component {
 
         var ref = firebase.database().ref();
         ref.on('value', this.processData);
-        // this.processData(dataconst);
 
         this.toggle();
     }

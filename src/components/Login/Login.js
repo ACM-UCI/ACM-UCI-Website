@@ -7,6 +7,7 @@ import Data from './Data/Data';
 import Log from './Log/Log';
 import Profile from './Profile/Profile';
 import firebase from 'firebase/app';
+import config from '../config.js';
 import 'firebase/auth';
 import './Login.css';
 
@@ -40,6 +41,10 @@ export default class Login extends Component {
                 {this.state.status}
             </Button>
         ];
+        this.default = {};
+        for (var key in config['defaultData']) {
+            this.default[key] = config['defaultData'][key];
+        }
 
         this.ref = firebase.database().ref();
         this.ref.on('value', this.processData);
@@ -194,6 +199,7 @@ export default class Login extends Component {
         }
 
         this.owner = user;
+        this.default['Contributor'] = [this.owner.email.split('@')[0]];
 
         this.setTab('Profile');
 
@@ -226,17 +232,7 @@ export default class Login extends Component {
                 quarter={this.quarter}
                 owner={this.owner.email.split('@')[0]}
                 session={this.session}
-                data={{
-                    Name: '',
-                    Link: '',
-                    Difficulty: 'Select one',
-                    Note: '',
-                    Solution: '',
-                    Contributor: this.owner.email.split('@')[0],
-                    Session: '',
-                    Code: '',
-                    SubmitDate: ''
-                }}
+                data={this.default}
             />,
             <Log
                 week={this.week}

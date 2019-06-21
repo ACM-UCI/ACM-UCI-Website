@@ -21,57 +21,56 @@ export default class Session extends Component {
     }
 
     processData(myData) {
-        const problems = [[]];
+        var contributors = myData['logs'];
+        var sessionProblems = myData[this.quarter][this.week][this.session];
+        var allProblems = myData['submissions'];
+
+        var problems = [[]];
         this.announcements = [];
 
-        for (var key in myData) {
-            if (myData.hasOwnProperty(key)) {
-                const data = myData[key];
+        for (var key in sessionProblems) {
+            if (allProblems.hasOwnProperty(key)) {
+                var data = allProblems[key];
                 if (data !== null) {
                     if (problems[problems.length - 1].length === 3) {
                         problems.push([]);
                     }
 
                     var conName = '';
-                    if (
-                        this.props.contributors.hasOwnProperty(data.Contributor)
-                    ) {
-                        conName = this.props.contributors[data.Contributor]
-                            .Name;
+                    if (contributors.hasOwnProperty(data.Contributor[0])) {
+                        conName = contributors[data.Contributor[0]].Name;
                     }
 
-                    if (data.Session === this.session) {
-                        if (data.Difficulty === 'announcement') {
-                            this.announcements.push(
-                                <Announcement
-                                    key={data.Name}
+                    if (data.Difficulty === 'announcement') {
+                        this.announcements.push(
+                            <Announcement
+                                key={data.Name}
+                                name={data.Name}
+                                desc={data.Link}
+                                con={data.Contributor[0]}
+                                conName={conName}
+                            />
+                        );
+                    } else {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height space">
+                                <Problem
+                                    className="center"
                                     name={data.Name}
-                                    desc={data.Link}
-                                    con={data.Contributor}
+                                    link={data.Link}
+                                    note={data.Note}
+                                    diff={data.Difficulty}
+                                    slink={data.Solution}
+                                    code={data.Code}
+                                    con={data.Contributor[0]}
                                     conName={conName}
+                                    txt="Solution"
+                                    week={this.week}
+                                    quarter={this.quarter}
+                                    session={this.session}
                                 />
-                            );
-                        } else {
-                            problems[problems.length - 1].push(
-                                <Col md="4" className="height space">
-                                    <Problem
-                                        className="center"
-                                        name={data.Name}
-                                        link={data.Link}
-                                        note={data.Note}
-                                        diff={data.Difficulty}
-                                        slink={data.Solution}
-                                        code={data.Code}
-                                        con={data.Contributor}
-                                        conName={conName}
-                                        txt="Solution"
-                                        week={this.week}
-                                        quarter={this.quarter}
-                                        session={this.session}
-                                    />
-                                </Col>
-                            );
-                        }
+                            </Col>
+                        );
                     }
                 }
             }

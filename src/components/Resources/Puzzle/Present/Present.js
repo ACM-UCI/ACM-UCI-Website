@@ -28,13 +28,17 @@ export default class Present extends Component {
     }
 
     processData(myData) {
+        var contributors = myData['logs'];
+        var sessionProblems = myData[this.quarter][this.week][this.session];
+        var allProblems = myData['submissions'];
+
         var problems = [[]];
         var events = [[]];
         this.announcements = [];
 
-        for (var key in myData) {
-            if (myData.hasOwnProperty(key)) {
-                var data = myData[key];
+        for (var key in sessionProblems) {
+            if (allProblems.hasOwnProperty(key)) {
+                var data = allProblems[key];
                 if (data !== null) {
                     var t = 'Solution';
                     if (problems[problems.length - 1].length === 3) {
@@ -45,73 +49,67 @@ export default class Present extends Component {
                         events.push([]);
                     }
 
-                    if (!this.end && data.Session === this.session.toString()) {
+                    if (!this.end) {
                         t = 'Help';
                         // make sure no solution is shown since session is ongoing
                         data.Solution = '';
                     }
 
                     var conName = '';
-                    if (
-                        this.props.contributors.hasOwnProperty(data.Contributor)
-                    ) {
-                        conName = this.props.contributors[data.Contributor]
-                            .Name;
+                    if (contributors.hasOwnProperty(data.Contributor[0])) {
+                        conName = contributors[data.Contributor[0]].Name;
                     }
 
-                    // if this entry is from the current session
-                    if (data.Session === this.session.toString()) {
-                        if (data.Difficulty === 'announcement') {
-                            this.announcements.push(
-                                <Announcement
-                                    key={data.Name}
+                    if (data.Difficulty === 'announcement') {
+                        this.announcements.push(
+                            <Announcement
+                                key={data.Name}
+                                name={data.Name}
+                                desc={data.Link}
+                                con={data.Contributor[0]}
+                                conName={conName}
+                            />
+                        );
+                    } else if (data.Difficulty === 'event') {
+                        events[events.length - 1].push(
+                            <Col md="4" className="height space">
+                                <Problem
+                                    className="center"
                                     name={data.Name}
-                                    desc={data.Link}
-                                    con={data.Contributor}
+                                    link={data.Link}
+                                    diff={data.Difficulty}
+                                    slink={data.Solution}
+                                    con={data.Contributor[0]}
                                     conName={conName}
+                                    code={data.Code}
+                                    note={data.Note}
+                                    txt="Info"
+                                    week={this.week}
+                                    quarter={this.quarter}
+                                    session={this.session}
+                                    evnt="yes"
                                 />
-                            );
-                        } else if (data.Difficulty === 'event') {
-                            events[events.length - 1].push(
-                                <Col md="4" className="height space">
-                                    <Problem
-                                        className="center"
-                                        name={data.Name}
-                                        link={data.Link}
-                                        diff={data.Difficulty}
-                                        slink={data.Solution}
-                                        con={data.Contributor}
-                                        conName={conName}
-                                        code={data.Code}
-                                        note={data.Note}
-                                        txt="Info"
-                                        week={this.week}
-                                        quarter={this.quarter}
-                                        session={this.session}
-                                        evnt="yes"
-                                    />
-                                </Col>
-                            );
-                        } else {
-                            problems[problems.length - 1].push(
-                                <Col md="4" className="height space">
-                                    <Problem
-                                        name={data.Name}
-                                        link={data.Link}
-                                        diff={data.Difficulty}
-                                        slink={data.Solution}
-                                        con={data.Contributor}
-                                        conName={conName}
-                                        note={data.Note}
-                                        code={data.Code}
-                                        week={this.week}
-                                        quarter={this.quarter}
-                                        session={this.session}
-                                        txt={t}
-                                    />
-                                </Col>
-                            );
-                        }
+                            </Col>
+                        );
+                    } else {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height space">
+                                <Problem
+                                    name={data.Name}
+                                    link={data.Link}
+                                    diff={data.Difficulty}
+                                    slink={data.Solution}
+                                    con={data.Contributor[0]}
+                                    conName={conName}
+                                    note={data.Note}
+                                    code={data.Code}
+                                    week={this.week}
+                                    quarter={this.quarter}
+                                    session={this.session}
+                                    txt={t}
+                                />
+                            </Col>
+                        );
                     }
                 }
             }

@@ -31,8 +31,7 @@ export default class Past extends Component {
                         session={3}
                         week={11}
                         quarter={this.quarters[i]}
-                        data={props.data[this.quarters[i]]}
-                        contributors={props.data['logs']}
+                        data={props.data}
                     />
                 </TabPane>
             );
@@ -45,8 +44,7 @@ export default class Past extends Component {
                     session={this.session}
                     week={this.week}
                     quarter={this.quarters[curr]}
-                    data={props.data[this.quarters[curr]]}
-                    contributors={props.data['logs']}
+                    data={props.data}
                 />
             </TabPane>
         );

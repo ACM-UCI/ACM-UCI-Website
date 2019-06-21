@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import board from '../../Board/board.json';
 import './Submit.css';
+import config from '../../config.js';
 
 const vars = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
@@ -14,6 +15,10 @@ export default class Submit extends Component {
     constructor(props) {
         super(props);
 
+        this.acceptedLangs = '.py';
+        for (var lang in config.supportedLanguage) {
+            this.acceptedLangs += ',' + lang;
+        }
         this.quarter = props.quarter;
         this.week = props.week;
         this.owner = props.owner;
@@ -42,6 +47,7 @@ export default class Submit extends Component {
         }
 
         this.diffSel = [];
+        this.contributors = [];
         var i = 0;
         for (i = 0; i < vars.difficulties.length; i++) {
             this.diffSel.push(
@@ -67,11 +73,23 @@ export default class Submit extends Component {
         for (var key in props.data) {
             this.submission[key] = props.data[key];
         }
+        if (
+            this.submission['Category'] === '' ||
+            this.submission['Category'] === undefined
+        ) {
+            this.submission['Category'] = [];
+        }
+        if (
+            this.submission['Session'] === '' ||
+            this.submission['Session'] === undefined
+        ) {
+            this.submission['Session'] = [];
+        }
     }
 
     processData(data) {
         this.data = data.val();
-        // /* this is code for initializing logs in firebase to 0 BE CAREFUL
+        /* this is code for initializing logs in firebase to 0 BE CAREFUL
         var okay = true;
         if (okay) {
             var u = {};
@@ -85,7 +103,7 @@ export default class Submit extends Component {
                         // u['/logs/' + b + '/Fall 2018/' + i.toString()] = 0;
                         // u['/logs/' + b + '/Winter 2019/' + i.toString()] = 0;
                         // u['/logs/' + b + '/Spring 2019/' + i.toString()] = 0;
-                        u['/logs/' + b + '/Fall 2019/' + i.toString()] = 0;
+                        // u['/logs/' + b + '/Fall 2019/' + i.toString()] = 0;
                     }
                 }
             }
@@ -193,72 +211,24 @@ export default class Submit extends Component {
 
             // current problem collision checker
             if (s.Difficulty !== 'event') {
-                var stop = false;
                 var problem = null;
-                for (var q in this.data) {
-                    if (q === 'submissions') {
-                        var sub = this.data[q];
-                        for (var key in sub) {
-                            if (sub.hasOwnProperty(key)) {
-                                problem = sub[key];
-                                if (problem != null) {
-                                    if (
-                                        (s.Link === problem.Link ||
-                                            s.Link + '/' === problem.Link) &&
-                                        problem.Link !== this.props.data.Link
-                                    ) {
-                                        errors.push(
-                                            <li key={errors.length}>
-                                                Oof someone submitted that
-                                                already!
-                                            </li>
-                                        );
-                                        stop = true;
-                                        break;
-                                    }
-                                }
+                for (var key in this.data['submissions']) {
+                    if (this.data['submissions'].hasOwnProperty(key)) {
+                        problem = this.data['submissions'][key];
+                        if (problem != null) {
+                            if (
+                                (s.Link === problem.Link ||
+                                    s.Link + '/' === problem.Link) &&
+                                problem.Link !== this.props.data.Link
+                            ) {
+                                errors.push(
+                                    <li key={errors.length}>
+                                        Oof someone submitted that already!
+                                    </li>
+                                );
+                                break;
                             }
                         }
-                    } else if (
-                        this.data.hasOwnProperty(q) &&
-                        q !== 'board' &&
-                        q !== 'logs'
-                    ) {
-                        var quarter = this.data[q];
-                        for (var w in quarter) {
-                            if (quarter.hasOwnProperty(w)) {
-                                var week = quarter[w];
-                                for (var keys in week) {
-                                    if (week.hasOwnProperty(keys)) {
-                                        problem = week[keys];
-                                        if (problem != null) {
-                                            if (
-                                                (s.Link === problem.Link ||
-                                                    s.Link + '/' ===
-                                                        problem.Link) &&
-                                                problem.Link !==
-                                                    this.props.data.Link
-                                            ) {
-                                                errors.push(
-                                                    <li key={errors.length}>
-                                                        Oof someone else
-                                                        submitted that already!
-                                                    </li>
-                                                );
-                                                stop = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (stop) {
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (stop) {
-                        break;
                     }
                 }
             }
@@ -292,7 +262,7 @@ export default class Submit extends Component {
                 this.props.data.Link !== '' &&
                 this.props.data.Link !== undefined
             ) {
-                updates[this.props.k + '/' + this.props.x] = s;
+                updates['submissions/' + this.props.x] = s;
                 firebase
                     .database()
                     .ref()
@@ -468,7 +438,7 @@ export default class Submit extends Component {
                             type="file"
                             name="file"
                             id="File"
-                            accept=".py,.cpp"
+                            accept={this.acceptedLangs}
                             onChange={evt => this.updateInputValue(evt)}
                         />
                         {this.filename}
