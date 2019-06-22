@@ -11,8 +11,9 @@ import {
 import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
-import fblogo from '../../../../../../../img/fb.png';
-import processCon from '../processCon.js';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { Carousel } from 'react-responsive-carousel';
+import { SocialIcon } from 'react-social-icons';
 
 const Python = codeString => (
     <SyntaxHighlighter key="mycode" language="python" style={tomorrowNight}>
@@ -40,7 +41,6 @@ export default class Solution extends Component {
         this.type = props.link.split('.');
         this.type = this.type[this.type.length - 1];
         this.link = props.link;
-        this.conName = props.conName.split(' ')[0];
         this.txt = props.txt;
         this.code = [];
         this.notes = [];
@@ -60,34 +60,12 @@ export default class Solution extends Component {
     }
 
     componentDidMount() {
-        const fb = processCon(this.props.con);
-        if (this.con === '') {
-            this.conName = ' Any Board Member';
-        }
-        this.link = `Ask ${this.conName} for help`;
+        this.link = `Ask${this.props.conName} for help`;
 
         if (this.props.note === '') {
             this.code.push(
-                <div
-                    style={{ marginBottom: '20px' }}
-                    className="center"
-                    key="contrib">
-                    <Row
-                        style={{
-                            objectFit: 'contain'
-                        }}>
-                        <img
-                            alt={`${this.con}'s`}
-                            className="pc"
-                            src={fb[1]}
-                            style={{
-                                width: '100%'
-                            }}
-                        />
-                    </Row>
-                    <a href={fb[0]} target="_blank" rel="noopener noreferrer">
-                        <img alt="facebook link" className="fb" src={fblogo} />
-                    </a>
+                <div style={{ marginBottom: '20px' }} key="contrib">
+                    {this.props.contributors}
                 </div>
             );
         } else {
@@ -95,34 +73,9 @@ export default class Solution extends Component {
                 <div style={{ marginBottom: '20px' }} key={'withnotes'}>
                     <Row className="center">
                         <Col style={{ width: '50%' }}>
-                            <Row className="center">
-                                <div
-                                    style={{
-                                        objectFit: 'contain'
-                                    }}>
-                                    <img
-                                        alt={`${this.con}'s`}
-                                        src={fb[1]}
-                                        style={{
-                                            width: '100%'
-                                        }}
-                                    />
-                                </div>
-                            </Row>
+                            {this.props.contributors}
                         </Col>
                         <Col style={{ textAlign: 'left' }}>{this.notes}</Col>
-                    </Row>
-                    <Row className="center">
-                        <a
-                            href={fb[0]}
-                            target="_blank"
-                            rel="noopener noreferrer">
-                            <img
-                                alt="facebook link"
-                                className="fb"
-                                src={fblogo}
-                            />
-                        </a>
                     </Row>
                 </div>
             );

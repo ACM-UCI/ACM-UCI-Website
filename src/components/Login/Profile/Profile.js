@@ -180,7 +180,11 @@ export default class Log extends Component {
                             maxWidth: this.state.imw,
                             minWidth: this.state.imw
                         }}>
-                        <img style={{ maxWidth: '100%' }} src={this.pic} />
+                        <img
+                            style={{ maxWidth: '100%' }}
+                            src={this.pic}
+                            alt=""
+                        />
                     </Col>
                     <Col
                         style={{
@@ -191,19 +195,25 @@ export default class Log extends Component {
                         <Row>
                             <Col style={{ maxWidth: '150px' }}>
                                 <pre>
-                                    Name :<br />
+                                    {'Name     :'}
                                     <br />
-                                    UCINetID :<br />
                                     <br />
-                                    Position :<br />
+                                    {'UCINetID :'}
                                     <br />
-                                    Photo :<br />
                                     <br />
-                                    LinkedIn :<br />
+                                    {'Position :'}
                                     <br />
-                                    GitHub :<br />
                                     <br />
-                                    Facebook :
+                                    {'Photo    :'}
+                                    <br />
+                                    <br />
+                                    {'LinkedIn :'}
+                                    <br />
+                                    <br />
+                                    {'GitHub   :'}
+                                    <br />
+                                    <br />
+                                    {'Facebook :'}
                                 </pre>
                             </Col>
                             <Col>

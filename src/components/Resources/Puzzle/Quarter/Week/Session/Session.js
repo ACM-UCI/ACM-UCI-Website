@@ -49,6 +49,7 @@ export default class Session extends Component {
                                 desc={data.Link}
                                 con={data.Contributor[0]}
                                 conName={conName}
+                                contributors={contributors}
                             />
                         );
                     } else {
@@ -62,12 +63,13 @@ export default class Session extends Component {
                                     diff={data.Difficulty}
                                     slink={data.Solution}
                                     code={data.Code}
-                                    con={data.Contributor[0]}
+                                    con={data.Contributor}
                                     conName={conName}
                                     txt="Solution"
                                     week={this.week}
                                     quarter={this.quarter}
                                     session={this.session}
+                                    contributors={contributors}
                                 />
                             </Col>
                         );

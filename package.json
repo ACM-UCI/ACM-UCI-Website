@@ -27,6 +27,7 @@
         "react-konami-code": "^1.4.0",
         "react-md": "^1.9.3",
         "react-profiles": "^0.1.4",
+        "react-responsive-carousel": "^3.1.49",
         "react-router": "^4.3.1",
         "react-router-dom": "^4.3.1",
         "react-scripts": "^2.1.8",

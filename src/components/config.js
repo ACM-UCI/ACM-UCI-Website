@@ -40,6 +40,11 @@ const config = {
         php: 'php',
         kt: 'kotlin',
         m: 'objectivec'
+    },
+    social: {
+        Facebook: 'https://www.facebook.com/',
+        GitHub: 'https://github.com/',
+        LinkedIn: 'https://www.linkedin.com/in/'
     }
 };
 

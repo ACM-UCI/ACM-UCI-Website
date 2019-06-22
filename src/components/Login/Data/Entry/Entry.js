@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
     Alert,
-    Container,
     Button,
     Modal,
     ModalHeader,
@@ -50,6 +49,7 @@ export default class Entry extends Component {
         this.tempSol = '';
         this.edit = null;
         this.msg = null;
+        this.msg2 = null;
         this.data = props.data;
 
         this.selectedSess = '';
@@ -115,7 +115,7 @@ export default class Entry extends Component {
                     modal: [false, false, false, false, false]
                 });
             } else {
-                this.msg = (
+                this.msg2 = (
                     <Alert color="warning">
                         Sorry! This session is from a different quarter! ^^
                     </Alert>
@@ -126,7 +126,7 @@ export default class Entry extends Component {
                 });
             }
         } else {
-            this.msg = (
+            this.msg2 = (
                 <Alert color="warning">
                     Sorry! Only Bryon, Jens, and Meta can remove problems for
                     now XD
@@ -260,19 +260,22 @@ export default class Entry extends Component {
                         onClick={() => {
                             this.toggle(0);
                         }}>
-                        {problem.Solution}
+                        Blocked
                     </Button>
                 );
             }
         }
 
         // set code
-        var ext = problem.Solution.split('.').slice(-1)[0];
-        this.code = (
-            <SyntaxHighlighter language={lang[ext]} style={tomorrowNight}>
-                {problem.Code}
-            </SyntaxHighlighter>
-        );
+        this.code = null;
+        if (problem.Solution !== undefined) {
+            var ext = problem.Solution.split('.').slice(-1)[0];
+            this.code = (
+                <SyntaxHighlighter language={lang[ext]} style={tomorrowNight}>
+                    {problem.Code}
+                </SyntaxHighlighter>
+            );
+        }
 
         // set notes
         this.txt = '-';
@@ -300,7 +303,7 @@ export default class Entry extends Component {
 
         // set sessions
         this.sessions = [];
-        for (var i in this.data.Session) {
+        for (i in this.data.Session) {
             this.sessions.push(
                 <Button
                     id={this.data.Session[i]}
@@ -484,6 +487,7 @@ export default class Entry extends Component {
                         }}>
                         Remove Session
                     </ModalHeader>
+                    {this.msg2}
                     <Row
                         style={{
                             textAlign: 'center',

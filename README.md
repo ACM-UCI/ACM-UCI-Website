@@ -3,6 +3,4 @@
 ## To Do
 Start of quarter:
 - Add new quarter to Past tabs
-
-Start of year:
-- Add new quarters to list in Puzzle and Login
+- Check config.js file in components
