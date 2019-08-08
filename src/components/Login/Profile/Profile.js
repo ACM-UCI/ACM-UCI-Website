@@ -39,6 +39,8 @@ export default class Log extends Component {
         this.alert = <Alert color="info">Successfully Updated!</Alert>;
         this.icons = [
             <SocialIcon
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ margin: '1%' }}
                 network="email"
                 key="email"
@@ -51,6 +53,8 @@ export default class Log extends Component {
         ) {
             this.icons.push(
                 <SocialIcon
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ margin: '1%' }}
                     key="linkedin"
                     url={'https://www.linkedin.com/in/' + this.profile.LinkedIn}
@@ -60,6 +64,8 @@ export default class Log extends Component {
         if (this.profile.GitHub !== undefined && this.profile.GitHub !== '') {
             this.icons.push(
                 <SocialIcon
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ margin: '1%' }}
                     key="github"
                     url={'https://github.com/' + this.profile.GitHub}
@@ -75,6 +81,8 @@ export default class Log extends Component {
                     style={{ margin: '1%' }}
                     key="facebook"
                     url={'https://www.facebook.com/' + this.profile.Facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 />
             );
         }
@@ -119,6 +127,8 @@ export default class Log extends Component {
                 network="email"
                 key="email"
                 url={'mailto:' + this.owner + '@uci.edu'}
+                target="_blank"
+                rel="noopener noreferrer"
             />
         ];
         if (
@@ -130,6 +140,8 @@ export default class Log extends Component {
                     style={{ margin: '1%' }}
                     key="linkedin"
                     url={'https://www.linkedin.com/in/' + this.profile.LinkedIn}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 />
             );
         }
@@ -139,6 +151,8 @@ export default class Log extends Component {
                     style={{ margin: '1%' }}
                     key="github"
                     url={'https://github.com/' + this.profile.GitHub}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 />
             );
         }
@@ -151,6 +165,8 @@ export default class Log extends Component {
                     style={{ margin: '1%' }}
                     key="facebook"
                     url={'https://www.facebook.com/' + this.profile.Facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 />
             );
         }

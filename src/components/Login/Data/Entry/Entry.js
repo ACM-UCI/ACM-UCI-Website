@@ -406,7 +406,7 @@ export default class Entry extends Component {
                                 </tr>
                                 <tr>
                                     <th>Contributor</th>
-                                    <td>: {problem.Contributor}</td>
+                                    <td>: {this.contributors}</td>
                                 </tr>
                                 <tr>
                                     <th>Solution</th>

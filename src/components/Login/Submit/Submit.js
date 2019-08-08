@@ -46,9 +46,10 @@ export default class Submit extends Component {
             );
         }
 
+        this.conSel = [];
         this.diffSel = [];
-        this.contributors = [];
         var i = 0;
+
         for (i = 0; i < vars.difficulties.length; i++) {
             this.diffSel.push(
                 <option key={'opt' + i.toString()}>
@@ -63,9 +64,6 @@ export default class Submit extends Component {
                 );
             }
         }
-
-        this.ref = firebase.database().ref();
-        this.ref.on('value', this.processData);
 
         this.status = [];
 
@@ -85,12 +83,21 @@ export default class Submit extends Component {
         ) {
             this.submission['Session'] = [];
         }
+        if (
+            this.submission['Contributor'] === '' ||
+            this.submission['Contributor'] === undefined
+        ) {
+            this.submission['Contributor'] = [props.owner];
+        }
+
+        this.ref = firebase.database().ref();
+        this.ref.on('value', this.processData);
     }
 
     processData(data) {
         this.data = data.val();
         /* this is code for initializing logs in firebase to 0 BE CAREFUL
-        var okay = true;
+        var okay = false;
         if (okay) {
             var u = {};
             for (var b in this.data['logs']) {
@@ -113,6 +120,24 @@ export default class Submit extends Component {
                 .update(u);
         }
         // */
+        this.conSel = [];
+        for (var key in this.data.logs) {
+            if (key !== this.owner) {
+                if (this.submission['Contributor'].indexOf(key) !== -1) {
+                    this.conSel.push(
+                        <option selected={true} key={key}>
+                            {key}
+                        </option>
+                    );
+                } else {
+                    this.conSel.push(
+                        <option selected={false} key={key}>
+                            {key}
+                        </option>
+                    );
+                }
+            }
+        }
     }
 
     updateInputValue(e) {
@@ -122,6 +147,14 @@ export default class Submit extends Component {
             var reader = new FileReader();
             reader.onload = this.readCode;
             reader.readAsText(file);
+        } else if (e.target.id === 'Contributor') {
+            this.submission['Contributor'] = [this.owner];
+            for (var i = 0; i < e.target.options.length; i++) {
+                var option = e.target.options[i];
+                if (option.selected) {
+                    this.submission['Contributor'].push(option.value);
+                }
+            }
         } else {
             this.submission[e.target.id] = e.target.value;
             while (
@@ -258,6 +291,67 @@ export default class Submit extends Component {
         } else {
             s.SubmitDate = Date().toString();
             var updates = {};
+
+            if (
+                vars.difficulties.indexOf(this.props.data.Difficulty) !== -1 &&
+                this.props.data.Contributor !== undefined &&
+                this.props.data.Contributor !== ''
+            ) {
+                var conLen = this.props.data.Contributor.length;
+                for (var i = 0; i < conLen; i++) {
+                    var contrib = this.props.data.Contributor[i];
+                    updates[
+                        '/logs/' +
+                            contrib +
+                            '/' +
+                            this.quarter +
+                            '/' +
+                            this.week
+                    ] =
+                        this.data['logs'][contrib][this.quarter][this.week] -
+                        1 / conLen;
+                }
+            }
+
+            if (vars.difficulties.indexOf(s.Difficulty) !== -1) {
+                var conLen = this.submission.Contributor.length;
+                for (var i = 0; i < conLen; i++) {
+                    var contrib = this.submission.Contributor[i];
+                    if (
+                        updates.hasOwnProperty(
+                            '/logs/' +
+                                contrib +
+                                '/' +
+                                this.quarter +
+                                '/' +
+                                this.week
+                        )
+                    ) {
+                        updates[
+                            '/logs/' +
+                                contrib +
+                                '/' +
+                                this.quarter +
+                                '/' +
+                                this.week
+                        ] += 1 / conLen;
+                    } else {
+                        updates[
+                            '/logs/' +
+                                contrib +
+                                '/' +
+                                this.quarter +
+                                '/' +
+                                this.week
+                        ] =
+                            this.data['logs'][contrib][this.quarter][
+                                this.week
+                            ] +
+                            1 / conLen;
+                    }
+                }
+            }
+
             if (
                 this.props.data.Link !== '' &&
                 this.props.data.Link !== undefined
@@ -275,19 +369,6 @@ export default class Submit extends Component {
                     .child('submissions')
                     .push().key;
                 updates['/submissions/' + newPostKey] = s;
-
-                if (vars.difficulties.indexOf(s.Difficulty) !== -1) {
-                    updates[
-                        '/logs/' +
-                            this.owner +
-                            '/' +
-                            this.quarter +
-                            '/' +
-                            this.week
-                    ] =
-                        this.data['logs'][this.owner][this.quarter][this.week] +
-                        1;
-                }
 
                 firebase
                     .database()
@@ -315,7 +396,8 @@ export default class Submit extends Component {
         } else {
             this.status = (
                 <Alert color="success" style={{ textAlign: 'left' }}>
-                    Problem Submitted! Thank you :)
+                    Problem Submitted! Thank you :) (May need to refresh Data
+                    tab to see changes)
                 </Alert>
             );
         }
@@ -391,6 +473,39 @@ export default class Submit extends Component {
                             id="Difficulty">
                             <option>Select one</option>
                             {this.diffSel}
+                        </Input>
+                    </Col>
+                </Row>
+                <br />
+
+                <Row>
+                    <Col className="submitcol">
+                        <button
+                            className="submitlabel"
+                            disabled
+                            style={{
+                                backgroundColor: 'rgba(109, 181, 226, 0.051)',
+                                color: '#02284B'
+                            }}>
+                            Other Contributors
+                        </button>
+                        <p style={{ fontSize: '9px', marginBottom: 0 }}>
+                            Hold the CTRL/⌘ key to select multiple or to
+                            deselect.
+                        </p>
+                        <p style={{ fontSize: '9px' }}>
+                            Submitter is automatically included.
+                        </p>
+                    </Col>
+                    <Col>
+                        <Input
+                            type="select"
+                            multiple
+                            // defaultValue={this.props.data.Difficulty}
+                            onChange={evt => this.updateInputValue(evt)}
+                            name="select"
+                            id="Contributor">
+                            {this.conSel}
                         </Input>
                     </Col>
                 </Row>

@@ -56,6 +56,8 @@ export default class Problem extends Component {
                     if (contrib !== 'acmuciguest') {
                         icons.push(
                             <SocialIcon
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 style={{ margin: '1%' }}
                                 key={contrib + icon}
                                 url={'mailto:' + contrib + '@uci.edu'}
@@ -67,6 +69,8 @@ export default class Problem extends Component {
                         if (icon in props.contributors[contrib]) {
                             icons.push(
                                 <SocialIcon
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     style={{ margin: '1%' }}
                                     key={contrib + icon}
                                     url={
@@ -142,7 +146,9 @@ export default class Problem extends Component {
         }
         this.obj = (
             <CardTitle>
-                <a href={props.link}>{props.name}</a>
+                <a href={props.link} target="_blank" rel="noopener noreferrer">
+                    {props.name}{' '}
+                </a>
             </CardTitle>
         );
 

@@ -192,6 +192,7 @@ export default class Login extends Component {
                 u['/logs/' + email[0] + '/Fall 2019/' + i.toString()] = 0;
             }
             u['/logs/' + email[0] + '/Name'] = user.displayName;
+            u['/logs/' + email[0] + '/Positoin'] = 'Member';
             firebase
                 .database()
                 .ref()
