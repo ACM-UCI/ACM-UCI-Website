@@ -17,7 +17,7 @@ export default class Submit extends Component {
 
         this.acceptedLangs = '.py';
         for (var lang in config.supportedLanguage) {
-            this.acceptedLangs += ',' + lang;
+            this.acceptedLangs += ',.' + lang;
         }
         this.quarter = props.quarter;
         this.week = props.week;
@@ -291,15 +291,18 @@ export default class Submit extends Component {
         } else {
             s.SubmitDate = Date().toString();
             var updates = {};
+            var conLen = 0;
+            var i = 0;
+            var contrib = '';
 
             if (
                 vars.difficulties.indexOf(this.props.data.Difficulty) !== -1 &&
                 this.props.data.Contributor !== undefined &&
                 this.props.data.Contributor !== ''
             ) {
-                var conLen = this.props.data.Contributor.length;
-                for (var i = 0; i < conLen; i++) {
-                    var contrib = this.props.data.Contributor[i];
+                conLen = this.props.data.Contributor.length;
+                for (i = 0; i < conLen; i++) {
+                    contrib = this.props.data.Contributor[i];
                     updates[
                         '/logs/' +
                             contrib +
@@ -314,9 +317,9 @@ export default class Submit extends Component {
             }
 
             if (vars.difficulties.indexOf(s.Difficulty) !== -1) {
-                var conLen = this.submission.Contributor.length;
-                for (var i = 0; i < conLen; i++) {
-                    var contrib = this.submission.Contributor[i];
+                conLen = this.submission.Contributor.length;
+                for (i = 0; i < conLen; i++) {
+                    contrib = this.submission.Contributor[i];
                     if (
                         updates.hasOwnProperty(
                             '/logs/' +

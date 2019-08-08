@@ -41,7 +41,7 @@ export default class Problem extends Component {
             for (var con = 0; con < cons.length; con++) {
                 var contrib = cons[con];
                 if (props.contributors.hasOwnProperty(contrib)) {
-                    if (contrib != 'acmuciguest') {
+                    if (contrib !== 'acmuciguest') {
                         if (con === cons.length - 1 && cons.length > 1) {
                             this.conNames +=
                                 ' or ' +
@@ -59,7 +59,7 @@ export default class Problem extends Component {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{ margin: '1%' }}
-                                key={contrib + icon}
+                                key={contrib + 'email'}
                                 url={'mailto:' + contrib + '@uci.edu'}
                             />
                         );

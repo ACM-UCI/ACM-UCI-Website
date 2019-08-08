@@ -12,8 +12,6 @@ import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { Carousel } from 'react-responsive-carousel';
-import { SocialIcon } from 'react-social-icons';
 
 const Python = codeString => (
     <SyntaxHighlighter key="mycode" language="python" style={tomorrowNight}>
