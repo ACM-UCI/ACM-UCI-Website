@@ -167,6 +167,7 @@ export default class Data extends Component {
                             </Input>
                         </th>
                         <th />
+                        <th />
                     </tr>
                 </thead>
                 <tbody>{this.body}</tbody>

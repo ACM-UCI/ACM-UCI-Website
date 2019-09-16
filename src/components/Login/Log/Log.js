@@ -160,6 +160,9 @@ export default class Log extends Component {
 
                     // get the total score
                     tot += d[i];
+
+                    // rounding
+                    d[i] = parseFloat(d[i].toFixed(2));
                 }
 
                 // For Wall of Shame:
@@ -168,9 +171,9 @@ export default class Log extends Component {
                 // }
                 //d['tot'] = tot - this.week * 2;
 
-                if (mins.indexOf(tot) === -1) {
-                    mins.push(tot);
-                }
+                tot = parseFloat(tot.toFixed(2));
+
+                if (mins.indexOf(tot) === -1) mins.push(tot);
                 d['tot'] = tot;
                 if (
                     board['2019-2020'].hasOwnProperty(key) &&
