@@ -22,9 +22,8 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
         this.logged = this.logged.bind(this);
-        this.lout = this.lout.bind(this);
-        this.lin = this.lin.bind(this);
         this.toggle = this.toggle.bind(this);
         this.setTab = this.setTab.bind(this);
         this.processData = this.processData.bind(this);
@@ -108,6 +107,14 @@ export default class Login extends Component {
             this.quarter = quarters[i + 1];
         }
 
+        // check if logged in (after refreshed)
+        // uncomment below for debugging
+        const user = window.localStorage.getItem('user');
+        if (user !== undefined && user !== null && user !== '') {
+            this.verified(JSON.parse(user));
+            // this.verified({ email: 'mnovitia@uci.edu' });
+        }
+
         /*
 
         this.week = 2;
@@ -118,50 +125,53 @@ export default class Login extends Component {
     processData(data) {
         if (this.state.status === 'Login') {
             this.emails = data.val()['logs'];
-
-            // uncomment below for debugging
-            // this.logged({ user: { email: 'mnovitia@uci.edu' } });
         }
     }
 
+    logout() {
+        firebase.auth().signOut();
+        this.show = [
+            <Button
+                key="loginbutton"
+                className="loginbutton"
+                onClick={this.login}>
+                Login
+            </Button>,
+            <Alert key="notboard" color="info">
+                See you next time {this.owner.displayName.split(' ')[0]}!
+            </Alert>
+        ];
+        this.owner = {};
+        window.localStorage.removeItem('user');
+        this.setState({
+            status: 'Login'
+        });
+    }
+
     login() {
-        if (this.state.status === 'Login') {
-            var provider = new firebase.auth.GoogleAuthProvider();
-            firebase
-                .auth()
-                .signInWithPopup(provider)
-                .then(this.logged)
-                .catch(function(error) {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // The email of the user's account used.
-                    var email = error.email;
-                    // The firebase.auth.AuthCredential type that was used.
-                    // var credential = error.credential;
-                    // ...
-                    // alert("Failed to log in");
-                    console.log(errorCode, errorMessage, email);
-                });
-        } else {
-            firebase.auth().signOut();
-            this.show = [
-                <Button
-                    key="loginbutton"
-                    className="loginbutton"
-                    onClick={this.login}>
-                    Login
-                </Button>,
-                <Alert key="notboard" color="info">
-                    See you next time {this.owner.displayName.split(' ')[0]}!
-                </Alert>
-            ];
-            this.owner = {};
-            this.setState({
-                status: 'Login',
-                tab: 'Submit'
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(this.logged)
+            .catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                // var credential = error.credential;
+                // ...
+                // alert("Failed to log in");
+                console.log(errorCode, errorMessage, email);
             });
-        }
+    }
+
+    verified(user) {
+        this.owner = user;
+        this.default['Contributor'] = [this.owner.email.split('@')[0]];
+        this.toggle('Profile');
     }
 
     logged(result) {
@@ -193,30 +203,26 @@ export default class Login extends Component {
             }
             u['/logs/' + email[0] + '/Name'] = user.displayName;
             u['/logs/' + email[0] + '/Position'] = 'Member';
+            u['/logs/' + email[0] + '/Photo'] = user.photoURL;
+            firebase
+                .database()
+                .ref()
+                .update(u);
+        } else if (
+            this.emails[email[0]].Photo === undefined ||
+            this.emails[email[0]].Photo === ''
+        ) {
+            var u = {};
+            u['/logs/' + email[0] + '/Photo'] = user.photoURL;
             firebase
                 .database()
                 .ref()
                 .update(u);
         }
 
-        this.owner = user;
-        this.default['Contributor'] = [this.owner.email.split('@')[0]];
+        window.localStorage.setItem('user', JSON.stringify(user));
 
-        this.setTab('Profile');
-
-        this.lout();
-    }
-
-    lin() {
-        this.setState({
-            status: 'Login'
-        });
-    }
-
-    lout() {
-        this.setState({
-            status: 'Logout'
-        });
+        this.verified(user);
     }
 
     setTab(ntab) {
@@ -297,7 +303,7 @@ export default class Login extends Component {
                 <Button
                     key="logoutbutton"
                     className="loginbutton"
-                    onClick={this.login}>
+                    onClick={this.logout}>
                     Logout
                 </Button>
                 {allTabs[tabI[ntab]]}

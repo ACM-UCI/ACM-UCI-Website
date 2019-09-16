@@ -382,7 +382,10 @@ export default class Entry extends Component {
                         toggle={() => {
                             this.toggle(1);
                         }}>
-                        {problem.Contributor}
+                        {problem.Contributor.map((name, i) => {
+                            if (i) return ', ' + name;
+                            return name;
+                        })}
                     </ModalHeader>
                     <ModalBody>{problem.Note}</ModalBody>
                 </Modal>

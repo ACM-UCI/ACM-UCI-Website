@@ -81,7 +81,6 @@ const HeaderCell = props => {
 };
 
 const HighlightedHeaderColCell = ({ style, ...restProps }) => {
-    console.log(restProps);
     return (
         <TableFixedColumns.Cell
             {...restProps}

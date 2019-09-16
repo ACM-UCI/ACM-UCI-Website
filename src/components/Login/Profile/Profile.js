@@ -15,7 +15,7 @@ export default class Log extends Component {
         this.updateInputValue = this.updateInputValue.bind(this);
         this.update = this.update.bind(this);
 
-        this.state = { imw: '40%' };
+        this.state = { imw: '40%', done: false };
         this.space = '0';
         if (window.innerWidth <= 782) {
             this.space = '5%';
@@ -91,9 +91,7 @@ export default class Log extends Component {
         } else {
             this.pic = logo;
         }
-        this.setState({
-            imw: this.state.imw
-        });
+        this.setState({});
     }
 
     componentDidMount() {
@@ -176,7 +174,7 @@ export default class Log extends Component {
             this.pic = logo;
         }
         this.setState({
-            imw: this.state.imw
+            done: true
         });
     }
 
@@ -186,118 +184,133 @@ export default class Log extends Component {
     }
 
     render() {
-        return (
-            <Container style={{ border: '10px solid #02284B ' }}>
-                <Row style={{ padding: '5%', paddingBottom: '0' }}>
-                    <Col
+        if (this.state.done) {
+            return (
+                <Container style={{ border: '10px solid #02284B ' }}>
+                    <Row style={{ padding: '5%', paddingBottom: '0' }}>
+                        <Col
+                            style={{
+                                paddingRight: '5%',
+                                marginBottom: this.space,
+                                maxWidth: this.state.imw,
+                                minWidth: this.state.imw
+                            }}>
+                            <img
+                                style={{ maxWidth: '100%' }}
+                                src={this.pic}
+                                alt=""
+                            />
+                        </Col>
+                        <Col
+                            style={{
+                                fontSize: '20px',
+                                fontFamily: 'Verdana,sans-serif',
+                                textAlign: 'left'
+                            }}>
+                            <Row>
+                                <Col style={{ maxWidth: '150px' }}>
+                                    <pre>
+                                        {'Name     :'}
+                                        <br />
+                                        <br />
+                                        {'UCINetID :'}
+                                        <br />
+                                        <br />
+                                        {'Position :'}
+                                        <br />
+                                        <br />
+                                        {'Photo    :'}
+                                        <br />
+                                        <br />
+                                        {'LinkedIn :'}
+                                        <br />
+                                        <br />
+                                        {'GitHub   :'}
+                                        <br />
+                                        <br />
+                                        {'Facebook :'}
+                                    </pre>
+                                </Col>
+                                <Col>
+                                    <pre>
+                                        {this.profile.Name} <br />
+                                        <br />
+                                        {this.owner} <br />
+                                        <br />
+                                        {this.profile.Position}
+                                    </pre>
+                                    <Input
+                                        style={{
+                                            height: '32px',
+                                            marginTop: '28px'
+                                        }}
+                                        onChange={evt =>
+                                            this.updateInputValue(evt)
+                                        }
+                                        id="Photo"
+                                        defaultValue={this.profile.Photo}
+                                        placeholder="your profile pic URL"
+                                    />
+                                    <Input
+                                        style={{
+                                            height: '32px',
+                                            marginTop: '22px'
+                                        }}
+                                        onChange={evt =>
+                                            this.updateInputValue(evt)
+                                        }
+                                        id="LinkedIn"
+                                        defaultValue={this.profile.LinkedIn}
+                                        placeholder="your LinkedIn username"
+                                    />
+                                    <Input
+                                        style={{
+                                            height: '32px',
+                                            marginTop: '22px'
+                                        }}
+                                        onChange={evt =>
+                                            this.updateInputValue(evt)
+                                        }
+                                        id="GitHub"
+                                        placeholder="your GitHub username"
+                                        defaultValue={this.profile.GitHub}
+                                    />
+                                    <Input
+                                        style={{
+                                            height: '32px',
+                                            marginTop: '22px'
+                                        }}
+                                        onChange={evt =>
+                                            this.updateInputValue(evt)
+                                        }
+                                        id="Facebook"
+                                        placeholder="your Facebook username"
+                                        defaultValue={this.profile.Facebook}
+                                    />
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                    <Row
                         style={{
-                            paddingRight: '5%',
-                            marginBottom: this.space,
-                            maxWidth: this.state.imw,
-                            minWidth: this.state.imw
+                            justifyContent: 'center',
+                            marginBottom: '3%'
                         }}>
-                        <img
-                            style={{ maxWidth: '100%' }}
-                            src={this.pic}
-                            alt=""
-                        />
-                    </Col>
-                    <Col
-                        style={{
-                            fontSize: '20px',
-                            fontFamily: 'Verdana,sans-serif',
-                            textAlign: 'left'
-                        }}>
-                        <Row>
-                            <Col style={{ maxWidth: '150px' }}>
-                                <pre>
-                                    {'Name     :'}
-                                    <br />
-                                    <br />
-                                    {'UCINetID :'}
-                                    <br />
-                                    <br />
-                                    {'Position :'}
-                                    <br />
-                                    <br />
-                                    {'Photo    :'}
-                                    <br />
-                                    <br />
-                                    {'LinkedIn :'}
-                                    <br />
-                                    <br />
-                                    {'GitHub   :'}
-                                    <br />
-                                    <br />
-                                    {'Facebook :'}
-                                </pre>
-                            </Col>
-                            <Col>
-                                <pre>
-                                    {this.profile.Name} <br />
-                                    <br />
-                                    {this.owner} <br />
-                                    <br />
-                                    {this.profile.Position}
-                                </pre>
-                                <Input
-                                    style={{
-                                        height: '32px',
-                                        marginTop: '28px'
-                                    }}
-                                    onChange={evt => this.updateInputValue(evt)}
-                                    id="Photo"
-                                    defaultValue={this.profile.Photo}
-                                    placeholder="your profile pic URL"
-                                />
-                                <Input
-                                    style={{
-                                        height: '32px',
-                                        marginTop: '22px'
-                                    }}
-                                    onChange={evt => this.updateInputValue(evt)}
-                                    id="LinkedIn"
-                                    defaultValue={this.profile.LinkedIn}
-                                    placeholder="your LinkedIn username"
-                                />
-                                <Input
-                                    style={{
-                                        height: '32px',
-                                        marginTop: '22px'
-                                    }}
-                                    onChange={evt => this.updateInputValue(evt)}
-                                    id="GitHub"
-                                    placeholder="your GitHub username"
-                                    defaultValue={this.profile.GitHub}
-                                />
-                                <Input
-                                    style={{
-                                        height: '32px',
-                                        marginTop: '22px'
-                                    }}
-                                    onChange={evt => this.updateInputValue(evt)}
-                                    id="Facebook"
-                                    placeholder="your Facebook username"
-                                    defaultValue={this.profile.Facebook}
-                                />
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row style={{ justifyContent: 'center', marginBottom: '3%' }}>
-                    {this.icons}
-                </Row>
-                {this.alert}
-                <Button
-                    className="submitbtn"
-                    style={{ width: '60%' }}
-                    onClick={this.update}>
-                    Update
-                </Button>
-                <br />
-                <br />
-                <br />
-            </Container>
-        );
+                        {this.icons}
+                    </Row>
+                    {this.alert}
+                    <Button
+                        className="submitbtn"
+                        style={{ width: '60%' }}
+                        onClick={this.update}>
+                        Update
+                    </Button>
+                    <br />
+                    <br />
+                    <br />
+                </Container>
+            );
+        }
+        return null;
     }
 }
