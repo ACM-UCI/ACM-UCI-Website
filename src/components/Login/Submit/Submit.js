@@ -5,11 +5,59 @@ import 'firebase/database';
 import board from '../../Board/board.json';
 import './Submit.css';
 import config from '../../config.js';
+import Chip from '@material-ui/core/Chip';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import InputBase from '@material-ui/core/InputBase';
+import { withStyles } from '@material-ui/core/styles';
 
 const vars = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
     extras: ['event', 'announcment', 'finals', 'thanksgiving']
 };
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250
+        }
+    }
+};
+
+const BootstrapInput = withStyles(theme => ({
+    root: {},
+    input: {
+        borderRadius: 4,
+        position: 'relative',
+        backgroundColor: theme.palette.background.paper,
+        border: '1px solid #ced4da',
+        fontSize: 16,
+        padding: '10px 26px 10px 12px',
+        transition: theme.transitions.create(['border-color', 'box-shadow']),
+        // Use the system font instead of the default Roboto font.
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"'
+        ].join(','),
+        '&:focus': {
+            borderRadius: 4,
+            borderColor: '#80bdff',
+            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)'
+        }
+    }
+}))(InputBase);
 
 export default class Submit extends Component {
     constructor(props) {
@@ -123,21 +171,14 @@ export default class Submit extends Component {
         this.conSel = [];
         for (var key in this.data.logs) {
             if (key !== this.owner) {
-                if (this.submission['Contributor'].indexOf(key) !== -1) {
-                    this.conSel.push(
-                        <option selected={true} key={key}>
-                            {key}
-                        </option>
-                    );
-                } else {
-                    this.conSel.push(
-                        <option selected={false} key={key}>
-                            {key}
-                        </option>
-                    );
-                }
+                this.conSel.push(
+                    <MenuItem name={key} value={key} key={key}>
+                        {key}
+                    </MenuItem>
+                );
             }
         }
+        this.setState({});
     }
 
     updateInputValue(e) {
@@ -147,14 +188,6 @@ export default class Submit extends Component {
             var reader = new FileReader();
             reader.onload = this.readCode;
             reader.readAsText(file);
-        } else if (e.target.id === 'Contributor') {
-            this.submission['Contributor'] = [this.owner];
-            for (var i = 0; i < e.target.options.length; i++) {
-                var option = e.target.options[i];
-                if (option.selected) {
-                    this.submission['Contributor'].push(option.value);
-                }
-            }
         } else {
             this.submission[e.target.id] = e.target.value;
             while (
@@ -165,9 +198,8 @@ export default class Submit extends Component {
                 this.submission['Link'] = str.slice(0, str.length - 1);
             }
         }
-        this.setState({
-            tog: false
-        });
+
+        this.setState({});
     }
 
     readCode(evt) {
@@ -490,27 +522,90 @@ export default class Submit extends Component {
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
                                 color: '#02284B'
                             }}>
-                            Other Contributors
+                            Contributors
                         </button>
-                        <p style={{ fontSize: '9px', marginBottom: 0 }}>
-                            Hold the CTRL/⌘ key to select multiple or to
-                            deselect.
-                        </p>
-                        <p style={{ fontSize: '9px' }}>
-                            Submitter is automatically included.
-                        </p>
                     </Col>
-                    <Col>
+
+                    <Col style={{ textAlign: 'left' }}>
+                        <Select
+                            multiple
+                            value={this.submission.Contributor}
+                            onChange={evt => {
+                                evt.target.id = 'Contributor';
+                                this.updateInputValue(evt);
+                            }}
+                            input={
+                                <BootstrapInput
+                                    name="Contributor"
+                                    id="Contributor"
+                                />
+                            }
+                            renderValue={selected => (
+                                <div>
+                                    {selected.map(value => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </div>
+                            )}
+                            MenuProps={MenuProps}>
+                            {this.conSel}
+                        </Select>
+                    </Col>
+                </Row>
+                <br />
+
+                <Row>
+                    <Col className="submitcol">
+                        <button
+                            className="submitlabel"
+                            disabled
+                            style={{
+                                backgroundColor: 'rgba(109, 181, 226, 0.051)',
+                                color: '#02284B'
+                            }}>
+                            Categories
+                        </button>
+                    </Col>
+                    <Col style={{ textAlign: 'left' }}>
+                        <Select
+                            multiple
+                            id={'Category'}
+                            value={this.submission.Category}
+                            onChange={evt => {
+                                evt.target.id = 'Category';
+                                this.updateInputValue(evt);
+                            }}
+                            input={
+                                <BootstrapInput name="Category" id="Category" />
+                            }
+                            renderValue={selected => (
+                                <div>
+                                    {selected.map(value => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </div>
+                            )}
+                            MenuProps={MenuProps}>
+                            {config.categories.map(name => (
+                                <MenuItem key={name} value={name}>
+                                    {name}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </Col>
+                    {/* <Col>
                         <Input
                             type="select"
                             multiple
-                            // defaultValue={this.props.data.Difficulty}
+                            defaultValue={this.props.data.Category}
                             onChange={evt => this.updateInputValue(evt)}
                             name="select"
-                            id="Contributor">
-                            {this.conSel}
+                            id="Categories">
+                            {config.categories.sort().map(data=>(
+                                <option key={data}>{data}</option>
+                            ))}
                         </Input>
-                    </Col>
+                    </Col> */}
                 </Row>
                 <br />
 

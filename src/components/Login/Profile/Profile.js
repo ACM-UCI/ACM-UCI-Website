@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import logo from '../../../acm_logo.svg';
 import { SocialIcon } from 'react-social-icons';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class Log extends Component {
     constructor(props) {
@@ -311,6 +312,6 @@ export default class Log extends Component {
                 </Container>
             );
         }
-        return null;
+        return <CircularProgress />;
     }
 }

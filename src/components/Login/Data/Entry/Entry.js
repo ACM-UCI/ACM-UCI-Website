@@ -41,6 +41,7 @@ export default class Entry extends Component {
         // bindings
         this.updateInputValue = this.updateInputValue.bind(this);
         this.setProblem = this.setProblem.bind(this);
+        this.toggle = this.toggle.bind(this);
 
         this.avail = '';
         this.sol = '';
@@ -460,9 +461,10 @@ export default class Entry extends Component {
                 <Modal
                     size="lg"
                     isOpen={this.state.modal[3]}
-                    toggle={() => {
-                        this.toggle(3);
-                    }}>
+                    // toggle={() => {
+                    //     this.toggle(3);
+                    // }}
+                >
                     <ModalHeader
                         toggle={() => {
                             this.toggle(3);
