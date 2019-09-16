@@ -13,29 +13,22 @@ import {
     TableFixedColumns
 } from '@devexpress/dx-react-grid-material-ui';
 
-const styles = [
-    {
-        backgroundColor: 'white'
-    },
-    {
-        backgroundColor: '#fded5d'
-    },
-    {
-        backgroundColor: '#c2c1b9'
-    },
-    {
-        backgroundColor: '#9b9567'
-    }
-];
+const styles = ['white', '#fded5d', '#c2c1b9', '#9b9567', '#4ec5e6'];
 
 var m = [300, 300, 300];
+var owner = undefined;
 
 var TableRow = ({ row, ...restProps }) => (
     <Table.Row
         {...restProps}
         style={{
             cursor: 'pointer',
-            ...styles[m.indexOf(row.tot) + 1]
+            backgroundColor:
+                m.indexOf(row.tot) !== -1
+                    ? styles[m.indexOf(row.tot) + 1]
+                    : row.Name === owner
+                    ? styles[4]
+                    : styles[m.indexOf(row.tot) + 1]
         }}
     />
 );
@@ -44,7 +37,9 @@ const HighlightedCell = ({ value, style, ...restProps }) => (
     <Table.Cell
         {...restProps}
         style={{
-            backgroundColor: value < 0 ? 'red' : undefined,
+            textAlign: 'center',
+            backgroundColor:
+                value === owner ? styles[4] : value < 0 ? 'red' : undefined,
             ...style
         }}>
         <span
@@ -56,17 +51,71 @@ const HighlightedCell = ({ value, style, ...restProps }) => (
     </Table.Cell>
 );
 
+const NormalCell = ({ value, style, ...restProps }) => (
+    <Table.Cell
+        {...restProps}
+        style={{
+            textAlign: 'center',
+            ...style
+        }}>
+        <span>{value}</span>
+    </Table.Cell>
+);
+
+const NormalHeaderCell = ({ style, ...restProps }) => {
+    return (
+        <TableHeaderRow.Cell
+            {...restProps}
+            style={{
+                textAlign: isNaN(Number(restProps.column.name))
+                    ? 'center'
+                    : 'right',
+                ...style
+            }}
+        />
+    );
+};
+
+const HeaderCell = props => {
+    return <NormalHeaderCell {...props} />;
+};
+
+const HighlightedHeaderColCell = ({ style, ...restProps }) => {
+    console.log(restProps);
+    return (
+        <TableFixedColumns.Cell
+            {...restProps}
+            style={{
+                textAlign: 'left',
+                backgroundColor:
+                    restProps.tableRow.key === 'Symbol(heading)'
+                        ? 'white'
+                        : restProps.tableRow.row.Name === owner
+                        ? styles[4]
+                        : 'white',
+                ...style
+            }}
+        />
+    );
+};
+
+const HeaderColCell = props => {
+    return <HighlightedHeaderColCell {...props} />;
+};
+
 const Cell = props => {
     const { column } = props;
     if (column.name === 'score') {
         return <HighlightedCell {...props} />;
     }
-    return <Table.Cell {...props} />;
+    return <NormalCell {...props} />;
 };
 
 export default class Log extends Component {
     constructor(props) {
         super(props);
+
+        owner = props.owner;
 
         this.done = false;
         this.filter = 'All Members';
@@ -249,8 +298,12 @@ export default class Log extends Component {
                                 rowComponent={TableRow}
                                 columnExtensions={this.extcolumns}
                             />
-                            <TableHeaderRow showSortingControls />
+                            <TableHeaderRow
+                                cellComponent={HeaderCell}
+                                showSortingControls
+                            />
                             <TableFixedColumns
+                                cellComponent={HeaderColCell}
                                 leftColumns={['Name']}
                                 rightColumns={['Total Score']}
                             />
