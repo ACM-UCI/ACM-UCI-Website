@@ -33,7 +33,11 @@ class Board extends Component {
                 this.cols.push(
                     <Col md="4" key={'current ' + k}>
                         <BoardMember
-                            src={Images[k]}
+                            src={
+                                Images.hasOwnProperty(k)
+                                    ? Images[k]
+                                    : Images['acm']
+                            }
                             name={key.name}
                             position={key.position}
                         />

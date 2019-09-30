@@ -16,6 +16,8 @@ import 'firebase/database';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
 import Submit from '../../Submit/Submit';
 import filter from './filter.js';
+import config from '../../../config.js';
+import board from '../../../Board/board.json';
 
 const lang = {
     py: 'python',
@@ -96,7 +98,8 @@ export default class Entry extends Component {
         if (
             this.props.owner === 'mnovitia' ||
             this.props.owner === 'btjanaka' ||
-            this.props.owner === 'jtuyls'
+            this.props.owner === 'jtuyls' ||
+            this.props.owner === 'bbui3'
         ) {
             // if removing from this quarter
             if (this.selectedSess.startsWith(this.props.qrt)) {
@@ -250,9 +253,7 @@ export default class Entry extends Component {
             // !!!!! position
             if (
                 problem.Contributor !== this.props.owner &&
-                this.props.owner !== 'mnovitia' &&
-                this.props.owner !== 'btjanaka' &&
-                this.props.owner !== 'jtuyls'
+                !board[config.current].hasOwnProperty(this.props.owner)
             ) {
                 this.sol = (
                     <Button

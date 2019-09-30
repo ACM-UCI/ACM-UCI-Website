@@ -1,4 +1,5 @@
 const Images = {
+    acm: require('../../img/acm.jpg'),
     amourady: require('../../img/armen.jpg'),
     aphilipe: require('../../img/arne.jpg'),
     bwakasa: require('../../img/blake.jpg'),
@@ -21,7 +22,9 @@ const Images = {
     arvind: require('../../img/arvind.jpg'),
     allen: require('../../img/allen.jpg'),
     shaun: require('../../img/shaun.jpg'),
-    pattis: require('../../img/pattis.jpg')
+    pattis: require('../../img/pattis.jpg'),
+    kirkmc: require('../../img/kirkmc.jpg'),
+    bmchu1: require('../../img/bmchu1.jpg')
 };
 
 export default Images;

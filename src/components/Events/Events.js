@@ -10,6 +10,7 @@ import {
     CardBody,
     Button
 } from 'reactstrap';
+import { HashLink as Link } from 'react-router-hash-link';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import codingNights from '../../img/girl_coding_nights_event.jpg';
@@ -22,6 +23,7 @@ import jackytalk from '../../img/jackytalk.jpg';
 import junlintalk from '../../img/junlintalk.jpg';
 import pooyatalk from '../../img/pooyatalk.jpg';
 import uipath from '../../img/uiPath.jpg';
+import acm_meeting from '../../img/acm_meeting.jpg';
 import './Events.css';
 
 class Events extends Component {
@@ -38,12 +40,41 @@ class Events extends Component {
 
                 <h2 className="mt-3">Weekly Schedule</h2>
                 <Card body className="card-body">
-                    <CardTitle>ACM Practice - Spring 2019</CardTitle>
+                    <CardTitle>ACM Practice - Fall 2019</CardTitle>
                     <CardText>
                         <strong>Tuesday: </strong>
-                        ICS 432, 7:00 - 9:00 pm <br />
+                        TBA, 6:00 - 8:00 pm <br />
                         <strong>Thursday: </strong>
-                        DBH 3011, 7:00 - 9:00 pm
+                        TBA, 6:00 - 8:00 pm
+                    </CardText>
+                </Card>
+                <Card body className="card-body">
+                    <CardTitle>Quick Links</CardTitle>
+                    <CardText>
+                        <Link
+                            style={{ color: '#32587B' }}
+                            to="/events#upcoming-events">
+                            Upcoming Events
+                        </Link>{' '}
+                        <br />
+                        <Link
+                            style={{ color: '#32587B' }}
+                            to="/events#2019-fall-events">
+                            Fall 2019
+                        </Link>{' '}
+                        <br />
+                        <Link
+                            style={{ color: '#32587B' }}
+                            to="/events#2019-spring-events">
+                            Spring 2019
+                        </Link>{' '}
+                        <br />
+                        <Link
+                            style={{ color: '#32587B' }}
+                            to="/events#2019-winter-events">
+                            Winter 2019
+                        </Link>{' '}
+                        <br />
                     </CardText>
                 </Card>
             </div>
@@ -109,13 +140,62 @@ class Events extends Component {
                                 marginLeft: '5%',
                                 paddingRight: '5%'
                             }}>
-                            <h2 className="mt-3">Spring 2019 Events</h2>
+                            <h2 id="upcoming-events" className="mt-3">
+                                Upcoming Events
+                            </h2>
+
+                            <Card body className="card-body">
+                                <CardTitle>
+                                    <h3>
+                                        1st Meeting: Storm DBH 4011, they can't
+                                        stop all of us
+                                    </h3>
+                                    <i>
+                                        Tuesday, October 1st, DBH 4011 @ 6:00pm
+                                        - 8:00 pm
+                                    </i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={acm_meeting}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    Come to our first meeting to learn more
+                                    about ACM@UCI and get a slice of fun coding
+                                    challenges! Stay updated on this event on
+                                    <a
+                                        style={{ color: '#3b5998' }}
+                                        href={
+                                            'https://www.facebook.com/events/2396693600444034/?active_tab=about'
+                                        }>
+                                        {' '}
+                                        Facebook
+                                    </a>
+                                    .
+                                    <br />
+                                    <i>P.S. There will be pizza :)</i>
+                                </CardText>
+                            </Card>
+
+                            <br />
+                            <h2 id="2019-fall-events" className="mt-3">
+                                Fall 2019 Events
+                            </h2>
+
+                            <br />
+                            <h2 id="2019-spring-events" className="mt-3">
+                                Spring 2019 Events
+                            </h2>
 
                             {/* UiPath Event */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    UiPath Recruiting Event
-                                    <br />
+                                    <h3>UiPath Recruiting Event</h3>
                                     <i>
                                         Tuesday, April 9th, DBH 4011 @ 6:30 - 8
                                         pm
@@ -150,14 +230,18 @@ class Events extends Component {
                                 </CardText>
                             </Card>
 
-                            <h2 className="mt-3">Winter 2019 Events</h2>
+                            <br />
+                            <h2 id="2019-winter-events" className="mt-3">
+                                Winter 2019 Events
+                            </h2>
 
                             {/* JUNLIN */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    Adversarial Attacks on Machine Learning
-                                    Models
-                                    <br />
+                                    <h3>
+                                        Adversarial Attacks on Machine Learning
+                                        Models
+                                    </h3>
                                     <i>
                                         by Junlin Wang - March 7th, DBH 4011 @
                                         6:30 - 7:30 pm
@@ -197,8 +281,9 @@ class Events extends Component {
                             {/* POOYA */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    Should We Follow Ant’s Traffic Laws?!
-                                    <br />
+                                    <h3>
+                                        Should We Follow Ant’s Traffic Laws?!
+                                    </h3>
                                     <i>
                                         by Pooya Khosravi - February 28th, DBH
                                         4011 @ 6:30 - 7:30 pm
@@ -236,8 +321,10 @@ class Events extends Component {
                             {/* BRYON */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    Use the Force, Luke: Computer Science and
-                                    Molecular Dynamics Force Fields <br />
+                                    <h3>
+                                        Use the Force, Luke: Computer Science
+                                        and Molecular Dynamics Force Fields{' '}
+                                    </h3>
                                     <i>
                                         by Bryon Tjanaka - February 21th, DBH
                                         4011 @ 6:30 - 7:30 pm
@@ -279,7 +366,7 @@ class Events extends Component {
                             {/* CHINMAY */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    Algorithms in Nature <br />
+                                    <h3>Algorithms in Nature </h3>
                                     <i>
                                         by Chinmay Raut - February 14th, DBH
                                         4011 @ 6:30 - 7:30 pm
@@ -315,7 +402,7 @@ class Events extends Component {
                             {/* ARNE */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    Let's Go!!! <br />
+                                    <h3>Let's Go!!! </h3>
                                     <i>
                                         by Arne Philipeit - February 7th, DBH
                                         4011 @ 6:30 - 7:30 pm
@@ -354,8 +441,10 @@ class Events extends Component {
                             {/* JENS */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    Machine learning: Do we really understand
-                                    it? <br />
+                                    <h3>
+                                        Machine learning: Do we really
+                                        understand it?{' '}
+                                    </h3>
                                     <i>
                                         by Jens Tuyls - January 31th, DBH 4011 @
                                         6:30 - 7:30 pm
@@ -393,8 +482,10 @@ class Events extends Component {
                             {/* JACKY */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    Unzipping our Genes with Machine Learning{' '}
-                                    <br />
+                                    <h3>
+                                        Unzipping our Genes with Machine
+                                        Learning{' '}
+                                    </h3>
                                     <i>
                                         by Jacky Dai - January 24th, DBH 4011 @
                                         6:30 - 7:30 pm
@@ -471,9 +562,10 @@ class Events extends Component {
                             {/* KARTHIK */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    P = NP and Other Hilarious Jokes You Can
-                                    Tell Yourself
-                                    <br />
+                                    <h3>
+                                        P = NP and Other Hilarious Jokes You Can
+                                        Tell Yourself
+                                    </h3>
                                     <i>
                                         by Karthik Gajulapalli - January 17th,
                                         DBH 4011 @ 6:30 - 7:30

@@ -1,4 +1,5 @@
 const config = {
+    current: '2019-2020',
     quarters: [
         'Fall 2018',
         'Winter 2019',

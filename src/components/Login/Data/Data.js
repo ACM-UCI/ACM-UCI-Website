@@ -108,70 +108,73 @@ export default class Data extends Component {
 
     render() {
         return (
-            <Table style={{ justifyItems: 'center' }}>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>
-                            <Input
-                                type="select"
-                                onChange={evt => this.updateInputValue(evt)}
-                                name="select"
-                                id="difffilter">
-                                <option>Difficulty</option>
-                                <option>easy</option>
-                                <option>med</option>
-                                <option>hard</option>
-                                <option>icpc</option>
-                                <option>codealong</option>
-                            </Input>
-                        </th>
-                        <th>
-                            <Input
-                                type="select"
-                                onChange={evt => this.updateInputValue(evt)}
-                                name="select"
-                                id="solfilter">
-                                <option>Solution</option>
-                                <option>No Solution</option>
-                                <option>Has Solution</option>
-                            </Input>
-                        </th>
-                        <th>
-                            <Input
-                                type="select"
-                                onChange={evt => this.updateInputValue(evt)}
-                                name="select"
-                                id="notefilter">
-                                <option>Notes</option>
-                                <option>No Notes</option>
-                                <option>Has Notes</option>
-                            </Input>
-                        </th>
-                        <th>
-                            <Input
-                                type="select"
-                                onChange={evt => this.updateInputValue(evt)}
-                                name="select"
-                                id="confilter">
-                                {this.cons}
-                            </Input>
-                        </th>
-                        <th>
-                            <Input
-                                type="select"
-                                onChange={evt => this.updateInputValue(evt)}
-                                name="select"
-                                id="sessfilter">
-                                {this.sessoptions}
-                            </Input>
-                        </th>
-                        <th />
-                        <th />
-                    </tr>
-                </thead>
-                <tbody>{this.body}</tbody>
-            </Table>
+            <>
+                {this.categoryFilter}
+                <Table style={{ justifyItems: 'center' }}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>
+                                <Input
+                                    type="select"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                    name="select"
+                                    id="difffilter">
+                                    <option>Difficulty</option>
+                                    <option>easy</option>
+                                    <option>med</option>
+                                    <option>hard</option>
+                                    <option>icpc</option>
+                                    <option>codealong</option>
+                                </Input>
+                            </th>
+                            <th>
+                                <Input
+                                    type="select"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                    name="select"
+                                    id="solfilter">
+                                    <option>Solution</option>
+                                    <option>No Solution</option>
+                                    <option>Has Solution</option>
+                                </Input>
+                            </th>
+                            <th>
+                                <Input
+                                    type="select"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                    name="select"
+                                    id="notefilter">
+                                    <option>Notes</option>
+                                    <option>No Notes</option>
+                                    <option>Has Notes</option>
+                                </Input>
+                            </th>
+                            <th>
+                                <Input
+                                    type="select"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                    name="select"
+                                    id="confilter">
+                                    {this.cons}
+                                </Input>
+                            </th>
+                            <th>
+                                <Input
+                                    type="select"
+                                    onChange={evt => this.updateInputValue(evt)}
+                                    name="select"
+                                    id="sessfilter">
+                                    {this.sessoptions}
+                                </Input>
+                            </th>
+                            <th />
+                            <th />
+                        </tr>
+                    </thead>
+                    <tbody>{this.body}</tbody>
+                </Table>
+            </>
         );
     }
 }

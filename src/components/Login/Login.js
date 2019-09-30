@@ -107,12 +107,21 @@ export default class Login extends Component {
             this.quarter = quarters[i + 1];
         }
 
+        // this.verified({ email: 'alaird@uci.edu' });
+        // this.verified({ email: 'mnovitia@uci.edu' });
+        // this.verified({ email: 'craut@uci.edu' });
+
         // check if logged in (after refreshed)
         // uncomment below for debugging
         const user = window.localStorage.getItem('user');
+
         if (user !== undefined && user !== null && user !== '') {
-            this.verified(JSON.parse(user));
-            // this.verified({ email: 'mnovitia@uci.edu' });
+            const user_json = JSON.parse(user);
+            const user_last_logged_in = parseInt(user_json['lastLoginAt']);
+            const time_now = new Date().getTime();
+            const days_apart =
+                (time_now - user_last_logged_in) / 1000 / 60 / 60 / 24;
+            if (days_apart < 1) this.verified(user_json);
         }
 
         /*

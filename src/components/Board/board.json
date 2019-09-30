@@ -6,15 +6,11 @@
         },
         "btjanaka": {
             "name": "Bryon Tjanaka",
-            "position": "Vice President and Director of Innovation"
+            "position": "Internal Vice President"
         },
         "jtuyls": {
             "name": "Jens Tuyls",
-            "position": "Vice President"
-        },
-        "kgajulap": {
-            "name": "Karthik Gajulapalli",
-            "position": "President Emeritus"
+            "position": "External Vice President"
         },
         "pooyak": {
             "name": "Pooya Khosravi",
@@ -22,7 +18,7 @@
         },
         "mnovitia": {
             "name": "Meta Novitia",
-            "position": "Webmistress"
+            "position": "Webmaster"
         },
         "bwakasa": {
             "name": "Blake Wakasa",
@@ -30,11 +26,39 @@
         },
         "renjied": {
             "name": "Jacky Dai",
-            "position": "AI and ML SIG Lead"
+            "position": "General SIG Lead"
         },
         "junliw1": {
             "name": "Junlin Wang",
-            "position": "AI and ML SIG Lead"
+            "position": "AI SIG Lead"
+        },
+        "bbui3": {
+            "name": "Brian Bui",
+            "position": "Lead Mentor"
+        },
+        "bmchu1": {
+            "name": "Brian Chu",
+            "position": "Internal Outreach"
+        },
+        "alaird": {
+            "name": "Andrew Laird",
+            "position": "Corporate Outreach"
+        },
+        "kirkmc": {
+            "name": "Michael Kirk",
+            "position": "Photographer"
+        },
+        "sdowdle": {
+            "name": "Sean Dowdle",
+            "position": "Data Admin"
+        },
+        "jsley": {
+            "name": " Justin Ley",
+            "position": "Historian"
+        },
+        "kgajulap": {
+            "name": "Karthik Gajulapalli",
+            "position": "President Emeritus"
         },
         "aphilipe": {
             "name": "Arne Philipeit",
