@@ -2,5 +2,5 @@ node_modules/
 .vscode/
 processing/
 build/
-firebase-config.js
 send.sh
+scp.sh

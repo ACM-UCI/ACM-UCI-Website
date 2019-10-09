@@ -147,7 +147,8 @@ export default class Entry extends Component {
         if (
             this.props.owner === 'mnovitia' ||
             this.props.owner === 'btjanaka' ||
-            this.props.owner === 'jtuyls'
+            this.props.owner === 'jtuyls' ||
+            this.props.owner === 'bbui3'
         ) {
             if (this.data.Session === undefined) {
                 this.data.Session = [];

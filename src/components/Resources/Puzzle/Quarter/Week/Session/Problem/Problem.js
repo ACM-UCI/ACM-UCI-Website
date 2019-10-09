@@ -37,7 +37,7 @@ export default class Problem extends Component {
                 pc = '';
             }
             var probContributors = [];
-            console.log(cons);
+            console.log(props);
             for (var con = 0; con < cons.length; con++) {
                 var contrib = cons[con];
                 if (props.contributors.hasOwnProperty(contrib)) {

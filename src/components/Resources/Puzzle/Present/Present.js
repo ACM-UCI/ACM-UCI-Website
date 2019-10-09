@@ -79,7 +79,7 @@ export default class Present extends Component {
                                     link={data.Link}
                                     diff={data.Difficulty}
                                     slink={data.Solution}
-                                    con={data.Contributor[0]}
+                                    con={data.Contributor}
                                     conName={conName}
                                     code={data.Code}
                                     note={data.Note}
@@ -88,6 +88,7 @@ export default class Present extends Component {
                                     quarter={this.quarter}
                                     session={this.session}
                                     evnt="yes"
+                                    contributors={contributors}
                                 />
                             </Col>
                         );
@@ -99,7 +100,7 @@ export default class Present extends Component {
                                     link={data.Link}
                                     diff={data.Difficulty}
                                     slink={data.Solution}
-                                    con={data.Contributor[0]}
+                                    con={data.Contributor}
                                     conName={conName}
                                     note={data.Note}
                                     code={data.Code}
@@ -107,6 +108,7 @@ export default class Present extends Component {
                                     quarter={this.quarter}
                                     session={this.session}
                                     txt={t}
+                                    contributors={contributors}
                                 />
                             </Col>
                         );

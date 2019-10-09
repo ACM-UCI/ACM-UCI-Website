@@ -24,6 +24,8 @@ import junlintalk from '../../img/junlintalk.jpg';
 import pooyatalk from '../../img/pooyatalk.jpg';
 import uipath from '../../img/uiPath.jpg';
 import acm_meeting from '../../img/acm_meeting.jpg';
+import ieeextreme13 from '../../img/ieeextreme13.jpg';
+import facebook from '../../img/facebook.jpg';
 import './Events.css';
 
 class Events extends Component {
@@ -38,16 +40,18 @@ class Events extends Component {
             <div>
                 {/* <h2 className="mt-3">Next Event</h2> */}
 
-                <h2 className="mt-3">Weekly Schedule</h2>
+                <h3 className="mt-3">Weekly Schedule</h3>
                 <Card body className="card-body">
                     <CardTitle>ACM Practice - Fall 2019</CardTitle>
                     <CardText>
                         <strong>Tuesday: </strong>
-                        TBA, 6:00 - 8:00 pm <br />
+                        DBH 4011, 6:00 - 8:00 pm <br />
                         <strong>Thursday: </strong>
-                        TBA, 6:00 - 8:00 pm
+                        DBH 4011, 6:00 - 8:00 pm
                     </CardText>
                 </Card>
+                {/* <h3 className="mt-3">Quick links</h3> */}
+                <hr className="event-line" />
                 <Card body className="card-body">
                     <CardTitle>Quick Links</CardTitle>
                     <CardText>
@@ -75,6 +79,31 @@ class Events extends Component {
                             Winter 2019
                         </Link>{' '}
                         <br />
+                    </CardText>
+                </Card>
+                <Card body className="card-body">
+                    <CardTitle>Quick Info</CardTitle>
+                    <CardText>
+                        <ul>
+                            <li>
+                                <Link
+                                    style={{ color: '#32587B' }}
+                                    to="/events#IEEEXtreme13">
+                                    IEEEXtreme 13.0
+                                </Link>
+                                <br />
+                                {'Oct 18, 5PM - Oct 19, 5PM @ DBH 4011'}
+                            </li>
+                            <li>
+                                <Link
+                                    style={{ color: '#32587B' }}
+                                    to="/events#FacebookTechTalk">
+                                    Facebook Tech Talk
+                                </Link>
+                                <br />
+                                {'Oct 25, TBA @ DBH 6011'}
+                            </li>
+                        </ul>
                     </CardText>
                 </Card>
             </div>
@@ -144,6 +173,104 @@ class Events extends Component {
                                 Upcoming Events
                             </h2>
 
+                            <Card id="IEEEXtreme13" body className="card-body">
+                                <CardTitle>
+                                    <h3>IEEEXtreme 13.0</h3>
+                                    <i>
+                                        Friday, October 18, 5PM - Saturday,
+                                        October 19, 5PM @ DBH 4011
+                                    </i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={ieeextreme13}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    During the event:
+                                    <ol>
+                                        <li>
+                                            ACM and IEEE will host the
+                                            competition in DBH (Donald Bren
+                                            Hall) 4011.
+                                        </li>
+                                        <li>
+                                            We have booked the room from 4PM on
+                                            October 18 to 6PM on October 19, so
+                                            you can arrive as early as 4PM. Keep
+                                            in mind you will need time to set
+                                            up. Please plan accordingly.
+                                        </li>
+                                        <li>
+                                            We will provide snacks, breakfast,
+                                            lunch, and dinner at appropriate
+                                            times throughout the competition.
+                                        </li>
+                                        <li>
+                                            Bring any necessary materials,
+                                            particularly laptops, power strips,
+                                            snacks, sleeping bags, water, and
+                                            anything else that will help you
+                                            survive 24 hours straight.
+                                            <ul>
+                                                <li>
+                                                    There will be a restroom
+                                                    very close to the room, as
+                                                    well as a water bottle
+                                                    refilling station.
+                                                </li>
+                                                <li>
+                                                    Of course, you may leave
+                                                    during the competition.
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                    It was the great Amelia Earhart who once
+                                    said, “The most difficult thing is the
+                                    decision to act, the rest is merely
+                                    tenacity.” Congratulations on your decision
+                                    to compete in IEEExtreme. I wish you the
+                                    best of luck. Please reach out if you have
+                                    any further questions.
+                                    <br />
+                                    <br />
+                                    Sincerely,
+                                    <br />
+                                    Bryon Tjanaka
+                                </CardText>
+                            </Card>
+
+                            <Card
+                                id="FacebookTechTalk"
+                                body
+                                className="card-body">
+                                <CardTitle>
+                                    <h3>Facebook Tech Talk</h3>
+                                    <i>Friday, October 25, TBA @ DBH 6011</i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={facebook}
+                                        alt=""
+                                    />
+                                    {/* <hr className="event-line" /> */}
+                                </CardText>
+                            </Card>
+
+                            <br />
+                            <h2 id="2019-fall-events" className="mt-3">
+                                Fall 2019 Events
+                            </h2>
+
                             <Card body className="card-body">
                                 <CardTitle>
                                     <h3>
@@ -181,11 +308,6 @@ class Events extends Component {
                                     <i>P.S. There will be pizza :)</i>
                                 </CardText>
                             </Card>
-
-                            <br />
-                            <h2 id="2019-fall-events" className="mt-3">
-                                Fall 2019 Events
-                            </h2>
 
                             <br />
                             <h2 id="2019-spring-events" className="mt-3">
