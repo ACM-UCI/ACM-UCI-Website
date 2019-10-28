@@ -95,12 +95,7 @@ export default class Entry extends Component {
 
     remove() {
         // change this to position !!!!!
-        if (
-            this.props.owner === 'mnovitia' ||
-            this.props.owner === 'btjanaka' ||
-            this.props.owner === 'jtuyls' ||
-            this.props.owner === 'bbui3'
-        ) {
+        if (board[config.current].hasOwnProperty(this.props.owner)) {
             // if removing from this quarter
             if (this.selectedSess.startsWith(this.props.qrt)) {
                 var sessionIndex = this.data.Session.indexOf(this.selectedSess);
@@ -144,12 +139,7 @@ export default class Entry extends Component {
 
     setProblem() {
         // change this to position !!!!!
-        if (
-            this.props.owner === 'mnovitia' ||
-            this.props.owner === 'btjanaka' ||
-            this.props.owner === 'jtuyls' ||
-            this.props.owner === 'bbui3'
-        ) {
+        if (board[config.current].hasOwnProperty(this.props.owner)) {
             if (this.data.Session === undefined) {
                 this.data.Session = [];
             }

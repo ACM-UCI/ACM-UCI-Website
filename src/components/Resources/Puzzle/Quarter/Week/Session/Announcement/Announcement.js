@@ -42,7 +42,7 @@ export default class Announcement extends Component {
         return (
             <div>
                 <Alert color="dark" fade={false}>
-                    {this.name}:{this.desc} {this.con}
+                    {this.name}: {this.desc} {this.con}
                 </Alert>
                 <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>

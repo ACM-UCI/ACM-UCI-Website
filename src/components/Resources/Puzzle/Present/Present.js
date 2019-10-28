@@ -182,6 +182,7 @@ export default class Present extends Component {
     }
 
     render() {
+        console.log(this.announcements);
         return (
             <Container>
                 {this.announcements}

@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const vars = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
-    extras: ['event', 'announcment', 'finals', 'thanksgiving']
+    extras: ['event', 'announcement', 'finals', 'thanksgiving']
 };
 
 const ITEM_HEIGHT = 48;
@@ -586,7 +586,7 @@ export default class Submit extends Component {
                                 </div>
                             )}
                             MenuProps={MenuProps}>
-                            {config.categories.map(name => (
+                            {config.categories.sort().map(name => (
                                 <MenuItem key={name} value={name}>
                                     {name}
                                 </MenuItem>

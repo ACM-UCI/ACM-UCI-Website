@@ -2,7 +2,7 @@
     "name": "acm-reactify",
     "version": "0.1.0",
     "private": true,
-    "homepage": "http://clubs.uci.edu/acm",
+    "homepage": "http://acm-uci.github.io",
     "dependencies": {
         "@devexpress/dx-react-core": "^1.10.3",
         "@devexpress/dx-react-grid": "^1.10.3",
@@ -16,6 +16,7 @@
         "classnames": "^2.2.6",
         "code": "^5.2.4",
         "firebase": "^5.8.1",
+        "gh-pages": "^2.1.1",
         "googleapis": "^36.0.0",
         "hoek": "^4.2.1",
         "jquery": "^3.3.1",
@@ -42,10 +43,14 @@
         "watch-css": "npm run build-css && node-sass --include-path ./src/scss --include-path ./node-modules src/scss/ -o src/scss/ --watch --recursive",
         "start-js": "react-scripts start",
         "start": "npm-run-all -p watch-css start-js",
-        "build": "npm run build-css && react-scripts build",
+        "cp-cname": "cp CNAME build",
+        "cp-404": "cp 404.html build",
+        "build": "npm run build-css && react-scripts build && npm run cp-cname && npm run cp-404",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "format": "prettier --write '**/*.{js,jsx}'"
+        "format": "prettier --write '**/*.{js,jsx}'",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build -r https://github.com/acm-uci/acm-uci.github.io -b master"
     },
     "husky": {
         "hooks": {

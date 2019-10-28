@@ -69,7 +69,6 @@ class Events extends Component {
                     </CardText>
                 </Card> */}
                 {/* <h3 className="mt-3">Quick links</h3> */}
-                {/* <hr className="event-line" /> */}
                 <Card body className="card-body">
                     <CardTitle>Quick Links</CardTitle>
                     <CardText>
@@ -464,7 +463,6 @@ class Events extends Component {
                                     <br />
                                     Come learn from your own ACM Alumni!
                                     <br />
-                                    Come learn from your own ACM Alumni!
                                     <br />
                                     We will also dive into how to best prepare
                                     for a systems interview!

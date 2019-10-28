@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 import './scss/custom.css';
+import './index.css';
 import App from './App';
 
 ReactDOM.render(
-    <HashRouter>
+    <BrowserRouter forceRefresh={true}>
         <App />
-    </HashRouter>,
+    </BrowserRouter>,
     document.getElementById('root')
 );

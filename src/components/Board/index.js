@@ -24,7 +24,8 @@ const Images = {
     shaun: require('../../img/shaun.jpg'),
     pattis: require('../../img/pattis.jpg'),
     kirkmc: require('../../img/kirkmc.jpg'),
-    bmchu1: require('../../img/bmchu1.jpg')
+    bmchu1: require('../../img/bmchu1.jpg'),
+    sdowdle: require('../../img/sdowdle.jpg')
 };
 
 export default Images;

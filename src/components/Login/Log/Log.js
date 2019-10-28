@@ -227,7 +227,9 @@ export default class Log extends Component {
                     board['2019-2020'].hasOwnProperty(key) &&
                     key !== 'kgajulap'
                 ) {
-                    d['score'] = tot - (this.week - 1) * 2;
+                    d['score'] = parseFloat(
+                        (tot - (this.week - 1) * 2).toFixed(2)
+                    );
                 }
                 this.data.push(d);
             }

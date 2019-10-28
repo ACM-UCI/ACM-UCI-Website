@@ -12,6 +12,7 @@ import Puzzle from './components/Resources/Puzzle/Puzzle';
 import Donate from './components/Donate/donate';
 import Login from './components/Login/Login';
 import config from './firebase-config.js';
+import PageNotFound from './PageNotFound';
 import './scss/custom.css';
 import IEEExtreme13 from './components/Blog/BlogPages/IEEExtreme13';
 
@@ -37,6 +38,7 @@ class App extends Component {
                 <Route path="/introToCp" component={IntroCP} />
                 <Route path="/puzzle" component={Puzzle} />
                 <Route path="/login" component={Login} />
+                <Route component={PageNotFound} />
             </Switch>
         );
     }

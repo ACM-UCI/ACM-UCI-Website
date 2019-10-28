@@ -115,6 +115,13 @@ class Navigation extends Component {
                                         Donate
                                     </NavLink>
                                 </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink
+                                        href="https://github.com/ACM-UCI/ACM-UCI-Website/issues"
+                                        target="_blank">
+                                        Raise Issue
+                                    </NavLink>
+                                </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem className="mx-3">
