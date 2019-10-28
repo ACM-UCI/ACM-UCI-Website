@@ -333,7 +333,7 @@ export default class Login extends Component {
                 <Navigation />
                 <Banner
                     lead="Submit Your Problems!"
-                    leadSub="Or else WACeM will haunt you"
+                    leadSub="We've got a lot on the line, people."
                 />
 
                 <Container className="logincontainer">{this.show}</Container>

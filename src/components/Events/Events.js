@@ -26,6 +26,7 @@ import uipath from '../../img/uiPath.jpg';
 import acm_meeting from '../../img/acm_meeting.jpg';
 import ieeextreme13 from '../../img/ieeextreme13.jpg';
 import facebook from '../../img/facebook.jpg';
+import facebooktech from '../../img/facebooktech.png';
 import './Events.css';
 
 class Events extends Component {
@@ -50,17 +51,34 @@ class Events extends Component {
                         DBH 4011, 6:00 - 8:00 pm
                     </CardText>
                 </Card>
+                <hr className="event-line" />
+                {/* <Card body className="card-body">
+                    <CardTitle>Quick Info</CardTitle>
+                    <CardText>
+                        <ul>
+                            <li>
+                                <Link
+                                    style={{ color: '#32587B' }}
+                                    to="/events#FacebookTechTalk">
+                                    Facebook Tech Talk
+                                </Link>
+                                <br />
+                                {'Oct 25, TBA @ DBH 6011'}
+                            </li>
+                        </ul>
+                    </CardText>
+                </Card> */}
                 {/* <h3 className="mt-3">Quick links</h3> */}
                 <hr className="event-line" />
                 <Card body className="card-body">
                     <CardTitle>Quick Links</CardTitle>
                     <CardText>
-                        <Link
+                        {/* <Link
                             style={{ color: '#32587B' }}
                             to="/events#upcoming-events">
                             Upcoming Events
                         </Link>{' '}
-                        <br />
+                        <br /> */}
                         <Link
                             style={{ color: '#32587B' }}
                             to="/events#2019-fall-events">
@@ -77,6 +95,10 @@ class Events extends Component {
                             style={{ color: '#32587B' }}
                             to="/events#2019-winter-events">
                             Winter 2019
+                        </Link>{' '}
+                        <br />
+                        <Link style={{ color: '#32587B' }} to="/blog">
+                            Blog
                         </Link>{' '}
                         <br />
                     </CardText>
@@ -135,7 +157,8 @@ class Events extends Component {
                         style={{
                             maxWidth: '30%',
                             padding: '2%',
-                            paddingTop: (0 - this.y).toString() + 'px',
+                            paddingTop:
+                                Math.max(0 - this.y, 20).toString() + 'px',
                             paddingBottom: '0',
                             marginRight: '5%',
                             paddingLeft: '1%'
@@ -166,14 +189,142 @@ class Events extends Component {
                             style={{
                                 maxWidth: '65%',
                                 padding: '2%',
+                                paddingTop: '20px',
                                 marginLeft: '5%',
                                 paddingRight: '5%'
                             }}>
-                            <h2 id="upcoming-events" className="mt-3">
+                            {/* <h2 id="upcoming-events" className="mt-3">
                                 Upcoming Events
+                            </h2> */}
+
+                            {/* <br /> */}
+                            <h2 id="2019-fall-events" className="mt-3">
+                                Fall 2019 Events
                             </h2>
 
-                            <Card id="IEEEXtreme13" body className="card-body">
+                            {/* 1st Meeting */}
+                            <Card body className="card-body">
+                                <CardTitle>
+                                    <h3>
+                                        1st Meeting: Storm DBH 4011, they can't
+                                        stop all of us
+                                    </h3>
+                                    <i>
+                                        Tuesday, October 1st, DBH 4011 @ 6:00pm
+                                        - 8:00 pm
+                                    </i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={acm_meeting}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    Come to our first meeting to learn more
+                                    about ACM@UCI and get a slice of fun coding
+                                    challenges! Stay updated on this event on
+                                    <a
+                                        style={{ color: '#3b5998' }}
+                                        href={
+                                            'https://www.facebook.com/events/2396693600444034/?active_tab=about'
+                                        }>
+                                        {' '}
+                                        Facebook
+                                    </a>
+                                    .
+                                    <br />
+                                    <i>P.S. There will be pizza :)</i>
+                                </CardText>
+                            </Card>
+
+                            {/* IEEEXtreme 13.0 */}
+                            <Card body className="card-body">
+                                <CardTitle>
+                                    <h3>IEEEXtreme 13.0</h3>
+                                    <i>
+                                        Friday, October 18, 5PM - Saturday,
+                                        October 19, 5PM @ DBH 4011
+                                    </i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{
+                                            width: '100%'
+                                        }}
+                                        src={ieeextreme13}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    During the event:
+                                    <ol>
+                                        <li>
+                                            ACM and IEEE will host the
+                                            competition in DBH (Donald Bren
+                                            Hall) 4011.
+                                        </li>
+                                        <li>
+                                            We have booked the room from 4PM on
+                                            October 18 to 6PM on October 19, so
+                                            you can arrive as early as 4PM. Keep
+                                            in mind you will need time to set
+                                            up. Please plan accordingly.
+                                        </li>
+                                        <li>
+                                            We will provide snacks, breakfast,
+                                            lunch, and dinner at appropriate
+                                            times throughout the competition.
+                                        </li>
+                                        <li>
+                                            Bring any necessary materials,
+                                            particularly laptops, power strips,
+                                            snacks, sleeping bags, water, and
+                                            anything else that will help you
+                                            survive 24 hours straight.
+                                            <ul>
+                                                <li>
+                                                    There will be a restroom
+                                                    very close to the room, as
+                                                    well as a water bottle
+                                                    refilling station.
+                                                </li>
+                                                <li>
+                                                    Of course, you may leave
+                                                    during the competition.
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                    It was the great Amelia Earhart who once
+                                    said, “The most difficult thing is the
+                                    decision to act, the rest is merely
+                                    tenacity.” Congratulations on your decision
+                                    to compete in IEEExtreme. I wish you the
+                                    best of luck. Please reach out if you have
+                                    any further questions.
+                                    <br />
+                                    <br />
+                                    Sincerely,
+                                    <br />
+                                    Bryon Tjanaka
+                                    <hr className="event-line" />
+                                    Results: see our{' '}
+                                    <Link
+                                        style={{ color: '#32587B' }}
+                                        to="/blog/ieeextreme13"
+                                        target="_blank">
+                                        blog
+                                    </Link>
+                                    {'!'}
+                                </CardText>
+                            </Card>
+
+                            {/* ICPC Qualifiers 2019 */}
+                            <Card body className="card-body">
                                 <CardTitle>
                                     <h3>IEEEXtreme 13.0</h3>
                                     <i>
@@ -245,42 +396,11 @@ class Events extends Component {
                                 </CardText>
                             </Card>
 
-                            <Card
-                                id="FacebookTechTalk"
-                                body
-                                className="card-body">
-                                <CardTitle>
-                                    <h3>Facebook Tech Talk</h3>
-                                    <i>Friday, October 25, TBA @ DBH 6011</i>
-                                </CardTitle>
-                                <CardText>
-                                    <hr className="event-line" />
-                                    <img
-                                        style={{
-                                            width: '100%'
-                                        }}
-                                        src={facebook}
-                                        alt=""
-                                    />
-                                    {/* <hr className="event-line" /> */}
-                                </CardText>
-                            </Card>
-
-                            <br />
-                            <h2 id="2019-fall-events" className="mt-3">
-                                Fall 2019 Events
-                            </h2>
-
+                            {/* Facebook Tech Talk */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    <h3>
-                                        1st Meeting: Storm DBH 4011, they can't
-                                        stop all of us
-                                    </h3>
-                                    <i>
-                                        Tuesday, October 1st, DBH 4011 @ 6:00pm
-                                        - 8:00 pm
-                                    </i>
+                                    <h3>Facebook Tech Talk</h3>
+                                    <i>Friday, October 25, 6-8pm @ DBH 6011</i>
                                 </CardTitle>
                                 <CardText>
                                     <hr className="event-line" />
@@ -288,24 +408,27 @@ class Events extends Component {
                                         style={{
                                             width: '100%'
                                         }}
-                                        src={acm_meeting}
+                                        src={facebooktech}
                                         alt=""
                                     />
                                     <hr className="event-line" />
-                                    Come to our first meeting to learn more
-                                    about ACM@UCI and get a slice of fun coding
-                                    challenges! Stay updated on this event on
-                                    <a
-                                        style={{ color: '#3b5998' }}
-                                        href={
-                                            'https://www.facebook.com/events/2396693600444034/?active_tab=about'
-                                        }>
-                                        {' '}
-                                        Facebook
-                                    </a>
-                                    .
+                                    If you haven't heard of Production
+                                    Engineering (PE), that's because it’s a one
+                                    of a kind hybrid role that’s only at
+                                    Facebook! PEs are software engineers who
+                                    focus specifically in our infrastructure
+                                    space by improving efficiency, scalability &
+                                    reliability across our family of apps &
+                                    services. <br />
                                     <br />
-                                    <i>P.S. There will be pizza :)</i>
+                                    Come learn from your own ACM Alumni!
+                                    <br />
+                                    <br />
+                                    We will also dive into how to best prepare
+                                    for a systems interview!
+                                    <br />
+                                    <br />
+                                    Hope to see you there!
                                 </CardText>
                             </Card>
 
@@ -641,6 +764,7 @@ class Events extends Component {
                                 </CardText>
                             </Card>
 
+                            {/* Girls' Coding Nights */}
                             <Card style={{ 'margin-top': '20px' }}>
                                 <a
                                     href="https://www.facebook.com/events/558100287990483/"

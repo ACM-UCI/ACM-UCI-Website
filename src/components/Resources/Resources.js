@@ -13,7 +13,7 @@ class Resources extends Component {
                 <Navigation />
                 <Banner
                     lead="ACM Resources"
-                    leadSub="Find our weekly problems and solutions here, as well as tutorials."
+                    leadSub="Find our tutorials here!"
                 />
                 <Container>
                     <Row>

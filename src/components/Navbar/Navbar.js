@@ -65,6 +65,11 @@ class Navigation extends Component {
                                         Our Board
                                     </NavLink>
                                 </DropdownItem>
+                                <DropdownItem>
+                                    <NavLink tag={Link} to="/blog">
+                                        Blog
+                                    </NavLink>
+                                </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem className="mx-3">
