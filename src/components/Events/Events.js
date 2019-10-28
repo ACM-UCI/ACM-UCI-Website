@@ -69,7 +69,7 @@ class Events extends Component {
                     </CardText>
                 </Card> */}
                 {/* <h3 className="mt-3">Quick links</h3> */}
-                <hr className="event-line" />
+                {/* <hr className="event-line" /> */}
                 <Card body className="card-body">
                     <CardTitle>Quick Links</CardTitle>
                     <CardText>
@@ -464,42 +464,7 @@ class Events extends Component {
                                     <br />
                                     Come learn from your own ACM Alumni!
                                     <br />
-                                    <br />
-                                    We will also dive into how to best prepare
-                                    for a systems interview!
-                                    <br />
-                                    <br />
-                                    Hope to see you there!
-                                </CardText>
-                            </Card>
-
-                            {/* Facebook Tech Talk */}
-                            <Card body className="card-body">
-                                <CardTitle>
-                                    <h3>Facebook Tech Talk</h3>
-                                    <i>Friday, October 25, 6-8pm @ DBH 6011</i>
-                                </CardTitle>
-                                <CardText>
-                                    <hr className="event-line" />
-                                    <img
-                                        style={{
-                                            width: '100%'
-                                        }}
-                                        src={facebooktech}
-                                        alt=""
-                                    />
-                                    <hr className="event-line" />
-                                    If you haven't heard of Production
-                                    Engineering (PE), that's because it’s a one
-                                    of a kind hybrid role that’s only at
-                                    Facebook! PEs are software engineers who
-                                    focus specifically in our infrastructure
-                                    space by improving efficiency, scalability &
-                                    reliability across our family of apps &
-                                    services. <br />
-                                    <br />
                                     Come learn from your own ACM Alumni!
-                                    <br />
                                     <br />
                                     We will also dive into how to best prepare
                                     for a systems interview!
