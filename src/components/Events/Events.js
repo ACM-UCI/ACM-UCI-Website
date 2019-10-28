@@ -103,31 +103,6 @@ class Events extends Component {
                         <br />
                     </CardText>
                 </Card>
-                <Card body className="card-body">
-                    <CardTitle>Quick Info</CardTitle>
-                    <CardText>
-                        <ul>
-                            <li>
-                                <Link
-                                    style={{ color: '#32587B' }}
-                                    to="/events#IEEEXtreme13">
-                                    IEEEXtreme 13.0
-                                </Link>
-                                <br />
-                                {'Oct 18, 5PM - Oct 19, 5PM @ DBH 4011'}
-                            </li>
-                            <li>
-                                <Link
-                                    style={{ color: '#32587B' }}
-                                    to="/events#FacebookTechTalk">
-                                    Facebook Tech Talk
-                                </Link>
-                                <br />
-                                {'Oct 25, TBA @ DBH 6011'}
-                            </li>
-                        </ul>
-                    </CardText>
-                </Card>
             </div>
         );
 
@@ -326,11 +301,147 @@ class Events extends Component {
                             {/* ICPC Qualifiers 2019 */}
                             <Card body className="card-body">
                                 <CardTitle>
-                                    <h3>IEEEXtreme 13.0</h3>
+                                    <h3>ICPC 2019 Qualifiers</h3>
                                     <i>
-                                        Friday, October 18, 5PM - Saturday,
-                                        October 19, 5PM @ DBH 4011
+                                        Thursday, October 17, 12:00AM -
+                                        Wednesday, October 23, 11:59PM @{' '}
+                                        <a
+                                            style={{ color: '#32587B' }}
+                                            href="https://open.kattis.com/contests/gsp4oi"
+                                            target="_blank">
+                                            Kattis
+                                        </a>
                                     </i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    Interest Form:{' '}
+                                    <a
+                                        href="http://bit.ly/32aZ6G0"
+                                        target="_blank"
+                                        style={{ color: '#32587B' }}>
+                                        http://bit.ly/32aZ6G0
+                                    </a>
+                                    <br />
+                                    Contest Link:{' '}
+                                    <a
+                                        style={{ color: '#32587B' }}
+                                        href="https://open.kattis.com/contests/gsp4oi"
+                                        target="_blank">
+                                        https://open.kattis.com/contests/gsp4oi
+                                    </a>
+                                    <hr className="event-line" />
+                                    Hey everybody,
+                                    <br />
+                                    <br />
+                                    Thank you for your interest in representing
+                                    UCI at this year's ICPC SoCal regionals.
+                                    Please read the entirety of this email.
+                                    We've decided to open the internal
+                                    qualifiers a little earlier than mentioned
+                                    in the interest form at this
+                                    <a
+                                        href="http://bit.ly/32aZ6G0"
+                                        target="_blank"
+                                        style={{ color: '#32587B' }}>
+                                        {' '}
+                                        link
+                                    </a>
+                                    .
+                                    <br />
+                                    <br />
+                                    We will be using Kattis as the online judge.
+                                    Although ICPC is a group event, this contest
+                                    is meant to be done individually. Do not
+                                    form teams. The contest will end on
+                                    Wednesday, October 23 at 11:59PM.
+                                    <br />
+                                    <br />
+                                    Sign up for the website under your name and
+                                    it will be matched with your interest form
+                                    from earlier. If your account uses a
+                                    separate user name, please ensure that
+                                    you've recorded it in the
+                                    <a
+                                        href="http://bit.ly/32aZ6G0"
+                                        target="_blank"
+                                        style={{ color: '#32587B' }}>
+                                        {' '}
+                                        interest form
+                                    </a>
+                                    . If you know any people who would like to
+                                    participate, feel free to forward this email
+                                    to them.
+                                    <br />
+                                    <br />
+                                    Some important notices below: You have five
+                                    hours to submit your solutions from your
+                                    first accepted submission to your last
+                                    submission. We will take the five-hour
+                                    window which maximizes your score when
+                                    taking your final score into consideration,
+                                    but you are strongly discouraged from
+                                    submitting outside this time as there may be
+                                    penalties.
+                                    <br />
+                                    <br />
+                                    NOTE: THE FINAL STANDING OF THE KATTIS
+                                    LEADERBOARD DOES NOT REPRESENT YOUR ACTUAL
+                                    SCORE**
+                                    <br />
+                                    <br />
+                                    If you are submitting in Python, submit in
+                                    Python 2 as it is 100x faster on Kattis.
+                                    <br />
+                                    <br />
+                                    Again, do not create a team in Kattis
+                                    <br />
+                                    <br />
+                                    The contest ends at midnight at midnight
+                                    Wednesday 23, 2019 Please review your
+                                    qualifications and contest details.
+                                    <br />
+                                    <br />
+                                    For any questions, feel free to respond to
+                                    this
+                                    <a
+                                        href="mailto: acm@uci.edu?subject=[ICPC-Qual-2019]"
+                                        style={{ color: '#32587B' }}>
+                                        {' '}
+                                        email{' '}
+                                    </a>
+                                    with the subject line including
+                                    "[ICPC-Qual-2019]". To ensure that your
+                                    performance is recorded,
+                                    <a
+                                        href="mailto: acm@uci.edu?subject=[ICPC-Qual-2019-Sub]"
+                                        style={{ color: '#32587B' }}>
+                                        {' '}
+                                        email a screenshot of your position on
+                                        the leaderboard{' '}
+                                    </a>
+                                    after your five-hour attempt to acm@uci.edu
+                                    with the tag "[ICPC-Qual-2019-Sub]".
+                                    <br />
+                                    <br />
+                                    Thanks,
+                                    <br />
+                                    ACM@UCI
+                                    <br />
+                                    <br />
+                                    ** ICPC is a timed competition, so in order
+                                    to gauge how students solve problems under
+                                    time constraints while simultaneously giving
+                                    competitors flexibility, the stated window
+                                    is much longer.
+                                </CardText>
+                            </Card>
+
+                            {/* Facebook Tech Talk */}
+                            <Card body className="card-body">
+                                <CardTitle>
+                                    <h3>Facebook Tech Talk</h3>
+                                    <i>Friday, October 25, 6-8pm @ DBH 6011</i>
                                 </CardTitle>
                                 <CardText>
                                     <hr className="event-line" />
@@ -338,61 +449,27 @@ class Events extends Component {
                                         style={{
                                             width: '100%'
                                         }}
-                                        src={ieeextreme13}
+                                        src={facebooktech}
                                         alt=""
                                     />
                                     <hr className="event-line" />
-                                    During the event:
-                                    <ol>
-                                        <li>
-                                            ACM and IEEE will host the
-                                            competition in DBH (Donald Bren
-                                            Hall) 4011.
-                                        </li>
-                                        <li>
-                                            We have booked the room from 4PM on
-                                            October 18 to 6PM on October 19, so
-                                            you can arrive as early as 4PM. Keep
-                                            in mind you will need time to set
-                                            up. Please plan accordingly.
-                                        </li>
-                                        <li>
-                                            We will provide snacks, breakfast,
-                                            lunch, and dinner at appropriate
-                                            times throughout the competition.
-                                        </li>
-                                        <li>
-                                            Bring any necessary materials,
-                                            particularly laptops, power strips,
-                                            snacks, sleeping bags, water, and
-                                            anything else that will help you
-                                            survive 24 hours straight.
-                                            <ul>
-                                                <li>
-                                                    There will be a restroom
-                                                    very close to the room, as
-                                                    well as a water bottle
-                                                    refilling station.
-                                                </li>
-                                                <li>
-                                                    Of course, you may leave
-                                                    during the competition.
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ol>
-                                    It was the great Amelia Earhart who once
-                                    said, “The most difficult thing is the
-                                    decision to act, the rest is merely
-                                    tenacity.” Congratulations on your decision
-                                    to compete in IEEExtreme. I wish you the
-                                    best of luck. Please reach out if you have
-                                    any further questions.
+                                    If you haven't heard of Production
+                                    Engineering (PE), that's because it’s a one
+                                    of a kind hybrid role that’s only at
+                                    Facebook! PEs are software engineers who
+                                    focus specifically in our infrastructure
+                                    space by improving efficiency, scalability &
+                                    reliability across our family of apps &
+                                    services. <br />
+                                    <br />
+                                    Come learn from your own ACM Alumni!
                                     <br />
                                     <br />
-                                    Sincerely,
+                                    We will also dive into how to best prepare
+                                    for a systems interview!
                                     <br />
-                                    Bryon Tjanaka
+                                    <br />
+                                    Hope to see you there!
                                 </CardText>
                             </Card>
 
