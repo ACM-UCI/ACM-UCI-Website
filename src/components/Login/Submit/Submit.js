@@ -8,7 +8,6 @@ import config from '../../config.js';
 import Chip from '@material-ui/core/Chip';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -138,6 +137,8 @@ export default class Submit extends Component {
             this.submission['Contributor'] = [props.owner];
         }
 
+        this.categories = [];
+
         this.ref = firebase.database().ref();
         this.ref.on('value', this.processData);
     }
@@ -178,6 +179,7 @@ export default class Submit extends Component {
                 );
             }
         }
+        this.categories = this.data['categories'].sort();
         this.setState({});
     }
 
@@ -586,26 +588,13 @@ export default class Submit extends Component {
                                 </div>
                             )}
                             MenuProps={MenuProps}>
-                            {config.categories.sort().map(name => (
+                            {this.categories.sort().map(name => (
                                 <MenuItem key={name} value={name}>
                                     {name}
                                 </MenuItem>
                             ))}
                         </Select>
                     </Col>
-                    {/* <Col>
-                        <Input
-                            type="select"
-                            multiple
-                            defaultValue={this.props.data.Category}
-                            onChange={evt => this.updateInputValue(evt)}
-                            name="select"
-                            id="Categories">
-                            {config.categories.sort().map(data=>(
-                                <option key={data}>{data}</option>
-                            ))}
-                        </Input>
-                    </Col> */}
                 </Row>
                 <br />
 

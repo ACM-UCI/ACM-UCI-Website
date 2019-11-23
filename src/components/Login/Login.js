@@ -109,7 +109,7 @@ export default class Login extends Component {
 
         // this.verified({ email: 'alaird@uci.edu' });
         // this.verified({ email: 'mnovitia@uci.edu' });
-        // this.verified({ email: 'craut@uci.edu' });
+        // this.verified({ email: 'pbaldara@uci.edu' });
 
         // check if logged in (after refreshed)
         // uncomment below for debugging
@@ -180,7 +180,8 @@ export default class Login extends Component {
     verified(user) {
         this.owner = user;
         this.default['Contributor'] = [this.owner.email.split('@')[0]];
-        this.toggle('Profile');
+        // this.toggle('Profile');
+        this.toggle('Data');
     }
 
     logged(result) {

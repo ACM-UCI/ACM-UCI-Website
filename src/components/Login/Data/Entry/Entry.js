@@ -15,7 +15,6 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
 import Submit from '../../Submit/Submit';
-import filter from './filter.js';
 import config from '../../../config.js';
 import board from '../../../Board/board.json';
 
@@ -33,8 +32,6 @@ const lang = {
     kt: 'kotlin',
     m: 'objectivec'
 };
-
-const shouldDisplay = ['none', undefined];
 
 export default class Entry extends Component {
     constructor(props) {
@@ -63,7 +60,6 @@ export default class Entry extends Component {
         }
 
         this.session = props.sess;
-        this.filters = props.filters;
         this.optses1 = '2';
         this.optses2 = '1';
         if (this.session === 1) {
@@ -198,8 +194,7 @@ export default class Entry extends Component {
         } else {
             this.msg = (
                 <Alert color="warning">
-                    Sorry! Only Bryon, Jens, and Meta can set problems for now
-                    XD
+                    Sorry! Only board members can set problems!
                 </Alert>
             );
             this.setState({
@@ -232,13 +227,18 @@ export default class Entry extends Component {
         this.avail = 'Not Available';
         if (problem.Solution !== '') {
             this.avail = 'Available';
+            var solName = problem.Solution.substring(0, 15);
+            for (var i = 15; i < problem.Solution.length; i += 15) {
+                solName += '\n';
+                solName += problem.Solution.substring(i, i + 15);
+            }
             this.sol = (
                 <Button
                     className="solbtn"
                     onClick={() => {
                         this.toggle(0);
                     }}>
-                    {problem.Solution}
+                    {solName}
                 </Button>
             );
             // !!!!! position
@@ -311,11 +311,18 @@ export default class Entry extends Component {
             );
         }
 
+        //set categories
+        this.categories = [];
+        for (var i in this.data.Category) {
+            var c = this.data.Category[i];
+            if (i > 0) {
+                c = ', ' + c;
+            }
+            this.categories.push(c);
+        }
+
         return (
-            <tr
-                style={{
-                    display: shouldDisplay[filter(problem, this.filters)]
-                }}>
+            <tr>
                 <th scope="row" style={{ textAlign: 'left' }}>
                     <a
                         className="problinkdata"
@@ -337,6 +344,7 @@ export default class Entry extends Component {
                 <td>{this.txt}</td>
                 <td>{this.contributors}</td>
                 <td>{this.sessions}</td>
+                <td>{this.categories}</td>
                 <td>
                     <Button
                         onClick={() => {
@@ -467,7 +475,7 @@ export default class Entry extends Component {
                         week={this.props.wk}
                         quarter={this.props.qrt}
                         owner={this.props.owner}
-                        session={this.props.sess}
+                        session={this.props.session}
                         data={problem}
                         x={this.props.x}
                     />
