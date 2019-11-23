@@ -83,7 +83,7 @@ export default class Data extends Component {
     }
 
     changePage(num) {
-        if (num != '') this.setState({ page: num });
+        this.setState({ page: num });
     }
 
     updateInputValue(evt) {
