@@ -176,7 +176,8 @@ export default class Data extends Component {
                                     width: '100px',
                                     marginLeft: '10px',
                                     position: 'absolute',
-                                    right: 10
+                                    right: 10,
+                                    top: 3
                                 }}
                                 type="select"
                                 onChange={evt => this.updateInputValue(evt)}
