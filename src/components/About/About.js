@@ -5,7 +5,7 @@ import Banner from '../Banner/Banner';
 import { Timeline, TimelineItem } from 'vertical-timeline-component-for-react';
 import './About.css';
 import TimelineData from './timeline.json';
-import Images from './img/index';
+import Images from './img-index';
 
 let about_timeline_header = {
     background: '#02284B',

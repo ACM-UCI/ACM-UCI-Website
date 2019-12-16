@@ -8,11 +8,13 @@ another JSON object in the array. The object should have, at the very least, the
 chronological order starting from the top, even though the page itself is in
 reverse chronological order.
 
-To associate the event with an image, add the image to the img folder here and
-create an entry mapping its name to a require statement in the Images object in
-index.js. For instance:
+To associate the event with an image, add the image to `src/img` and create an
+entry mapping its name to a require statement in the Images object in `img-index.js`.
+For instance:
+
 ```javascript
-'icpc-socal-2018.jpg': require('./icpc-socal-2018.jpg'),
+'icpc_socal_2018.jpg': require('../../img/icpc_socal_2018.jpg'),
 ```
+
 Then, in timeline.json, add the filename of the image to your event as an "img"
 attribute and add a caption as "caption".
