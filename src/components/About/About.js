@@ -57,7 +57,7 @@ class About extends Component {
                         <Col
                             md={{ size: 8, offset: 2 }}
                             className="text-center">
-                            <p style={{ fontSize: '20px', marginTop: '20px' }}>
+                            <p style={{ fontSize: '20px', marginTop: '40px' }}>
                                 Members of ACM@UCI enjoy computer science and
                                 puzzles. We study algorithms and compete in
                                 prestigious programming contests like ICPC and

@@ -57,7 +57,7 @@
         "date": "October 2018",
 
         "title": "IEEExtreme 12.0",
-        "desc": "At IEEExtreme 12.0, a 24-hour worldwide programming contest, ACM@UCI gets two teams, sheep and sleep24hrs, into the top 100 in the world. The two teams also rank 6th and 7th in the US, respectively.",
+        "desc": "At IEEExtreme 12.0, two teams from ACM@UCI, sheep and sleep24hrs, place in the top 100 in the world. The two teams also rank 6th and 7th in the US, respectively.",
         "img": "ieeextreme-12-sleep24hrs.jpg",
         "caption": "sleep24hrs shortly after IEEExtreme 12.0"
     },
@@ -76,5 +76,19 @@
         "desc": "ACM@UCI hosts another seminar series, once again with diverse talks.",
         "img": "seminar-winter-2019.jpg",
         "caption": "Karthik Gajulapalli presenting for the ACM Seminar Series, Winter 2019"
+    },
+    {
+        "date": "October 2019",
+        "title": "IEEExtreme 13.0",
+        "desc": "At IEEExtreme 13.0, a 24-hour worldwide programming contest, ACM@UCI gets three teams, OutOfPractice, Pan, and zotReduce, into the top 100 in the world. The three teams also rank 4th, 6th, and 7th in the US.",
+        "img": "ieeextreme-13.jpg",
+        "caption": "UCI students after IEEExtreme 13"
+    },
+    {
+        "date": "November 2019",
+        "title": "2019 SoCal Regional",
+        "desc": "ACM@UCI sends five teams to the 2019 SoCal Regiona. At the end of the contest, team filter ranks highest, at 7th place",
+        "img": "icpc-socal-2019.jpg",
+        "caption": "ACM@UCI members at the 2019 ICPC SoCal Regional"
     }
 ]
