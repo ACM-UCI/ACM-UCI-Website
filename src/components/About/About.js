@@ -5,7 +5,7 @@ import Banner from '../Banner/Banner';
 import { Timeline, TimelineItem } from 'vertical-timeline-component-for-react';
 import './About.css';
 import TimelineData from './timeline.json';
-import Images from './img/index';
+import Images from './img-index';
 
 let about_timeline_header = {
     background: '#02284B',
@@ -57,7 +57,7 @@ class About extends Component {
                         <Col
                             md={{ size: 8, offset: 2 }}
                             className="text-center">
-                            <p style={{ fontSize: '20px', marginTop: '20px' }}>
+                            <p style={{ fontSize: '20px', marginTop: '40px' }}>
                                 Members of ACM@UCI enjoy computer science and
                                 puzzles. We study algorithms and compete in
                                 prestigious programming contests like ICPC and
