@@ -1,6 +1,12 @@
+# Temporary directories
 node_modules/
-.vscode/
 processing/
 build/
+
+# Editor files
+.vscode/
+*.swp
+
+# Scripts
 send.sh
 scp.sh
