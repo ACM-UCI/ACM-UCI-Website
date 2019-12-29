@@ -29,7 +29,16 @@ export default class Present extends Component {
 
     processData(myData) {
         var contributors = myData['logs'];
-        var sessionProblems = myData[this.quarter][this.week][this.session];
+
+        // TEMPORARY FIX
+        var sessionProblems;
+        try {
+            sessionProblems = myData[this.quarter][this.week][this.session];
+        } catch (err) {
+            if (err.name == 'TypeError') return;
+            throw err;
+        }
+
         var allProblems = myData['submissions'];
 
         var problems = [[]];
