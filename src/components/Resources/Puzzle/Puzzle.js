@@ -20,7 +20,7 @@ export default class Puzzle extends Component {
 
         this.state = { collapse: false };
 
-        this.quarter = 'Spring 2019';
+        this.quarter = 'Winter 2020';
         this.week = 1;
         this.session = 1;
         this.end = false;
@@ -162,7 +162,7 @@ export default class Puzzle extends Component {
         // List of quarters that will be included in past solutions
         // note ".slice" does not include end argument
         this.quarters = quarters.slice(0, i + 1);
-        // console.log(this.session, this.quarter, this.end, this.week);
+        console.log(this.session, this.quarter, this.end, this.week);
         console.log(new Date(date));
         console.log(Date());
         this.done = true;

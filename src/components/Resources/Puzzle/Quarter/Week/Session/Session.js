@@ -22,7 +22,12 @@ export default class Session extends Component {
 
     processData(myData) {
         var contributors = myData['logs'];
-        var sessionProblems = myData[this.quarter][this.week][this.session];
+        var sessionProblems = {};
+        if (myData[this.quarter].hasOwnProperty(this.week)) {
+            if (myData[this.quarter][this.week].hasOwnProperty(this.session)) {
+                sessionProblems = myData[this.quarter][this.week][this.session];
+            }
+        }
         var allProblems = myData['submissions'];
 
         var problems = [[]];
