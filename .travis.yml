@@ -8,13 +8,14 @@ branches:
     only:
         - master
 
-# See npm ci documentation
+# See npm ci documentation.
 install: npm ci
 cache:
     directories:
         - '$HOME/.npm'
 
-script: npm run build
+# Set CI to false so that warnings are not treated as errors.
+script: CI=false npm run build
 
 deploy:
     provider: pages
