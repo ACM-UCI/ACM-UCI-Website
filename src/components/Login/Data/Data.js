@@ -229,6 +229,9 @@ export default class Data extends Component {
                                 {(v + 1) * 20} rows
                             </option>
                         ))}
+                        <option key={'rownumall'} value={this.body.length + 1}>
+                            All
+                        </option>
                     </Input>
                 </div>
                 <Table style={{ justifyItems: 'center' }} responsive>

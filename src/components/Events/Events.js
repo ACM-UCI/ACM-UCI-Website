@@ -43,7 +43,7 @@ class Events extends Component {
 
                 <h3 className="mt-3">Weekly Schedule</h3>
                 <Card body className="card-body">
-                    <CardTitle>ACM Practice - Fall 2019</CardTitle>
+                    <CardTitle>ACM Practice - Winter 2020</CardTitle>
                     <CardText>
                         <strong>Tuesday: </strong>
                         DBH 4011, 6:00 - 8:00 pm <br />
