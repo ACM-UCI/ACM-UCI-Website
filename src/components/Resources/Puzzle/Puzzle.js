@@ -104,7 +104,7 @@ export default class Puzzle extends Component {
 
         // change below for testing [ place desired date inside Date() ]
         var today = new Date(date);
-        // var today = new Date('October 1, 2019 21:00:00 GMT-07:00');
+        // var today = new Date('January 7, 2020 21:00:00 GMT-07:00');
         if (!(today instanceof Date) || isNaN(today)) {
             this.err();
             return;
@@ -162,9 +162,7 @@ export default class Puzzle extends Component {
         // List of quarters that will be included in past solutions
         // note ".slice" does not include end argument
         this.quarters = quarters.slice(0, i + 1);
-        console.log(this.session, this.quarter, this.end, this.week);
-        console.log(new Date(date));
-        console.log(Date());
+        // console.log(this.session, this.quarter, this.end, this.week);
         this.done = true;
 
         var ref = firebase.database().ref();

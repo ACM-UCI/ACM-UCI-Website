@@ -157,8 +157,8 @@ export default class Submit extends Component {
                     // uncomment this to initialize all
                     for (var i = 1; i <= 11; i++) {
                         // u['/logs/' + b + '/Fall 2018/' + i.toString()] = 0;
-                        // u['/logs/' + b + '/Winter 2019/' + i.toString()] = 0;
-                        // u['/logs/' + b + '/Spring 2019/' + i.toString()] = 0;
+                        u['/logs/' + b + '/Winter 2020/' + i.toString()] = 0;
+                        u['/logs/' + b + '/Spring 2020/' + i.toString()] = 0;
                         // u['/logs/' + b + '/Fall 2019/' + i.toString()] = 0;
                     }
                 }
