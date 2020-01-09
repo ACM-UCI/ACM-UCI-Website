@@ -1,0 +1,29 @@
+language: node_js
+node_js:
+    - 10
+
+git:
+    depth: 1
+branches:
+    only:
+        - master
+
+# See npm ci documentation.
+install: npm ci
+cache:
+    directories:
+        - '$HOME/.npm'
+
+# Set CI to false so that warnings are not treated as errors.
+script: CI=false npm run build
+
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    on:
+        branch: master
+    local_dir: build
+    repo: acm-uci/acm-uci.github.io
+    target_branch: master
