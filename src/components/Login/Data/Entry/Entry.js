@@ -59,7 +59,7 @@ export default class Entry extends Component {
             this.allweeks.push(<option key={'w' + w.toString()}>{w}</option>);
         }
 
-        this.session = props.sess;
+        this.session = props.session;
         this.optses1 = '2';
         this.optses2 = '1';
         if (this.session === 1) {
