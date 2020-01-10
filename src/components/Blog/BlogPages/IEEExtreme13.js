@@ -79,7 +79,14 @@ export default class IEEExtreme13 extends Component {
                                 zotReduce (Pooya Khosravi, Haoyu Wang, Milan
                                 Lad) placed 107th. These teams also placed 4th,
                                 6th, and 7th in the US, as well as 1st, 3rd, and
-                                4th in the Western US, respectively.
+                                4th in the Western US, respectively. Full
+                                results from the competition may be viewed{' '}
+                                <a
+                                    href="https://ieeextreme.org/ieeextreme-13-0-global-ranking/"
+                                    style={{ color: '#6DB6E2' }}>
+                                    here
+                                </a>
+                                .
                                 <br />
                                 <br />
                                 <br />
