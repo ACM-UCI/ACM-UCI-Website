@@ -104,7 +104,7 @@ export default class Puzzle extends Component {
 
         // change below for testing [ place desired date inside Date() ]
         var today = new Date(date);
-        // var today = new Date('January 7, 2020 21:00:00 GMT-07:00');
+        // var today = new Date('January 9, 2020 20:00:00 GMT-07:00');
         if (!(today instanceof Date) || isNaN(today)) {
             this.err();
             return;
@@ -146,7 +146,7 @@ export default class Puzzle extends Component {
         // check if the session ended, assuming each session lasts 2 hours
         // note that ses === 0 corresponds to Tuesday, and ses === 2 corresponds to Thursday
         const tm = ((today - startDates[i]) / 1000 / 60 / 60) % 24;
-        if ((ses === 0 || ses === 2) && tm < 3) {
+        if ((ses === 0 || ses === 2) && tm < 2) {
             this.end = false;
         } else {
             this.end = true;
