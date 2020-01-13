@@ -38,15 +38,14 @@ class Home extends Component {
                     <Row>
                         <div className="pseudo" />
                         <p className="text-center m-5">
-                            There are no requirements to join us; in fact, we
-                            encourage you to join even if you have no
-                            experience. Consider attending one of our meetings
-                            that we hold once or twice a week. Our chapter hosts
-                            a variety of events including workshops by UCI
-                            students to share knowledge and presentations by
-                            distinguished speakers about new ideas. <br />
+                            There are no requirements to join us. In fact, we
+                            encourage you to do so even if you have no
+                            experience. Consider attending one of our meetings,
+                            which we hold twice a week. We also host workshops
+                            by UCI students and presentations from distinguished
+                            speakers. <br />
                             <br />
-                            We also love coffee and pizza.
+                            We love coffee and pizza.
                         </p>
                         <Button color="secondary mx-auto button">
                             <a
