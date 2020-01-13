@@ -74,12 +74,19 @@ export default class IEEExtreme13 extends Component {
                                 Overall, UCI’s teams did incredibly well in the
                                 contest. Internationally, team OutOfPractice
                                 (Bryon Tjanaka, Meta Novitia, Frank Shi) placed
-                                41st out of 4103, while Pan (Paul Baldaray,
-                                Andrew Laird, Brian Bui) placed 92nd and
+                                39th out of 4103, while Pan (Paul Baldaray,
+                                Andrew Laird, Brian Bui) placed 85th and
                                 zotReduce (Pooya Khosravi, Haoyu Wang, Milan
-                                Lad) placed 107th. These teams also placed 4th,
+                                Lad) placed 99th. These teams also placed 4th,
                                 6th, and 7th in the US, as well as 1st, 3rd, and
-                                4th in the Western US, respectively.
+                                4th in the Western US, respectively. Full
+                                results from the competition may be viewed{' '}
+                                <a
+                                    href="https://ieeextreme.org/ieeextreme-13-0-global-ranking/"
+                                    style={{ color: '#6DB6E2' }}>
+                                    here
+                                </a>
+                                .
                                 <br />
                                 <br />
                                 <br />
