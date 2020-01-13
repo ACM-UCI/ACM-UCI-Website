@@ -204,12 +204,16 @@ export default class Login extends Component {
             return;
         }
 
+        // TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
         if (!this.emails.hasOwnProperty(email[0])) {
             var u = {};
             for (var i = 1; i <= 11; i++) {
                 u['/logs/' + email[0] + '/Winter 2019/' + i.toString()] = 0;
                 u['/logs/' + email[0] + '/Spring 2019/' + i.toString()] = 0;
                 u['/logs/' + email[0] + '/Fall 2019/' + i.toString()] = 0;
+                u['/logs/' + email[0] + '/Winter 2020/' + i.toString()] = 0;
+                u['/logs/' + email[0] + '/Spring 2020/' + i.toString()] = 0;
+                u['/logs/' + email[0] + '/Fall 2020/' + i.toString()] = 0;
             }
             u['/logs/' + email[0] + '/Name'] = user.displayName;
             u['/logs/' + email[0] + '/Position'] = 'Member';

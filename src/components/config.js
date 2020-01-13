@@ -1,3 +1,4 @@
+// TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
 const config = {
     current: '2019-2020',
     quarters: [

@@ -59,6 +59,7 @@ export default class Past extends Component {
     }
 
     // manual input here for quarters
+    // TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
     render() {
         return (
             <div>
