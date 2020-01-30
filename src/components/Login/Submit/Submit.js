@@ -10,21 +10,12 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from '@material-ui/core/styles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 const vars = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
     extras: ['event', 'announcement', 'finals', 'thanksgiving']
-};
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250
-        }
-    }
 };
 
 const BootstrapInput = withStyles(theme => ({
@@ -93,7 +84,6 @@ export default class Submit extends Component {
             );
         }
 
-        this.conSel = [];
         this.diffSel = [];
         var i = 0;
 
@@ -146,7 +136,7 @@ export default class Submit extends Component {
     processData(data) {
         this.data = data.val();
         /* this is code for initializing logs in firebase to 0 BE CAREFUL
-        var okay = false;
+        var okay = false; // change this
         if (okay) {
             var u = {};
             for (var b in this.data['logs']) {
@@ -155,11 +145,18 @@ export default class Submit extends Component {
                     // u['/logs/' + b + '/GitHub'] = null;
                     // u['/logs/' + b + '/Facebook'] = null;
                     // uncomment this to initialize all
-                    for (var i = 1; i <= 11; i++) {
-                        // u['/logs/' + b + '/Fall 2018/' + i.toString()] = 0;
-                        u['/logs/' + b + '/Winter 2020/' + i.toString()] = 0;
-                        u['/logs/' + b + '/Spring 2020/' + i.toString()] = 0;
-                        // u['/logs/' + b + '/Fall 2019/' + i.toString()] = 0;
+                    var quartersToAdd = [];
+                    // quartersToAdd = ["Winter 2020","Spring 2020", "Fall 2020"];
+                    // u['/logs/' + b + '/0/'] = null;
+                    // u['/logs/' + b + '/1/'] = null;
+                    // u['/logs/' + b + '/2/'] = null;
+                    for(var qi in quartersToAdd) {
+                        var qAdd = quartersToAdd[qi];
+                        if(!this.data['logs'][b].hasOwnProperty(qAdd)) {
+                            for (var i = 1; i <= 11; i++) {
+                                u['/logs/' + b + '/'+qAdd+'/' + i.toString()] = 0;
+                            }
+                        }
                     }
                 }
             }
@@ -169,16 +166,6 @@ export default class Submit extends Component {
                 .update(u);
         }
         // */
-        this.conSel = [];
-        for (var key in this.data.logs) {
-            if (key !== this.owner) {
-                this.conSel.push(
-                    <MenuItem name={key} value={key} key={key}>
-                        {key}
-                    </MenuItem>
-                );
-            }
-        }
         this.categories = this.data['categories'].sort();
         this.setState({});
     }
@@ -276,6 +263,12 @@ export default class Submit extends Component {
                 );
             }
 
+            if (s.Contributor.length === 0) {
+                errors.push(
+                    <li key={errors.length}>Umm... who's the contributor?</li>
+                );
+            }
+
             // current problem collision checker
             if (s.Difficulty !== 'event') {
                 var problem = null;
@@ -298,6 +291,16 @@ export default class Submit extends Component {
                         }
                     }
                 }
+            }
+        }
+
+        // adding custom categories - TO DO: check if ever gonna have a double update
+        var current_categories = [];
+        for (var c in this.categories)
+            current_categories.push(this.categories[c].toLowerCase()); // case insensitive
+        for (var new_c in s.Category) {
+            if (!current_categories.includes(s.Category[new_c].toLowerCase())) {
+                this.categories.push(s.Category[new_c]);
             }
         }
 
@@ -324,7 +327,8 @@ export default class Submit extends Component {
             });
         } else {
             s.SubmitDate = Date().toString();
-            var updates = {};
+            s.SubmitBy = this.owner;
+            var updates = { categories: this.categories };
             var conLen = 0;
             var i = 0;
             var contrib = '';
@@ -529,29 +533,34 @@ export default class Submit extends Component {
                     </Col>
 
                     <Col style={{ textAlign: 'left' }}>
-                        <Select
+                        <Autocomplete
                             multiple
-                            value={this.submission.Contributor}
-                            onChange={evt => {
-                                evt.target.id = 'Contributor';
-                                this.updateInputValue(evt);
+                            id="tags-filled-contrib"
+                            options={Object.keys(this.data.logs).sort()}
+                            defaultValue={this.submission.Contributor}
+                            freeSolo={false}
+                            onChange={(evt, value) => {
+                                this.updateInputValue({
+                                    target: { id: 'Contributor', value: value }
+                                });
                             }}
-                            input={
-                                <BootstrapInput
-                                    name="Contributor"
-                                    id="Contributor"
-                                />
+                            renderTags={(value, getTagProps) =>
+                                value.map((option, index) => (
+                                    <Chip
+                                        variant="outlined"
+                                        label={option}
+                                        {...getTagProps({ index })}
+                                    />
+                                ))
                             }
-                            renderValue={selected => (
-                                <div>
-                                    {selected.map(value => (
-                                        <Chip key={value} label={value} />
-                                    ))}
-                                </div>
+                            renderInput={params => (
+                                <TextField
+                                    {...params}
+                                    variant="outlined"
+                                    fullWidth
+                                />
                             )}
-                            MenuProps={MenuProps}>
-                            {this.conSel}
-                        </Select>
+                        />
                     </Col>
                 </Row>
                 <br />
@@ -569,31 +578,35 @@ export default class Submit extends Component {
                         </button>
                     </Col>
                     <Col style={{ textAlign: 'left' }}>
-                        <Select
+                        <Autocomplete
                             multiple
-                            id={'Category'}
-                            value={this.submission.Category}
-                            onChange={evt => {
-                                evt.target.id = 'Category';
-                                this.updateInputValue(evt);
+                            id="tags-filled"
+                            options={this.categories.sort()}
+                            defaultValue={this.submission.Category}
+                            freeSolo
+                            onChange={(evt, value) => {
+                                this.updateInputValue({
+                                    target: { id: 'Category', value: value }
+                                });
                             }}
-                            input={
-                                <BootstrapInput name="Category" id="Category" />
+                            renderTags={(value, getTagProps) =>
+                                value.map((option, index) => (
+                                    <Chip
+                                        variant="outlined"
+                                        label={option}
+                                        {...getTagProps({ index })}
+                                    />
+                                ))
                             }
-                            renderValue={selected => (
-                                <div>
-                                    {selected.map(value => (
-                                        <Chip key={value} label={value} />
-                                    ))}
-                                </div>
+                            renderInput={params => (
+                                <TextField
+                                    {...params}
+                                    variant="outlined"
+                                    placeholder="Type and press enter to make custom tags"
+                                    fullWidth
+                                />
                             )}
-                            MenuProps={MenuProps}>
-                            {this.categories.sort().map(name => (
-                                <MenuItem key={name} value={name}>
-                                    {name}
-                                </MenuItem>
-                            ))}
-                        </Select>
+                        />
                     </Col>
                 </Row>
                 <br />
