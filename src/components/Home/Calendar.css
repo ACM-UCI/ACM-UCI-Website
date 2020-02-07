@@ -1,0 +1,9 @@
+.calendar {
+    border: 2px solid rgb(16, 16, 70);
+    width: 46%;
+    /* height: 100px; */
+    margin: 2%;
+    padding: 2%;
+    border-radius: 20%;
+    text-align: center;
+}

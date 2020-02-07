@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
-import { Container, Row, Button, Modal } from 'reactstrap';
+import {
+    Container,
+    Row,
+    Button,
+    Modal,
+    Card,
+    CardTitle,
+    CardText,
+    Tooltip
+} from 'reactstrap';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import Konami from 'react-konami-code';
 import kevin from '../../img/kevin.mp4';
+import Avatar from '@material-ui/core/Avatar';
+import Calendar from './Calendar.js';
 import './Home.css';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false
+            modal: false,
+            gold: false,
+            silver: false,
+            bronze: false
         };
 
         this.toggle = this.toggle.bind(this);
+        this.reload = this.reload.bind(this);
+        this.opentool = this.opentool.bind(this);
+        window.onresize = this.reload;
     }
 
     // easterEgg() {
@@ -26,7 +43,95 @@ class Home extends Component {
         }));
     }
 
+    opentool(type) {
+        var newstate = {};
+        newstate[type] = !this.state[type];
+        this.setState(newstate);
+    }
+
+    reload() {
+        this.setState({});
+    }
+
     render() {
+        var w = '96%';
+        var m = '2%';
+        if (window.innerWidth >= 777) {
+            w = '27.33%';
+            m = '5%';
+        }
+
+        this.cards = [
+            <Card
+                body
+                className="card-body-home"
+                key={'card1'}
+                style={{ marginLeft: m, paddingBottom: '2%', width: w }}>
+                <CardTitle style={{ textAlign: 'center' }}>
+                    <h2>Upcoming Events</h2>
+                </CardTitle>
+                <Row style={{ justifyContent: 'center' }}>
+                    <Calendar
+                        month="Feb"
+                        date="20"
+                        event="Hash Code"
+                        link="https://codingcompetitions.withgoogle.com/hashcode"
+                    />
+                </Row>
+            </Card>,
+            <Card body className="card-body-home" style={{ width: w }}>
+                <CardTitle style={{ textAlign: 'center' }}>
+                    <h2>Meeting Times</h2>
+                    <i>Winter 2020</i>
+                </CardTitle>
+                <hr className="home-line" />
+                <CardText claassname="card-text-home">
+                    <strong>Tuesday: </strong>
+                    DBH 4011, 6:00 - 8:00 pm <br />
+                    <strong>Thursday: </strong>
+                    DBH 4011, 6:00 - 8:00 pm
+                </CardText>
+            </Card>,
+            <Card
+                body
+                className="card-body-home"
+                style={{ marginRight: m, width: w }}
+                key={'card3'}>
+                <CardTitle style={{ textAlign: 'center' }}>
+                    <h2>Wall of Fame</h2>
+                    <i>Most Submissions</i>
+                </CardTitle>
+                <hr className="home-line" />
+                <Row style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Avatar
+                        alt="btjanaka"
+                        id="silver"
+                        className="silver award"
+                        src="https://raw.githubusercontent.com/btjanaka/branding/master/build/logo/bt-rotating-white-bkgd-512.gif"
+                    />
+                    <Avatar
+                        alt="pbaldara"
+                        id="gold"
+                        className="gold award"
+                        style={{ width: '50px', height: '50px' }}
+                        src="https://lh3.googleusercontent.com/-2RiAu-2uZdE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcW4IwtpG9zNZOnf4QbHAzyo97c6Q/photo.jpg"
+                    />
+                    <Avatar
+                        alt="renjied"
+                        id="bronze"
+                        className="bronze award"
+                        src="https://lh4.googleusercontent.com/-nqK4rk3BSdg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdI2BFxJB1FNdtzduqjCooEtMcmYw/photo.jpg"
+                    />
+                </Row>
+            </Card>
+        ];
+
+        this.cardrow = (
+            <Row style={{ margin: '0', padding: '0', width: '100%' }}>
+                {this.cards}
+            </Row>
+        );
+
         return (
             <div>
                 <Navigation />
@@ -36,15 +141,13 @@ class Home extends Component {
                 />
                 <Container className="home-body" fluid>
                     <Row>
-                        <div className="pseudo" />
-                        <p className="text-center m-5">
+                        <p className="text-center m-5 home-body-text">
                             There are no requirements to join us. In fact, we
                             encourage you to do so even if you have no
                             experience. Consider attending one of our meetings,
                             which we hold twice a week. We also host workshops
                             by UCI students and presentations from distinguished
                             speakers. <br />
-                            <br />
                             We love coffee and pizza.
                         </p>
                         <Button color="secondary mx-auto button">
@@ -55,7 +158,14 @@ class Home extends Component {
                                 JOIN US ON FACEBOOK
                             </a>
                         </Button>
+                        <div style={{ width: '100%' }}>
+                            <br />
+                            {this.cardrow}
+                        </div>
                     </Row>
+                    <br />
+                    <br />
+                    <br />
                 </Container>
                 <Modal
                     size="lg"
@@ -72,6 +182,26 @@ class Home extends Component {
                     </video>
                 </Modal>
                 <Konami action={this.toggle} />
+
+                {/* TO DO */}
+                <Tooltip
+                    isOpen={this.state.gold}
+                    target={'gold'}
+                    toggle={() => this.opentool('gold')}>
+                    Paul Baldara
+                </Tooltip>
+                <Tooltip
+                    isOpen={this.state.silver}
+                    target={'silver'}
+                    toggle={() => this.opentool('silver')}>
+                    Bryon Tjanaka
+                </Tooltip>
+                <Tooltip
+                    isOpen={this.state.bronze}
+                    target={'bronze'}
+                    toggle={() => this.opentool('bronze')}>
+                    Jacky Dai
+                </Tooltip>
             </div>
         );
     }
