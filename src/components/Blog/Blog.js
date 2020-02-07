@@ -16,6 +16,7 @@ import { HashLink as Link } from 'react-router-hash-link';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import ieee_acm from '../../img/ieee_acm.jpg';
+import acm_wics from '../../img/ACMxWICS.jpg';
 import './Blog.css';
 
 class Blog extends Component {
@@ -49,6 +50,24 @@ class Blog extends Component {
                                             </CardTitle>
                                             <CardSubtitle>
                                                 by Bryon Tjanaka (Oct 26)
+                                            </CardSubtitle>
+                                        </CardBody>
+                                    </Card>
+                                </NavLink>
+                            </Col>
+                            <Col md="4">
+                                <NavLink tag={Link} to="/blog/acmxwics">
+                                    <Card className="blogcard">
+                                        <CardImg
+                                            className="card-img"
+                                            src={acm_wics}
+                                        />
+                                        <CardBody>
+                                            <CardTitle>
+                                                ACMxWICS Mock Interviews
+                                            </CardTitle>
+                                            <CardSubtitle>
+                                                by Jens Tuyls (Feb 6)
                                             </CardSubtitle>
                                         </CardBody>
                                     </Card>

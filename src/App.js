@@ -15,6 +15,7 @@ import config from './firebase-config.js';
 import PageNotFound from './PageNotFound';
 import './scss/custom.css';
 import IEEExtreme13 from './components/Blog/BlogPages/IEEExtreme13';
+import ACMxWICS from './components/Blog/BlogPages/ACMxWICS';
 
 const firebase = require('firebase');
 // Required for side-effects
@@ -30,6 +31,7 @@ class App extends Component {
                 <Route path="/about" component={About} />
                 <Route path="/events" component={Events} />
                 <Route path="/blog/ieeextreme13" component={IEEExtreme13} />
+                <Route path="/blog/acmxwics" component={ACMxWICS} />
                 <Route path="/blog" component={Blog} />
                 <Route path="/resources" component={Resources} />
                 <Route path="/board" component={Board} />
