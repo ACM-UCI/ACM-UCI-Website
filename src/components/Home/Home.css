@@ -1,12 +1,14 @@
 
 .card-body-home {
-  color: black;
+  color:  #02284B;
   padding: 5%;
   padding-left: 4%;
   padding-right: 4%;
   margin: 2%;
   margin-top: 20%;
   margin-bottom: 0;
+  background-color: white;
+  border: 7px solid rgb(109, 181, 226)
 }
 
 .award {
