@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Row, Col } from 'reactstrap';
 import Problem from './Problem/Problem';
 import Announcement from './Announcement/Announcement';
+import PollCard from './Poll/PollCard';
 import './Session.css';
 
 export default class Session extends Component {
@@ -56,6 +57,17 @@ export default class Session extends Component {
                                 conName={conName}
                                 contributors={contributors}
                             />
+                        );
+                    } else if (data.Difficulty === 'poll') {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height space">
+                                <PollCard
+                                    name={data.Name}
+                                    link={data.Link}
+                                    identifier={key}
+                                    mark={'past'}
+                                />
+                            </Col>
                         );
                     } else {
                         problems[problems.length - 1].push(

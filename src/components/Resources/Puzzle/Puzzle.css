@@ -60,6 +60,10 @@
     background-color: rgb(81, 168, 202);
 }
 
+.poll {
+    background-color: rgb(190, 208, 228);
+}
+
 .thanksgiving {
     background-image: url("../../../img/thanksgiving.png");
     background-size: 80%;

@@ -6,8 +6,6 @@ import board from '../../Board/board.json';
 import './Submit.css';
 import config from '../../config.js';
 import Chip from '@material-ui/core/Chip';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -15,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 
 const vars = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
-    extras: ['event', 'announcement', 'finals', 'thanksgiving']
+    extras: ['event', 'announcement', 'finals', 'thanksgiving', 'poll']
 };
 
 const BootstrapInput = withStyles(theme => ({

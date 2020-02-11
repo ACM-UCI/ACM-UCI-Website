@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Problem from '../Quarter/Week/Session/Problem/Problem';
 import Announcement from '../Quarter/Week/Session/Announcement/Announcement';
+import PollCard from '../Quarter/Week/Session/Poll/PollCard';
 import './Present.css';
 
 export default class Present extends Component {
@@ -75,6 +76,16 @@ export default class Present extends Component {
                                 conName={conName}
                             />
                         );
+                    } else if (data.Difficulty === 'poll') {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height space">
+                                <PollCard
+                                    name={data.Name}
+                                    link={data.Link}
+                                    identifier={key}
+                                />
+                            </Col>
+                        );
                     } else if (data.Difficulty === 'event') {
                         events[events.length - 1].push(
                             <Col md="4" className="height space">
@@ -85,7 +96,6 @@ export default class Present extends Component {
                                     diff={data.Difficulty}
                                     slink={data.Solution}
                                     con={data.Contributor}
-                                    conName={conName}
                                     code={data.Code}
                                     note={data.Note}
                                     txt="Info"
@@ -187,7 +197,7 @@ export default class Present extends Component {
     }
 
     render() {
-        console.log(this.announcements);
+        // console.log(this.announcements);
         return (
             <Container>
                 {this.announcements}

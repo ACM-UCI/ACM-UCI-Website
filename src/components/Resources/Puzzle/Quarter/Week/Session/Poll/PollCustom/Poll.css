@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WRhyyTh89ZNpQ.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  }
+
+.poll-pop {
+    font-family: Montserrat;
+}
+
+.pollBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgb(71, 151, 255);
+    z-index: -1;
+}
+
+.poll-pop button {
+    text-align: left;
+    width: 90%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-right: 5%;
+    margin-left: 5%;
+    border: 5px solid primary;
+    background-color: transparent;
+    position: relative;
+}
+
+.poll-pop button:hover {
+    text-align: left;
+    width: 90%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-right: 5%;
+    margin-left: 5%;
+    border: 5px solid primary;
+    background-color: rgba(109, 181, 226, 0.582);
+}
+
+.poll-pop button:disabled {
+    text-align: left;
+    width: 90%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    margin-right: 5%;
+    margin-left: 5%;
+    border: 5px solid primary;
+    background-color: rgba(109, 181, 226, 0.445);
+}
+
+.poll-pop p {
+    text-align: center;
+    font-size: small;
+}

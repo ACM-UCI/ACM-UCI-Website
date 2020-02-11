@@ -59,6 +59,8 @@ export default class Solution extends Component {
 
     componentDidMount() {
         this.link = `Ask${this.props.conName} for help`;
+        if (this.props.txt === 'Take Poll')
+            this.link = `${this.props.conName} is interested in what you think!`;
 
         if (this.props.note === '') {
             this.code.push(
