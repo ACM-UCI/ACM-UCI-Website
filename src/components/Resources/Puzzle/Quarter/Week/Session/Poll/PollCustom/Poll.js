@@ -31,8 +31,7 @@ export default class PollCard extends Component {
         return (
             <div className="poll-pop">
                 {this.props.answers.map(v => {
-                    var show =
-                        this.voteAnswer !== null || this.props.mark === 'past';
+                    var show = this.props.mark === 'past';
                     var percent = '0%';
                     if (show && count)
                         percent =
@@ -43,7 +42,7 @@ export default class PollCard extends Component {
                             <Button
                                 id={v.option}
                                 onClick={this.buttonHandle}
-                                disabled={show}>
+                                disabled={this.voteAnswer !== null || show}>
                                 {v.option}
                                 {show ? ' ' + percent : null}
                                 {this.voteAnswer === v.option ? (
