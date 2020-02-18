@@ -1,30 +1,69 @@
+/**
+ * Defines The Blog page where all blog posts can be browsed. Retrieves Blog Posts from database /blogs/ and renders an array of BlogItems
+ */
+
 import React, { Component } from 'react';
-import {
-    Container,
-    Row,
-    Col,
-    Card,
-    CardTitle,
-    CardSubtitle,
-    CardText,
-    CardImg,
-    CardBody,
-    Button,
-    NavLink
-} from 'reactstrap';
-import { HashLink as Link } from 'react-router-hash-link';
+
+import { Container, Row, Col } from 'reactstrap';
+
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
-import ieee_acm from '../../img/ieee_acm.jpg';
-import acm_wics from '../../img/ACMxWICS.jpg';
+import BlogItem from './BlogItem';
+
+import firebase from 'firebase/app';
+import 'firebase/database';
+
 import './Blog.css';
 
 class Blog extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            posts: []
+        };
+
+        // Bind Local Function
+        this.loadBlogPosts = this.loadBlogPosts.bind(this);
+    }
+
+    // Callback for updating this.state.posts after database fetch complete
+    loadBlogPosts(firebase_data) {
+        this.setState({ posts: Object.entries(firebase_data.val()) });
+    }
+
+    componentDidMount() {
+        // Retrieve Data from Database
+        const ref = firebase.database().ref('/blogs');
+        ref.once('value').then(this.loadBlogPosts);
     }
 
     render() {
+        // Sort Posts by Date, Oldest First
+        this.state.posts.sort((a, b) => {
+            let postA = a[1];
+            let postB = b[1];
+            if (postA.year === postB.year) {
+                if (postA.month === postB.month) {
+                    return postA.day - postB.day;
+                } else {
+                    return postA.month - postB.month;
+                }
+            } else {
+                return postA.year - postB.year;
+            }
+        });
+
+        // Generate BlogItem components
+        // TODO when too many posts may need to split among multiple rows
+        let blogItems = this.state.posts.map(post => {
+            return (
+                <Col md="4" key={post[0]}>
+                    <BlogItem post={post} />
+                </Col>
+            );
+        });
+
         return (
             <div>
                 <Navigation />
@@ -36,44 +75,7 @@ class Blog extends Component {
                     <div className="pseudo" />
                     <br />
                     <div style={{ margin: '5%' }}>
-                        <Row>
-                            <Col md="4">
-                                <NavLink tag={Link} to="/blog/ieeextreme13">
-                                    <Card className="blogcard">
-                                        <CardImg
-                                            className="card-img"
-                                            src={ieee_acm}
-                                        />
-                                        <CardBody>
-                                            <CardTitle>
-                                                ACM@UCI at IEEEXtreme
-                                            </CardTitle>
-                                            <CardSubtitle>
-                                                by Bryon Tjanaka (Oct 26)
-                                            </CardSubtitle>
-                                        </CardBody>
-                                    </Card>
-                                </NavLink>
-                            </Col>
-                            <Col md="4">
-                                <NavLink tag={Link} to="/blog/acmxwics">
-                                    <Card className="blogcard">
-                                        <CardImg
-                                            className="card-img"
-                                            src={acm_wics}
-                                        />
-                                        <CardBody>
-                                            <CardTitle>
-                                                ACMxWICS Mock Interviews
-                                            </CardTitle>
-                                            <CardSubtitle>
-                                                by Jens Tuyls (Feb 6)
-                                            </CardSubtitle>
-                                        </CardBody>
-                                    </Card>
-                                </NavLink>
-                            </Col>
-                        </Row>
+                        <Row>{blogItems}</Row>
                     </div>
                     <br />
                     <br />

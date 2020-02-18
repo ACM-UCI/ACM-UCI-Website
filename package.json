@@ -27,6 +27,7 @@
         "react-bootstrap": "^1.0.0-beta.16",
         "react-dom": "^16.12.0",
         "react-konami-code": "^1.4.2",
+        "react-markdown": "^4.3.1",
         "react-md": "^1.14.1",
         "react-polls": "^1.2.0",
         "react-profiles": "^0.1.4",

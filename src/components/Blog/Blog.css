@@ -69,3 +69,14 @@
 .event-button:hover {
     color: #02284b;
 }
+
+.blog-img {
+    max-width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: center;
+}
+
+.blog-post-description-link, .blog-post-description-link:hover {
+    color: #6DB6E2;
+}
