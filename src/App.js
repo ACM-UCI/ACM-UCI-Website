@@ -4,6 +4,7 @@ import Home from './components/Home/Home';
 import About from './components/About/About';
 import Events from './components/Events/Events';
 import Blog from './components/Blog/Blog';
+import BlogPage from './components/Blog/BlogPage';
 import Resources from './components/Resources/Resources';
 import Board from './components/Board/Board';
 import Contact from './components/Contact/Contact';
@@ -14,8 +15,6 @@ import Login from './components/Login/Login';
 import config from './firebase-config.js';
 import PageNotFound from './PageNotFound';
 import './scss/custom.css';
-import IEEExtreme13 from './components/Blog/BlogPages/IEEExtreme13';
-import ACMxWICS from './components/Blog/BlogPages/ACMxWICS';
 
 const firebase = require('firebase');
 // Required for side-effects
@@ -30,9 +29,8 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/events" component={Events} />
-                <Route path="/blog/ieeextreme13" component={IEEExtreme13} />
-                <Route path="/blog/acmxwics" component={ACMxWICS} />
-                <Route path="/blog" component={Blog} />
+                <Route exact path="/blog" component={Blog} />
+                <Route path="/blog/:title" component={BlogPage} />
                 <Route path="/resources" component={Resources} />
                 <Route path="/board" component={Board} />
                 <Route path="/donate" component={Donate} />
