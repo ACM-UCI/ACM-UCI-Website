@@ -1,4 +1,34 @@
 {
+    "2020-2021": {
+        "pbaldara": {
+            "name": "Paul Baldaray",
+            "position": "President"
+        },
+        "jsley": {
+            "name": "Justin Ley",
+            "position": "Internal Vice President"
+        },
+        "mantoun": {
+            "name": "Michael Antoun",
+            "position": "External Vice President"
+        },
+        "rhsakuma": {
+            "name": "Ryan Sakuma",
+            "position": "Treasurer"
+        },
+        "ryansy": {
+            "name": "Ryan Yoshida",
+            "position": "Webmaster"
+        },
+        "bmchu1": {
+            "name": "Brian Chu",
+            "position": "Director of Marketing"
+        },
+        "pattis": {
+            "name": "Richard E. Pattis",
+            "position": "Faculty Advisor"
+        }
+    },
     "2019-2020": {
         "craut": {
             "name": "Chinmay Raut",
@@ -53,7 +83,7 @@
             "position": "Data Admin"
         },
         "jsley": {
-            "name": " Justin Ley",
+            "name": "Justin Ley",
             "position": "Historian"
         },
         "kgajulap": {
@@ -65,7 +95,7 @@
             "position": "ACM Tutor"
         },
         "rhsakuma": {
-            "name": "Ryan Hisashi Sakuma",
+            "name": "Ryan Sakuma",
             "position": "ACM Intern"
         },
         "pattis": {

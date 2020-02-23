@@ -72,10 +72,10 @@ class Home extends Component {
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
-                        month="Feb"
-                        date="20"
-                        event="Hash Code"
-                        link="https://codingcompetitions.withgoogle.com/hashcode"
+                        month="Mar"
+                        date="5"
+                        event="Internal Competition"
+                        link="https://www.facebook.com/events/568104980579743/"
                     />
                 </Row>
             </Card>,
@@ -117,10 +117,10 @@ class Home extends Component {
                         src="https://lh3.googleusercontent.com/-2RiAu-2uZdE/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcW4IwtpG9zNZOnf4QbHAzyo97c6Q/photo.jpg"
                     />
                     <Avatar
-                        alt="renjied"
+                        alt="mnovitia"
                         id="bronze"
                         className="bronze award"
-                        src="https://lh4.googleusercontent.com/-nqK4rk3BSdg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdI2BFxJB1FNdtzduqjCooEtMcmYw/photo.jpg"
+                        src="https://lh3.googleusercontent.com/-UbyqOmNprNc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcKFFY4hgQeD8uvdilxoHHTyIrGIA/mo/photo.jpg"
                     />
                 </Row>
             </Card>
@@ -188,7 +188,7 @@ class Home extends Component {
                     isOpen={this.state.gold}
                     target={'gold'}
                     toggle={() => this.opentool('gold')}>
-                    Paul Baldara
+                    Paul Baldaray
                 </Tooltip>
                 <Tooltip
                     isOpen={this.state.silver}
@@ -200,7 +200,7 @@ class Home extends Component {
                     isOpen={this.state.bronze}
                     target={'bronze'}
                     toggle={() => this.opentool('bronze')}>
-                    Jacky Dai
+                    Meta Novitia
                 </Tooltip>
             </div>
         );
