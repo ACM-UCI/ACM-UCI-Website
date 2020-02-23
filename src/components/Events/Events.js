@@ -193,10 +193,10 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     Participate in ACM@UCI's first internal
                                     competition of the year! Whether you're a
-                                    beginner just looking for some competitive
-                                    coding experience or you're one of our
-                                    veteran members looking to compete for the
-                                    top, everyone is welcome.
+                                    beginner seeking competitive coding
+                                    experience or you're a veteran members
+                                    competing for the top spot, Everyone is
+                                    Welcome.
                                     <ul>
                                         <li>
                                             There will be <b>Facebook prizes</b>
