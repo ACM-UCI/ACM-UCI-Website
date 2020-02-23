@@ -87,6 +87,7 @@ export default class Session extends Component {
                                     quarter={this.quarter}
                                     session={this.session}
                                     contributors={contributors}
+                                    identifier={key}
                                 />
                             </Col>
                         );

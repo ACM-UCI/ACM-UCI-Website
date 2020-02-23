@@ -10,7 +10,6 @@ export default class PollCard extends Component {
         this.voteAnswer = localStorage.getItem(
             'acm-uci-website/poll/' + props.identifier
         );
-        console.log(this.voteAnswer);
     }
 
     buttonHandle(evt) {
@@ -27,7 +26,6 @@ export default class PollCard extends Component {
         for (var i in this.props.answers) {
             count += this.props.answers[i].votes;
         }
-        console.log(this.voteAnswer);
         return (
             <div className="poll-pop">
                 {this.props.answers.map(v => {

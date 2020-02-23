@@ -45,3 +45,19 @@
     border-radius: 0;
     border: 3px dashed rgb(57, 119, 177);
 }
+
+.likebuttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+}
+
+.rateicons {
+    color: white;
+    margin: 2px;
+}
+
+.rateicons:hover {
+    color: #6DB6E2;
+}

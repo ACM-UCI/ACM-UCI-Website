@@ -113,6 +113,7 @@ export default class Present extends Component {
                                     session={this.session}
                                     evnt="yes"
                                     contributors={contributors}
+                                    identifier={key}
                                 />
                             </Col>
                         );
@@ -133,6 +134,7 @@ export default class Present extends Component {
                                     session={this.session}
                                     txt={t}
                                     contributors={contributors}
+                                    identifier={key}
                                 />
                             </Col>
                         );
