@@ -194,7 +194,7 @@ class Events extends Component {
                                     Participate in ACM@UCI's first internal
                                     competition of the year! Whether you're a
                                     beginner seeking competitive coding
-                                    experience or you're a veteran members
+                                    experience or you're a veteran member
                                     competing for the top spot, Everyone is
                                     Welcome.
                                     <ul>
