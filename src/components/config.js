@@ -47,6 +47,19 @@ const config = {
         Facebook: 'https://www.facebook.com/',
         GitHub: 'https://github.com/',
         LinkedIn: 'https://www.linkedin.com/in/'
+    },
+
+    difficulties: {
+        announcement: 0,
+        easy: 1,
+        med: 2,
+        hard: 3,
+        icpc: 4,
+        codealong: 5,
+        poll: 6,
+        finals: 7,
+        thanksgiving: 8,
+        event: 9
     }
 };
 

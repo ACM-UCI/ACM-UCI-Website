@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'reactstrap';
 import Problem from '../Quarter/Week/Session/Problem/Problem';
 import Announcement from '../Quarter/Week/Session/Announcement/Announcement';
 import PollCard from '../Quarter/Week/Session/Poll/PollCard';
+import config from '../../../config.js';
 import './Present.css';
 
 export default class Present extends Component {
@@ -42,7 +43,15 @@ export default class Present extends Component {
         var events = [[]];
         this.announcements = [];
 
-        for (var key in sessionProblems) {
+        // Sort by difficulty
+        sessionProblems = Object.keys(sessionProblems).sort(
+            (a, b) =>
+                config.difficulties[allProblems[a].Difficulty] -
+                config.difficulties[allProblems[b].Difficulty]
+        );
+
+        for (var key_ind in sessionProblems) {
+            var key = sessionProblems[key_ind];
             if (allProblems.hasOwnProperty(key)) {
                 var data = allProblems[key];
                 if (data !== null) {
