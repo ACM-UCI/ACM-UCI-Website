@@ -24,8 +24,10 @@ export default class Problem extends Component {
         this.solution = null;
         this.conNames = '';
         this.set_like = this.set_like.bind(this);
+        this.clicked_link = this.clicked_link.bind(this);
+        this.opened_modal = this.opened_modal.bind(this);
         this.state = {
-            status: localStorage.getItem(this.store_key)
+            status: localStorage.getItem(this.store_key + '/Rating')
         };
 
         // making carousel //
@@ -156,13 +158,14 @@ export default class Problem extends Component {
                     code={props.code}
                     note={props.note}
                     contributors={carousel}
+                    onClick={() => this.opened_modal(txt)}
                 />
             );
         }
         // end carousel //
 
         this.obj = (
-            <CardTitle>
+            <CardTitle onClick={this.clicked_link} style={{ fontSize: 20 }}>
                 <a href={props.link} target="_blank" rel="noopener noreferrer">
                     {props.name}{' '}
                 </a>
@@ -181,8 +184,8 @@ export default class Problem extends Component {
         var ratings = { like: 0, dislike: 0 };
 
         // check and set status
-        var store = localStorage.getItem(this.store_key);
-        localStorage.setItem(this.store_key, value);
+        var store = localStorage.getItem(this.store_key + '/Rating');
+        localStorage.setItem(this.store_key + '/Rating', value);
 
         // if previous was a dislike, change vote
         if (store === 'dislike' && value === 'like') ratings.dislike = -1;
@@ -217,6 +220,77 @@ export default class Problem extends Component {
         }
 
         this.setState({ status: value });
+    }
+
+    // add click count
+    clicked_link() {
+        // check and set status
+        var store = localStorage.getItem(this.store_key + '/Clicked');
+
+        if (store === null) {
+            localStorage.setItem(this.store_key + '/Clicked', 'true');
+            var postRef = firebase
+                .database()
+                .ref('submissions/' + this.props.identifier + '/Session/');
+
+            var sess_name =
+                this.props.quarter +
+                '/' +
+                this.props.week.toString() +
+                '/' +
+                this.props.session;
+
+            // this updates the firebase and avoid race condition
+            postRef.transaction(function(p) {
+                // look for index of session that problem is located in
+                var index = p.map(v => v.Name).indexOf(sess_name);
+
+                if (index !== -1) {
+                    p[index]['Clicks'] += 1;
+                }
+
+                return p;
+            });
+        }
+    }
+
+    // add solution or hint view count
+    opened_modal(value) {
+        if (value !== 'Solution' && value !== 'Help') value = 'Info';
+
+        // check and set status
+        var store = localStorage.getItem(
+            this.store_key + '/' + value + 'Viewed'
+        );
+
+        if (store === null) {
+            localStorage.setItem(
+                this.store_key + '/' + value + 'Viewed',
+                'true'
+            );
+            var postRef = firebase
+                .database()
+                .ref('submissions/' + this.props.identifier + '/Session/');
+
+            var sess_name =
+                this.props.quarter +
+                '/' +
+                this.props.week.toString() +
+                '/' +
+                this.props.session;
+
+            // this updates the firebase and avoid race condition
+            postRef.transaction(function(p) {
+                // look for index of session that problem is located in
+                var index = p.map(v => v.Name).indexOf(sess_name);
+
+                if (index !== -1) {
+                    p[index][value + 'Views'] += 1;
+                }
+
+                return p;
+            });
+        }
     }
 
     render() {

@@ -107,7 +107,12 @@ export default class Solution extends Component {
     render() {
         return (
             <div>
-                <Button className="btn-sol" onClick={this.toggle}>
+                <Button
+                    className="btn-sol"
+                    onClick={() => {
+                        this.toggle();
+                        this.props.onClick();
+                    }}>
                     {this.txt}
                 </Button>
                 <Modal size="lg" isOpen={this.state.modal} toggle={this.toggle}>

@@ -40,7 +40,9 @@ export default function BlogItem(props) {
             <Card className="blogcard">
                 <CardImg className="card-img" src={IMG_PATH(`./${post.img}`)} />
                 <CardBody>
-                    <CardTitle>{post.title}</CardTitle>
+                    <CardTitle style={{ fontWeight: 'bold' }}>
+                        {post.title}
+                    </CardTitle>
                     <CardSubtitle>
                         {`by ${post.author} (${MONTHS[post.month - 1]} ${
                             post.day

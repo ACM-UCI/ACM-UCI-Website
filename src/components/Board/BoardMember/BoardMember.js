@@ -8,8 +8,12 @@ class BoardMember extends Component {
             <Card className="mt-3">
                 <CardImg className="card-img" src={this.props.src} />
                 <CardBody>
-                    <CardTitle>{this.props.name}</CardTitle>
-                    <CardSubtitle>{this.props.position}</CardSubtitle>
+                    <CardTitle style={{ fontSize: 20, fontWeight: 'bold' }}>
+                        {this.props.name}
+                    </CardTitle>
+                    <CardSubtitle style={{ fontSize: 15, fontWeight: 'bold' }}>
+                        {this.props.position}
+                    </CardSubtitle>
                 </CardBody>
             </Card>
         );

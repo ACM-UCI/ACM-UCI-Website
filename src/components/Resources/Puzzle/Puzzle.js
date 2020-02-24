@@ -103,7 +103,7 @@ export default class Puzzle extends Component {
 
         // change below for testing [ place desired date inside Date() ]
         var today = new Date(date);
-        // var today = new Date('February 18, 2020 19:00:00 GMT-08:00');
+        // var today = new Date('February 18, 2020 17:00:00 GMT-08:00');
         if (!(today instanceof Date) || isNaN(today)) {
             this.err();
             return;
