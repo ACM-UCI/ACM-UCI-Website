@@ -4,8 +4,7 @@ import Entry from './Entry/Entry';
 import filter from './Entry/filter';
 import config from '../../config.js';
 import './Data.css';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 import Pagination from './Pagination.js';
 
 const titles = {
@@ -78,7 +77,7 @@ export default class Data extends Component {
     }
 
     componentDidMount() {
-        var ref = firebase.database().ref();
+        var ref = database().ref();
         ref.on('value', this.processData);
     }
 

@@ -11,8 +11,7 @@ import {
 } from 'reactstrap';
 import './Entry.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
 import Submit from '../../Submit/Submit';
 import config from '../../../config.js';
@@ -102,8 +101,7 @@ export default class Entry extends Component {
                 updates[
                     '/submissions/' + this.props.x + '/Session'
                 ] = this.data.Session;
-                firebase
-                    .database()
+                database()
                     .ref()
                     .update(updates);
 
@@ -183,8 +181,7 @@ export default class Entry extends Component {
                 updates[
                     '/submissions/' + this.props.x + '/Session'
                 ] = this.data.Session;
-                firebase
-                    .database()
+                database()
                     .ref()
                     .update(updates);
 
@@ -232,6 +229,7 @@ export default class Entry extends Component {
 
     render() {
         var problem = this.props.data;
+        var i, c;
 
         // set solution name, button, and availability
         this.sol = '';
@@ -239,7 +237,7 @@ export default class Entry extends Component {
         if (problem.Solution !== '') {
             this.avail = 'Available';
             var solName = problem.Solution.substring(0, 15);
-            for (var i = 15; i < problem.Solution.length; i += 15) {
+            for (i = 15; i < problem.Solution.length; i += 15) {
                 solName += '\n';
                 solName += problem.Solution.substring(i, i + 15);
             }
@@ -297,8 +295,8 @@ export default class Entry extends Component {
 
         // set contributors
         this.contributors = [];
-        for (var i in this.data.Contributor) {
-            var c = this.data.Contributor[i];
+        for (i in this.data.Contributor) {
+            c = this.data.Contributor[i];
             if (i > 0) {
                 c = ', ' + c;
             }
@@ -310,7 +308,7 @@ export default class Entry extends Component {
         for (i in this.data.Session) {
             this.sessions.push(
                 <Button
-                    id={this.data.Session[i]}
+                    id={this.data.Session[i].Name}
                     key={'sessbtn' + i.toString()}
                     className="solbtn"
                     onClick={e => {
@@ -324,8 +322,8 @@ export default class Entry extends Component {
 
         //set categories
         this.categories = [];
-        for (var i in this.data.Category) {
-            var c = this.data.Category[i];
+        for (i in this.data.Category) {
+            c = this.data.Category[i];
             if (i > 0) {
                 c = ', ' + c;
             }

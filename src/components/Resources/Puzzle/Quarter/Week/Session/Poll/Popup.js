@@ -2,16 +2,15 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Poll from './PollCustom/Poll';
 import './Popup.css';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 
 export default class Popup extends Component {
     constructor(props) {
         super(props);
         this.show = props.sol;
-        this.postRef = firebase
-            .database()
-            .ref('submissions/' + this.props.identifier + '/Poll/');
+        this.postRef = database().ref(
+            'submissions/' + this.props.identifier + '/Poll/'
+        );
 
         this.state = {
             modal: false,
@@ -43,9 +42,9 @@ export default class Popup extends Component {
     }
 
     handleVote(voteAnswer) {
-        var postRef = firebase
-            .database()
-            .ref('submissions/' + this.props.identifier + '/Poll/');
+        var postRef = database().ref(
+            'submissions/' + this.props.identifier + '/Poll/'
+        );
         postRef.transaction(function(poll) {
             // console.log(poll)
             if (poll) {
@@ -78,12 +77,12 @@ export default class Popup extends Component {
                     <ModalBody>
                         <Poll
                             theme={'blue'}
-                            answers={Object.keys(
-                                this.state.pollAnswers
-                            ).map(key => ({
-                                option: key,
-                                votes: this.state.pollAnswers[key]
-                            }))}
+                            answers={Object.keys(this.state.pollAnswers).map(
+                                key => ({
+                                    option: key,
+                                    votes: this.state.pollAnswers[key]
+                                })
+                            )}
                             onVote={this.handleVote}
                             identifier={this.props.identifier}
                             mark={this.props.mark}

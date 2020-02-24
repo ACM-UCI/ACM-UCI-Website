@@ -17,8 +17,6 @@ import PageNotFound from './PageNotFound';
 import './scss/custom.css';
 
 const firebase = require('firebase');
-// Required for side-effects
-require('firebase/firestore');
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp(config);
 

@@ -25,7 +25,7 @@ import pooyatalk from '../../img/pooyatalk.jpg';
 import uipath from '../../img/uiPath.jpg';
 import acm_meeting from '../../img/acm_meeting.jpg';
 import ieeextreme13 from '../../img/ieeextreme13.jpg';
-import facebook from '../../img/facebook.jpg';
+// import facebook from '../../img/facebook.jpg';
 import facebooktech from '../../img/facebooktech.png';
 import './Events.css';
 
@@ -307,7 +307,8 @@ class Events extends Component {
                                         <a
                                             style={{ color: '#32587B' }}
                                             href="https://open.kattis.com/contests/gsp4oi"
-                                            target="_blank">
+                                            target="_blank"
+                                            rel="noopener noreferrer">
                                             Kattis
                                         </a>
                                     </i>
@@ -318,6 +319,7 @@ class Events extends Component {
                                     <a
                                         href="http://bit.ly/32aZ6G0"
                                         target="_blank"
+                                        rel="noopener noreferrer"
                                         style={{ color: '#32587B' }}>
                                         http://bit.ly/32aZ6G0
                                     </a>
@@ -326,6 +328,7 @@ class Events extends Component {
                                     <a
                                         style={{ color: '#32587B' }}
                                         href="https://open.kattis.com/contests/gsp4oi"
+                                        rel="noopener noreferrer"
                                         target="_blank">
                                         https://open.kattis.com/contests/gsp4oi
                                     </a>
@@ -342,6 +345,7 @@ class Events extends Component {
                                     <a
                                         href="http://bit.ly/32aZ6G0"
                                         target="_blank"
+                                        rel="noopener noreferrer"
                                         style={{ color: '#32587B' }}>
                                         {' '}
                                         link
@@ -364,6 +368,7 @@ class Events extends Component {
                                     <a
                                         href="http://bit.ly/32aZ6G0"
                                         target="_blank"
+                                        rel="noopener noreferrer"
                                         style={{ color: '#32587B' }}>
                                         {' '}
                                         interest form

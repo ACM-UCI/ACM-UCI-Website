@@ -6,9 +6,8 @@ import Submit from './Submit/Submit';
 import Data from './Data/Data';
 import Log from './Log/Log';
 import Profile from './Profile/Profile';
-import firebase from 'firebase/app';
+import { database, auth } from 'firebase/app';
 import config from '../config.js';
-import 'firebase/auth';
 import './Login.css';
 
 const tabI = {
@@ -45,7 +44,7 @@ export default class Login extends Component {
             this.default[key] = config['defaultData'][key];
         }
 
-        this.ref = firebase.database().ref();
+        this.ref = database().ref();
         this.ref.on('value', this.processData);
 
         // QUARTER
@@ -138,7 +137,7 @@ export default class Login extends Component {
     }
 
     logout() {
-        firebase.auth().signOut();
+        auth().signOut();
         this.show = [
             <Button
                 key="loginbutton"
@@ -158,9 +157,8 @@ export default class Login extends Component {
     }
 
     login() {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase
-            .auth()
+        var provider = new auth.GoogleAuthProvider();
+        auth()
             .signInWithPopup(provider)
             .then(this.logged)
             .catch(function(error) {
@@ -169,7 +167,7 @@ export default class Login extends Component {
                 var errorMessage = error.message;
                 // The email of the user's account used.
                 var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
+                // The auth.AuthCredential type that was used.
                 // var credential = error.credential;
                 // ...
                 // alert("Failed to log in");
@@ -204,9 +202,9 @@ export default class Login extends Component {
             return;
         }
 
+        var u = {};
         // TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
         if (!this.emails.hasOwnProperty(email[0])) {
-            var u = {};
             for (var i = 1; i <= 11; i++) {
                 u['/logs/' + email[0] + '/Winter 2019/' + i.toString()] = 0;
                 u['/logs/' + email[0] + '/Spring 2019/' + i.toString()] = 0;
@@ -218,18 +216,15 @@ export default class Login extends Component {
             u['/logs/' + email[0] + '/Name'] = user.displayName;
             u['/logs/' + email[0] + '/Position'] = 'Member';
             u['/logs/' + email[0] + '/Photo'] = user.photoURL;
-            firebase
-                .database()
+            database()
                 .ref()
                 .update(u);
         } else if (
             this.emails[email[0]].Photo === undefined ||
             this.emails[email[0]].Photo === ''
         ) {
-            var u = {};
             u['/logs/' + email[0] + '/Photo'] = user.photoURL;
-            firebase
-                .database()
+            database()
                 .ref()
                 .update(u);
         }

@@ -5,8 +5,7 @@ import Banner from '../../Banner/Banner';
 import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 import $ from 'jquery';
 import config from '../../config.js';
 
@@ -165,7 +164,7 @@ export default class Puzzle extends Component {
         // console.log(this.session, this.quarter, this.end, this.week);
         this.done = true;
 
-        var ref = firebase.database().ref();
+        var ref = database().ref();
         ref.on('value', this.processData);
 
         this.toggle();

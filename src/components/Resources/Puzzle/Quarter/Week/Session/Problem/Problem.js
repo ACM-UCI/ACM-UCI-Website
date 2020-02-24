@@ -9,20 +9,26 @@ import logo from '../../../../../../../acm_logo.svg';
 import LikeIcon from '@material-ui/icons/ThumbUp';
 import DislikeIcon from '@material-ui/icons/ThumbDown';
 import { Carousel } from 'react-responsive-carousel';
-import firebase from 'firebase/app';
+import { database } from 'firebase/app';
 
 export default class Problem extends Component {
     constructor(props) {
         super(props);
+        this.store_key =
+            'acm-uci-website/problem/' +
+            props.identifier +
+            '/' +
+            props.quarter +
+            props.week +
+            props.session;
         this.solution = null;
         this.conNames = '';
-        this.like = this.like.bind(this);
-        this.dislike = this.dislike.bind(this);
+        this.set_like = this.set_like.bind(this);
         this.state = {
-            status: localStorage.getItem(
-                'acm-uci-website/problem/' + props.identifier
-            )
+            status: localStorage.getItem(this.store_key)
         };
+
+        // making carousel //
         if (
             props.diff === 'easy' ||
             props.diff === 'med' ||
@@ -153,6 +159,8 @@ export default class Problem extends Component {
                 />
             );
         }
+        // end carousel //
+
         this.obj = (
             <CardTitle>
                 <a href={props.link} target="_blank" rel="noopener noreferrer">
@@ -168,94 +176,47 @@ export default class Problem extends Component {
         }
     }
 
-    like(evt) {
-        var sub_dislike = 0;
-        var add_like = 0;
+    // set a like/dislike for problem rating
+    set_like(value) {
+        var ratings = { like: 0, dislike: 0 };
 
-        var store = localStorage.getItem(
-            'acm-uci-website/problem/' + this.props.identifier
-        );
+        // check and set status
+        var store = localStorage.getItem(this.store_key);
+        localStorage.setItem(this.store_key, value);
 
-        localStorage.setItem(
-            'acm-uci-website/problem/' + this.props.identifier,
-            'like'
-        );
+        // if previous was a dislike, change vote
+        if (store === 'dislike' && value === 'like') ratings.dislike = -1;
+        else if (store === 'like' && value === 'dislike') ratings.like = -1;
 
-        if (store === 'dislike') {
-            sub_dislike = 1;
-            add_like = 1;
-        }
+        if (value !== store) {
+            ratings[value] = 1;
 
-        if (store === null) add_like = 1;
+            var postRef = database().ref(
+                'submissions/' + this.props.identifier + '/Session/'
+            );
 
-        if (sub_dislike || add_like) {
-            var postRef = firebase
-                .database()
-                .ref('submissions/' + this.props.identifier);
+            var sess_name =
+                this.props.quarter +
+                '/' +
+                this.props.week.toString() +
+                '/' +
+                this.props.session;
 
+            // this updates the firebase and avoid race condition
             postRef.transaction(function(p) {
-                if (p['Ratings']) {
-                    var poll = p['Ratings'];
-                    if (!poll.hasOwnProperty('like')) poll['like'] = 0;
-                    if (!poll.hasOwnProperty('dislike')) poll['dislike'] = 0;
-                    poll['like'] += add_like;
-                    poll['dislike'] -= sub_dislike;
-                } else {
-                    p['Ratings'] = {
-                        like: 1,
-                        dislike: 0
-                    };
+                // look for index of session that problem is located in
+                var index = p.map(v => v.Name).indexOf(sess_name);
+
+                if (index !== -1) {
+                    p[index]['Ratings']['like'] += ratings.like;
+                    p[index]['Ratings']['dislike'] += ratings.dislike;
                 }
+
                 return p;
             });
         }
 
-        this.setState({ status: 'like' });
-    }
-
-    dislike(evt) {
-        var sub_like = 0;
-        var add_dislike = 0;
-
-        var store = localStorage.getItem(
-            'acm-uci-website/problem/' + this.props.identifier
-        );
-
-        localStorage.setItem(
-            'acm-uci-website/problem/' + this.props.identifier,
-            'dislike'
-        );
-
-        if (store === 'like') {
-            sub_like = 1;
-            add_dislike = 1;
-        }
-
-        if (store === null) add_dislike = 1;
-
-        if (sub_like || add_dislike) {
-            var postRef = firebase
-                .database()
-                .ref('submissions/' + this.props.identifier);
-
-            postRef.transaction(function(p) {
-                if (p['Ratings']) {
-                    var poll = p['Ratings'];
-                    if (!poll.hasOwnProperty('like')) poll['like'] = 0;
-                    if (!poll.hasOwnProperty('dislike')) poll['dislike'] = 0;
-                    poll['dislike'] += add_dislike;
-                    poll['like'] -= sub_like;
-                } else {
-                    p['Ratings'] = {
-                        like: 0,
-                        dislike: 1
-                    };
-                }
-                return p;
-            });
-        }
-
-        this.setState({ status: 'dislike' });
+        this.setState({ status: value });
     }
 
     render() {
@@ -268,12 +229,13 @@ export default class Problem extends Component {
                 <Col className="likebuttons">
                     <LikeIcon
                         className="rateicons"
-                        onClick={this.like}
+                        onClick={() => this.set_like('like')}
                         style={{ color: clike }}
                     />
+                    <br />
                     <DislikeIcon
                         className="rateicons"
-                        onClick={this.dislike}
+                        onClick={() => this.set_like('dislike')}
                         style={{ color: cdislike }}
                     />
                 </Col>

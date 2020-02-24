@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Alert, Col, Row, Button, Form, Input, FormText } from 'reactstrap';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 import board from '../../Board/board.json';
 import './Submit.css';
 import config from '../../config.js';
 import Chip from '@material-ui/core/Chip';
-import InputBase from '@material-ui/core/InputBase';
-import { withStyles } from '@material-ui/core/styles';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
@@ -15,37 +12,6 @@ const vars = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
     extras: ['event', 'announcement', 'finals', 'thanksgiving', 'poll']
 };
-
-const BootstrapInput = withStyles(theme => ({
-    root: {},
-    input: {
-        borderRadius: 4,
-        position: 'relative',
-        backgroundColor: theme.palette.background.paper,
-        border: '1px solid #ced4da',
-        fontSize: 16,
-        padding: '10px 26px 10px 12px',
-        transition: theme.transitions.create(['border-color', 'box-shadow']),
-        // Use the system font instead of the default Roboto font.
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"'
-        ].join(','),
-        '&:focus': {
-            borderRadius: 4,
-            borderColor: '#80bdff',
-            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)'
-        }
-    }
-}))(InputBase);
 
 export default class Submit extends Component {
     constructor(props) {
@@ -127,14 +93,14 @@ export default class Submit extends Component {
 
         this.categories = [];
 
-        this.ref = firebase.database().ref();
+        this.ref = database().ref();
         this.ref.on('value', this.processData);
     }
 
     processData(data) {
         this.data = data.val();
-        // /* this is code for initializing logs in firebase to 0 BE CAREFUL
-        var okay = true; // change this
+        /* this is code for initializing logs in firebase to 0 BE CAREFUL
+        var okay = false; // change this
         if (okay) {
             var u = {};
             // for (var b in this.data['logs']) {
@@ -191,8 +157,7 @@ export default class Submit extends Component {
                     }
                 }
             }
-            firebase
-                .database()
+            database()
                 .ref()
                 .update(u);
         }
@@ -429,21 +394,18 @@ export default class Submit extends Component {
                 this.props.data.Link !== undefined
             ) {
                 updates['submissions/' + this.props.x] = s;
-                firebase
-                    .database()
+                database()
                     .ref()
                     .update(updates, this.err);
                 this.err(null);
             } else {
-                var newPostKey = firebase
-                    .database()
+                var newPostKey = database()
                     .ref()
                     .child('submissions')
                     .push().key;
                 updates['/submissions/' + newPostKey] = s;
 
-                firebase
-                    .database()
+                database()
                     .ref()
                     .update(updates, this.err);
                 this.err(null);

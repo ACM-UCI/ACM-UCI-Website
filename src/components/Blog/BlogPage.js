@@ -18,8 +18,7 @@ import { Redirect } from 'react-router-dom';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 
 import ReactMarkdown from 'react-markdown';
 
@@ -74,7 +73,7 @@ class BlogPageContent extends Component {
 
     componentDidMount() {
         // Retrieve Data from Database
-        const ref = firebase.database().ref(`/blogs/${this.state.title}`);
+        const ref = database().ref(`/blogs/${this.state.title}`);
         ref.once('value').then(this.loadBlogPost);
     }
 

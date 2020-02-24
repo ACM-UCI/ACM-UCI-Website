@@ -68,7 +68,7 @@ class Home extends Component {
                 key={'card1'}
                 style={{ marginLeft: m, paddingBottom: '2%', width: w }}>
                 <CardTitle style={{ textAlign: 'center' }}>
-                    <h2>Upcoming Events</h2>
+                    <p style={{ fontSize: 30 }}>Upcoming Events</p>
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
@@ -79,9 +79,13 @@ class Home extends Component {
                     />
                 </Row>
             </Card>,
-            <Card body className="card-body-home" style={{ width: w }}>
+            <Card
+                key={'card2'}
+                body
+                className="card-body-home"
+                style={{ width: w }}>
                 <CardTitle style={{ textAlign: 'center' }}>
-                    <h2>Meeting Times</h2>
+                    <p style={{ fontSize: 30 }}>Meeting Times</p>
                     <i>Winter 2020</i>
                 </CardTitle>
                 <hr className="home-line" />
@@ -98,7 +102,7 @@ class Home extends Component {
                 style={{ marginRight: m, width: w }}
                 key={'card3'}>
                 <CardTitle style={{ textAlign: 'center' }}>
-                    <h2>Wall of Fame</h2>
+                    <p style={{ fontSize: 30 }}>Wall of Fame</p>
                     <i>Most Submissions</i>
                 </CardTitle>
                 <hr className="home-line" />

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Input } from 'reactstrap';
 import './Log.css';
 import board from '../../Board/board.json';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 import Paper from '@material-ui/core/Paper';
 import { SortingState, IntegratedSorting } from '@devexpress/dx-react-grid';
 import {
@@ -176,7 +175,7 @@ export default class Log extends Component {
     }
 
     callFirebase() {
-        var ref = firebase.database().ref();
+        var ref = database().ref();
         ref.on('value', this.processData);
     }
 

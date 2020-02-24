@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Col, Row, Input, Alert } from 'reactstrap';
 import './Profile.css';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import { database } from 'firebase/app';
 import logo from '../../../acm_logo.svg';
 import { SocialIcon } from 'react-social-icons';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -33,8 +32,7 @@ export default class Log extends Component {
     update() {
         var u = {};
         u['logs/' + this.owner] = this.profile;
-        firebase
-            .database()
+        database()
             .ref()
             .update(u);
         this.alert = <Alert color="info">Successfully Updated!</Alert>;
@@ -114,7 +112,7 @@ export default class Log extends Component {
     }
 
     callFirebase() {
-        var ref = firebase.database().ref();
+        var ref = database().ref();
         ref.on('value', this.processData);
     }
 

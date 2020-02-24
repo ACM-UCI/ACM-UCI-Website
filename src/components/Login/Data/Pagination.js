@@ -35,7 +35,7 @@ export default class MyPagination extends Component {
 
     render() {
         this.curr = this.props.curr;
-        if (this.props.rows != this.rows) {
+        if (this.props.rows !== this.rows) {
             this.rows = this.props.rows;
             this.curr = 1;
         }
