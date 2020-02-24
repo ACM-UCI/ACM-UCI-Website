@@ -11,7 +11,7 @@ import {
 } from 'reactstrap';
 import './Entry.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { database } from 'firebase/app';
+import firebase from '../../../../Firebase';
 import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
 import Submit from '../../Submit/Submit';
 import config from '../../../config.js';
@@ -101,7 +101,8 @@ export default class Entry extends Component {
                 updates[
                     '/submissions/' + this.props.x + '/Session'
                 ] = this.data.Session;
-                database()
+                firebase
+                    .database()
                     .ref()
                     .update(updates);
 
@@ -181,7 +182,8 @@ export default class Entry extends Component {
                 updates[
                     '/submissions/' + this.props.x + '/Session'
                 ] = this.data.Session;
-                database()
+                firebase
+                    .database()
                     .ref()
                     .update(updates);
 

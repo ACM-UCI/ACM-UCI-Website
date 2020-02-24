@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Col, Row, Button, Form, Input, FormText } from 'reactstrap';
-import { database } from 'firebase/app';
+import firebase from '../../../Firebase';
 import board from '../../Board/board.json';
 import './Submit.css';
 import config from '../../config.js';
@@ -31,7 +31,7 @@ export default class Submit extends Component {
         this.readCode = this.readCode.bind(this);
         this.err = this.err.bind(this);
         this.state = {
-            tog: false
+            loaded: false
         };
 
         this.prompt = 'Upload';
@@ -92,8 +92,10 @@ export default class Submit extends Component {
         }
 
         this.categories = [];
+    }
 
-        this.ref = database().ref();
+    componentDidMount() {
+        this.ref = firebase.database().ref();
         this.ref.on('value', this.processData);
     }
 
@@ -157,13 +159,14 @@ export default class Submit extends Component {
                     }
                 }
             }
-            database()
+            firebase
+                .database()
                 .ref()
                 .update(u);
         }
         // */
         this.categories = this.data['categories'].sort();
-        this.setState({});
+        this.setState({ loaded: true });
     }
 
     updateInputValue(e) {
@@ -394,18 +397,21 @@ export default class Submit extends Component {
                 this.props.data.Link !== undefined
             ) {
                 updates['submissions/' + this.props.x] = s;
-                database()
+                firebase
+                    .database()
                     .ref()
                     .update(updates, this.err);
                 this.err(null);
             } else {
-                var newPostKey = database()
+                var newPostKey = firebase
+                    .database()
                     .ref()
                     .child('submissions')
                     .push().key;
                 updates['/submissions/' + newPostKey] = s;
 
-                database()
+                firebase
+                    .database()
                     .ref()
                     .update(updates, this.err);
                 this.err(null);
@@ -438,6 +444,7 @@ export default class Submit extends Component {
     }
 
     render() {
+        if (!this.state.loaded) return null;
         return (
             <Form className="formsubmit">
                 <Row>

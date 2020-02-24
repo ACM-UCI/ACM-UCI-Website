@@ -4,7 +4,7 @@ import Entry from './Entry/Entry';
 import filter from './Entry/filter';
 import config from '../../config.js';
 import './Data.css';
-import { database } from 'firebase/app';
+import firebase from '../../../Firebase';
 import Pagination from './Pagination.js';
 
 const titles = {
@@ -74,10 +74,12 @@ export default class Data extends Component {
         this.body = [];
         this.rownum = 20;
         this.changePage = this.changePage.bind(this);
+        this.loaded = false;
     }
 
     componentDidMount() {
-        var ref = database().ref();
+        this.loaded = true;
+        var ref = firebase.database().ref();
         ref.on('value', this.processData);
     }
 
@@ -137,10 +139,13 @@ export default class Data extends Component {
                 this.options.cate.push(<option key={'cate' + v}>{v}</option>)
             );
 
-        this.setState({
-            tog: !this.state.tog,
-            page: 1
-        });
+        // make sure to not setstate when component have not mounted
+        if (this.loaded) {
+            this.setState({
+                tog: !this.state.tog,
+                page: 1
+            });
+        }
     }
 
     render() {

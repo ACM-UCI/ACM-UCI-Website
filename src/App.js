@@ -12,13 +12,11 @@ import IntroCP from './components/Resources/IntroCP/IntroCP';
 import Puzzle from './components/Resources/Puzzle/Puzzle';
 import Donate from './components/Donate/donate';
 import Login from './components/Login/Login';
-import config from './firebase-config.js';
 import PageNotFound from './PageNotFound';
 import './scss/custom.css';
 
-const firebase = require('firebase');
-// Initialize Cloud Firestore through Firebase
-firebase.initializeApp(config);
+// const firebase = require('firebase');
+// firebase.initializeApp(config);
 
 class App extends Component {
     render() {

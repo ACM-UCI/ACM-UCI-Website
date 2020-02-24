@@ -6,7 +6,8 @@ import Submit from './Submit/Submit';
 import Data from './Data/Data';
 import Log from './Log/Log';
 import Profile from './Profile/Profile';
-import { database, auth } from 'firebase/app';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import config from '../config.js';
 import './Login.css';
 
@@ -44,7 +45,7 @@ export default class Login extends Component {
             this.default[key] = config['defaultData'][key];
         }
 
-        this.ref = database().ref();
+        this.ref = firebase.database().ref();
         this.ref.on('value', this.processData);
 
         // QUARTER
@@ -105,7 +106,9 @@ export default class Login extends Component {
             this.week = 1;
             this.quarter = quarters[i + 1];
         }
+    }
 
+    componentDidMount() {
         // this.verified({ email: 'alaird@uci.edu' });
         // this.verified({ email: 'mnovitia@uci.edu' });
         // this.verified({ email: 'pbaldara@uci.edu' });
@@ -122,12 +125,6 @@ export default class Login extends Component {
                 (time_now - user_last_logged_in) / 1000 / 60 / 60 / 24;
             if (days_apart < 1) this.verified(user_json);
         }
-
-        /*
-
-        this.week = 2;
-
-        // */
     }
 
     processData(data) {
@@ -137,7 +134,7 @@ export default class Login extends Component {
     }
 
     logout() {
-        auth().signOut();
+        firebase.auth().signOut();
         this.show = [
             <Button
                 key="loginbutton"
@@ -157,8 +154,9 @@ export default class Login extends Component {
     }
 
     login() {
-        var provider = new auth.GoogleAuthProvider();
-        auth()
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase
+            .auth()
             .signInWithPopup(provider)
             .then(this.logged)
             .catch(function(error) {
@@ -167,7 +165,7 @@ export default class Login extends Component {
                 var errorMessage = error.message;
                 // The email of the user's account used.
                 var email = error.email;
-                // The auth.AuthCredential type that was used.
+                // The firebase.auth.AuthCredential type that was used.
                 // var credential = error.credential;
                 // ...
                 // alert("Failed to log in");
@@ -216,7 +214,8 @@ export default class Login extends Component {
             u['/logs/' + email[0] + '/Name'] = user.displayName;
             u['/logs/' + email[0] + '/Position'] = 'Member';
             u['/logs/' + email[0] + '/Photo'] = user.photoURL;
-            database()
+            firebase
+                .database()
                 .ref()
                 .update(u);
         } else if (
@@ -224,7 +223,8 @@ export default class Login extends Component {
             this.emails[email[0]].Photo === ''
         ) {
             u['/logs/' + email[0] + '/Photo'] = user.photoURL;
-            database()
+            firebase
+                .database()
                 .ref()
                 .update(u);
         }

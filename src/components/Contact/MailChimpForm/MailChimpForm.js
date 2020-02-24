@@ -13,7 +13,7 @@ class MailChimpForm extends Component {
                     name="mc-embedded-subscribe-form"
                     className="validate"
                     target="_blank"
-                    novalidate>
+                    noValidate>
                     <div id="mc_embed_signup_scroll">
                         <FormGroup>
                             <Label for="mce-FNAME">First Name </Label>
@@ -53,14 +53,14 @@ class MailChimpForm extends Component {
                             <Input
                                 type="text"
                                 name="b_5a9c0e84b29c28b9639d34561_ad4445a4e5"
-                                tabindex="-1"
-                                value=""
+                                tabIndex="-1"
+                                defaultValue=""
                             />
                         </div>
                         <div className="clear">
                             <Input
                                 type="submit"
-                                value="Subscribe"
+                                defaultValue="Subscribe"
                                 name="subscribe"
                                 id="mc-embedded-subscribe"
                                 className="submit-btn"

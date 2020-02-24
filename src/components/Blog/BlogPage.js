@@ -3,22 +3,14 @@
  */
 
 import React, { Component } from 'react';
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    Container,
-    Col,
-    Card,
-    CardTitle,
-    CardText
-} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Container, Col, Card } from 'reactstrap';
 import { HashLink as Link } from 'react-router-hash-link';
 import { Redirect } from 'react-router-dom';
 
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 
-import { database } from 'firebase/app';
+import firebase from '../../Firebase';
 
 import ReactMarkdown from 'react-markdown';
 
@@ -73,7 +65,7 @@ class BlogPageContent extends Component {
 
     componentDidMount() {
         // Retrieve Data from Database
-        const ref = database().ref(`/blogs/${this.state.title}`);
+        const ref = firebase.database().ref(`/blogs/${this.state.title}`);
         ref.once('value').then(this.loadBlogPost);
     }
 
@@ -122,16 +114,16 @@ class BlogPageContent extends Component {
                                     </Breadcrumb>
 
                                     {/* Post Title */}
-                                    <CardTitle style={{ textAlign: 'center' }}>
+                                    <div style={{ textAlign: 'center' }}>
                                         <h2>{post.title}</h2>
                                         <i>{`by ${post.author} (${
                                             MONTHS[post.month - 1]
                                         } ${post.day})`}</i>
-                                    </CardTitle>
+                                    </div>
 
                                     <hr className="event-line" />
 
-                                    <CardText>
+                                    <div>
                                         {/* Renders description as markdown parsed html */}
                                         <ReactMarkdown
                                             source={post.description}
@@ -154,7 +146,7 @@ class BlogPageContent extends Component {
                                                 link: DescriptionLink
                                             }}
                                         />
-                                    </CardText>
+                                    </div>
                                 </React.Fragment>
                             )}
                         </Card>

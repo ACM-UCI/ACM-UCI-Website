@@ -10,7 +10,7 @@ import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import BlogItem from './BlogItem';
 
-import { database } from 'firebase/app';
+import firebase from '../../Firebase';
 
 import './Blog.css';
 
@@ -33,7 +33,7 @@ class Blog extends Component {
 
     componentDidMount() {
         // Retrieve Data from Database
-        const ref = database().ref('/blogs');
+        const ref = firebase.database().ref('/blogs');
         ref.once('value').then(this.loadBlogPosts);
     }
 

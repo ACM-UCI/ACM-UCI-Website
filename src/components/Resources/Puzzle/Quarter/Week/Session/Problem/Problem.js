@@ -9,7 +9,7 @@ import logo from '../../../../../../../acm_logo.svg';
 import LikeIcon from '@material-ui/icons/ThumbUp';
 import DislikeIcon from '@material-ui/icons/ThumbDown';
 import { Carousel } from 'react-responsive-carousel';
-import { database } from 'firebase/app';
+import firebase from '../../../../../../../Firebase';
 
 export default class Problem extends Component {
     constructor(props) {
@@ -191,9 +191,9 @@ export default class Problem extends Component {
         if (value !== store) {
             ratings[value] = 1;
 
-            var postRef = database().ref(
-                'submissions/' + this.props.identifier + '/Session/'
-            );
+            var postRef = firebase
+                .database()
+                .ref('submissions/' + this.props.identifier + '/Session/');
 
             var sess_name =
                 this.props.quarter +

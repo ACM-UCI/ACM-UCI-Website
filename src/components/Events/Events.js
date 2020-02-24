@@ -4,8 +4,6 @@ import {
     Row,
     Col,
     Card,
-    CardTitle,
-    CardText,
     CardImg,
     CardBody,
     Button
@@ -43,18 +41,18 @@ class Events extends Component {
 
                 <h3 className="mt-3">Weekly Schedule</h3>
                 <Card body className="card-body">
-                    <CardTitle>ACM Practice - Winter 2020</CardTitle>
-                    <CardText>
+                    <div>ACM Practice - Winter 2020</div>
+                    <div>
                         <strong>Tuesday: </strong>
                         DBH 4011, 6:00 - 8:00 pm <br />
                         <strong>Thursday: </strong>
                         DBH 4011, 6:00 - 8:00 pm
-                    </CardText>
+                    </div>
                 </Card>
                 <hr className="event-line" />
                 {/* <Card body className="card-body">
-                    <CardTitle>Quick Info</CardTitle>
-                    <CardText>
+                    <div>Quick Info</div>
+                    <div>
                         <ul>
                             <li>
                                 <Link
@@ -66,12 +64,12 @@ class Events extends Component {
                                 {'Oct 25, TBA @ DBH 6011'}
                             </li>
                         </ul>
-                    </CardText>
+                    </div>
                 </Card> */}
                 {/* <h3 className="mt-3">Quick links</h3> */}
                 <Card body className="card-body">
-                    <CardTitle>Quick Links</CardTitle>
-                    <CardText>
+                    <div>Quick Links</div>
+                    <div>
                         {/* <Link
                             style={{ color: '#32587B' }}
                             to="/events#upcoming-events">
@@ -100,7 +98,7 @@ class Events extends Component {
                             Blog
                         </Link>{' '}
                         <br />
-                    </CardText>
+                    </div>
                 </Card>
             </div>
         );
@@ -178,7 +176,7 @@ class Events extends Component {
 
                             {/* 1st Meeting */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         1st Meeting: Storm DBH 4011, they can't
                                         stop all of us
@@ -187,8 +185,8 @@ class Events extends Component {
                                         Tuesday, October 1st, DBH 4011 @ 6:00pm
                                         - 8:00 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -212,19 +210,19 @@ class Events extends Component {
                                     .
                                     <br />
                                     <i>P.S. There will be pizza :)</i>
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* IEEEXtreme 13.0 */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>IEEEXtreme 13.0</h3>
                                     <i>
                                         Friday, October 18, 5PM - Saturday,
                                         October 19, 5PM @ DBH 4011
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -294,12 +292,12 @@ class Events extends Component {
                                         blog
                                     </Link>
                                     {'!'}
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* ICPC Qualifiers 2019 */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>ICPC 2019 Qualifiers</h3>
                                     <i>
                                         Thursday, October 17, 12:00AM -
@@ -312,8 +310,8 @@ class Events extends Component {
                                             Kattis
                                         </a>
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     Interest Form:{' '}
                                     <a
@@ -438,16 +436,16 @@ class Events extends Component {
                                     time constraints while simultaneously giving
                                     competitors flexibility, the stated window
                                     is much longer.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* Facebook Tech Talk */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>Facebook Tech Talk</h3>
                                     <i>Friday, October 25, 6-8pm @ DBH 6011</i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -474,7 +472,7 @@ class Events extends Component {
                                     <br />
                                     <br />
                                     Hope to see you there!
-                                </CardText>
+                                </div>
                             </Card>
 
                             <br />
@@ -484,14 +482,14 @@ class Events extends Component {
 
                             {/* UiPath Event */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>UiPath Recruiting Event</h3>
                                     <i>
                                         Tuesday, April 9th, DBH 4011 @ 6:30 - 8
                                         pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -517,7 +515,7 @@ class Events extends Component {
                                     INTERN - Business Development
                                     <br />
                                     INTERN - Data Engineering
-                                </CardText>
+                                </div>
                             </Card>
 
                             <br />
@@ -527,7 +525,7 @@ class Events extends Component {
 
                             {/* JUNLIN */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         Adversarial Attacks on Machine Learning
                                         Models
@@ -536,8 +534,8 @@ class Events extends Component {
                                         by Junlin Wang - March 7th, DBH 4011 @
                                         6:30 - 7:30 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -565,12 +563,12 @@ class Events extends Component {
                                     special interest group for AI Junlin enjoys
                                     watching censored videos he can’t see in
                                     China.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* POOYA */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         Should We Follow Ant’s Traffic Laws?!
                                     </h3>
@@ -578,8 +576,8 @@ class Events extends Component {
                                         by Pooya Khosravi - February 28th, DBH
                                         4011 @ 6:30 - 7:30 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -605,12 +603,12 @@ class Events extends Component {
                                     biomedical engineering, then minor in music
                                     just for laughs. If you are wondering, Pooya
                                     clearly did not write this.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* BRYON */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         Use the Force, Luke: Computer Science
                                         and Molecular Dynamics Force Fields{' '}
@@ -619,8 +617,8 @@ class Events extends Component {
                                         by Bryon Tjanaka - February 21th, DBH
                                         4011 @ 6:30 - 7:30 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -650,19 +648,19 @@ class Events extends Component {
                                     researcher in the Mobley Lab. After using
                                     the force to help him graduate, he will
                                     pursue a career as a Jedi master.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* CHINMAY */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>Algorithms in Nature </h3>
                                     <i>
                                         by Chinmay Raut - February 14th, DBH
                                         4011 @ 6:30 - 7:30 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -686,19 +684,19 @@ class Events extends Component {
                                     bio, and cs. In his limited free time, he
                                     helps run ACM and rants about the frugality
                                     of Del Taco’s Tuesday deal.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* ARNE */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>Let's Go!!! </h3>
                                     <i>
                                         by Arne Philipeit - February 7th, DBH
                                         4011 @ 6:30 - 7:30 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -725,12 +723,12 @@ class Events extends Component {
                                     Dublin, and Go-enthusiast. He also holds the
                                     socal record for solving most ICPC problems
                                     in Java, something he’s not too proud of.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* JENS */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         Machine learning: Do we really
                                         understand it?{' '}
@@ -739,8 +737,8 @@ class Events extends Component {
                                         by Jens Tuyls - January 31th, DBH 4011 @
                                         6:30 - 7:30 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -766,12 +764,12 @@ class Events extends Component {
                                     Along with being extremely interested in
                                     machine learning and algorithms, he is also
                                     the tallest Belgian on campus.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* JACKY */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         Unzipping our Genes with Machine
                                         Learning{' '}
@@ -780,8 +778,8 @@ class Events extends Component {
                                         by Jacky Dai - January 24th, DBH 4011 @
                                         6:30 - 7:30 pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -806,11 +804,11 @@ class Events extends Component {
                                     interests include graph algorithms and
                                     algorithm design in interdisciplinary
                                     subjects.
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* Girls' Coding Nights */}
-                            <Card style={{ 'margin-top': '20px' }}>
+                            <Card style={{ marginTop: '20px' }}>
                                 <a
                                     href="https://www.facebook.com/events/558100287990483/"
                                     target="_blank"
@@ -823,11 +821,11 @@ class Events extends Component {
                                     />
                                 </a>
                                 <CardBody>
-                                    <CardTitle>
+                                    <div>
                                         Girls' Coding Nights - January 23rd, DBH
                                         4011 @ 5 - 6 pm
-                                    </CardTitle>
-                                    <CardText>
+                                    </div>
+                                    <div>
                                         The ACM club is starting a new series
                                         called the Girls' Coding Nights, and we
                                         invite YOU to join! This is a good
@@ -838,7 +836,7 @@ class Events extends Component {
                                         questions on interview questions you are
                                         working on! The first meeting will be an
                                         introduction to Graph Theory.
-                                    </CardText>
+                                    </div>
                                     <a
                                         href="https://www.facebook.com/events/558100287990483/"
                                         target="_blank"
@@ -852,7 +850,7 @@ class Events extends Component {
 
                             {/* KARTHIK */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         P = NP and Other Hilarious Jokes You Can
                                         Tell Yourself
@@ -861,8 +859,8 @@ class Events extends Component {
                                         by Karthik Gajulapalli - January 17th,
                                         DBH 4011 @ 6:30 - 7:30
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{
@@ -889,7 +887,7 @@ class Events extends Component {
                                     about theoretical computer science. To truly
                                     marvel his front-end skills, you should
                                     visit his website.
-                                </CardText>
+                                </div>
                             </Card>
                         </Col>
                         {this.meeting}
