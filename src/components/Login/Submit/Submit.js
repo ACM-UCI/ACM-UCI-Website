@@ -133,27 +133,60 @@ export default class Submit extends Component {
 
     processData(data) {
         this.data = data.val();
-        /* this is code for initializing logs in firebase to 0 BE CAREFUL
-        var okay = false; // change this
+        // /* this is code for initializing logs in firebase to 0 BE CAREFUL
+        var okay = true; // change this
         if (okay) {
             var u = {};
-            for (var b in this.data['logs']) {
-                if (this.data['logs'].hasOwnProperty(b)) {
-                    // u['/logs/' + b + '/LinkedIn'] = null;
-                    // u['/logs/' + b + '/GitHub'] = null;
-                    // u['/logs/' + b + '/Facebook'] = null;
-                    // uncomment this to initialize all
-                    var quartersToAdd = [];
-                    // quartersToAdd = ["Winter 2020","Spring 2020", "Fall 2020"];
-                    // u['/logs/' + b + '/0/'] = null;
-                    // u['/logs/' + b + '/1/'] = null;
-                    // u['/logs/' + b + '/2/'] = null;
-                    for(var qi in quartersToAdd) {
-                        var qAdd = quartersToAdd[qi];
-                        if(!this.data['logs'][b].hasOwnProperty(qAdd)) {
-                            for (var i = 1; i <= 11; i++) {
-                                u['/logs/' + b + '/'+qAdd+'/' + i.toString()] = 0;
+            // for (var b in this.data['logs']) {
+            //     if (this.data['logs'].hasOwnProperty(b)) {
+            //         // u['/logs/' + b + '/LinkedIn'] = null;
+            //         // u['/logs/' + b + '/GitHub'] = null;
+            //         // u['/logs/' + b + '/Facebook'] = null;
+            //         // uncomment this to initialize all
+            //         var quartersToAdd = [];
+            //         // quartersToAdd = ["Winter 2020","Spring 2020", "Fall 2020"];
+            //         // u['/logs/' + b + '/0/'] = null;
+            //         // u['/logs/' + b + '/1/'] = null;
+            //         // u['/logs/' + b + '/2/'] = null;
+            //         for(var qi in quartersToAdd) {
+            //             var qAdd = quartersToAdd[qi];
+            //             if(!this.data['logs'][b].hasOwnProperty(qAdd)) {
+            //                 for (var i = 1; i <= 11; i++) {
+            //                     u['/logs/' + b + '/'+qAdd+'/' + i.toString()] = 0;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            for (var b in this.data['submissions']) {
+                if (
+                    this.data['submissions'].hasOwnProperty(b) &&
+                    this.data['submissions'][b].hasOwnProperty('Session')
+                ) {
+                    for (var sess_i = 0; sess_i < 10; sess_i += 1) {
+                        var sess = sess_i;
+                        if (
+                            sess < this.data['submissions'][b]['Session'].length
+                        ) {
+                            var name = '';
+                            for (var letter in this.data['submissions'][b][
+                                'Session'
+                            ][sess]) {
+                                name += this.data['submissions'][b]['Session'][
+                                    sess
+                                ][letter];
                             }
+                            u['/submissions/' + b + '/Session/' + sess] = {
+                                Name: name.toString(),
+                                Ratings: {
+                                    like: 0,
+                                    dislike: 0
+                                },
+                                Clicks: 0,
+                                SolutionViews: 0,
+                                HintViews: 0
+                            };
+                            console.log(name);
                         }
                     }
                 }

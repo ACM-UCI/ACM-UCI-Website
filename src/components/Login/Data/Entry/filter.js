@@ -1,4 +1,8 @@
 export default function filter(problem, filters) {
+    var sess_names =
+        problem && problem.Session
+            ? problem.Session.map(v => v.Name)
+            : undefined;
     if (
         ((filters.diff === 'All' &&
             (problem.Difficulty === 'easy' ||
@@ -14,9 +18,9 @@ export default function filter(problem, filters) {
             (problem.Contributor !== undefined &&
                 problem.Contributor.indexOf(filters.cons) !== -1)) &&
         (filters.sess === 'All' ||
-            (filters.sess === 'Not Used' && problem.Session === undefined) ||
-            (problem.Session !== undefined &&
-                problem.Session.indexOf(filters.sess) !== -1)) &&
+            (filters.sess === 'Not Used' && sess_names === undefined) ||
+            (sess_names !== undefined &&
+                sess_names.indexOf(filters.sess) !== -1)) &&
         (filters.note === 'All' ||
             (filters.note === 'No Notes' && problem.Note === '') ||
             (filters.note === 'Has Notes' && problem.Note !== '')) &&

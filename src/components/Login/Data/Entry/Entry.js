@@ -94,7 +94,8 @@ export default class Entry extends Component {
         if (board[config.current].hasOwnProperty(this.props.owner)) {
             // if removing from this quarter
             if (this.selectedSess.startsWith(this.props.qrt)) {
-                var sessionIndex = this.data.Session.indexOf(this.selectedSess);
+                var sess_names = this.data.Session.map(v => v.Name);
+                var sessionIndex = sess_names.indexOf(this.selectedSess);
                 this.data.Session.splice(sessionIndex, 1);
                 var updates = {};
                 updates[this.selectedSess + '/' + this.props.x] = null;
@@ -133,6 +134,7 @@ export default class Entry extends Component {
         }
     }
 
+    // Note: only board can set problems right now
     setProblem() {
         // change this to position !!!!!
         if (board[config.current].hasOwnProperty(this.props.owner)) {
@@ -148,14 +150,23 @@ export default class Entry extends Component {
                 this.session.toString();
 
             // if adding a new session
-            if (this.data.Session.indexOf(sess) === -1) {
-                this.data.Session.push(
-                    this.props.qrt +
+            var sess_names = this.data.Session.map(v => v.Name);
+            if (sess_names.indexOf(sess) === -1) {
+                this.data.Session.push({
+                    Name:
+                        this.props.qrt +
                         '/' +
                         this.week +
                         '/' +
-                        this.session.toString()
-                );
+                        this.session.toString(),
+                    Ratings: {
+                        like: 0,
+                        dislike: 0
+                    },
+                    SolutionViews: 0,
+                    HintViews: 0,
+                    Clicks: 0
+                });
                 var updates = {};
                 updates[
                     '/' +
@@ -306,7 +317,7 @@ export default class Entry extends Component {
                         this.selectedSess = e.target.id;
                         this.toggle(4);
                     }}>
-                    {this.data.Session[i]}
+                    {this.data.Session[i].Name}
                 </Button>
             );
         }
