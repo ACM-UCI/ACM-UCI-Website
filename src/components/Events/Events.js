@@ -25,6 +25,7 @@ import acm_meeting from '../../img/acm_meeting.jpg';
 import ieeextreme13 from '../../img/ieeextreme13.jpg';
 // import facebook from '../../img/facebook.jpg';
 import facebooktech from '../../img/facebooktech.png';
+import internalcomp0 from '../../img/internal_comp_0.jpg';
 import './Events.css';
 
 class Events extends Component {
@@ -165,9 +166,55 @@ class Events extends Component {
                                 marginLeft: '5%',
                                 paddingRight: '5%'
                             }}>
-                            {/* <h2 id="upcoming-events" className="mt-3">
+                            <h2 id="upcoming-events" className="mt-3">
                                 Upcoming Events
-                            </h2> */}
+                            </h2>
+                            {/* Facebook Internal Competition */}
+                            <Card body className="card-body">
+                                <CardTitle>
+                                    <h3>
+                                        ACM Internal Competition (Sponsored by
+                                        Facebook)
+                                    </h3>
+                                    <i>
+                                        Thursday, March 5th, DBH 4011 @ 7:00pm -
+                                        9:00pm
+                                    </i>
+                                </CardTitle>
+                                <CardText>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{ width: '100%' }}
+                                        src={internalcomp0}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    Participate in ACM@UCI's first internal
+                                    competition of the year! Whether you're a
+                                    beginner seeking competitive coding
+                                    experience or you're a veteran member
+                                    competing for the top spot, Everyone is
+                                    Welcome.
+                                    <ul>
+                                        <li>
+                                            There will be <b>Facebook prizes</b>
+                                        </li>
+                                        <li>
+                                            Follow our
+                                            <a
+                                                style={{ color: '#3b5998' }}
+                                                href={
+                                                    'https://www.facebook.com/events/568104980579743/?active_tab=about'
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                {` Facebook `}
+                                            </a>
+                                            to stay up to date with this event
+                                        </li>
+                                    </ul>
+                                </CardText>
+                            </Card>
 
                             {/* <br /> */}
                             <h2 id="2019-fall-events" className="mt-3">
