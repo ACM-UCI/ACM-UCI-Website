@@ -171,7 +171,7 @@ class Events extends Component {
                             </h2>
                             {/* Facebook Internal Competition */}
                             <Card body className="card-body">
-                                <CardTitle>
+                                <div>
                                     <h3>
                                         ACM Internal Competition (Sponsored by
                                         Facebook)
@@ -180,8 +180,8 @@ class Events extends Component {
                                         Thursday, March 5th, DBH 4011 @ 7:00pm -
                                         9:00pm
                                     </i>
-                                </CardTitle>
-                                <CardText>
+                                </div>
+                                <div>
                                     <hr className="event-line" />
                                     <img
                                         style={{ width: '100%' }}
@@ -213,7 +213,7 @@ class Events extends Component {
                                             to stay up to date with this event
                                         </li>
                                     </ul>
-                                </CardText>
+                                </div>
                             </Card>
 
                             {/* <br /> */}
