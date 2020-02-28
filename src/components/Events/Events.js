@@ -171,15 +171,35 @@ class Events extends Component {
                             </h2>
                             {/* Facebook Internal Competition */}
                             <Card body className="card-body">
-                                <div>
-                                    <h3>
-                                        ACM Internal Competition (Sponsored by
-                                        Facebook)
-                                    </h3>
-                                    <i>
-                                        Thursday, March 5th, DBH 4011 @ 7:00pm -
-                                        9:00pm
-                                    </i>
+                                <div className="container">
+                                    <Row>
+                                        <Col
+                                            xs="auto"
+                                            className="text-left px-0">
+                                            <h3>
+                                                ACM Internal Competition
+                                                (Sponsored by Facebook)
+                                            </h3>
+                                        </Col>
+                                        <Col xs="auto"></Col>
+                                        <Col
+                                            xs="auto"
+                                            className="text-right px-0 ml-auto">
+                                            <Button
+                                                href="https://forms.gle/zu1cUPvPuoEbKejN6"
+                                                size="lg"
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                Sign Up
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <i>
+                                            Thursday, March 5th, DBH 4011 @
+                                            7:00pm - 9:00pm
+                                        </i>
+                                    </Row>
                                 </div>
                                 <div>
                                     <hr className="event-line" />
@@ -211,6 +231,18 @@ class Events extends Component {
                                                 {` Facebook `}
                                             </a>
                                             to stay up to date with this event
+                                        </li>
+                                        <li>
+                                            Sign Up
+                                            <a
+                                                style={{ color: '#3b5998' }}
+                                                href={
+                                                    'https://forms.gle/zu1cUPvPuoEbKejN6'
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                {` Here `}
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
