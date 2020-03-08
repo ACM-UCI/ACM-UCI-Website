@@ -22,7 +22,6 @@ const tabI = {
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.logout = this.logout.bind(this);
         this.logged = this.logged.bind(this);
         this.toggle = this.toggle.bind(this);
         this.setTab = this.setTab.bind(this);
@@ -117,11 +116,39 @@ export default class Login extends Component {
                 if (
                     email.split('@')[1] !== 'uci.edu' &&
                     email !== 'acmuciguest@gmail.com'
-                )
+                ) {
                     logout();
+                    this.show[1] = (
+                        <Alert key="notboard" color="info">
+                            Hello {u.displayName}, welcome to the ACM website ^^
+                            . Unfortunately, this feature is only for UCI
+                            students and faculty at the moment!
+                        </Alert>
+                    );
+                    this.setState({
+                        status: 'Login'
+                    });
+                }
+
                 this.verified(u);
             } else {
                 // User is not logged in
+                this.show = [
+                    <Button
+                        key="loginbutton"
+                        className="loginbutton"
+                        onClick={login}>
+                        Login
+                    </Button>,
+                    <Alert key="notboard" color="info">
+                        See you next time {this.owner.displayName.split(' ')[0]}
+                        !
+                    </Alert>
+                ];
+                this.owner = {};
+                this.setState({
+                    status: 'Login'
+                });
             }
         });
     }
@@ -130,22 +157,6 @@ export default class Login extends Component {
         if (this.state.status === 'Login') {
             this.emails = data.val()['logs'];
         }
-    }
-
-    logout() {
-        logout();
-        this.show = [
-            <Button key="loginbutton" className="loginbutton" onClick={login}>
-                Login
-            </Button>,
-            <Alert key="notboard" color="info">
-                See you next time {this.owner.displayName.split(' ')[0]}!
-            </Alert>
-        ];
-        this.owner = {};
-        this.setState({
-            status: 'Login'
-        });
     }
 
     verified(user) {
@@ -285,7 +296,7 @@ export default class Login extends Component {
                 <Button
                     key="logoutbutton"
                     className="loginbutton"
-                    onClick={this.logout}>
+                    onClick={logout}>
                     Logout
                 </Button>
                 {allTabs[tabI[ntab]]}
