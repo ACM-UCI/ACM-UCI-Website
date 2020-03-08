@@ -10,6 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import config from '../config.js';
 import './Login.css';
+import { login, logout, getUser, addAuthListener } from './Auth';
 
 const tabI = {
     Submit: 0,
@@ -21,8 +22,6 @@ const tabI = {
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
         this.logged = this.logged.bind(this);
         this.toggle = this.toggle.bind(this);
         this.setTab = this.setTab.bind(this);
@@ -33,10 +32,7 @@ export default class Login extends Component {
         this.emails = {};
         this.owner = {};
         this.show = [
-            <Button
-                key="loginbutton"
-                className="loginbutton"
-                onClick={this.login}>
+            <Button key="loginbutton" className="loginbutton" onClick={login}>
                 {this.state.status}
             </Button>
         ];
@@ -109,68 +105,58 @@ export default class Login extends Component {
     }
 
     componentDidMount() {
-        // this.verified({ email: 'alaird@uci.edu' });
-        // this.verified({ email: 'mnovitia@uci.edu' });
-        // this.verified({ email: 'pbaldara@uci.edu' });
-
         // check if logged in (after refreshed)
         // uncomment below for debugging
-        const user = window.localStorage.getItem('user');
+        addAuthListener(u => {
+            if (u !== null) {
+                // User is logged in
+                const { email } = u;
 
-        if (user !== undefined && user !== null && user !== '') {
-            const user_json = JSON.parse(user);
-            const user_last_logged_in = parseInt(user_json['lastLoginAt']);
-            const time_now = new Date().getTime();
-            const days_apart =
-                (time_now - user_last_logged_in) / 1000 / 60 / 60 / 24;
-            if (days_apart < 1) this.verified(user_json);
-        }
+                // Verify has @uci.edu email
+                if (
+                    email.split('@')[1] !== 'uci.edu' &&
+                    email !== 'acmuciguest@gmail.com'
+                ) {
+                    logout();
+                    this.show[1] = (
+                        <Alert key="notboard" color="info">
+                            Hello {u.displayName}, welcome to the ACM website ^^
+                            . Unfortunately, this feature is only for UCI
+                            students and faculty at the moment!
+                        </Alert>
+                    );
+                    this.setState({
+                        status: 'Login'
+                    });
+                }
+
+                this.verified(u);
+            } else {
+                // User is not logged in
+                this.show = [
+                    <Button
+                        key="loginbutton"
+                        className="loginbutton"
+                        onClick={login}>
+                        Login
+                    </Button>,
+                    <Alert key="notboard" color="info">
+                        See you next time {this.owner.displayName.split(' ')[0]}
+                        !
+                    </Alert>
+                ];
+                this.owner = {};
+                this.setState({
+                    status: 'Login'
+                });
+            }
+        });
     }
 
     processData(data) {
         if (this.state.status === 'Login') {
             this.emails = data.val()['logs'];
         }
-    }
-
-    logout() {
-        firebase.auth().signOut();
-        this.show = [
-            <Button
-                key="loginbutton"
-                className="loginbutton"
-                onClick={this.login}>
-                Login
-            </Button>,
-            <Alert key="notboard" color="info">
-                See you next time {this.owner.displayName.split(' ')[0]}!
-            </Alert>
-        ];
-        this.owner = {};
-        window.localStorage.removeItem('user');
-        this.setState({
-            status: 'Login'
-        });
-    }
-
-    login() {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase
-            .auth()
-            .signInWithPopup(provider)
-            .then(this.logged)
-            .catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                // var credential = error.credential;
-                // ...
-                // alert("Failed to log in");
-                console.log(errorCode, errorMessage, email);
-            });
     }
 
     verified(user) {
@@ -228,8 +214,6 @@ export default class Login extends Component {
                 .ref()
                 .update(u);
         }
-
-        window.localStorage.setItem('user', JSON.stringify(user));
 
         this.verified(user);
     }
@@ -312,7 +296,7 @@ export default class Login extends Component {
                 <Button
                     key="logoutbutton"
                     className="loginbutton"
-                    onClick={this.logout}>
+                    onClick={logout}>
                     Logout
                 </Button>
                 {allTabs[tabI[ntab]]}
@@ -320,6 +304,10 @@ export default class Login extends Component {
         );
     }
 
+    /**
+     * Sets which view to show.
+     * @param {String} ntab The view to be shown (Submit, Log, Data, Profile, Logout)
+     */
     toggle(ntab) {
         this.setTab(ntab);
         this.setState({
