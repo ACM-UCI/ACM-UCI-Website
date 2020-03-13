@@ -10,7 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import config from '../config.js';
 import './Login.css';
-import { login, logout, getUser, addAuthListener } from './Auth';
+import { login, logout, addAuthListener } from './Auth';
 
 const tabI = {
     Submit: 0,

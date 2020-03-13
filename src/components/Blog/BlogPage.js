@@ -13,6 +13,7 @@ import Banner from '../Banner/Banner';
 import firebase from '../../Firebase';
 
 import ReactMarkdown from 'react-markdown';
+import { DescriptionLink, ImageRenderer } from './BlogMarkdownRenderers';
 
 import './Blog.css';
 
@@ -128,18 +129,29 @@ class BlogPageContent extends Component {
                                         <ReactMarkdown
                                             source={post.description}
                                             transformImageUri={uri => {
-                                                return IMG_PATH(
-                                                    uri.replace(
-                                                        /%IMG_PATH%/,
-                                                        './'
-                                                    )
-                                                );
+                                                if (uri.match(/%IMG_PATH%/)) {
+                                                    return IMG_PATH(
+                                                        uri.replace(
+                                                            /%IMG_PATH%/,
+                                                            './'
+                                                        )
+                                                    );
+                                                } else {
+                                                    return uri;
+                                                }
                                             }}
                                             transformLinkUri={uri => {
-                                                return uri.replace(
-                                                    /%BASE_URL%/,
-                                                    process.env.PUBLIC_URL
-                                                );
+                                                if (
+                                                    uri !== undefined &&
+                                                    uri.match(/%BASE_URL%/)
+                                                ) {
+                                                    return uri.replace(
+                                                        /%BASE_URL%/,
+                                                        process.env.PUBLIC_URL
+                                                    );
+                                                } else {
+                                                    return uri;
+                                                }
                                             }}
                                             renderers={{
                                                 image: ImageRenderer,
@@ -158,30 +170,6 @@ class BlogPageContent extends Component {
             </div>
         );
     }
-}
-
-// Rendering Component for all links in the description
-function DescriptionLink(props) {
-    return (
-        <Link
-            className="blog-post-description-link"
-            to={props.href}
-            {...props}
-        />
-    );
-}
-
-// Rendering Component for all images in the description
-function ImageRenderer(props) {
-    return (
-        <Col
-            style={{
-                textAlign: 'center'
-            }}>
-            <img className="blog-img" alt={props.alt} {...props} />
-            <i>{props.alt}</i>
-        </Col>
-    );
 }
 
 // Allows for handling query parameters
