@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import UploadBlog from './UploadBlog';
+import CreateBlog from './CreateBlog';
 
 import {
     Form,
@@ -187,7 +188,7 @@ export default class SubmitBlog extends Component {
                                 </Col>
                             </FormGroup>
                             <TabPanel value={curTab} index={0}>
-                                Item One
+                                <CreateBlog setPostData={this.setPostData} />
                             </TabPanel>
                             <TabPanel value={curTab} index={1}>
                                 <UploadBlog setPostData={this.setPostData} />
