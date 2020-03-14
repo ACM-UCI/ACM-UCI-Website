@@ -5,6 +5,7 @@ import Banner from '../Banner/Banner';
 import UploadBlog from './UploadBlog';
 import CreateBlog from './CreateBlog';
 
+import firebase from '../../Firebase';
 import {
     Form,
     FormGroup,
@@ -62,8 +63,12 @@ export default class SubmitBlog extends Component {
         this.state = {
             curTab: 0,
             displayImage: null,
+            imgName: null,
             postData: null,
-            errorMsg: null
+            errorMsg: null,
+            author: null,
+            postTitle: null,
+            pageTitle: null
         };
     }
 
@@ -78,9 +83,59 @@ export default class SubmitBlog extends Component {
 
     /**
      * Given the post to be created, adds new post to the firebase database.
-     * @param {*} postObj - The post to be created. Of form {author, post_title, page_title, image_uri, description}
+     * @param {Event} e - The post to be created. Of form {author, post_title, page_title, image_uri, description}
      */
-    submit(postObj) {}
+    submit(e) {
+        e.preventDefault();
+
+        // Collect Data
+        const {
+            author,
+            postTitle,
+            pageTitle,
+            displayImage,
+            imgName,
+            postData
+        } = this.state;
+
+        let errors = [];
+        // Verify Data
+        if (author === null || author.trim().length === 0) {
+            errors.push('Author must be set');
+        }
+        if (postTitle === null || postTitle.trim().length === 0) {
+            errors.push('Post title must be set');
+        }
+        if (pageTitle === null || pageTitle.trim().length === 0) {
+            errors.push('Page title must be set');
+        }
+        if (displayImage === null || displayImage.trim().length === 0) {
+            errors.push('Display image must be set');
+        }
+
+        if (errors.length > 0) {
+            this.setState({ errorMsg: ', '.concat(...errors) });
+            return;
+        } else {
+            let d = new Date();
+            let day = d.getDate();
+            let month = d.getMonth() + 1;
+            let year = d.getFullYear();
+            const dbRef = firebase
+                .database()
+                .ref('/blogs/' + pageTitle.toLowerCase().replace(/ /g, '-'));
+            dbRef.set({
+                author: author,
+                description: postData,
+                img: imgName,
+                page_title: pageTitle,
+                title: postTitle,
+                day: day,
+                month: month,
+                year: year
+            });
+        }
+    }
 
     /**
      * Verifies that the provided image filename is a valid image.
@@ -89,9 +144,15 @@ export default class SubmitBlog extends Component {
     verifyImage(filename) {
         try {
             let imageURI = IMG_PATH(`./${filename}`);
-            this.setState({ displayImage: imageURI });
+            this.setState({
+                displayImage: imageURI,
+                imgName: filename
+            });
         } catch (e) {
-            this.setState({ displayImage: null });
+            this.setState({
+                displayImage: null,
+                imgName: null
+            });
         }
     }
 
@@ -124,7 +185,7 @@ export default class SubmitBlog extends Component {
                         </Tabs>
                     </Paper>
                     <Container className="shadow-lg p-3">
-                        <Form onSubmit={e => console.log(e)} id="post-form">
+                        <Form onSubmit={this.submit} id="post-form">
                             <FormGroup row>
                                 <Label for="post-author" sm={2}>
                                     Author
@@ -134,6 +195,11 @@ export default class SubmitBlog extends Component {
                                         type="text"
                                         name="post-author"
                                         id="post-author"
+                                        onChange={e =>
+                                            this.setState({
+                                                author: e.target.value
+                                            })
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -146,6 +212,11 @@ export default class SubmitBlog extends Component {
                                         type="text"
                                         name="post-title"
                                         id="post-title"
+                                        onChange={e =>
+                                            this.setState({
+                                                postTitle: e.target.value
+                                            })
+                                        }
                                     />
                                 </Col>
                             </FormGroup>
@@ -158,6 +229,11 @@ export default class SubmitBlog extends Component {
                                         type="text"
                                         name="page-title"
                                         id="page-title"
+                                        onChange={e =>
+                                            this.setState({
+                                                pageTitle: e.target.value
+                                            })
+                                        }
                                     />
                                     <FormText>Keep it short & sweet</FormText>
                                 </Col>
@@ -241,7 +317,7 @@ export default class SubmitBlog extends Component {
                                             ) {
                                                 return uri.replace(
                                                     /%BASE_URL%/,
-                                                    process.env.PUBLIC_URL
+                                                    process.env.PUBLIC_URL + '/'
                                                 );
                                             } else {
                                                 return uri;
