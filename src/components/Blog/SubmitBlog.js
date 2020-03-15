@@ -15,7 +15,11 @@ import {
     Button,
     Col,
     Alert,
-    Container
+    Container,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter
 } from 'reactstrap';
 import ReactMarkdown from 'react-markdown';
 import {
@@ -29,12 +33,17 @@ import {
     Typography
 } from '@material-ui/core';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
+import { Redirect, Link } from 'react-router-dom';
 
 import { ImageRenderer, DescriptionLink } from './BlogMarkdownRenderers';
+import { addAuthListener } from '../Login/Auth';
 
 import default_image from '../../img/acm.jpg';
 const IMG_PATH = require.context('../../img', true);
 
+/**
+ * Helper component for the tab selection between creating and uploading posts.
+ */
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -51,6 +60,9 @@ function TabPanel(props) {
     );
 }
 
+/**
+ * Defines the UI for creating/uploading new blog posts.
+ */
 export default class SubmitBlog extends Component {
     constructor(props) {
         super(props);
@@ -68,8 +80,16 @@ export default class SubmitBlog extends Component {
             errorMsg: null,
             author: null,
             postTitle: null,
-            pageTitle: null
+            pageTitle: null,
+            redirect: false,
+            authenticated: false,
+            success: false,
+            displayModal: false
         };
+
+        addAuthListener(u =>
+            this.setState({ authenticated: u !== null, redirect: u === null })
+        );
     }
 
     /**
@@ -114,26 +134,47 @@ export default class SubmitBlog extends Component {
         }
 
         if (errors.length > 0) {
-            this.setState({ errorMsg: ', '.concat(...errors) });
+            this.setState({ errorMsg: errors.join(', ') });
             return;
         } else {
             let d = new Date();
             let day = d.getDate();
             let month = d.getMonth() + 1;
             let year = d.getFullYear();
+
             const dbRef = firebase
                 .database()
                 .ref('/blogs/' + pageTitle.toLowerCase().replace(/ /g, '-'));
-            dbRef.set({
-                author: author,
-                description: postData,
-                img: imgName,
-                page_title: pageTitle,
-                title: postTitle,
-                day: day,
-                month: month,
-                year: year
-            });
+            dbRef.set(
+                {
+                    author: author,
+                    description: postData,
+                    img: imgName,
+                    page_title: pageTitle,
+                    title: postTitle,
+                    day: day,
+                    month: month,
+                    year: year
+                },
+                error => {
+                    if (error !== null && error.code === 'PERMISSION_DENIED') {
+                        console.log('Trying to hack? I think not!');
+                        this.setState({ redirect: true });
+                    } else if (error !== null) {
+                        this.setState({ errorMsg: 'Something went wrong' });
+                    } else {
+                        // No Error
+                        document.getElementById('post-form').reset();
+
+                        this.setState({
+                            success: true,
+                            displayImage: null,
+                            postData: null,
+                            displayModal: true
+                        });
+                    }
+                }
+            );
         }
     }
 
@@ -156,6 +197,10 @@ export default class SubmitBlog extends Component {
         }
     }
 
+    /**
+     * Sets the body of the post to be rendered by preview & to be saved in database.
+     * @param {*} data - A string in markdown syntax containing the body of the post.
+     */
     setPostData(errors, data) {
         this.setState({
             postData: data,
@@ -163,11 +208,31 @@ export default class SubmitBlog extends Component {
         });
     }
 
-    componentWillMount() {}
-
     render() {
+        // Redirect if unauthorized
+        if (this.state.redirect) {
+            return <Redirect to="/blog" />;
+        } else if (!this.state.authenticated) {
+            // still loading account
+            return (
+                <Alert
+                    className="med m"
+                    transition={{ in: true, timeout: 100 }}>
+                    Fetching Data :3
+                </Alert>
+            );
+        }
+
         // Extract State
-        let { curTab, displayImage, postData, errorMsg } = this.state;
+        let {
+            curTab,
+            displayImage,
+            postData,
+            errorMsg,
+            success,
+            pageTitle,
+            displayModal
+        } = this.state;
         return (
             <React.Fragment>
                 <Navigation />
@@ -254,6 +319,7 @@ export default class SubmitBlog extends Component {
                                     <FormText>
                                         Image must exist in website
                                     </FormText>
+                                    {/* If a valid image display it below input field */}
                                     {displayImage !== null && (
                                         <img
                                             src={displayImage}
@@ -279,6 +345,29 @@ export default class SubmitBlog extends Component {
                             </FormGroup>
                             {errorMsg !== null && (
                                 <Alert color="danger">{errorMsg}</Alert>
+                            )}
+                            {success && errorMsg === null && (
+                                // <Alert color="success">Blog Post Submitted</Alert>
+                                <Modal
+                                    isOpen={displayModal}
+                                    toggle={e =>
+                                        this.setState({
+                                            displayModal: !displayModal
+                                        })
+                                    }>
+                                    <ModalHeader>Success</ModalHeader>
+                                    <ModalBody>
+                                        Blog post successfully submitted
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Link
+                                            to={`/blog/${pageTitle
+                                                .toLowerCase()
+                                                .replace(/ /g, '-')}`}>
+                                            <Button>View It</Button>
+                                        </Link>
+                                    </ModalFooter>
+                                </Modal>
                             )}
                         </Form>
 

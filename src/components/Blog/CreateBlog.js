@@ -53,7 +53,6 @@ export default function CreateBlog(props) {
             editor.value.lastIndexOf('\n', start - 1) + 1
         );
         let moveBy = 4 - ((start - lineStart + 4) % 4);
-        console.log(moveBy);
         editor.value =
             editor.value.slice(0, start) +
             ' '.repeat(moveBy) +

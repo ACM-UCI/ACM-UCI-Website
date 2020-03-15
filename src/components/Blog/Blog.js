@@ -4,13 +4,15 @@
 
 import React, { Component } from 'react';
 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
 import BlogItem from './BlogItem';
 
 import firebase from '../../Firebase';
+import { addAuthListener } from '../Login/Auth';
 
 import './Blog.css';
 
@@ -19,11 +21,14 @@ class Blog extends Component {
         super(props);
 
         this.state = {
-            posts: []
+            posts: [],
+            authenticated: false
         };
 
         // Bind Local Function
         this.loadBlogPosts = this.loadBlogPosts.bind(this);
+
+        addAuthListener(u => this.setState({ authenticated: u !== null }));
     }
 
     // Callback for updating this.state.posts after database fetch complete
@@ -72,8 +77,15 @@ class Blog extends Component {
                     fluid
                     style={{ margin: 0, padding: 0 }}>
                     <div className="pseudo" />
+                    {this.state.authenticated === true && (
+                        <Row>
+                            <Link to="/blog/submit" className="mx-auto mt-3">
+                                <Button>Create A Post</Button>
+                            </Link>
+                        </Row>
+                    )}
                     <br />
-                    <div style={{ margin: '5%' }}>
+                    <div style={{ margin: ' 0 5%' }}>
                         <Row>{blogItems}</Row>
                     </div>
                     <br />

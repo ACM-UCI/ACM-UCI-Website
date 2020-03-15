@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { HashLink as Link } from 'react-router-hash-link';
-
 import { Col } from 'reactstrap';
 
 /**
@@ -10,12 +8,11 @@ import { Col } from 'reactstrap';
 
 // Rendering Component for all links in the description
 export function DescriptionLink(props) {
+    console.log(props);
     return (
-        <Link
-            className="blog-post-description-link"
-            to={props.href}
-            {...props}
-        />
+        <a className="blog-post-description-link" href={props.href} {...props}>
+            {props.children}
+        </a>
     );
 }
 

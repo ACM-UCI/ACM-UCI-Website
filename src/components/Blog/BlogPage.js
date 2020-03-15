@@ -53,7 +53,7 @@ class BlogPageContent extends Component {
             // Replace new line syntax characters with \n string
             if (data.description !== null) {
                 data.description = data.description.replace(
-                    / *(\n|<br>|<br *\/>) */g,
+                    / *(\n|<br>|<br *\/>)/g,
                     '\n\n'
                 );
             }
@@ -72,7 +72,7 @@ class BlogPageContent extends Component {
 
     render() {
         if (this.state.redirect) {
-            return <Redirect to="/404" />;
+            return <Redirect to="/blog" />;
         }
 
         let post = this.state.post;
