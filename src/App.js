@@ -5,6 +5,7 @@ import About from './components/About/About';
 import Events from './components/Events/Events';
 import Blog from './components/Blog/Blog';
 import BlogPage from './components/Blog/BlogPage';
+import SubmitBlog from './components/Blog/SubmitBlog';
 import Resources from './components/Resources/Resources';
 import Board from './components/Board/Board';
 import Contact from './components/Contact/Contact';
@@ -26,6 +27,7 @@ class App extends Component {
                 <Route path="/about" component={About} />
                 <Route path="/events" component={Events} />
                 <Route exact path="/blog" component={Blog} />
+                <Route exact path="/blog/submit" component={SubmitBlog} />
                 <Route path="/blog/:title" component={BlogPage} />
                 <Route path="/resources" component={Resources} />
                 <Route path="/board" component={Board} />

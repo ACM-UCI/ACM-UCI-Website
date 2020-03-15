@@ -6,7 +6,7 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
-    <BrowserRouter forceRefresh={true}>
+    <BrowserRouter forceRefresh={true} basename={process.env.PUBLIC_URL}>
         <App />
     </BrowserRouter>,
     document.getElementById('root')

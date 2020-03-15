@@ -1,5 +1,7 @@
 # Blog
-Loads all blog posts as `Blog Item`s. Each `Blog Item` will redirect to the corresponding `Blog Page`
+* Loads all blog posts as `Blog Item`s. Each `Blog Item` will redirect to the corresponding `Blog Page`.
+* Uploading/Creating blog posts handled by `Submit Item`. This route is protected by authentication rules.
+  * User must be logged in to access create blog posts
 
 ## Database Structure
 location: '/blog'
