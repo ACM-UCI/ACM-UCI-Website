@@ -19,7 +19,7 @@ export default class Puzzle extends Component {
 
         this.state = { collapse: false };
 
-        this.quarter = 'Winter 2020';
+        this.quarter = 'Spring 2020';
         this.week = 1;
         this.session = 1;
         this.end = false;
@@ -103,12 +103,11 @@ export default class Puzzle extends Component {
 
         // change below for testing [ place desired date inside Date() ]
         var today = new Date(date);
-        // var today = new Date('February 18, 2020 17:00:00 GMT-08:00');
+        // var today = new Date('April 7, 2020 08:59:59');
         if (!(today instanceof Date) || isNaN(today)) {
             this.err();
             return;
         }
-
         today = today.getTime();
 
         // index of the quarter we are in
@@ -144,11 +143,15 @@ export default class Puzzle extends Component {
         // END
         // check if the session ended, assuming each session lasts 2 hours
         // note that ses === 0 corresponds to Tuesday, and ses === 2 corresponds to Thursday
-        const tm = ((today - startDates[i]) / 1000 / 60 / 60) % 24;
-        if ((ses === 0 || ses === 2) && tm < 2) {
-            this.end = false;
+        const hoursElapsed = (today - startDates[i]) / 1000 / 60 / 60; // Total hours elapsed since start of quarter
+        const hourOfWeek = hoursElapsed % 168; // 168 hours in week
+
+        if (this.session == 1) {
+            this.end = hourOfWeek >= config.meetingLengths[0];
+        } else if (this.session == 2) {
+            this.end = hourOfWeek >= 48 + config.meetingLengths[1]; // 48 is the number of hours between meetings
         } else {
-            this.end = true;
+            this.end = false;
         }
 
         // Handling after quarter dates
