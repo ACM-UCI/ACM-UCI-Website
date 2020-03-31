@@ -111,6 +111,14 @@ class Navigation extends Component {
                                     </NavLink>
                                 </DropdownItem>
                                 <DropdownItem>
+                                    <NavLink
+                                        href="https://discord.gg/hWGDyw"
+                                        target="_blank"
+                                        rel="noopener norefferer">
+                                        Discord
+                                    </NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
                                     <NavLink tag={Link} to="/donate">
                                         Donate
                                     </NavLink>
@@ -118,7 +126,8 @@ class Navigation extends Component {
                                 <DropdownItem>
                                     <NavLink
                                         href="https://github.com/ACM-UCI/ACM-UCI-Website/issues"
-                                        target="_blank">
+                                        target="_blank"
+                                        rel="noopener noreferrer">
                                         Raise Issue
                                     </NavLink>
                                 </DropdownItem>

@@ -184,7 +184,7 @@ export default class Puzzle extends Component {
                     <Navigation />
                     <Banner
                         lead="Weekly Problems and Solutions"
-                        leadSub="Problems posted an hour before meetings start; solutions posted an hour before meetings end."
+                        leadSub="Due to current circumstances all meetings will be held on Discord Tu 6-8pm and Th 6-8pm"
                     />
                     {this.error}
                     <div className="center">
@@ -224,6 +224,24 @@ export default class Puzzle extends Component {
                                 transition={{ in: true, timeout: 300 }}>
                                 Event
                             </Alert>
+                        </Row>
+                        <Row className="center">
+                            <h1 className="display-3">
+                                Join Meetings on{' '}
+                                <a
+                                    href="https://discord.gg/hWGDyw"
+                                    style={{ color: 'rgb(81, 168, 202)' }}
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    Discord
+                                </a>
+                            </h1>
+                        </Row>
+                        <Row className="center">
+                            <span>
+                                Meetings <strong>Tuesday</strong> 6-8pm and{' '}
+                                <strong>Thursday</strong> 6-8pm
+                            </span>
                         </Row>
                     </div>
 
