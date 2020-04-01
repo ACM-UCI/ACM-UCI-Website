@@ -112,7 +112,7 @@ class Navigation extends Component {
                                 </DropdownItem>
                                 <DropdownItem>
                                     <NavLink
-                                        href="https://discord.gg/hWGDyw"
+                                        href="https://discord.gg/MCtKPxC"
                                         target="_blank"
                                         rel="noopener norefferer">
                                         Discord

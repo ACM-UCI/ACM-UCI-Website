@@ -94,7 +94,7 @@ class Home extends Component {
                     </strong>
                     <br></br>
                     <a
-                        href="https://discord.gg/hWGDyw"
+                        href="https://discord.gg/MCtKPxC"
                         target="_blank"
                         rel="noopener noreferrer">
                         Join Our Discord
