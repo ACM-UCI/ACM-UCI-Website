@@ -229,7 +229,7 @@ export default class Puzzle extends Component {
                             <h1 className="display-3">
                                 Join Meetings on{' '}
                                 <a
-                                    href="https://discord.gg/hWGDyw"
+                                    href="https://discord.gg/MCtKPxC"
                                     style={{ color: 'rgb(81, 168, 202)' }}
                                     target="_blank"
                                     rel="noopener noreferrer">
