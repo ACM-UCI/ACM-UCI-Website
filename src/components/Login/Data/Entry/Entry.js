@@ -58,6 +58,12 @@ export default class Entry extends Component {
             this.allweeks.push(<option key={'w' + w.toString()}>{w}</option>);
         }
 
+        const quarterMeetingSchedule = config.meetings[this.props.qrtIndex];
+        this.allsessions = [];
+        for (let i = 0; i < quarterMeetingSchedule.length; ++i) {
+            this.allsessions.push(<option key={`s${i}`}>{i + 1}</option>);
+        }
+
         this.session = props.session;
         this.optses1 = '2';
         this.optses2 = '1';
@@ -254,7 +260,9 @@ export default class Entry extends Component {
             );
             // !!!!! position
             if (
-                problem.Contributor !== this.props.owner &&
+                (Array.isArray(problem.Contributor)
+                    ? !problem.Contributor.includes(this.props.owner)
+                    : problem.Contributor !== this.props.owner) &&
                 !board[config.current].hasOwnProperty(this.props.owner)
             ) {
                 this.sol = (
@@ -370,6 +378,8 @@ export default class Entry extends Component {
                     </Button>
                 </td>
                 <td>{this.edit}</td>
+
+                {/* View Solution Code Modal */}
                 <Modal
                     size="lg"
                     isOpen={this.state.modal[0]}
@@ -384,6 +394,8 @@ export default class Entry extends Component {
                     </ModalHeader>
                     <ModalBody>{this.code}</ModalBody>
                 </Modal>
+
+                {/* Problem Notes Modal */}
                 <Modal
                     size="lg"
                     isOpen={this.state.modal[1]}
@@ -401,6 +413,8 @@ export default class Entry extends Component {
                     </ModalHeader>
                     <ModalBody>{problem.Note}</ModalBody>
                 </Modal>
+
+                {/* Add Problem to Session Modal */}
                 <Modal
                     isOpen={this.state.modal[2]}
                     toggle={() => {
@@ -456,8 +470,7 @@ export default class Entry extends Component {
                                             }
                                             name="select"
                                             id="Session">
-                                            <option>{this.optses1}</option>
-                                            <option>{this.optses2}</option>
+                                            {this.allsessions}
                                         </Input>
                                     </td>
                                 </tr>
@@ -469,6 +482,8 @@ export default class Entry extends Component {
                         </div>
                     </ModalBody>
                 </Modal>
+
+                {/* Edit Modal */}
                 <Modal
                     size="lg"
                     isOpen={this.state.modal[3]}
@@ -491,6 +506,8 @@ export default class Entry extends Component {
                         x={this.props.x}
                     />
                 </Modal>
+
+                {/* Remove Session Modal */}
                 <Modal
                     size="sm"
                     isOpen={this.state.modal[4]}

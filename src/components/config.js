@@ -1,7 +1,61 @@
+/**
+ * Defines a Meeting and can be used to calculate whether a Meeting has occured given a current time.
+ */
+export class Meeting {
+    /**
+     * Instantiates a new instance of Meeting with a start time (milliseconds) offset after the beginning of the week
+     * and a duration (minutes).
+     * @param {Integer} startTime - The start time of the meeting given in milliseconds after the week has begun.
+     * @param {Integer} duration - How long the meeting occurs for given in minutes.
+     */
+    constructor(startTime, duration) {
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
+    static STATE_PRIOR() {
+        return 0;
+    }
+    static STATE_STARTED() {
+        return 1;
+    }
+    static STATE_ENDED() {
+        return 2;
+    }
+
+    /**
+     * Determines what state the Meeting instance is in based on a given time.
+     * These states will be one of three constants {PRIOR: 0, STARTED: 1, ENDED: 2} which can be obtained from the
+     * static functions: STATE_PRIOR(), STATE_STARTED(), and STATE_ENDED().
+     * @param {Integer} currTimeMilli - The number of milliseconds passed since the beginning of the week
+     */
+    determineState(currTimeMilli) {
+        if (isNaN(currTimeMilli)) {
+            throw TypeError('Invalid Time Given');
+        } else if (currTimeMilli < this.startTime) {
+            return Meeting.STATE_PRIOR();
+        } else if (currTimeMilli < this.startTime + this.duration * 60000) {
+            return Meeting.STATE_STARTED();
+        } else {
+            return Meeting.STATE_ENDED();
+        }
+    }
+}
+
 // TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
 const config = {
     current: '2019-2020',
-    meetingLengths: [48, 120], // How long to leave problems open for after start time [Meeting 1, Meeting 2], (in hours).
+    // Arranges weekly meeting schedule corresponding to quarter
+    meetings: [
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
+        [
+            new Meeting(0, 10080) // Tuesday - 2 Days
+        ]
+    ],
     quarters: [
         'Fall 2018',
         'Winter 2019',
