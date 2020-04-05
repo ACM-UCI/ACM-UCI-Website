@@ -6,8 +6,8 @@ import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
 import firebase from '../../../Firebase';
-import $ from 'jquery';
 import config from '../../config.js';
+import { initializeSchedule } from '../../../utils/Scheduling';
 
 export default class Puzzle extends Component {
     constructor(props) {
@@ -30,12 +30,9 @@ export default class Puzzle extends Component {
         this.past = null;
         this.present = null;
 
-        // tricky stuff, may change if website changes
-        $.ajax({
-            url: 'https://24timezones.com/time-zone/utc',
-            context: document.body,
-            crossdomain: true
-        }).done(this.getDate);
+        initializeSchedule()
+            .then(this.getDate)
+            .catch(e => this.err(e.message));
     }
 
     processData(data) {
@@ -69,102 +66,19 @@ export default class Puzzle extends Component {
         this.toggle();
     }
 
-    err() {
+    err(message) {
         this.done = true;
-        this.error = (
-            <Alert color="info">
-                We noticed that your computer's clock is not set correctly.
-                Please set it correctly for better performance! :)
-            </Alert>
-        );
+        this.error = <Alert color="info">{message}</Alert>;
         this.toggle();
     }
 
-    getDate(data) {
-        data = data.split('<div id="cityClock">', 2)[1];
-        data = data.split('</div>', 2);
-        var date = data[1].split(', ');
-        date = date[1] + ', ' + date[2].split('<')[0];
+    getDate(state) {
+        this.quarter = state.quarter;
+        this.week = state.week;
+        this.session = state.session;
+        this.end = state.currentSessionOver;
 
-        var time = data[0].split(/\D+/);
-        var ampm = data[0].split(/<\/*sup>+/)[1];
-        if (ampm === 'pm' && time[1] !== '12') {
-            time[1] = ((parseInt(time[1], 10) + 12) % 24).toString();
-        } else if (ampm === 'am' && time[1] === '12') {
-            time[1] = '00';
-        }
-        date =
-            date + ' ' + time[1] + ':' + time[2] + ':' + time[3] + ' GMT+00:00';
-
-        // QUARTER
-        // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        const quarters = config['quarters'];
-        const startDates = config['dates'];
-
-        // change below for testing [ place desired date inside Date() ]
-        var today = new Date(date);
-        // var today = new Date('April 7, 2020 08:59:59');
-        if (!(today instanceof Date) || isNaN(today)) {
-            this.err();
-            return;
-        }
-        today = today.getTime();
-
-        // index of the quarter we are in
-        let i = 0;
-        while (i + 1 < startDates.length && startDates[i + 1] <= today) {
-            i += 1;
-        }
-        this.quarter = quarters[i];
-
-        // WEEK
-        // calculating which week we are in (based on start time of first meeting in UTC minus 1 hour)
-        // will post questions 1 hr before meeting starts
-        // will post solutions right after the meeting ends
-        // adding .5 will make sure number is rounded up
-        this.week = (
-            (today - startDates[i]) / 1000 / 60 / 60 / 24 / 7 +
-            0.5
-        ).toFixed(0);
-
-        // SESSION
-        // calculating what the latest meeting session is (UTC)
-        // mod 7 to make sure numbers stay in week range
-        const ses =
-            Math.floor((today - startDates[i]) / 1000 / 60 / 60 / 24) % 7;
-        // Usually Tuesday
-        if (ses < 2) {
-            this.session = 1;
-            // Usually Thursday
-        } else {
-            this.session = 2;
-        }
-
-        // END
-        // check if the session ended, assuming each session lasts 2 hours
-        // note that ses === 0 corresponds to Tuesday, and ses === 2 corresponds to Thursday
-        const hoursElapsed = (today - startDates[i]) / 1000 / 60 / 60; // Total hours elapsed since start of quarter
-        const hourOfWeek = hoursElapsed % 168; // 168 hours in week
-
-        if (this.session == 1) {
-            this.end = hourOfWeek >= config.meetingLengths[0];
-        } else if (this.session == 2) {
-            this.end = hourOfWeek >= 48 + config.meetingLengths[1]; // 48 is the number of hours between meetings
-        } else {
-            this.end = false;
-        }
-
-        // Handling after quarter dates
-        if (this.week > 11) {
-            this.session = 2;
-            this.week = 11;
-            this.end = true;
-        }
-
-        // List of quarters that will be included in past solutions
-        // note ".slice" does not include end argument
-        this.quarters = quarters.slice(0, i + 1);
-        // console.log(this.session, this.quarter, this.end, this.week);
+        this.quarters = this.quarters.slice(0, state.quarterIndex + 1);
         this.done = true;
 
         var ref = firebase.database().ref();

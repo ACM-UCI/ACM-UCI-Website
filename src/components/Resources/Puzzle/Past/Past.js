@@ -3,6 +3,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import './Past.css';
 import classnames from 'classnames';
 import Quarter from '../Quarter/Quarter';
+import config from '../../../config';
 
 // ADD SPRING NAVITEMS WHEN SPRING QUARTER STARTS
 
@@ -28,9 +29,10 @@ export default class Past extends Component {
             this.tabcontents.push(
                 <TabPane key={i.toString()} tabId={i.toString()}>
                     <Quarter
-                        session={3}
+                        session={config.meetings[i].length + 1}
                         week={11}
                         quarter={this.quarters[i]}
+                        quarterIndex={i}
                         data={props.data}
                     />
                 </TabPane>
@@ -44,6 +46,7 @@ export default class Past extends Component {
                     session={this.session}
                     week={this.week}
                     quarter={this.quarters[curr]}
+                    quarterIndex={this.quarters.length - 1}
                     data={props.data}
                 />
             </TabPane>

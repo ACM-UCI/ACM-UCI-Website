@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import Week from './Week/Week';
 import './Quarter.css';
+import config from '../../../config';
 
 export default class Quarter extends Component {
     constructor(props) {
@@ -27,7 +28,7 @@ export default class Quarter extends Component {
                     key={i}
                     week={i}
                     quarter={props.quarter}
-                    session={3}
+                    session={config.meetings[props.quarterIndex].length + 1}
                     data={props.data}
                 />
             );

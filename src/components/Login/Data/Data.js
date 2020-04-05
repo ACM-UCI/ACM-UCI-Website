@@ -69,6 +69,7 @@ export default class Data extends Component {
         this.state = { tog: false, page: 1 };
         this.week = props.week;
         this.quarter = props.quarter;
+        this.quarterIndex = props.quarterIndex;
         this.session = props.session;
         this.data = {};
         this.body = [];
@@ -114,6 +115,7 @@ export default class Data extends Component {
                         // current time
                         wk={this.props.week}
                         qrt={this.props.quarter}
+                        qrtIndex={this.props.quarterIndex}
                         session={this.props.session}
                         // data
                         data={submissions[key]}
