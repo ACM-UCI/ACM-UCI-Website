@@ -3,6 +3,7 @@ import { Alert, Row, Col } from 'reactstrap';
 import Problem from './Problem/Problem';
 import Announcement from './Announcement/Announcement';
 import PollCard from './Poll/PollCard';
+import Presentation from './Presentation/Presentation';
 import './Session.css';
 
 export default class Session extends Component {
@@ -57,6 +58,17 @@ export default class Session extends Component {
                                 conName={conName}
                                 contributors={contributors}
                             />
+                        );
+                    } else if (data.Difficulty === 'presentation') {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height space">
+                                <Presentation
+                                    className="center"
+                                    name={data.Name}
+                                    presentationLink={data.Link}
+                                    presentationNotes={data.PresNotes}
+                                />
+                            </Col>
                         );
                     } else if (data.Difficulty === 'poll') {
                         problems[problems.length - 1].push(
