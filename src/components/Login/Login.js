@@ -68,9 +68,6 @@ export default class Login extends Component {
     componentDidMount() {
         // check if logged in (after refreshed)
         // uncomment below for debugging
-        // if (!this.can_display_data){
-        //     return;
-        // }
         addAuthListener(this.setUser);
     }
 
