@@ -10,7 +10,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import config from '../config.js';
 import './Login.css';
-import { login, logout, addAuthListener } from './Auth';
+import { login, logout, addAuthListener, getUser } from './Auth';
 import { initializeSchedule } from '../../utils/Scheduling';
 
 const tabI = {
@@ -24,6 +24,7 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.logged = this.logged.bind(this);
+        this.setUser = this.setUser.bind(this);
         this.toggle = this.toggle.bind(this);
         this.setTab = this.setTab.bind(this);
         this.processData = this.processData.bind(this);
@@ -52,6 +53,7 @@ export default class Login extends Component {
                 this.week = state.week;
                 this.session = state.session;
                 this.setState({ can_display_data: true });
+                getUser().then(this.setUser);
             })
             .catch(e => {
                 this.show = (
@@ -69,55 +71,57 @@ export default class Login extends Component {
         // if (!this.can_display_data){
         //     return;
         // }
-        addAuthListener(u => {
-            if (u !== null) {
-                // User is logged in
-                const { email } = u;
+        addAuthListener(this.setUser);
+    }
 
-                // Verify has @uci.edu email
-                if (
-                    email.split('@')[1] !== 'uci.edu' &&
-                    email !== 'acmuciguest@gmail.com'
-                ) {
-                    logout();
-                    this.show[1] = (
-                        <Alert key="notboard" color="info">
-                            Hello {u.displayName}, welcome to the ACM website ^^
-                            . Unfortunately, this feature is only for UCI
-                            students and faculty at the moment!
-                        </Alert>
-                    );
-                    this.setState({
-                        status: 'Login'
-                    });
-                }
-                if (this.state.can_display_data) {
-                    this.verified(u);
-                }
-            } else {
-                // User is not logged in
-                this.show = [
-                    <Button
-                        key="loginbutton"
-                        className="loginbutton"
-                        onClick={login}>
-                        Login
-                    </Button>,
-                    this.owner.hasOwnProperty('displayName') ? (
-                        <Alert key="notboard" color="info">
-                            See you next time{' '}
-                            {this.owner.displayName.split(' ')[0]}!
-                        </Alert>
-                    ) : (
-                        <span key="blank"></span>
-                    )
-                ];
-                this.owner = {};
+    setUser(u) {
+        if (u !== null) {
+            // User is logged in
+            const { email } = u;
+
+            // Verify has @uci.edu email
+            if (
+                email.split('@')[1] !== 'uci.edu' &&
+                email !== 'acmuciguest@gmail.com'
+            ) {
+                logout();
+                this.show[1] = (
+                    <Alert key="notboard" color="info">
+                        Hello {u.displayName}, welcome to the ACM website ^^ .
+                        Unfortunately, this feature is only for UCI students and
+                        faculty at the moment!
+                    </Alert>
+                );
                 this.setState({
                     status: 'Login'
                 });
             }
-        });
+            if (this.state.can_display_data) {
+                this.verified(u);
+            }
+        } else {
+            // User is not logged in
+            this.show = [
+                <Button
+                    key="loginbutton"
+                    className="loginbutton"
+                    onClick={login}>
+                    Login
+                </Button>,
+                this.owner.hasOwnProperty('displayName') ? (
+                    <Alert key="notboard" color="info">
+                        See you next time {this.owner.displayName.split(' ')[0]}
+                        !
+                    </Alert>
+                ) : (
+                    <span key="blank"></span>
+                )
+            ];
+            this.owner = {};
+            this.setState({
+                status: 'Login'
+            });
+        }
     }
 
     processData(data) {
