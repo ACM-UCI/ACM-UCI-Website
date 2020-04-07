@@ -11,6 +11,7 @@ import 'firebase/auth';
 import config from '../config.js';
 import './Login.css';
 import { login, logout, addAuthListener } from './Auth';
+import { initializeSchedule } from '../../utils/Scheduling';
 
 const tabI = {
     Submit: 0,
@@ -27,7 +28,8 @@ export default class Login extends Component {
         this.setTab = this.setTab.bind(this);
         this.processData = this.processData.bind(this);
         this.state = {
-            status: 'Login'
+            status: 'Login',
+            can_display_data: false
         };
         this.emails = {};
         this.owner = {};
@@ -43,56 +45,30 @@ export default class Login extends Component {
 
         this.ref = firebase.database().ref();
         this.ref.on('value', this.processData);
-
-        // QUARTER
-        // calculating which quarter we are in (based on start time of first meeting in UTC minus 1 hour)
-        const quarters = config.quarters;
-        const startDates = config.dates;
-
-        var today = new Date().getTime();
-
-        // index of the quarter we are in
-        let i = 0;
-        while (i + 1 < startDates.length && startDates[i + 1] <= today) {
-            i += 1;
-        }
-        this.quarter = quarters[i];
-
-        // WEEK
-        // calculating which week we are in (based on start time of first meeting in UTC minus 1 hour)
-        // will post questions 1 hr before meeting starts
-        // will post solutions right after the meeting ends
-        // adding .5 will make sure number is rounded up
-        this.week = (
-            (today - startDates[i]) / 1000 / 60 / 60 / 24 / 7 +
-            0.5
-        ).toFixed(0);
-
-        // SESSION
-        // calculating what the latest meeting session is (UTC)
-        // mod 7 to make sure numbers stay in week range
-        const ses =
-            Math.floor((today - startDates[i]) / 1000 / 60 / 60 / 24) % 7;
-        // Usually Tuesday
-        if (ses < 2) {
-            this.session = 2;
-            // Usually Thursday
-        } else {
-            this.session = 1;
-            this.week = parseInt(this.week) + 1;
-        }
-
-        // Handling after quarter dates
-        if (this.week > 11) {
-            this.session = 1;
-            this.week = 1;
-            this.quarter = quarters[i + 1];
-        }
+        initializeSchedule()
+            .then(state => {
+                this.quarter = state.quarter;
+                this.quarterIndex = state.quarterIndex;
+                this.week = state.week;
+                this.session = state.session;
+                this.setState({ can_display_data: true });
+            })
+            .catch(e => {
+                this.show = (
+                    <Alert key="error" color="danger">
+                        {e.message}
+                    </Alert>
+                );
+                this.setState({ can_display_data: false });
+            });
     }
 
     componentDidMount() {
         // check if logged in (after refreshed)
         // uncomment below for debugging
+        // if (!this.can_display_data){
+        //     return;
+        // }
         addAuthListener(u => {
             if (u !== null) {
                 // User is logged in
@@ -115,8 +91,9 @@ export default class Login extends Component {
                         status: 'Login'
                     });
                 }
-
-                this.verified(u);
+                if (this.state.can_display_data) {
+                    this.verified(u);
+                }
             } else {
                 // User is not logged in
                 this.show = [
@@ -126,10 +103,14 @@ export default class Login extends Component {
                         onClick={login}>
                         Login
                     </Button>,
-                    <Alert key="notboard" color="info">
-                        See you next time {this.owner.displayName.split(' ')[0]}
-                        !
-                    </Alert>
+                    this.owner.hasOwnProperty('displayName') ? (
+                        <Alert key="notboard" color="info">
+                            See you next time{' '}
+                            {this.owner.displayName.split(' ')[0]}!
+                        </Alert>
+                    ) : (
+                        <span key="blank"></span>
+                    )
                 ];
                 this.owner = {};
                 this.setState({
@@ -228,6 +209,7 @@ export default class Login extends Component {
             <Data
                 week={this.week}
                 quarter={this.quarter}
+                quarterIndex={this.quarterIndex}
                 session={this.session}
                 owner={this.owner.email.split('@')[0]}
             />,

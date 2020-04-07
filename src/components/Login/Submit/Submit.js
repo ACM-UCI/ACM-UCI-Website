@@ -305,7 +305,7 @@ export default class Submit extends Component {
 
         if (
             !board['2019-2020'].hasOwnProperty(this.owner) &&
-            this.data['logs'][this.owner][this.quarter][this.week] >= 2
+            this.data['logs'][this.owner][this.quarter][this.week] >= 5
         ) {
             errors.push(
                 <li key={errors.length}>
