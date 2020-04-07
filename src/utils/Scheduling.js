@@ -29,6 +29,7 @@ export async function initializeSchedule() {
         })
         .then(data => {
             state.datetime = new Date(data.datetime);
+
             // state.datetime = new Date('April 7, 2020 08:00:00'); // Use for testing
             // Verify time is valid ------------------------------------------------------------------
             if (
@@ -86,7 +87,10 @@ export async function initializeSchedule() {
                 state.session = MEETINGS.length + 1; // Must do +1 because of 1-based indexing in Week.js
                 state.currentSessionOver = true;
             } else {
-                if (MEETINGS[i].determineState === Meeting.STATE_PRIOR()) {
+                if (
+                    MEETINGS[i].determineState(weekTimeElapsed) ===
+                    Meeting.STATE_PRIOR()
+                ) {
                     state.session = i; // Sets it to previous session and flags it as complete, will not show current session
                     state.currentSessionOver = true;
                 } else {
