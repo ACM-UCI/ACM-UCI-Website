@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Problem from '../Quarter/Week/Session/Problem/Problem';
 import Announcement from '../Quarter/Week/Session/Announcement/Announcement';
+import Presentation from '../Quarter/Week/Session/Presentation/Presentation';
 import PollCard from '../Quarter/Week/Session/Poll/PollCard';
 import config from '../../../config.js';
 import './Present.css';
@@ -84,6 +85,17 @@ export default class Present extends Component {
                                 con={data.Contributor[0]}
                                 conName={conName}
                             />
+                        );
+                    } else if (data.Difficulty === 'presentation') {
+                        problems[problems.length - 1].push(
+                            <Col md="4" className="height space">
+                                <Presentation
+                                    className="center"
+                                    name={data.Name}
+                                    presentationLink={data.Link}
+                                    presentationNotes={data.PresNotes}
+                                />
+                            </Col>
                         );
                     } else if (data.Difficulty === 'poll') {
                         problems[problems.length - 1].push(

@@ -8,8 +8,9 @@ import Chip from '@material-ui/core/Chip';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
+// TOOD - Will need to drastically redesign this system to allow greater flexibility
 const vars = {
-    difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong'],
+    difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong', 'presentation'],
     extras: ['event', 'announcement', 'finals', 'thanksgiving', 'poll']
 };
 
@@ -58,13 +59,15 @@ export default class Submit extends Component {
                 </option>
             );
         }
-        if (props.owner === 'mnovitia') {
+        if (props.owner === 'mnovitia' || props.owner === 'ryansy') {
             for (i = 0; i < vars.extras.length; i++) {
                 this.diffSel.push(
                     <option key={'ex' + i.toString()}>{vars.extras[i]}</option>
                 );
             }
         }
+
+        this.isPresentation = false;
 
         this.status = [];
 
@@ -187,6 +190,18 @@ export default class Submit extends Component {
             }
         }
 
+        if (e.target.id === 'Difficulty') {
+            this.isPresentation = e.target.value === 'presentation';
+            if (
+                this.isPresentation &&
+                !this.submission.hasOwnProperty('PresNotes')
+            ) {
+                this.submission['PresNotes'] = '';
+            } else if (!this.isPresentation) {
+                delete this.submission.PresNotes;
+            }
+        }
+
         this.setState({});
     }
 
@@ -197,6 +212,54 @@ export default class Submit extends Component {
     upload() {
         var s = this.submission;
         var errors = [];
+
+        if (s.Difficulty === 'presentation') {
+            // Quick Error Check:
+            if (s.Name === '') {
+                errors.push(
+                    <li key={errors.length}>Problem name cannot be blank</li>
+                );
+            }
+            if (s.Link === '') {
+                errors.push(
+                    <li key={errors.length}>No Problem Link Selected</li>
+                );
+            }
+
+            if (errors.length > 0) {
+                this.status = (
+                    <Alert color="danger" style={{ textAlign: 'left' }}>
+                        Sorry, failed to upload:
+                        {errors}
+                    </Alert>
+                );
+                this.setState({
+                    tog: false
+                });
+            } else {
+                s.SubmitDate = Date().toString();
+                s.SubmitBy = this.owner;
+
+                let newPostKey = firebase
+                    .database()
+                    .ref()
+                    .child('submissions')
+                    .push().key;
+                let updates = {};
+                updates['/submissions/' + newPostKey] = s;
+
+                firebase
+                    .database()
+                    .ref()
+                    .update(updates, this.err);
+                this.err(null);
+
+                this.setState({
+                    tog: false
+                });
+            }
+            return;
+        }
 
         if (s.Difficulty === 'Select one') {
             errors.push(
@@ -403,7 +466,7 @@ export default class Submit extends Component {
                     .update(updates, this.err);
                 this.err(null);
             } else {
-                var newPostKey = firebase
+                let newPostKey = firebase
                     .database()
                     .ref()
                     .child('submissions')
@@ -518,6 +581,35 @@ export default class Submit extends Component {
                     </Col>
                 </Row>
                 <br />
+
+                {this.isPresentation && (
+                    <React.Fragment>
+                        <Row>
+                            <Col className="submitcol">
+                                <button
+                                    className="submitlabel"
+                                    disabled
+                                    style={{
+                                        backgroundColor:
+                                            'rgba(109, 181, 226, 0.051)',
+                                        color: '#02284B'
+                                    }}>
+                                    Pres Notes Link
+                                </button>
+                            </Col>
+                            <Col>
+                                <Input
+                                    type="text"
+                                    defaultValue=""
+                                    onChange={evt => this.updateInputValue(evt)}
+                                    name="presentation-notes"
+                                    id="PresNotes"
+                                />
+                            </Col>
+                        </Row>
+                        <br />
+                    </React.Fragment>
+                )}
 
                 <Row>
                     <Col className="submitcol">
