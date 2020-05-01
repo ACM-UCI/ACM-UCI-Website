@@ -17,6 +17,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Calendar from './Calendar.js';
 import './Home.css';
 
+import excellence_award from '../../img/Website_2020.png';
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -154,6 +156,7 @@ class Home extends Component {
                 <Banner
                     lead="ACM @ UCI"
                     leadSub="Learn about algorithms and improve your interview skills."
+                    img={excellence_award}
                 />
                 <Container className="home-body" fluid>
                     <Row>

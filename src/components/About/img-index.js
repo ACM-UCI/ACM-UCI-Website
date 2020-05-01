@@ -7,7 +7,8 @@ const Images = {
     'ieeextreme_11.jpg': require('../../img/ieeextreme_11.jpg'),
     'ieeextreme_12_sleep24hrs.jpg': require('../../img/ieeextreme_12_sleep24hrs.jpg'),
     'ieeextreme_13.jpg': require('../../img/ieee_acm.jpg'),
-    'seminar_winter_2019.jpg': require('../../img/seminar_winter_2019.jpg')
+    'seminar_winter_2019.jpg': require('../../img/seminar_winter_2019.jpg'),
+    'Website_2020.jpg': require('../../img/Website_2020.jpg')
 };
 
 export default Images;

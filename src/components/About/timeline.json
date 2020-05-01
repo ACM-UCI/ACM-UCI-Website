@@ -87,8 +87,15 @@
     {
         "date": "November 2019",
         "title": "2019 SoCal Regional",
-        "desc": "ACM@UCI sends five teams to the 2019 SoCal Regiona. At the end of the contest, team filter ranks highest, at 7th place",
+        "desc": "ACM@UCI sends five teams to the 2019 SoCal Regional. At the end of the contest, team filter ranks highest, at 7th place",
         "img": "icpc_socal_2019.jpg",
         "caption": "ACM@UCI members at the 2019 ICPC SoCal Regional"
+    },
+    {
+        "date": "April 2020",
+        "title": "ACM 2020 Outstanding Website",
+        "desc": "Just over two years after its inception, the ACM@UCI website was recognized with the ACM 2020 Outstanding Website award as part of the ACM Excellence Awards.",
+        "img": "Website_2020.jpg",
+        "caption": "ACM@UCI receives Outstanding Website 2020 award"
     }
 ]
