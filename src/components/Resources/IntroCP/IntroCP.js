@@ -3,6 +3,9 @@ import {
     Container,
     Row,
     Col,
+    Modal,
+    ModalBody,
+    ModalHeader,
     Nav,
     NavItem,
     NavLink,
@@ -15,14 +18,17 @@ import { hybrid } from 'react-syntax-highlighter/styles/hljs';
 import Navigation from '../../Navbar/Navbar';
 import Banner from '../../Banner/Banner';
 import './IntroCP.css';
+import javameme from '../../../img/javameme.jpg';
 
 class IntroCP extends Component {
     constructor(props) {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
         this.state = {
-            activeTab: '1'
+            activeTab: '1',
+            modal: false
         };
     }
 
@@ -32,6 +38,10 @@ class IntroCP extends Component {
                 activeTab: tab
             });
         }
+    }
+
+    toggleModal() {
+        this.setState({ modal: !this.state.modal });
     }
 
     render() {
@@ -83,6 +93,14 @@ for line in sys.stdin:
                     lead="New Member Guide"
                     leadSub="Designed for the utterly clueless, by the utterly clueless"
                 />
+                <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>
+                        > Uses Java
+                    </ModalHeader>
+                    <ModalBody>
+                        <img src={javameme} />
+                    </ModalBody>
+                </Modal>
                 <Container className="mt-4">
                     <Nav tabs>
                         <NavItem>
@@ -119,7 +137,7 @@ for line in sys.stdin:
                                     <p>
                                         Hello new ACM@UCI member! Welcome to the
                                         world of competitive programming. I’m
-                                        Bryon Tjanaka, a first-year computer
+                                        Bryon Tjanaka, now a graduated computer
                                         science major at UCI. This short guide
                                         is intended to give you a quick
                                         introduction to the club. I’ll go over
@@ -382,7 +400,9 @@ for line in sys.stdin:
                                     </ol>
 
                                     {/** ******** PROGRAMMING LANGUAGES ********* */}
-                                    <h2>Programming Languages</h2>
+                                    <h2 id="programming_languages">
+                                        Programming Languages
+                                    </h2>
                                     <hr />
                                     <p>
                                         C++, Java, and Python are the more
@@ -392,9 +412,20 @@ for line in sys.stdin:
                                         the fastest, but Java and Python are
                                         usually good enough to solve a problem..
                                         As a general rule of thumb, Java is 2x
-                                        slower than C++, and Python is 10-100x
-                                        (some say 20-40x) slower. Even if you
-                                        end up using Python for most of your
+                                        slower than C++ (Note this is a highly
+                                        contested{' '}
+                                        <a
+                                            className="link"
+                                            href="#programming_languages"
+                                            onClick={e =>
+                                                this.setState({ modal: true })
+                                            }>
+                                            fact
+                                        </a>{' '}
+                                        by our current president, Paul
+                                        Baldaray), and Python is 10-100x (some
+                                        say 20-40x) slower. Even if you end up
+                                        using Python for most of your
                                         programming, you should at least
                                         understand C++ because many of the best
                                         sample solutions are written in C++.
@@ -509,6 +540,13 @@ for line in sys.stdin:
                                         </a>
                                         . Both are paid software tools, but are
                                         free for university students!
+                                    </p>
+                                    <p>
+                                        If you ever want recommendations on how
+                                        to set up your development environment
+                                        our ACM board as well as fellow ACM
+                                        members will always be happy to lend a
+                                        helping hand.
                                     </p>
 
                                     {/** ******** OTHER TIPS ********* */}

@@ -92,8 +92,8 @@ class Navigation extends Component {
                             <NavLink
                                 tag={Link}
                                 className="nav-font"
-                                to="/resources">
-                                Resources
+                                to="/introToCP">
+                                New Members
                             </NavLink>
                         </NavItem>
                         <UncontrolledDropdown className="mx-3">
