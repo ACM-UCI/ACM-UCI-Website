@@ -98,7 +98,7 @@ for line in sys.stdin:
                         > Uses Java
                     </ModalHeader>
                     <ModalBody>
-                        <img src={javameme} />
+                        <img src={javameme} alt="feelsjavaman.jpg" />
                     </ModalBody>
                 </Modal>
                 <Container className="mt-4">
