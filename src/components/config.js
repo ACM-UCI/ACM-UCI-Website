@@ -44,7 +44,8 @@ export class Meeting {
 
 // TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
 const config = {
-    current: '2019-2020',
+    yearList: ['2015-2016', '2016-2017', '2017-2018', '2018-2019', '2019-2020'],
+    current: '2019-2020', // This must be of form 'prevyear-nextyear'
     // Arranges weekly meeting schedule corresponding to quarter
     meetings: [
         [new Meeting(0, 180), new Meeting(172800000, 180)],

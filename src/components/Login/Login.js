@@ -11,7 +11,7 @@ import 'firebase/auth';
 import config from '../config.js';
 import './Login.css';
 import { login, logout, addAuthListener, getUser } from './Auth';
-import { initializeSchedule } from '../../utils/Scheduling';
+import { initializeSchedule, getConfiguredYear } from '../../utils/Scheduling';
 
 const tabI = {
     Submit: 0,
@@ -205,6 +205,7 @@ export default class Login extends Component {
             <Log
                 week={this.week}
                 quarter={this.quarter}
+                year={getConfiguredYear()}
                 owner={this.owner.email.split('@')[0]}
             />,
             <Data

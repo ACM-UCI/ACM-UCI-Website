@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Input } from 'reactstrap';
 import './Log.css';
-import board from '../../Board/board.json';
 import firebase from '../../../Firebase';
+import {
+    Max,
+    extcolumns,
+    columns,
+    filters,
+    inFilter
+} from '../../../utils/LoginUtils/LogUtils';
 import Paper from '@material-ui/core/Paper';
 import { SortingState, IntegratedSorting } from '@devexpress/dx-react-grid';
 import {
@@ -11,39 +17,60 @@ import {
     TableHeaderRow,
     TableFixedColumns
 } from '@devexpress/dx-react-grid-material-ui';
+import color from '@material-ui/core/colors/amber';
 
-const styles = ['white', '#fded5d', '#c2c1b9', '#9b9567', '#4ec5e6'];
+// white, gold, grey, bland gold, blue
+const colors = {
+    owner: '#4ec5ec', // bright light saturated blue
+    normal: 'white', // white
+    first: '#fded5d', // gold
+    second: 'c2c1b9', // silver
+    third: '#9b9567' // bronze
+};
+const minmax = new Max();
 
-var m = [300, 300, 300];
-var owner = undefined;
+// for use with rendering row bg colors
+let currentUser = undefined;
 
-var TableRow = ({ row, ...restProps }) => (
-    <Table.Row
-        {...restProps}
-        style={{
-            cursor: 'pointer',
-            backgroundColor:
-                m.indexOf(row.tot) !== -1
-                    ? styles[m.indexOf(row.tot) + 1]
-                    : row.Name === owner
-                    ? styles[4]
-                    : styles[m.indexOf(row.tot) + 1]
-        }}
-    />
-);
+function TableRow(props) {
+    const { row, ...restProps } = props;
+    console.log(currentUser);
+    if (row.Name === currentUser) console.log(row);
+    const bgColor =
+        row.Name === currentUser
+            ? color.owner
+            : row.tot === minmax.gold
+            ? colors.first
+            : row.tot === minmax.silver
+            ? colors.second
+            : row.tot === minmax.bronze
+            ? colors.third
+            : colors.normal;
 
+    return (
+        <Table.Row
+            {...restProps}
+            style={{
+                cursor: 'pointer',
+                backgroundColor: bgColor
+            }}
+        />
+    );
+}
+
+// Set Color to Red when quarter starts
 const HighlightedCell = ({ value, style, ...restProps }) => (
     <Table.Cell
         {...restProps}
         style={{
             textAlign: 'center',
-            backgroundColor:
-                value === owner ? styles[4] : value < 0 ? 'red' : undefined,
+            // backgroundColor:
+            //     value === currentUser ? colors.owner : value < 0 ? 'red' : undefined,
             ...style
         }}>
         <span
             style={{
-                color: value < 0 ? 'white' : undefined
+                color: value < 0 ? colors.white : undefined
             }}>
             {value}
         </span>
@@ -88,8 +115,8 @@ const HighlightedHeaderColCell = ({ style, ...restProps }) => {
                 backgroundColor:
                     restProps.tableRow.key === 'Symbol(heading)'
                         ? 'white'
-                        : restProps.tableRow.row.Name === owner
-                        ? styles[4]
+                        : restProps.tableRow.row.Name === currentUser
+                        ? colors.owner
                         : 'white',
                 ...style
             }}
@@ -109,151 +136,107 @@ const Cell = props => {
     return <NormalCell {...props} />;
 };
 
+/**
+ * Defines the rendering of the log component displaying
+ * how many problems members have submitted.
+ */
 export default class Log extends Component {
     constructor(props) {
         super(props);
 
-        owner = props.owner;
-
-        this.done = false;
-        this.filter = 'All Members';
+        // Bind Functions
         this.processData = this.processData.bind(this);
         this.updateInputValue = this.updateInputValue.bind(this);
 
-        this.quarter = props.quarter;
-        this.week = props.week;
-
         this.state = {
-            tog: false
+            // Pass props to state
+            owner: props.owner,
+            year: props.year,
+            quarter: props.quarter,
+            week: props.week,
+
+            // Initialize controls
+            filter: filters.ALL,
+            done: false,
+
+            // Initalize data
+            data: []
         };
 
-        this.extcolumns = [
-            {
-                columnName: 'Name',
-                width: 170
-            },
-            {
-                columnName: 'score',
-                align: 'center'
-            },
-            {
-                columnName: 'tot',
-                align: 'center'
-            }
-        ];
+        currentUser = props.owner; // For rendering row bg color
 
-        this.columns = [
-            {
-                name: 'Name'
-            }
-        ];
-
-        for (var i = 1; i <= 11; i++) {
-            this.columns.push({ name: i.toString() });
-            this.extcolumns.push({
-                columnName: i.toString(),
-                // align: "center",
-                width: 60
-            });
-        }
-
-        this.columns.push({
-            name: 'score',
-            title: 'Board Score'
-        });
-
-        this.columns.push({
-            name: 'tot',
-            title: 'Total Score'
-        });
-
-        this.data = [];
+        this.extcolumns = extcolumns;
+        this.columns = columns;
     }
 
     componentDidMount() {
         this.callFirebase();
     }
 
+    /**
+     * Initiates the fetching and parsing of log data from firebase
+     */
     callFirebase() {
         var ref = firebase.database().ref();
         ref.on('value', this.processData);
     }
 
+    /**
+     * Recieves firebase data and parses it to display in the logs.
+     * @param {Firebase} data
+     */
     processData(data) {
+        const { year, quarter, week, filter } = this.state;
         var logs = data.val()['logs'];
-        var d = {};
-        var tot;
-        var mins = [];
-        this.data = [];
+        const filteredData = [];
+        minmax.reset(); // For calculated bgcolor values for rows
 
-        // for each member
-        for (var key in logs) {
-            if (
-                logs.hasOwnProperty(key) &&
-                key !== 'pattis' &&
-                (this.filter === 'All Members' ||
-                    (this.filter === 'Board' &&
-                        board['2019-2020'].hasOwnProperty(key) &&
-                        key !== 'kgajulap') ||
-                    (this.filter === 'Non-Board' &&
-                        !board['2019-2020'].hasOwnProperty(key)))
-            ) {
-                d = { Name: key };
-                tot = 0;
+        // for each member calculate score
+        for (var member in logs)
+            if (inFilter(member, year, filter)) {
+                const member_data = { Name: member };
+                let tot = 0;
 
                 // for each week
                 for (var i = 1; i <= 11; i++) {
-                    d[i] = logs[key][this.quarter][i];
-
-                    // get the total score
-                    tot += d[i];
-
-                    // rounding
-                    d[i] = parseFloat(d[i].toFixed(2));
+                    const temp = logs[member][quarter][i];
+                    tot += temp; // Get total score
+                    member_data[i] = parseFloat(temp.toFixed(2)); // Rounding
                 }
 
-                // For Wall of Shame:
-                // if (mins.indexOf(tot - this.week * 2) === -1) {
-                //     mins.push(tot - this.week * 2);
-                // }
-                //d['tot'] = tot - this.week * 2;
-
-                tot = parseFloat(tot.toFixed(2));
-
-                if (mins.indexOf(tot) === -1) mins.push(tot);
-                d['tot'] = tot;
-                if (
-                    board['2019-2020'].hasOwnProperty(key) &&
-                    key !== 'kgajulap'
-                ) {
-                    d['score'] = parseFloat(
-                        (tot - (this.week - 1) * 2).toFixed(2)
+                member_data['tot'] = parseFloat(tot.toFixed(2));
+                if (inFilter(member, year, filters.BOARD)) {
+                    // Calculate board score
+                    member_data['score'] = parseFloat(
+                        (tot - (week - 1)).toFixed(2)
                     );
+                    minmax.update(tot);
                 }
-                this.data.push(d);
+                filteredData.push(member_data);
             }
-        }
-
-        mins.sort(function(a, b) {
-            return b - a;
-        });
-        mins.splice(3, mins.length - 3);
-        m = mins;
-
-        this.done = true;
 
         this.setState({
-            tog: !this.state.tog
+            data: filteredData,
+            done: true
         });
     }
 
+    // Callback function to update filter
     updateInputValue(e) {
-        this.filter = e.target.value;
-        this.callFirebase();
+        // Map selected option index to filter value
+        const mappings = {
+            0: filters.ALL,
+            1: filters.BOARD,
+            2: filters.MEMBER
+        };
+        this.setState({ filter: mappings[e.target.selectedIndex] }, () => {
+            this.callFirebase();
+        });
     }
 
     render() {
-        if (this.done) {
+        const { data, done } = this.state;
+        if (done) {
             return (
                 <div style={{ position: 'relative' }}>
                     <div
@@ -286,7 +269,7 @@ export default class Log extends Component {
                             marginTop: '8%',
                             marginBottom: '2%'
                         }}>
-                        <Grid rows={this.data} columns={this.columns}>
+                        <Grid rows={data} columns={this.columns}>
                             <SortingState
                                 defaultSorting={[
                                     { columnName: 'Name', direction: 'asc' }

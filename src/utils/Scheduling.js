@@ -17,7 +17,7 @@ export const state = {
 };
 
 /**
- * Makes a request to external world clock api to get current time in Pacific Daylight Time.
+ * Makes a request to external world clock api to get current time in Pacific Daylight Time. (TODO - need to add this functionality)
  * Returns a Promise whose then clause takes a one argument callback function where the argument is the current time Date object.
  */
 export async function initializeSchedule() {
@@ -67,6 +67,7 @@ async function computeSchedule(data) {
         (currTimeMilli - state.quarterStart) / 1000 / 60 / 60 / 24 / 7 +
         0.5
     ).toFixed(0);
+    state.week = Math.min(state.week, 11);
 
     // Determine Session of Week -------------------------------------------------------------
     const weekTimeElapsed = (currTimeMilli - state.quarterStart) % 604800000; // 604800000 milliseconds in a week
@@ -103,4 +104,22 @@ async function computeSchedule(data) {
  */
 export function isInitialized() {
     return state.initialized;
+}
+
+// Accessor functions
+/**
+ * Returns a string representation the current year that can be used to access
+ * board.json as well as the logs in the firebase database.
+ *
+ * Example form: '2019-2020'
+ */
+export function getConfiguredYear() {
+    return config.current;
+}
+
+/**
+ * Returns a list of all years for which board members are kept track off
+ */
+export function getConfiguredYearList() {
+    return config.yearList;
 }
