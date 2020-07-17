@@ -24,7 +24,6 @@ export default class Submit extends Component {
         }
         this.quarter = props.quarter;
         this.week = props.week;
-        console.log('week =', this.week);
         this.owner = props.owner;
 
         this.updateInputValue = this.updateInputValue.bind(this);
