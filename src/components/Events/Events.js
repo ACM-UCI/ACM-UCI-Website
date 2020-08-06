@@ -26,6 +26,7 @@ import ieeextreme13 from '../../img/ieeextreme13.jpg';
 // import facebook from '../../img/facebook.jpg';
 import facebooktech from '../../img/facebooktech.png';
 import internalcomp0 from '../../img/internal_comp_0.jpg';
+import internalcomp1 from '../../img/UCIxUCSD.png';
 import './Events.css';
 
 class Events extends Component {
@@ -169,6 +170,89 @@ class Events extends Component {
                             <h2 id="upcoming-events" className="mt-3">
                                 Upcoming Events
                             </h2>
+                            {/* UCIxUCSD Collab Competition */}
+                            <Card body className="card-body">
+                                <div className="container">
+                                    <Row>
+                                        <Col
+                                            xs="auto"
+                                            className="text-left px-0">
+                                            <h3>
+                                                ACM UCSD x UCI Competition
+                                                (Sponsored by Service Now)
+                                            </h3>
+                                        </Col>
+                                        <Col xs="auto"></Col>
+                                        <Col
+                                            xs="auto"
+                                            className="text-right px-0 ml-auto">
+                                            <Button
+                                                href="https://forms.gle/rZCRTuGxikR3uwr38"
+                                                size="lg"
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                Sign Up
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <i>
+                                            Saturday, September 12th, Online
+                                            (Hackerrank) 10:30am - 3:00pm
+                                        </i>
+                                    </Row>
+                                </div>
+                                <div>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{ width: '100%' }}
+                                        src={internalcomp1}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    UCI is collaborating with UCSD to host a
+                                    quarantine themed competition. This is a
+                                    perfect opportunity for new students looking
+                                    to get a taste of competitve programming and
+                                    a nifty excuse for experienced programmers
+                                    to freshen up their skills.
+                                    <ul>
+                                        <li>
+                                            Prizes include: Echo dot, gift
+                                            cards, and service now swag
+                                        </li>
+                                        <li>
+                                            Participants will have their resumes
+                                            directly forwarded to SericeNow
+                                        </li>
+                                        <li>
+                                            Follow our
+                                            <a
+                                                style={{ color: '#3b5998' }}
+                                                href={
+                                                    'https://www.facebook.com/events/664339430844292/'
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                {` Facebook `}
+                                            </a>
+                                            to stay up to date with this event
+                                        </li>
+                                        <li>
+                                            Sign Up
+                                            <a
+                                                style={{ color: '#3b5998' }}
+                                                href={
+                                                    'https://forms.gle/rZCRTuGxikR3uwr38'
+                                                }
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                {` Here `}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </Card>
                             {/* Facebook Internal Competition */}
                             <Card body className="card-body">
                                 <div className="container">

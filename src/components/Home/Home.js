@@ -74,10 +74,10 @@ class Home extends Component {
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
-                        month="Mar"
-                        date="5"
-                        event="Internal Competition"
-                        link="https://www.facebook.com/events/568104980579743/"
+                        month="Sep"
+                        date="12"
+                        event="ACM UCSD x UCI Competition"
+                        link="https://www.facebook.com/events/664339430844292/"
                     />
                 </Row>
             </Card>,
