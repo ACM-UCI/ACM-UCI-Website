@@ -187,7 +187,7 @@ class Events extends Component {
                                             xs="auto"
                                             className="text-right px-0 ml-auto">
                                             <Button
-                                                href="https://forms.gle/rZCRTuGxikR3uwr38"
+                                                href="https://www.hackerrank.com/uci-ucsd-quarantine-competition"
                                                 size="lg"
                                                 target="_blank"
                                                 rel="noopener noreferrer">
@@ -243,11 +243,21 @@ class Events extends Component {
                                             <a
                                                 style={{ color: '#3b5998' }}
                                                 href={
-                                                    'https://forms.gle/rZCRTuGxikR3uwr38'
+                                                    'https://www.hackerrank.com/uci-ucsd-quarantine-competition'
                                                 }
                                                 target="_blank"
                                                 rel="noopener noreferrer">
                                                 {` Here `}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            Be sure to join zoom by 10:30 at{' '}
+                                            <a
+                                                style={{ color: '#3b5998' }}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                href="https://ucsd.zoom.us/j/99419539223">
+                                                https://ucsd.zoom.us/j/99419539223
                                             </a>
                                         </li>
                                     </ul>

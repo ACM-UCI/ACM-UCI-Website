@@ -77,7 +77,7 @@ class Home extends Component {
                         month="Sep"
                         date="12"
                         event="ACM UCSD x UCI Competition"
-                        link="https://www.facebook.com/events/664339430844292/"
+                        link="https://www.hackerrank.com/uci-ucsd-quarantine-competition"
                     />
                 </Row>
             </Card>,
