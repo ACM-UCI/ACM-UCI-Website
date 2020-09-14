@@ -51,40 +51,40 @@ export default function EditorialMansion() {
                     {' '}
                     {/* This should be the link to download the solution file */}
                     <h2>Solution</h2>
-                    <Row>
-                        <a href="#" className="mx-1" download>
-                            <Button>
-                                <i data-feather="download" /> Python Solution
-                            </Button>
-                        </a>
-                        <a href="#" className="mx-1" download>
-                            <Button>
-                                <i data-feather="download" /> C++ Solution
-                            </Button>
-                        </a>
-                        <a href="#" className="mx-1" download>
-                            <Button>
-                                <i data-feather="download" /> Java Solution
-                            </Button>
-                        </a>
-                    </Row>
-                    <p>
-                        Duis sunt commodo id duis incididunt culpa quis. Do
-                        dolor dolore dolore consectetur dolore esse sit
-                        reprehenderit non nostrud. Fugiat ut velit adipisicing
-                        eiusmod nulla velit minim culpa. Mollit ipsum in
-                        adipisicing sit duis eiusmod consequat proident cillum
-                        id culpa amet pariatur reprehenderit.
-                    </p>
-                    <p>
-                        Ipsum commodo incididunt cupidatat nostrud ad sunt ut
-                        deserunt aute ipsum veniam in ex. Deserunt sit ea irure
-                        et. Velit nostrud mollit exercitation fugiat culpa sunt
-                        laboris esse. Incididunt laboris veniam laborum commodo
-                        aute. Veniam sunt deserunt ea veniam aliqua exercitation
-                        officia dolore reprehenderit est culpa.
-                    </p>
                 </a>
+                <Row>
+                    <a href="#" className="mx-1" download>
+                        <Button>
+                            <i data-feather="download" /> Python Solution
+                        </Button>
+                    </a>
+                    <a href="#" className="mx-1" download>
+                        <Button>
+                            <i data-feather="download" /> C++ Solution
+                        </Button>
+                    </a>
+                    <a href="#" className="mx-1" download>
+                        <Button>
+                            <i data-feather="download" /> Java Solution
+                        </Button>
+                    </a>
+                </Row>
+                <p>
+                    Duis sunt commodo id duis incididunt culpa quis. Do dolor
+                    dolore dolore consectetur dolore esse sit reprehenderit non
+                    nostrud. Fugiat ut velit adipisicing eiusmod nulla velit
+                    minim culpa. Mollit ipsum in adipisicing sit duis eiusmod
+                    consequat proident cillum id culpa amet pariatur
+                    reprehenderit.
+                </p>
+                <p>
+                    Ipsum commodo incididunt cupidatat nostrud ad sunt ut
+                    deserunt aute ipsum veniam in ex. Deserunt sit ea irure et.
+                    Velit nostrud mollit exercitation fugiat culpa sunt laboris
+                    esse. Incididunt laboris veniam laborum commodo aute. Veniam
+                    sunt deserunt ea veniam aliqua exercitation officia dolore
+                    reprehenderit est culpa.
+                </p>
             </Container>
 
             <Container className="text-left">
