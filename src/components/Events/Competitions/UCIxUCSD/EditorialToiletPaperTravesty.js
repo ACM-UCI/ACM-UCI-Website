@@ -6,6 +6,11 @@ import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import '../Editorial.css';
 
+// Import Solution files
+import pySol from '../../../../data/toilet_paper_travesty.py';
+import cppSol from '../../../../data/toilet_paper_travesty.cpp';
+import javaSol from '../../../../data/toilet_paper_travesty.java';
+
 export default function EditorialToiletPaperTravesty() {
     return (
         <Container className="mx-auto text-center">
@@ -51,23 +56,23 @@ export default function EditorialToiletPaperTravesty() {
             </Container>
 
             <Container className="text-left">
-                <a href="#" className="problem-link" download>
+                <a href={pySol} className="problem-link" download>
                     {' '}
                     {/* This should be the link to download the solution file */}
                     <h2>Solution</h2>
                 </a>
                 <Row>
-                    <a href="#" className="mx-1" download>
+                    <a href={pySol} className="mx-1" download>
                         <Button>
                             <i data-feather="download" /> Python Solution
                         </Button>
                     </a>
-                    <a href="#" className="mx-1" download>
+                    <a href={cppSol} className="mx-1" download>
                         <Button>
                             <i data-feather="download" /> C++ Solution
                         </Button>
                     </a>
-                    <a href="#" className="mx-1" download>
+                    <a href={javaSol} className="mx-1" download>
                         <Button>
                             <i data-feather="download" /> Java Solution
                         </Button>
