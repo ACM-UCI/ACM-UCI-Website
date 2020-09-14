@@ -1,0 +1,14 @@
+
+.problem-link {
+    /* <a /> tag */
+
+    color: #000;
+}
+
+.problem-link:hover, .body-link:hover {
+    color: #02284B;
+}
+
+.body-link {
+    color: #6DB6E2;
+}

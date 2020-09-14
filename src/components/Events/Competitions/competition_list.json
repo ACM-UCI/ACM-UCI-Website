@@ -1,0 +1,48 @@
+[
+    {
+        "name": "UCIxUCSD Quarantine Competition",
+        "date": "9/12/2020",
+        "editorials": [
+            {
+                "name": "I Caught the Bomber",
+                "difficulty": "easy",
+                "link": "/editorials/0"
+            },
+            {
+                "name": "Long Distance Social Distance I",
+                "difficulty": "easy",
+                "link": "/editorials/1"
+            },
+            {
+                "name": "Deadline Dash",
+                "difficulty": "medium",
+                "link": "/editorials/2"
+            },
+            {
+                "name": "Shopping 100% Speedrun",
+                "difficulty": "medium",
+                "link": "/editorials/3"
+            },
+            {
+                "name": "Toilet Paper Travesty",
+                "difficulty": "medium-hard",
+                "link": "/editorials/4"
+            },
+            {
+                "name": "Long Distance Social Distance II",
+                "difficulty": "hard",
+                "link": "/editorials/5"
+            },
+            {
+                "name": "Ayrco",
+                "difficulty": "hard",
+                "link": "/editorials/6"
+            },
+            {
+                "name": "Mansion",
+                "difficulty": "hard",
+                "link": "/editorials/7"
+            }
+        ]
+    }
+]

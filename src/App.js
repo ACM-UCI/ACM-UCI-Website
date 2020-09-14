@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './components/Home/Home';
 import About from './components/About/About';
 import Events from './components/Events/Events';
+import EditorialBrowse from './components/Events/Competitions/EditorialBrowse';
+import EditorialRoute from './components/Events/Competitions/EditorialRoute';
 import Blog from './components/Blog/Blog';
 import BlogPage from './components/Blog/BlogPage';
 import SubmitBlog from './components/Blog/SubmitBlog';
@@ -26,6 +28,12 @@ class App extends Component {
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/events" component={Events} />
+                <Route exact path="/editorials" component={EditorialBrowse} />
+                <Route
+                    exact
+                    path="/editorials/:id"
+                    component={EditorialRoute}
+                />
                 <Route exact path="/blog" component={Blog} />
                 <Route exact path="/blog/submit" component={SubmitBlog} />
                 <Route path="/blog/:title" component={BlogPage} />
