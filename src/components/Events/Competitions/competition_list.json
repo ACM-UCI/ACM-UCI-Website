@@ -6,42 +6,58 @@
             {
                 "name": "I Caught the Bomber",
                 "difficulty": "easy",
-                "link": "/editorials/0"
+                "link": "/editorials/0",
+                "points": 20,
+                "rate": 0.8202
             },
             {
                 "name": "Long Distance Social Distance I",
                 "difficulty": "easy",
-                "link": "/editorials/1"
+                "link": "/editorials/1",
+                "points": 20,
+                "rate": 0.8826
             },
             {
                 "name": "Deadline Dash",
-                "difficulty": "medium",
-                "link": "/editorials/2"
+                "difficulty": "med",
+                "link": "/editorials/2",
+                "points": 40,
+                "rate": 0.1429
             },
             {
                 "name": "Shopping 100% Speedrun",
-                "difficulty": "medium",
-                "link": "/editorials/3"
+                "difficulty": "med",
+                "link": "/editorials/3",
+                "points": 40,
+                "rate": 0.2867
             },
             {
                 "name": "Toilet Paper Travesty",
-                "difficulty": "medium-hard",
-                "link": "/editorials/4"
+                "difficulty": "med",
+                "link": "/editorials/4",
+                "points": 60,
+                "rate": 0.0159
             },
             {
                 "name": "Long Distance Social Distance II",
                 "difficulty": "hard",
-                "link": "/editorials/5"
+                "link": "/editorials/5",
+                "points": 80,
+                "rate": 0.0833
             },
             {
                 "name": "Ayrco",
                 "difficulty": "hard",
-                "link": "/editorials/6"
+                "link": "/editorials/6",
+                "points": 80,
+                "rate": 0.0
             },
             {
                 "name": "Mansion",
                 "difficulty": "hard",
-                "link": "/editorials/7"
+                "link": "/editorials/7",
+                "points": 100,
+                "rate": 0.0
             }
         ]
     }

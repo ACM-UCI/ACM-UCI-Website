@@ -1,0 +1,13 @@
+
+.editorial-link-card {
+    border-radius: 20px;
+    border-color: transparent;
+}
+
+.editorial-title, .editorial-text {
+    color: white;
+}
+
+.editorial-link-card:hover {
+    background-color: rgb(120,130,140);
+}
