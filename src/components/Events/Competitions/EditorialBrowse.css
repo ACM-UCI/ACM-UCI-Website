@@ -11,3 +11,12 @@
 .editorial-link-card:hover {
     background-color: rgb(120,130,140);
 }
+
+.disabled {
+    background-color: #666;
+}
+
+.disabled:hover {
+    background-color: #666;
+    cursor: not-allowed;
+}

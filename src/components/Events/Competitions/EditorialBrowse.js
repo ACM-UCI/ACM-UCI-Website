@@ -77,11 +77,14 @@ function CircularProgressWithLabel(props) {
 }
 
 function EditorialLink(props) {
-    const { name, link, difficulty, points, rate } = props;
+    const { name, link, difficulty, points, rate, finished } = props;
     return (
         <Col lg={4} md={4} sm={12} xs={12} className="my-1">
             <Link to={link}>
-                <Card className={`editorial-link-card ${difficulty} m`}>
+                <Card
+                    className={`editorial-link-card ${
+                        finished ? difficulty : 'disabled'
+                    } m`}>
                     <CardBody className="w-75 py-4">
                         <CardTitle className="text-center editorial-title">
                             {name}
@@ -131,6 +134,11 @@ function CompetitionComponent(props) {
 function DifficultyLegend(props) {
     return (
         <Row className="center">
+            <Alert
+                className="disabled m"
+                transition={{ in: true, timeout: 300 }}>
+                Not Available
+            </Alert>
             <Alert className="easy m" transition={{ in: true, timeout: 300 }}>
                 Easy
             </Alert>
