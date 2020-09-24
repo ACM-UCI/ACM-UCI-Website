@@ -6,31 +6,30 @@ import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import '../Editorial.css';
 
+import pySol from '../../../../data/i_caught_the_bomber.py';
+import cppSol from '../../../../data/i_caught_the_bomber.cpp';
+
 export default function EditorialICaughtTheBomber() {
     return (
         <Container className="mx-auto text-center">
-            <a href="#" className="problem-link">
+            <a
+                href="https://www.hackerrank.com/contests/uci-ucsd-quarantine-competition/challenges/i-caught-the-bomber"
+                className="problem-link">
                 {' '}
                 {/* This should be link to hackerrank problem */}
-                <h1 className="display-3">Name</h1>
+                <h1 className="display-3">I Caught the Bomber</h1>
             </a>
 
             <Container className="text-left">
                 <h2>Problem Description</h2>{' '}
                 {/* Rephrase the problem in simpler terms here */}
                 <p>
-                    Ut consectetur voluptate et duis ipsum excepteur cupidatat
-                    dolore commodo qui deserunt deserunt. Fugiat mollit id velit
-                    nisi laboris velit incididunt elit adipisicing qui magna
-                    nostrud. Aute nisi dolore proident aute dolor est ex. Sint
-                    sint ipsum officia eu ex officia labore minim aute elit
-                    magna aliquip.
+                    Given a list of emails and approved schools, print out the
+                    emails that do not end with edu or are not in the list of
+                    approved schools.
                 </p>
                 <p>
-                    Nulla velit sit sit nostrud non tempor amet adipisicing sunt
-                    deserunt. Sunt eiusmod aliqua occaecat nulla velit. Officia
-                    minim dolor veniam amet dolore velit Lorem eiusmod eiusmod
-                    ad.
+                    Every email will be in the format "username@school.domain".
                 </p>
             </Container>
 
@@ -47,43 +46,44 @@ export default function EditorialICaughtTheBomber() {
             </Container>
 
             <Container className="text-left">
-                <a href="#" className="problem-link" download>
+                <a href={pySol} className="problem-link" download>
                     {' '}
                     {/* This should be the link to download the solution file */}
                     <h2>Solution</h2>
                 </a>
                 <Row>
-                    <a href="#" className="mx-1" download>
+                    <a href={pySol} className="mx-1" download>
                         <Button>
                             <i data-feather="download" /> Python Solution
                         </Button>
                     </a>
-                    <a href="#" className="mx-1" download>
+                    <a href={cppSol} className="mx-1" download>
                         <Button>
                             <i data-feather="download" /> C++ Solution
                         </Button>
                     </a>
-                    <a href="#" className="mx-1" download>
-                        <Button>
-                            <i data-feather="download" /> Java Solution
-                        </Button>
-                    </a>
                 </Row>
                 <p>
-                    Duis sunt commodo id duis incididunt culpa quis. Do dolor
-                    dolore dolore consectetur dolore esse sit reprehenderit non
-                    nostrud. Fugiat ut velit adipisicing eiusmod nulla velit
-                    minim culpa. Mollit ipsum in adipisicing sit duis eiusmod
-                    consequat proident cillum id culpa amet pariatur
-                    reprehenderit.
+                    All emails are already valid email addresses, so we don't
+                    have to do any checking of that. Because we only care about
+                    the school and the top-level domain, we simply just have to
+                    look at the string following the @ sign.
                 </p>
                 <p>
-                    Ipsum commodo incididunt cupidatat nostrud ad sunt ut
-                    deserunt aute ipsum veniam in ex. Deserunt sit ea irure et.
-                    Velit nostrud mollit exercitation fugiat culpa sunt laboris
-                    esse. Incididunt laboris veniam laborum commodo aute. Veniam
-                    sunt deserunt ea veniam aliqua exercitation officia dolore
-                    reprehenderit est culpa.
+                    This means we just have to check if ending string is a
+                    concatenation of an approved school and ".edu"
+                </p>
+                <p>
+                    Since the worst test case can have up to{' '}
+                    <InlineMath> 10^5</InlineMath> different schools, we should
+                    store all the possible valid endings in a hash set so we can
+                    look up if an ending is valid in{' '}
+                    <InlineMath>O(1)</InlineMath>.
+                </p>
+                <p>
+                    Now, all we have to do is go through the list of email
+                    addresses and check if its ending is in our table, and if it
+                    isn't, we print it out.
                 </p>
             </Container>
 
@@ -91,18 +91,20 @@ export default function EditorialICaughtTheBomber() {
                 <h2>Analysis</h2>{' '}
                 {/* Provide complexity analysis and other problem observations here*/}
                 <p>
-                    Pariatur incididunt reprehenderit tempor sit minim. Tempor
-                    laborum voluptate labore non est voluptate veniam ex. Lorem
-                    exercitation voluptate eiusmod velit anim in ut nulla ea
-                    exercitation laboris.
+                    The time to go through each school is
+                    <InlineMath>O(M)</InlineMath>. The time it takes to go
+                    through each email is <InlineMath>O(N)</InlineMath>.
                 </p>
                 <p>
-                    Elit tempor ipsum in tempor. Dolor dolor Lorem velit mollit
-                    eiusmod tempor. Est consectetur ad consequat voluptate magna
-                    tempor. Elit ullamco eiusmod ad adipisicing aliqua cupidatat
-                    esse velit magna voluptate nisi. Qui aliqua deserunt eu do.
-                    Ex do tempor sint enim non. Aliquip elit velit fugiat culpa
-                    est dolore quis eiusmod excepteur magna et.
+                    The time it takes to validate an email address is
+                    <InlineMath>O(M)</InlineMath> if we iterate through each
+                    school to find a match, but it is{' '}
+                    <InlineMath>O(1)</InlineMath> if we look it up with a hash
+                    table.
+                </p>
+                <p>
+                    So the total time complexity is{' '}
+                    <InlineMath>O(M) + O(N) \cdot O(1) = O(M + N)</InlineMath>
                 </p>
             </Container>
 
