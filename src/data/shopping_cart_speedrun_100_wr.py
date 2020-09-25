@@ -1,9 +1,8 @@
-from collections import defaultdict
 N, M = map(int, input().split())
 pods = list(map(int, input().split()))
 
 ans, count = 10**9, 0
-cart = defaultdict(int)
+cart = [0] * N
 
 l = 0
 for r in range(M):
