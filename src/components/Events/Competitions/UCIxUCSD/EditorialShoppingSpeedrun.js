@@ -6,31 +6,28 @@ import { InlineMath, BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
 import '../Editorial.css';
 
+import pySol from '../../../../data/shopping_cart_speedrun_100_wr.py';
+import cppSol from '../../../../data/shopping_cart_speedrun_100_wr.cpp';
+
 export default function EditorialShoppingSpeedrun() {
     return (
         <Container className="mx-auto text-center">
-            <a href="#" className="problem-link">
+            <a
+                href="https://www.hackerrank.com/contests/uci-ucsd-quarantine-competition/challenges/shopping-100-speedrun-wr"
+                className="problem-link">
                 {' '}
                 {/* This should be link to hackerrank problem */}
-                <h1 className="display-3">Name</h1>
+                <h1 className="display-4">Shopping Cart Speedrun 100% WR</h1>
             </a>
 
             <Container className="text-left">
                 <h2>Problem Description</h2>{' '}
                 {/* Rephrase the problem in simpler terms here */}
                 <p>
-                    Ut consectetur voluptate et duis ipsum excepteur cupidatat
-                    dolore commodo qui deserunt deserunt. Fugiat mollit id velit
-                    nisi laboris velit incididunt elit adipisicing qui magna
-                    nostrud. Aute nisi dolore proident aute dolor est ex. Sint
-                    sint ipsum officia eu ex officia labore minim aute elit
-                    magna aliquip.
-                </p>
-                <p>
-                    Nulla velit sit sit nostrud non tempor amet adipisicing sunt
-                    deserunt. Sunt eiusmod aliqua occaecat nulla velit. Officia
-                    minim dolor veniam amet dolore velit Lorem eiusmod eiusmod
-                    ad.
+                    Given a list of <InlineMath math="M" /> pods containing
+                    exactly 1 item, figure out the minimum amount of adjacent
+                    pods you would have to walk through to collect all items of
+                    ids 0 through <InlineMath math="N-1" />.
                 </p>
             </Container>
 
@@ -38,11 +35,9 @@ export default function EditorialShoppingSpeedrun() {
                 <h2>Constraints</h2>
                 <Container className="mx-0 w-25">
                     <BlockMath className="text-left">
-                        0 \le N \le 10^6
+                        1 \le N \le M \le 10^5
                     </BlockMath>
-                    <BlockMath className="text-left">
-                        0 \le M \le 10^5
-                    </BlockMath>
+                    <BlockMath className="text-left">0 \le X \le N-1</BlockMath>
                 </Container>
             </Container>
 
@@ -53,37 +48,44 @@ export default function EditorialShoppingSpeedrun() {
                     <h2>Solution</h2>
                 </a>
                 <Row>
-                    <a href="#" className="mx-1" download>
+                    <a href={pySol} className="mx-1" download>
                         <Button>
                             <i data-feather="download" /> Python Solution
                         </Button>
                     </a>
-                    <a href="#" className="mx-1" download>
+                    <a href={cppSol} className="mx-1" download>
                         <Button>
                             <i data-feather="download" /> C++ Solution
                         </Button>
                     </a>
-                    <a href="#" className="mx-1" download>
-                        <Button>
-                            <i data-feather="download" /> Java Solution
-                        </Button>
-                    </a>
                 </Row>
                 <p>
-                    Duis sunt commodo id duis incididunt culpa quis. Do dolor
-                    dolore dolore consectetur dolore esse sit reprehenderit non
-                    nostrud. Fugiat ut velit adipisicing eiusmod nulla velit
-                    minim culpa. Mollit ipsum in adipisicing sit duis eiusmod
-                    consequat proident cillum id culpa amet pariatur
-                    reprehenderit.
+                    The first step to solving this problem is understanding what
+                    it's asking in the most simple terms possible: find the
+                    smallest subarray (group of adjacent elements)with every
+                    number from 0 through N-1. If you are familiar with the
+                    sliding window algorithm, it should be apparent that this
+                    problem is a variant of it.
                 </p>
                 <p>
-                    Ipsum commodo incididunt cupidatat nostrud ad sunt ut
-                    deserunt aute ipsum veniam in ex. Deserunt sit ea irure et.
-                    Velit nostrud mollit exercitation fugiat culpa sunt laboris
-                    esse. Incididunt laboris veniam laborum commodo aute. Veniam
-                    sunt deserunt ea veniam aliqua exercitation officia dolore
-                    reprehenderit est culpa.
+                    A quick overview of the sliding window algorithm: maintain
+                    two pointers that represent the bounds of a window and
+                    within the window keep track of some value. In this case,
+                    the value we want to track is the number of unique ids we
+                    have within our window. We can do this by using a array to
+                    keep track of the counts of each id within the window. When
+                    the count of an id increases from 0 to 1, we increment the
+                    number of unique items. Likewise, when the count of an id
+                    decreases from 1 to 0, we decrement the number of unique
+                    items. When the number of unique items is less than{' '}
+                    <InlineMath math="N" />, we expand our window right until
+                    that condition is met. When the number of unique items
+                    equals
+                    <InlineMath math="N" />, we can shrink our window from the
+                    left until the number of unique items is less than it.
+                    During the shrinking phase, our window will have all ids so
+                    it is a valid answer and we just have to take the window
+                    minimum of the minimum length.
                 </p>
             </Container>
 
@@ -91,18 +93,10 @@ export default function EditorialShoppingSpeedrun() {
                 <h2>Analysis</h2>{' '}
                 {/* Provide complexity analysis and other problem observations here*/}
                 <p>
-                    Pariatur incididunt reprehenderit tempor sit minim. Tempor
-                    laborum voluptate labore non est voluptate veniam ex. Lorem
-                    exercitation voluptate eiusmod velit anim in ut nulla ea
-                    exercitation laboris.
-                </p>
-                <p>
-                    Elit tempor ipsum in tempor. Dolor dolor Lorem velit mollit
-                    eiusmod tempor. Est consectetur ad consequat voluptate magna
-                    tempor. Elit ullamco eiusmod ad adipisicing aliqua cupidatat
-                    esse velit magna voluptate nisi. Qui aliqua deserunt eu do.
-                    Ex do tempor sint enim non. Aliquip elit velit fugiat culpa
-                    est dolore quis eiusmod excepteur magna et.
+                    Our pointers never go backward and through each iteration it
+                    is guaranteed that the right pointer will move to the right.
+                    Therefore, the overall time complexity is{' '}
+                    <InlineMath math="O(N)" />.
                 </p>
             </Container>
 
