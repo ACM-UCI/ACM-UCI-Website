@@ -33,7 +33,7 @@
                 "link": "/editorials/3",
                 "points": 40,
                 "rate": 0.2867,
-                "finished": false
+                "finished": true
             },
             {
                 "name": "Toilet Paper Travesty",
@@ -57,7 +57,7 @@
                 "link": "/editorials/6",
                 "points": 80,
                 "rate": 0.0,
-                "finished": false
+                "finished": true
             },
             {
                 "name": "Mansion",
@@ -65,7 +65,7 @@
                 "link": "/editorials/7",
                 "points": 100,
                 "rate": 0.0,
-                "finished": false
+                "finished": true
             }
         ]
     }

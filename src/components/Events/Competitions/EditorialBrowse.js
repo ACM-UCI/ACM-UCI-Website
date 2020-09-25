@@ -137,7 +137,7 @@ function DifficultyLegend(props) {
             <Alert
                 className="disabled m"
                 transition={{ in: true, timeout: 300 }}>
-                Not Available
+                Not Available Yet
             </Alert>
             <Alert className="easy m" transition={{ in: true, timeout: 300 }}>
                 Easy
