@@ -4,7 +4,6 @@ import { useParams, Redirect } from 'react-router-dom';
 import Navigation from '../../Navbar/Navbar';
 import Banner from '../../Banner/Banner';
 
-import EditorialTemplate from './UCIxUCSD/EditorialTemplate';
 import EditorialICaughtTheBomber from './UCIxUCSD/EditorialICaughtTheBomber';
 import EditorialLongDistanceSocialDistanceI from './UCIxUCSD/EditorialLongDistanceSocialDistanceI';
 import EditorialDeadlineDash from './UCIxUCSD/EditorialDeadlineDash';
