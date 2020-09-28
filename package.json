@@ -17,7 +17,7 @@
         "classnames": "^2.2.6",
         "code": "^5.2.4",
         "feather-icons": "^4.28.0",
-        "firebase": "^5.11.1",
+        "firebase": "^7.21.0",
         "gh-pages": "^2.2.0",
         "googleapis": "^47.0.0",
         "hoek": "^4.2.1",
