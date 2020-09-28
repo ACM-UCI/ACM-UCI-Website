@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react';
 import { Row, Button, Container } from 'reactstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 
@@ -42,7 +41,7 @@ export default function EditorialShoppingSpeedrun() {
             </Container>
 
             <Container className="text-left">
-                <a href="#" className="problem-link" download>
+                <a href={pySol} className="problem-link" download>
                     {' '}
                     {/* This should be the link to download the solution file */}
                     <h2>Solution</h2>

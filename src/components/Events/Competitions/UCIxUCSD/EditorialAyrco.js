@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react';
 import { Row, Button, Container } from 'reactstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 

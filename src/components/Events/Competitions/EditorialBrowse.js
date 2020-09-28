@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 // Material UI
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
         position: 'relative'
     },
     bottom: {
-        color: theme.palette.grey[theme.palette.type == 'light' ? 200 : 700]
+        color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]
     },
     top: {
         color: '#1a90ff',
@@ -134,11 +134,6 @@ function CompetitionComponent(props) {
 function DifficultyLegend(props) {
     return (
         <Row className="center">
-            <Alert
-                className="disabled m"
-                transition={{ in: true, timeout: 300 }}>
-                Not Available Yet
-            </Alert>
             <Alert className="easy m" transition={{ in: true, timeout: 300 }}>
                 Easy
             </Alert>
