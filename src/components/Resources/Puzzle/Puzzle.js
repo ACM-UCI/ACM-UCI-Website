@@ -98,7 +98,7 @@ export default class Puzzle extends Component {
                     <Navigation />
                     <Banner
                         lead="Weekly Problems and Solutions"
-                        leadSub="Due to current circumstances all meetings will be held on Discord Tu 6-8pm and Th 6-8pm"
+                        leadSub="Due to current circumstances all meetings will be held online. Times are TBD"
                     />
                     {this.error}
                     <div className="center">
@@ -152,10 +152,7 @@ export default class Puzzle extends Component {
                             </h1>
                         </Row>
                         <Row className="center">
-                            <span>
-                                Meetings <strong>Tuesday</strong> 6-8pm and{' '}
-                                <strong>Thursday</strong> 6-8pm
-                            </span>
+                            <span>Meetings TBD</span>
                         </Row>
                     </div>
 

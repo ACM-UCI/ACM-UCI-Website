@@ -88,26 +88,26 @@ class Home extends Component {
                 style={{ width: w }}>
                 <CardTitle style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: 29 }}>Meeting Times</p>
-                    <i>Spring 2020</i>
+                    <i>Fall 2020</i>
                     <br></br>
                     <strong>
-                        Due to current circumstances, all meetings will be
-                        conducted on Discord this quarter
+                        All meetings this quarter will be conducted online. To
+                        keep up to date follow our{' '}
+                        <a href="https://www.facebook.com/groups/228954137162541/">
+                            Facebook
+                        </a>{' '}
+                        and join our{' '}
+                        <a href="https://discord.gg/MCtKPxC">Discord</a>.
                     </strong>
                     <br></br>
-                    <a
-                        href="https://discord.gg/MCtKPxC"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        Join Our Discord
-                    </a>
                 </CardTitle>
                 <hr className="home-line" />
                 <CardText claassname="card-text-home">
-                    <strong>Tuesday: </strong>
+                    <strong>Meeting Times are TBD</strong>
+                    {/* <strong>Tuesday: </strong>
                     Discord, 6:00 - 8:00 pm <br />
                     <strong>Thursday: </strong>
-                    Discord, 6:00 - 8:00 pm
+                    Discord, 6:00 - 8:00 pm */}
                 </CardText>
             </Card>,
             <Card
