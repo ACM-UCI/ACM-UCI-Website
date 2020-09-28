@@ -169,12 +169,20 @@ class Home extends Component {
                             speakers. <br />
                             We love coffee and pizza.
                         </p>
-                        <Button color="secondary mx-auto button">
+                        <Button color="secondary ml-auto button mr-2">
                             <a
                                 href="https://www.facebook.com/groups/228954137162541/"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                 JOIN US ON FACEBOOK
+                            </a>
+                        </Button>
+                        <Button color="secondary mr-auto button">
+                            <a
+                                href="https://discord.gg/MCtKPxC"
+                                target="_blank"
+                                rel="noopener noreferrer">
+                                JOIN US ON DISCORD
                             </a>
                         </Button>
                         <div style={{ width: '100%' }}>
