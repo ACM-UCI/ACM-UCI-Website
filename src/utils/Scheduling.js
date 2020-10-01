@@ -96,7 +96,6 @@ async function computeSchedule(data) {
     }
 
     state.initialized = true;
-    console.log(state);
     return state;
 }
 
