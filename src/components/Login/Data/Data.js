@@ -116,6 +116,8 @@ export default class Data extends Component {
                         wk={this.props.week}
                         qrt={this.props.quarter}
                         qrtIndex={this.props.quarterIndex}
+                        boardQuarter={this.props.boardQuarter}
+                        boardQuarterInd={this.props.boardQuarterInd}
                         session={this.props.session}
                         // data
                         data={submissions[key]}

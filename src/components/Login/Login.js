@@ -50,6 +50,8 @@ export default class Login extends Component {
             .then(state => {
                 this.quarter = state.quarter;
                 this.quarterIndex = state.quarterIndex;
+                this.boardQuarter = state.boardQuarter;
+                this.boardQuarterInd = state.boardQuarterInd;
                 this.week = state.week;
                 this.session = state.session;
                 this.setState({ can_display_data: true });
@@ -198,12 +200,16 @@ export default class Login extends Component {
             <Submit
                 week={this.week}
                 quarter={this.quarter}
+                boardQuarter={this.boardQuarter}
+                boardQuarterInd={this.boardQuarterInd}
                 owner={this.owner.email.split('@')[0]}
                 session={this.session}
                 data={this.default}
             />,
             <Log
                 week={this.week}
+                boardQuarter={this.boardQuarter}
+                boardQuarterInd={this.boardQuarterInd}
                 quarter={this.quarter}
                 year={getConfiguredYear()}
                 owner={this.owner.email.split('@')[0]}
@@ -211,6 +217,8 @@ export default class Login extends Component {
             <Data
                 week={this.week}
                 quarter={this.quarter}
+                boardQuarter={this.boardQuarter}
+                boardQuarterInd={this.boardQuarterInd}
                 quarterIndex={this.quarterIndex}
                 session={this.session}
                 owner={this.owner.email.split('@')[0]}

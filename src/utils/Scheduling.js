@@ -2,6 +2,7 @@ import config, { Meeting } from '../components/config.js';
 
 const START_TIMES = config.dates;
 const QUARTERS = config.quarters;
+const BOARD_QUARTERS = config.boardAccess;
 const ALL_MEETINGS = config.meetings;
 const MEETINGS = ALL_MEETINGS[ALL_MEETINGS.length - 1];
 
@@ -30,7 +31,7 @@ export async function initializeSchedule() {
 async function computeSchedule(data) {
     state.datetime = new Date(data.datetime);
 
-    // state.datetime = new Date('October 9, 2020 21:00:00'); // Use for testing
+    // state.datetime = new Date('October 7, 2020 21:00:01'); // Use for testing
     // Verify time is valid ------------------------------------------------------------------
     if (!(state.datetime instanceof Date) || isNaN(state.datetime.getTime())) {
         return Promise.reject(
@@ -61,6 +62,20 @@ async function computeSchedule(data) {
             )
         );
     }
+
+    // Determine Board Quarter --------------------------------------------------------------
+    //  This is the the quarter which board memebers can set problems for
+    q = 0;
+    while (
+        q < QUARTERS.length &&
+        q < BOARD_QUARTERS.length &&
+        BOARD_QUARTERS[q] < currTimeMilli
+    )
+        ++q;
+
+    --q;
+    state.boardQuarterInd = q;
+    state.boardQuarter = QUARTERS[q];
 
     // Determine Week of the Quarter ---------------------------------------------------------
     state.week = (

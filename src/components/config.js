@@ -83,6 +83,16 @@ const config = {
         new Date('March 31, 2020 08:00:00').getTime(), // Tu 8am - Th 8am & Th
         new Date('October 7, 2020 18:00:00').getTime()
     ],
+    boardAccess: [
+        // The date when the board is able to set problems for a specific quarter
+        new Date('October 2, 2018 18:00:00').getTime(),
+        new Date('January 8, 2019 17:00:00').getTime(),
+        new Date('April 2, 2019 18:00:00').getTime(),
+        new Date('October 1, 2019 17:00:00').getTime(),
+        new Date('January 7, 2020 17:00:00').getTime(),
+        new Date('March 31, 2020 08:00:00').getTime(), // Tu 8am - Th 8am & Th
+        new Date('October 1, 2020 00:00:00').getTime()
+    ],
     defaultData: {
         Category: '',
         Name: '',

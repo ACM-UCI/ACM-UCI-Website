@@ -58,7 +58,8 @@ export default class Entry extends Component {
             this.allweeks.push(<option key={'w' + w.toString()}>{w}</option>);
         }
 
-        const quarterMeetingSchedule = config.meetings[this.props.qrtIndex];
+        const quarterMeetingSchedule =
+            config.meetings[this.props.boardQuarterInd];
         this.allsessions = [];
         for (let i = 0; i < quarterMeetingSchedule.length; ++i) {
             this.allsessions.push(<option key={`s${i}`}>{i + 1}</option>);
@@ -73,6 +74,11 @@ export default class Entry extends Component {
         }
 
         this.week = props.wk;
+
+        if (props.boardQuarterInd !== props.qrtInd) {
+            this.week = 1;
+            this.session = 1;
+        }
         this.state = {
             // see solution, see note, set problem, edit, remove session
             modal: [false, false, false, false, false]
@@ -98,7 +104,7 @@ export default class Entry extends Component {
         // change this to position !!!!!
         if (board[config.current].hasOwnProperty(this.props.owner)) {
             // if removing from this quarter
-            if (this.selectedSess.startsWith(this.props.qrt)) {
+            if (this.selectedSess.startsWith(this.props.boardQuarter)) {
                 var sess_names = this.data.Session.map(v => v.Name);
                 var sessionIndex = sess_names.indexOf(this.selectedSess);
                 this.data.Session.splice(sessionIndex, 1);
@@ -148,7 +154,7 @@ export default class Entry extends Component {
             }
 
             var sess =
-                this.props.qrt +
+                this.props.boardQuarter +
                 '/' +
                 this.week +
                 '/' +
@@ -159,7 +165,7 @@ export default class Entry extends Component {
             if (sess_names.indexOf(sess) === -1) {
                 this.data.Session.push({
                     Name:
-                        this.props.qrt +
+                        this.props.boardQuarter +
                         '/' +
                         this.week +
                         '/' +
@@ -175,7 +181,7 @@ export default class Entry extends Component {
                 var updates = {};
                 updates[
                     '/' +
-                        this.props.qrt +
+                        this.props.boardQuarter +
                         '/' +
                         this.week +
                         '/' +
@@ -225,6 +231,7 @@ export default class Entry extends Component {
         } else if (evt.target.id === 'Week') {
             this.week = evt.target.value;
         }
+        this.forceUpdate();
     }
 
     toggle(i) {
@@ -443,14 +450,14 @@ export default class Entry extends Component {
                                 </tr>
                                 <tr>
                                     <th>Quarter</th>
-                                    <td>: {this.props.qrt}</td>
+                                    <td>: {this.props.boardQuarter}</td>
                                 </tr>
                                 <tr>
                                     <th>Week</th>
                                     <td>
                                         <Input
                                             type="select"
-                                            value={this.props.wk}
+                                            value={this.week}
                                             onChange={evt =>
                                                 this.updateInputValue(evt)
                                             }
@@ -465,6 +472,7 @@ export default class Entry extends Component {
                                     <td>
                                         <Input
                                             type="select"
+                                            value={this.session}
                                             onChange={evt =>
                                                 this.updateInputValue(evt)
                                             }
