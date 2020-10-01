@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     Container,
     Row,
+    Col,
     Button,
     Modal,
     Card,
@@ -74,10 +75,10 @@ class Home extends Component {
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
-                        month="Sep"
-                        date="12"
-                        event="ACM UCSD x UCI Competition"
-                        link="https://www.hackerrank.com/uci-ucsd-quarantine-competition"
+                        month="Oct"
+                        date="7"
+                        event="First Meeting of Quarter"
+                        link="https://discord.gg/MCtKPxC"
                     />
                 </Row>
             </Card>,
@@ -91,8 +92,8 @@ class Home extends Component {
                     <i>Fall 2020</i>
                     <br></br>
                     <strong>
-                        All meetings this quarter will be conducted online. To
-                        keep up to date follow our{' '}
+                        All meetings this quarter will be conducted on Discord.
+                        To keep up to date follow our{' '}
                         <a href="https://www.facebook.com/groups/228954137162541/">
                             Facebook
                         </a>{' '}
@@ -103,11 +104,10 @@ class Home extends Component {
                 </CardTitle>
                 <hr className="home-line" />
                 <CardText claassname="card-text-home">
-                    <strong>Meeting Times are TBD</strong>
-                    {/* <strong>Tuesday: </strong>
-                    Discord, 6:00 - 8:00 pm <br />
-                    <strong>Thursday: </strong>
-                    Discord, 6:00 - 8:00 pm */}
+                    <strong>Wednesday: </strong>
+                    Discord, 7:00 - 9:00 pm <br />
+                    <strong>Friday: </strong>
+                    Discord, 7:00 - 9:00 pm
                 </CardText>
             </Card>,
             <Card
@@ -160,31 +160,39 @@ class Home extends Component {
                 />
                 <Container className="home-body" fluid>
                     <Row>
-                        <p className="text-center m-5 home-body-text">
-                            There are no requirements to join us. In fact, we
-                            encourage you to do so even if you have no
-                            experience. Consider attending one of our meetings,
-                            which we hold twice a week. We also host workshops
-                            by UCI students and presentations from distinguished
-                            speakers. <br />
-                            We love coffee and pizza.
-                        </p>
-                        <Button color="secondary ml-auto button mr-2">
-                            <a
-                                href="https://www.facebook.com/groups/228954137162541/"
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                JOIN US ON FACEBOOK
-                            </a>
-                        </Button>
-                        <Button color="secondary mr-auto button">
-                            <a
-                                href="https://discord.gg/MCtKPxC"
-                                target="_blank"
-                                rel="noopener noreferrer">
-                                JOIN US ON DISCORD
-                            </a>
-                        </Button>
+                        <Col className="col-12">
+                            <p className="text-center m-5 home-body-text">
+                                There are no requirements to join us. In fact,
+                                we encourage you to do so even if you have no
+                                experience. Consider attending one of our
+                                meetings, which we hold twice a week. We also
+                                host workshops by UCI students and presentations
+                                from distinguished speakers. <br />
+                                We love coffee and pizza.
+                            </p>
+                        </Col>
+                        <Col>
+                            <Row className="justify-content-center">
+                                <Col className="text-center">
+                                    <Button color="secondary ml-auto button mr-2">
+                                        <a
+                                            href="https://www.facebook.com/groups/228954137162541/"
+                                            target="_blank"
+                                            rel="noopener noreferrer">
+                                            JOIN US ON FACEBOOK
+                                        </a>
+                                    </Button>
+                                    <Button color="secondary mr-auto button">
+                                        <a
+                                            href="https://discord.gg/MCtKPxC"
+                                            target="_blank"
+                                            rel="noopener noreferrer">
+                                            JOIN US ON DISCORD
+                                        </a>
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </Col>
                         <div style={{ width: '100%' }}>
                             <br />
                             {this.cardrow}

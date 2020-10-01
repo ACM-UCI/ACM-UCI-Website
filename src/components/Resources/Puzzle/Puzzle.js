@@ -19,7 +19,6 @@ export default class Puzzle extends Component {
 
         this.state = { collapse: false };
 
-        this.quarter = 'Spring 2020';
         this.week = 1;
         this.session = 1;
         this.end = false;
@@ -152,7 +151,7 @@ export default class Puzzle extends Component {
                             </h1>
                         </Row>
                         <Row className="center">
-                            <span>Meetings TBD</span>
+                            <span>Wednesdays and Fridays 7-9 pm</span>
                         </Row>
                     </div>
 

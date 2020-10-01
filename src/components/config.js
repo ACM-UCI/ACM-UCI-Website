@@ -44,8 +44,15 @@ export class Meeting {
 
 // TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
 const config = {
-    yearList: ['2015-2016', '2016-2017', '2017-2018', '2018-2019', '2019-2020'],
-    current: '2019-2020', // This must be of form 'prevyear-nextyear'
+    yearList: [
+        '2015-2016',
+        '2016-2017',
+        '2017-2018',
+        '2018-2019',
+        '2019-2020',
+        '2020-2021'
+    ],
+    current: '2020-2021', // This must be of form 'prevyear-nextyear'
     // Arranges weekly meeting schedule corresponding to quarter
     meetings: [
         [new Meeting(0, 180), new Meeting(172800000, 180)],
@@ -55,7 +62,8 @@ const config = {
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [
             new Meeting(0, 10080) // Tuesday - 2 Days
-        ]
+        ],
+        [new Meeting(0, 180), new Meeting(172800000, 180)]
     ],
     quarters: [
         'Fall 2018',
@@ -63,7 +71,8 @@ const config = {
         'Spring 2019',
         'Fall 2019',
         'Winter 2020',
-        'Spring 2020'
+        'Spring 2020',
+        'Fall 2020'
     ],
     dates: [
         new Date('October 2, 2018 18:00:00').getTime(),
@@ -71,7 +80,8 @@ const config = {
         new Date('April 2, 2019 18:00:00').getTime(),
         new Date('October 1, 2019 17:00:00').getTime(),
         new Date('January 7, 2020 17:00:00').getTime(),
-        new Date('March 31, 2020 08:00:00').getTime() // Tu 8am - Th 8am & Th
+        new Date('March 31, 2020 08:00:00').getTime(), // Tu 8am - Th 8am & Th
+        new Date('October 7, 2020 18:00:00').getTime()
     ],
     defaultData: {
         Category: '',

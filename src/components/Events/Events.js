@@ -43,57 +43,28 @@ class Events extends Component {
 
                 <h3 className="mt-3">Weekly Schedule</h3>
                 <Card body className="card-body">
-                    <div>ACM Practice - Winter 2020</div>
+                    <div>ACM Practice - Fall 2020</div>
                     <div>
-                        <strong>Tuesday: </strong>
-                        DBH 4011, 6:00 - 8:00 pm <br />
-                        <strong>Thursday: </strong>
-                        DBH 4011, 6:00 - 8:00 pm
+                        <strong>Wednesday: </strong>
+                        Discord, 7:00 - 9:00 pm <br />
+                        <strong>Friday: </strong>
+                        Discord, 7:00 - 9:00 pm
                     </div>
                 </Card>
                 <hr className="event-line" />
-                {/* <Card body className="card-body">
-                    <div>Quick Info</div>
-                    <div>
-                        <ul>
-                            <li>
-                                <Link
-                                    style={{ color: '#32587B' }}
-                                    to="/events#FacebookTechTalk">
-                                    Facebook Tech Talk
-                                </Link>
-                                <br />
-                                {'Oct 25, TBA @ DBH 6011'}
-                            </li>
-                        </ul>
-                    </div>
-                </Card> */}
-                {/* <h3 className="mt-3">Quick links</h3> */}
                 <Card body className="card-body">
                     <div>Quick Links</div>
                     <div>
-                        {/* <Link
+                        <Link
                             style={{ color: '#32587B' }}
                             to="/events#upcoming-events">
                             Upcoming Events
                         </Link>{' '}
-                        <br /> */}
+                        <br />
                         <Link
                             style={{ color: '#32587B' }}
                             to="/events#2019-fall-events">
-                            Fall 2019
-                        </Link>{' '}
-                        <br />
-                        <Link
-                            style={{ color: '#32587B' }}
-                            to="/events#2019-spring-events">
-                            Spring 2019
-                        </Link>{' '}
-                        <br />
-                        <Link
-                            style={{ color: '#32587B' }}
-                            to="/events#2019-winter-events">
-                            Winter 2019
+                            2019-2020
                         </Link>{' '}
                         <br />
                         <Link style={{ color: '#32587B' }} to="/blog">
@@ -169,6 +140,63 @@ class Events extends Component {
                             }}>
                             <h2 id="upcoming-events" className="mt-3">
                                 Upcoming Events
+                            </h2>
+                            {/* First Meeting 2020 */}
+                            <Card body className="card-body">
+                                <div className="container">
+                                    <Row>
+                                        <Col
+                                            xs="auto"
+                                            className="text-left px-0">
+                                            <h3>
+                                                1st Meeting: The Pizza is
+                                                Virtual
+                                            </h3>
+                                        </Col>
+                                        <Col xs="auto"></Col>
+                                    </Row>
+                                    <Row>
+                                        <i>
+                                            Wednesday, October 7th, Online
+                                            (Discord) 7 - 9 pm
+                                        </i>
+                                    </Row>
+                                </div>
+                                <div>
+                                    <hr className="event-line" />
+                                    <img
+                                        style={{ width: '100%' }}
+                                        src={acm_meeting}
+                                        alt=""
+                                    />
+                                    <hr className="event-line" />
+                                    Join us for our first meeting on{' '}
+                                    <a
+                                        style={{ color: '#32587B' }}
+                                        href="https://discord.gg/MCtKPxC"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                        Discord
+                                    </a>
+                                    . Learn about ACM@UCI. Meet the board. Meet
+                                    some friends. Become the{' '}
+                                    <a
+                                        style={{ color: '#32587B' }}
+                                        href="https://codeforces.com/profile/tourist"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                        tourist
+                                    </a>
+                                    .
+                                    <br />
+                                    <i>
+                                        P.S. Corona-Chan says no pizza... but
+                                        you can still pretend
+                                    </i>
+                                </div>
+                            </Card>
+                            <h2 id="summer-2020-events" className="mt-3">
+                                Summer 2020 Events
                             </h2>
                             {/* UCIxUCSD Collab Competition */}
                             <Card body className="card-body">
@@ -263,6 +291,9 @@ class Events extends Component {
                                     </ul>
                                 </div>
                             </Card>
+                            <h2 id="2019-fall-events" className="mt-3">
+                                Winter 2019 Events
+                            </h2>
                             {/* Facebook Internal Competition */}
                             <Card body className="card-body">
                                 <div className="container">

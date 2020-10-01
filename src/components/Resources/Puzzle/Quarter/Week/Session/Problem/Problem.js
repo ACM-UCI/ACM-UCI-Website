@@ -285,7 +285,9 @@ export default class Problem extends Component {
                 var index = p.map(v => v.Name).indexOf(sess_name);
 
                 if (index !== -1) {
-                    p[index][value + 'Views'] += 1;
+                    p[index][
+                        (value === 'Help' ? 'Hint' : value) + 'Views'
+                    ] += 1;
                 }
 
                 return p;
