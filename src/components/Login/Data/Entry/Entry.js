@@ -85,8 +85,9 @@ export default class Entry extends Component {
         };
 
         if (
-            this.data.Contributor !== undefined &&
-            this.data.Contributor.indexOf(this.props.owner) !== -1
+            (this.data.Contributor !== undefined &&
+                this.data.Contributor.indexOf(this.props.owner) !== -1) ||
+            board[config.current].hasOwnProperty(this.props.owner)
         ) {
             this.edit = (
                 <Button
