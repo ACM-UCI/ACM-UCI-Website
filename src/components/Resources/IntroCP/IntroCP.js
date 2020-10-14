@@ -136,11 +136,9 @@ for line in sys.stdin:
                                     <hr />
                                     <p>
                                         Hello new ACM@UCI member! Welcome to the
-                                        world of competitive programming. I’m
-                                        Bryon Tjanaka, now a graduated computer
-                                        science major at UCI. This short guide
-                                        is intended to give you a quick
-                                        introduction to the club. I’ll go over
+                                        world of competitive programming. This
+                                        short guide will give you a quick
+                                        introduction to the club. We’ll go over
                                         some terms, competitions, benefits,
                                         websites, books, programming languages,
                                         software, and other tips in relation to
@@ -410,9 +408,9 @@ for line in sys.stdin:
                                         of these 3 languages, competitive
                                         programmers often use C++ because it is
                                         the fastest, but Java and Python are
-                                        usually good enough to solve a problem..
+                                        usually good enough to solve a problem.
                                         As a general rule of thumb, Java is 2x
-                                        slower than C++ (Note this is a highly
+                                        slower than C++ (Note this is highly
                                         contested{' '}
                                         <a
                                             className="link"
@@ -435,9 +433,9 @@ for line in sys.stdin:
                                         some cases. Ultimately, you will want to
                                         be at least somewhat familiar with all
                                         three of these languages. If there is a
-                                        language you want to learn quickly, I
-                                        would recommend picking up a book about
-                                        it and just speeding through it (usually
+                                        language you want to learn quickly, we
+                                        recommend picking up a book about it and
+                                        just speeding through it (usually
                                         skimming the first few introductory
                                         chapters), but of course, there are many
                                         ways to learn a new language.
@@ -490,17 +488,17 @@ for line in sys.stdin:
                                         allows you to efficiently run your
                                         programs with test input. You may also
                                         want to learn to use the command line.
-                                        Right now, for instance, I use Visual
-                                        Studio Code to edit my programs, and I
-                                        then run them from the Git Bash command
-                                        line integrated into VS Code, with input
+                                        For instance, you can use Visual Studio
+                                        Code to edit your programs, and then run
+                                        them from the Git Bash command line
+                                        integrated into VS Code, with input
                                         redirection. If using the command line,
                                         you will need to know about how to
-                                        download the appropriate compilers, set
-                                        your PATH variables on your system, and
-                                        redirect standard input and output. To
-                                        integrate Git Bash into VS Code, follow
-                                        the instructions at{' '}
+                                        download the appropriate compilers or
+                                        interpreters, set your PATH variables on
+                                        your system, and redirect standard input
+                                        and output. To integrate Git Bash into
+                                        VS Code, follow the instructions at{' '}
                                         <a
                                             href="https://stackoverflow.com/questions/42606837/how-to-use-bash-on-windows-from-visual-studio-code-integrated-terminal"
                                             className="link">
