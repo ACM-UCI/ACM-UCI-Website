@@ -19,7 +19,7 @@ const titles = {
 export default class Data extends Component {
     constructor(props) {
         super(props);
-        this.filters = {};
+        this.filters = {}; // A Mapping of All Filters
         for (var t in titles) this.filters[t] = 'All';
 
         this.options = {
@@ -29,7 +29,8 @@ export default class Data extends Component {
                 <option key="difficulty-med">med</option>,
                 <option key="difficulty-hard">hard</option>,
                 <option key="difficulty-icpc">icpc</option>,
-                <option key="difficulty-codealong">codealong</option>
+                <option key="difficulty-codealong">codealong</option>,
+                <option key="difficulty-presentation">presentation</option>
             ],
             sess: [
                 <option key="sessopt">All</option>,
@@ -88,6 +89,11 @@ export default class Data extends Component {
         this.setState({ page: num });
     }
 
+    /**
+     * Updates the Filters
+     *
+     * @param {*} evt
+     */
     updateInputValue(evt) {
         var name = evt.target.id.substring(0, 4);
         if (name === 'rows') {
@@ -157,6 +163,8 @@ export default class Data extends Component {
             <>
                 <br />
                 <br />
+
+                {/* Begin Filters */}
                 <div
                     style={{
                         display: 'flex',
@@ -196,6 +204,9 @@ export default class Data extends Component {
                         </div>
                     ))}
                 </div>
+                {/* End Filters */}
+
+                {/* Begin Top Pagination */}
                 <div
                     style={{
                         height: '60px',
@@ -242,6 +253,9 @@ export default class Data extends Component {
                         </option>
                     </Input>
                 </div>
+                {/* End Top Pagination */}
+
+                {/* Begin Main Table */}
                 <Table style={{ justifyItems: 'center' }} responsive>
                     <thead>
                         <tr>
@@ -260,6 +274,9 @@ export default class Data extends Component {
                         )}
                     </tbody>
                 </Table>
+                {/* End Main Table */}
+
+                {/*Begin Bottom Pagination */}
                 <div
                     style={{
                         height: '60px',
@@ -276,6 +293,7 @@ export default class Data extends Component {
                         callback={this.changePage}
                     />
                 </div>
+                {/* End Bottom Pagination */}
             </>
         );
     }
