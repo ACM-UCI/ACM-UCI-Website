@@ -21,6 +21,7 @@ export default class Data extends Component {
         super(props);
         this.filters = {}; // A Mapping of All Filters
         for (var t in titles) this.filters[t] = 'All';
+        this.filters['sear'] = undefined;
 
         this.options = {
             diff: [
@@ -99,6 +100,13 @@ export default class Data extends Component {
         if (name === 'rows') {
             this.rownum = evt.target.value;
             this.setState({ page: 1 });
+        } else if (name === 'sear') {
+            if (evt.target.value.trim() === '') {
+                this.filters['sear'] = undefined;
+            } else {
+                this.filters['sear'] = evt.target.value.trim().toLowerCase();
+            }
+            this.processData(this.data);
         } else if (this.filters.hasOwnProperty(name)) {
             this.filters[name] = evt.target.value;
             this.processData(this.data);
@@ -203,7 +211,34 @@ export default class Data extends Component {
                             </Input>
                         </div>
                     ))}
+
+                    {/* Begin Search Feature */}
+
+                    <div
+                        key={'searchcheck'}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            position: 'relative',
+                            margin: '10px',
+                            width: '500px',
+                            backgroundColor: '#aad1e9',
+                            borderRadius: '20px'
+                        }}>
+                        <Input
+                            style={{
+                                width: '95%',
+                                position: 'absolute'
+                            }}
+                            type="text"
+                            onChange={evt => this.updateInputValue(evt)}
+                            name="text"
+                            id={'searchfilter'}
+                            placeholder="Search - Works Best for Unique Words"></Input>
+                    </div>
                 </div>
+                {/* End Search Feature */}
                 {/* End Filters */}
 
                 {/* Begin Top Pagination */}

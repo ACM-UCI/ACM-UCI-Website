@@ -1,3 +1,60 @@
+/**
+ * Uses the soundex algorithm to compute phonetic code
+ */
+function soundex(name) {
+    if (name.trim().length === 0) return '';
+    let s = [];
+    let si = 1;
+    let c;
+
+    //              ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    let mappings = '01230120022455012623010202';
+
+    s[0] = name[0].toUpperCase();
+
+    for (let i = 1, l = name.length; i < l; i++) {
+        c = name[i].toUpperCase().charCodeAt(0) - 65;
+
+        if (c >= 0 && c <= 25) {
+            if (mappings[c] !== '0') {
+                if (mappings[c] !== s[si - 1]) {
+                    s[si] = mappings[c];
+                    si++;
+                }
+
+                if (si > 3) {
+                    break;
+                }
+            }
+        }
+    }
+
+    if (si <= 3) {
+        while (si <= 3) {
+            s[si] = '0';
+            si++;
+        }
+    }
+
+    return s.join('');
+}
+
+function computeMatch(a, b) {
+    const aSplit = a.split(' ');
+    const bSplit = b.split(' ');
+
+    const aSoundex = aSplit.map(x => soundex(x));
+    const bSoundex = bSplit.map(x => soundex(x));
+
+    const hashed = new Set(aSoundex);
+    for (let i = 0; i < bSoundex.length; ++i)
+        if (hashed.has(bSoundex[i])) {
+            return true;
+        }
+
+    return false;
+}
+
 export default function filter(problem, filters) {
     var sess_names =
         problem && problem.Session
@@ -27,7 +84,8 @@ export default function filter(problem, filters) {
             (filters.note === 'Has Notes' && problem.Note !== '')) &&
         (filters.cate === 'All' ||
             (problem.Category !== undefined &&
-                problem.Category.indexOf(filters.cate) !== -1))
+                problem.Category.indexOf(filters.cate) !== -1)) &&
+        (filters.sear === undefined || computeMatch(problem.Name, filters.sear))
     ) {
         return 1;
     }
