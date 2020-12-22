@@ -39,6 +39,11 @@ function soundex(name) {
     return s.join('');
 }
 
+/**
+ * Computes whether the search string is phonetically similar to the problem name
+ * @param {String} a - Problem name
+ * @param {String} b - Search string
+ */
 function computeMatch(a, b) {
     const aSplit = a.split(' ');
     const bSplit = b.split(' ');
@@ -47,12 +52,9 @@ function computeMatch(a, b) {
     const bSoundex = bSplit.map(x => soundex(x));
 
     const hashed = new Set(aSoundex);
-    for (let i = 0; i < bSoundex.length; ++i)
-        if (hashed.has(bSoundex[i])) {
-            return true;
-        }
 
-    return false;
+    return bSoundex.every(x => hashed.has(x)); // Every phonetic code of the search string
+    // Must be found in the problem name
 }
 
 export default function filter(problem, filters) {
