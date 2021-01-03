@@ -6,7 +6,6 @@ import Past from './Past/Past';
 import Present from './Present/Present';
 import './Puzzle.css';
 import firebase from '../../../Firebase';
-import config from '../../config.js';
 import { initializeSchedule } from '../../../utils/Scheduling';
 
 export default class Puzzle extends Component {
@@ -22,7 +21,6 @@ export default class Puzzle extends Component {
         this.week = 1;
         this.session = 1;
         this.end = false;
-        this.quarters = config['quarters'];
 
         this.done = false;
         this.error = null;
@@ -36,16 +34,9 @@ export default class Puzzle extends Component {
 
     processData(data) {
         this.data = data.val();
-        // this.data = data;
 
         this.past = (
-            <Past
-                week={this.week}
-                quarters={this.quarters}
-                session={this.session}
-                className="center"
-                data={this.data}
-            />
+            <Past week={this.week} session={this.session} data={this.data} />
         );
 
         this.present = (
@@ -71,13 +62,16 @@ export default class Puzzle extends Component {
         this.toggle();
     }
 
+    /**
+     * Callback function called after the schedule is initialized
+     * @param {*} state
+     */
     getDate(state) {
         this.quarter = state.quarter;
         this.week = state.week;
         this.session = state.session;
         this.end = state.currentSessionOver;
 
-        this.quarters = this.quarters.slice(0, state.quarterIndex + 1);
         this.done = true;
 
         var ref = firebase.database().ref();

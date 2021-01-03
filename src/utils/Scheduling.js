@@ -84,6 +84,19 @@ async function computeSchedule(data) {
     ).toFixed(0);
     state.week = Math.min(state.week, 11);
 
+    // The following code handles what is displayed in between quarters
+    if (state.week === 11) {
+        if (state.quarterIndex < QUARTERS.length - 1) {
+            state.week = 0;
+            ++state.quarterIndex;
+            state.quarter = QUARTERS[state.quarterIndex];
+        }
+        if (state.boardQuarterInd < QUARTERS.length - 1) {
+            ++state.boardQuarterInd;
+            state.boardQuarter = QUARTERS[state.boardQuarterInd];
+        }
+    }
+
     // Determine Session of Week -------------------------------------------------------------
     const weekTimeElapsed = (currTimeMilli - state.quarterStart) % 604800000; // 604800000 milliseconds in a week
 

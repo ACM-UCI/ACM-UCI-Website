@@ -1,133 +1,93 @@
-import React, { Component } from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
-import './Past.css';
-import classnames from 'classnames';
-import Quarter from '../Quarter/Quarter';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import config from '../../../config';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
+import Quarter from '../Quarter/Quarter';
+import classnames from 'classnames';
 
-// ADD SPRING NAVITEMS WHEN SPRING QUARTER STARTS
+import './Past.css';
 
-export default class Past extends Component {
-    constructor(props) {
-        super(props);
+/**
+ * The Past component renders the tabbed-panes of all past quarter problem sets.
+ * It is rendered right below the Present component.
+ * @param {*} props
+ */
+function Past(props) {
+    const { data, week, session } = props; // data is the quarterly problem data used to populate the tab panes
+    const { quarters, meetings } = config; // A list in order of all quarters
 
-        this.toggle = this.toggle.bind(this);
-        // contains up to current quarter
-        this.quarters = props.quarters;
-        this.state = {
-            activeTab: (this.quarters.length - 1).toString()
-        };
-        this.week = props.week;
-        this.session = props.session;
-
-        this.navitems = [];
-        this.tabcontents = [];
-        const curr = this.quarters.length - 1;
-
-        // push all quarters to the tabs except current one
-        for (let i = 0; i < this.quarters.length - 1; i++) {
-            this.tabcontents.push(
-                <TabPane key={i.toString()} tabId={i.toString()}>
-                    <Quarter
-                        session={config.meetings[i].length + 1}
-                        week={11}
-                        quarter={this.quarters[i]}
-                        quarterIndex={i}
-                        data={props.data}
-                    />
-                </TabPane>
-            );
-        }
-
-        // push the current quarter on to the tab pane
-        this.tabcontents.push(
-            <TabPane key={curr.toString()} tabId={curr.toString()}>
+    // Generate TabPanes: have to do past & current separately because past has default session/week
+    //  but current has same session/week as is passed from props
+    // Add Past Quarters
+    const tabQuarters = [];
+    for (let i = 0; i < quarters.length - 1; ++i) {
+        tabQuarters.push(
+            <TabPane key={`pane-quarter-${i}`} tabId={i}>
                 <Quarter
-                    session={this.session}
-                    week={this.week}
-                    quarter={this.quarters[curr]}
-                    quarterIndex={this.quarters.length - 1}
-                    data={props.data}
+                    session={meetings[i].length}
+                    week={11}
+                    quarter={quarters[i]}
+                    quarterIndex={i}
+                    data={data}
                 />
             </TabPane>
         );
     }
 
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
-    }
+    // Add Current Quarter
+    tabQuarters.push(
+        <TabPane
+            key={`pane-quarter-${quarters.length - 1}`}
+            tabId={quarters.length - 1}>
+            <Quarter
+                session={session}
+                week={week}
+                quarter={quarters[quarters.length - 1]} // last quarter is current
+                quarterIndex={quarters.length - 1}
+                data={data}
+            />
+        </TabPane>
+    );
 
-    // manual input here for quarters
-    // TO DO: MAKE ADDING NEW QUARTERS AUTOMATIC
-    render() {
+    const toggle = newTab => {
+        if (activeTab !== newTab) setActiveTab(newTab);
+    };
+
+    // Initialize State
+    const [activeTab, setActiveTab] = useState(quarters.length - 1);
+
+    // Generate Tab NavLinks
+    const tabLinks = quarters.map((qtr, i) => {
         return (
-            <div>
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({
-                                active: this.state.activeTab === '0'
-                            })}
-                            onClick={() => {
-                                this.toggle('0');
-                            }}>
-                            {this.quarters[0]}
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({
-                                active: this.state.activeTab === '1'
-                            })}
-                            onClick={() => {
-                                this.toggle('1');
-                            }}>
-                            {this.quarters[1]}
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({
-                                active: this.state.activeTab === '2'
-                            })}
-                            onClick={() => {
-                                this.toggle('2');
-                            }}>
-                            {this.quarters[2]}
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({
-                                active: this.state.activeTab === '3'
-                            })}
-                            onClick={() => {
-                                this.toggle('3');
-                            }}>
-                            {this.quarters[3]}
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({
-                                active: this.state.activeTab === '4'
-                            })}
-                            onClick={() => {
-                                this.toggle('4');
-                            }}>
-                            {this.quarters[4]}
-                        </NavLink>
-                    </NavItem>
-                </Nav>
-
-                <TabContent activeTab={this.state.activeTab}>
-                    {this.tabcontents}
-                </TabContent>
-            </div>
+            <NavItem key={`nav-quarter-${i}`}>
+                <NavLink
+                    className={[
+                        classnames({ active: activeTab === i }),
+                        'tab-link'
+                    ].join(' ')}
+                    onClick={() => {
+                        toggle(i);
+                    }}>
+                    {qtr}
+                </NavLink>
+            </NavItem>
         );
-    }
+    });
+
+    return (
+        <div>
+            <Nav tabs>{tabLinks}</Nav>
+
+            <TabContent activeTab={activeTab}>{tabQuarters}</TabContent>
+        </div>
+    );
 }
+
+Past.propTypes = {
+    week: PropTypes.number,
+    session: PropTypes.number,
+    data: PropTypes.object
+};
+
+export default Past;

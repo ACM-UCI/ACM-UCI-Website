@@ -20,3 +20,12 @@
 .height{
     min-height: 100%;
 }
+
+.tab-link {
+    color: #999;
+}
+
+.tab-link:hover {
+    color: #777;
+    cursor: pointer;
+}
