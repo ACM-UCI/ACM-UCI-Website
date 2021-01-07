@@ -75,8 +75,8 @@ class Home extends Component {
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
-                        month="Oct"
-                        date="7"
+                        month="Jan"
+                        date="6"
                         event="First Meeting of Quarter"
                         link="https://discord.gg/MCtKPxC"
                     />

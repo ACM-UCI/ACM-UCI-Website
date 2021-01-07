@@ -126,6 +126,26 @@ export default class Login extends Component {
     processData(data) {
         if (this.state.status === 'Login') {
             this.emails = data.val()['logs'];
+            const username = this.owner.email.split('@')[0];
+            if (this.emails.hasOwnProperty(username)) {
+                if (!this.emails[username].hasOwnProperty(this.quarter)) {
+                    var u = {};
+                    for (let i = 1; i <= 11; ++i) {
+                        u[
+                            '/logs/' +
+                                username +
+                                '/' +
+                                this.quarter +
+                                '/' +
+                                i.toString()
+                        ] = 0;
+                    }
+                    firebase
+                        .database()
+                        .ref()
+                        .update(u);
+                }
+            }
         }
     }
 
@@ -166,6 +186,7 @@ export default class Login extends Component {
                 u['/logs/' + email[0] + '/Winter 2020/' + i.toString()] = 0;
                 u['/logs/' + email[0] + '/Spring 2020/' + i.toString()] = 0;
                 u['/logs/' + email[0] + '/Fall 2020/' + i.toString()] = 0;
+                u['/logs/' + email[0] + '/Winter 2021/' + i.toString()] = 0;
             }
             u['/logs/' + email[0] + '/Name'] = user.displayName;
             u['/logs/' + email[0] + '/Position'] = 'Member';

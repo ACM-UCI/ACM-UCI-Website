@@ -367,7 +367,12 @@ export default class Submit extends Component {
         }
 
         if (
-            !board['2019-2020'].hasOwnProperty(this.owner) &&
+            !board[config.current].hasOwnProperty(this.owner) &&
+            this.data['logs'].hasOwnProperty(this.owner) &&
+            this.data['logs'][this.owner].hasOwnProperty(this.quarter) &&
+            this.data['logs'][this.owner][this.quarter].hasOwnProperty(
+                this.week
+            ) &&
             this.data['logs'][this.owner][this.quarter][this.week] >= 5
         ) {
             errors.push(
