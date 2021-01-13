@@ -145,7 +145,7 @@ export default class Puzzle extends Component {
                             </h1>
                         </Row>
                         <Row className="center">
-                            <span>Wednesdays and Fridays 7-9 pm</span>
+                            <span>Wednesdays and Fridays 6-8 pm</span>
                         </Row>
                     </div>
 

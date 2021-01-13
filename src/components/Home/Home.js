@@ -105,9 +105,9 @@ class Home extends Component {
                 <hr className="home-line" />
                 <CardText claassname="card-text-home">
                     <strong>Wednesday: </strong>
-                    Discord, 7:00 - 9:00 pm <br />
+                    Discord, 6:00 - 8:00 pm <br />
                     <strong>Friday: </strong>
-                    Discord, 7:00 - 9:00 pm
+                    Discord, 6:00 - 8:00 pm
                 </CardText>
             </Card>,
             <Card
