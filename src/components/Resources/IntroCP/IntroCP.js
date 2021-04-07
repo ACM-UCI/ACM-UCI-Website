@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { hybrid } from 'react-syntax-highlighter/styles/hljs';
+import { hybrid } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Navigation from '../../Navbar/Navbar';
 import Banner from '../../Banner/Banner';
 import './IntroCP.css';

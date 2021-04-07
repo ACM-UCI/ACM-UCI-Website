@@ -58,11 +58,10 @@ const config = {
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
+
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
-        [
-            new Meeting(0, 10080) // Tuesday - 2 Days
-        ],
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)]
@@ -87,7 +86,7 @@ const config = {
         new Date('March 31, 2020 08:00:00').getTime(), // Tu 8am - Th 8am & Th
         new Date('October 7, 2020 18:00:00').getTime(),
         new Date('January 6, 2021 17:00:00').getTime(),
-        new Date('March 22, 2021 17:00:00').getTime()
+        new Date('March 31, 2021 17:30:00').getTime()
     ],
     boardAccess: [
         // The date when the board is able to set problems for a specific quarter

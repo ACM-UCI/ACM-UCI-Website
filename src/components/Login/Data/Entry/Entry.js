@@ -12,7 +12,7 @@ import {
 import './Entry.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import firebase from '../../../../Firebase';
-import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
+import { tomorrowNight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Submit from '../../Submit/Submit';
 import config from '../../../config.js';
 import board from '../../../Board/board.json';
