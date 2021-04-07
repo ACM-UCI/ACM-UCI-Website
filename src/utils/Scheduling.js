@@ -31,7 +31,7 @@ export async function initializeSchedule() {
 async function computeSchedule(data) {
     state.datetime = new Date(data.datetime);
 
-    state.datetime = new Date('March 29, 2021 16:59:59'); // Use for testing
+    // state.datetime = new Date('April 7, 2021 17:30:01'); // Use for testing
     // Verify time is valid ------------------------------------------------------------------
     if (!(state.datetime instanceof Date) || isNaN(state.datetime.getTime())) {
         return Promise.reject(
