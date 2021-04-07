@@ -126,7 +126,9 @@ export default class Login extends Component {
     processData(data) {
         if (this.state.status === 'Login') {
             this.emails = data.val()['logs'];
-            const username = this.owner.email.split('@')[0];
+            const username = this.owner.hasOwnProperty('email')
+                ? this.owner.email.split('@')[0]
+                : '';
             if (this.emails.hasOwnProperty(username)) {
                 if (!this.emails[username].hasOwnProperty(this.quarter)) {
                     var u = {};

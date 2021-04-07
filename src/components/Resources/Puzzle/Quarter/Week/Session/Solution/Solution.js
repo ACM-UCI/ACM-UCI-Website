@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 import './Solution.css';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { tomorrowNight } from 'react-syntax-highlighter/dist/styles/hljs';
+import { tomorrowNight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const Python = codeString => (
