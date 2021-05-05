@@ -89,7 +89,7 @@ class Home extends Component {
                 style={{ width: w }}>
                 <CardTitle style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: 29 }}>Meeting Times</p>
-                    <i>Fall 2020</i>
+                    <i>Spring 2021</i>
                     <br></br>
                     <strong>
                         All meetings this quarter will be conducted on Discord.
@@ -105,9 +105,9 @@ class Home extends Component {
                 <hr className="home-line" />
                 <CardText claassname="card-text-home">
                     <strong>Wednesday: </strong>
-                    Discord, 6:00 - 8:00 pm <br />
+                    Discord, 6:30 - 8:30 pm <br />
                     <strong>Friday: </strong>
-                    Discord, 6:00 - 8:00 pm
+                    Discord, 6:30 - 8:30 pm
                 </CardText>
             </Card>,
             <Card
@@ -125,7 +125,7 @@ class Home extends Component {
                         alt="btjanaka"
                         id="silver"
                         className="silver award"
-                        src="https://raw.githubusercontent.com/btjanaka/branding/master/build/logo/bt-rotating-white-bkgd-512.gif"
+                        src="https://avatars.githubusercontent.com/u/38124174?v=4"
                     />
                     <Avatar
                         alt="pbaldara"
