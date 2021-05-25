@@ -97,5 +97,19 @@
         "desc": "Just over two years after its inception, the ACM@UCI website was recognized with the ACM 2020 Outstanding Website award as part of the ACM Excellence Awards.",
         "img": "Website_2020.jpg",
         "caption": "ACM@UCI receives Outstanding Website 2020 award"
+    },
+    {
+        "date": "February 2021",
+        "title": "2020-21 SoCal Regional",
+        "desc": "In an usual year, COVID-19 forces ICPC Socal Regionals to host its first ever online competition. ACM@UCI sends 11 teams, of which team Map ranks highest at 9th place. UCI advances two teams to the first ever ICPC North American Division Championships.",
+        "img": "icpc_socal_2020.jpg",
+        "caption": "The final scoreboard at 2020 ICPC SoCal Regional"
+    },
+    {
+        "date": "April 2021",
+        "title": "2021 ICPC North American Division Championship",
+        "desc": "In the first year ICPC held NADC, ACM@UCI sends two teams - Comprehension and Map. In the challenging field, team Comprehension and team Map place 22nd and 25th respectively in the west division.",
+        "img": "2021_icpc_nadc.webp",
+        "caption": "ICPC NADC"
     }
 ]

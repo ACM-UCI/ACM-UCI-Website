@@ -22,7 +22,7 @@ class About extends Component {
                 img = (
                     <figure>
                         <img
-                            src={Images[TimelineData[i].img]}
+                            src={Images[TimelineData[i].img].default}
                             alt={TimelineData[i].caption}
                             width="100%"
                         />
