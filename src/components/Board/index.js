@@ -26,6 +26,11 @@ const Images = {
     kirkmc: require('../../img/kirkmc.jpg'),
     bmchu1: require('../../img/bmchu1.jpg'),
     sdowdle: require('../../img/sdowdle.jpg'),
+    pbaldara: require('../../img/pbaldaray.jpg'),
+    jsley: require('../../img/jley.jpg'),
+    mantoun: require('../../img/mantoun.jpg'),
+    rhsakuma: require('../../img/rhsakuma.jpg'),
+    tejasv: require('../../img/tejasv.jpg'),
     ryansy: require('../../img/ryansy.jpg')
 };
 
