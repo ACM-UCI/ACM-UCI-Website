@@ -31,7 +31,7 @@ export async function initializeSchedule() {
 async function computeSchedule(data) {
     state.datetime = new Date(data.datetime);
 
-    // state.datetime = new Date('April 7, 2021 17:30:01'); // Use for testing
+    // state.datetime = new Date('October 3, 2021 20:00:01'); // Use for testing
     // Verify time is valid ------------------------------------------------------------------
     if (!(state.datetime instanceof Date) || isNaN(state.datetime.getTime())) {
         return Promise.reject(
@@ -70,8 +70,9 @@ async function computeSchedule(data) {
         q < QUARTERS.length &&
         q < BOARD_QUARTERS.length &&
         BOARD_QUARTERS[q] < currTimeMilli
-    )
+    ) {
         ++q;
+    }
 
     --q;
     state.boardQuarterInd = q;
@@ -92,6 +93,7 @@ async function computeSchedule(data) {
             state.quarter = QUARTERS[state.quarterIndex];
         }
         if (state.boardQuarterInd < QUARTERS.length - 1) {
+            // Automatically allows board to add problems for next quarter if in between quarters
             ++state.boardQuarterInd;
             state.boardQuarter = QUARTERS[state.boardQuarterInd];
         }
