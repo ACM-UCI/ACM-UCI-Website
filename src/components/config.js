@@ -53,7 +53,7 @@ const config = {
         '2020-2021',
         '2021-2022'
     ],
-    current: '2020-2021', // This must be of form 'prevyear-nextyear'
+    current: '2021-2022', // This must be of form 'prevyear-nextyear'
     // Arranges weekly meeting schedule corresponding to quarter
     meetings: [
         [new Meeting(0, 180), new Meeting(172800000, 180)],
