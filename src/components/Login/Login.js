@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Alert, Container, Button, Col } from 'reactstrap';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
-import Submit from './Submit/Submit';
+import Submit from './Submit/SubmitOld';
 import Data from './Data/Data';
 import Log from './Log/Log';
 import Profile from './Profile/Profile';

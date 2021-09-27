@@ -168,7 +168,7 @@ export default class Data extends Component {
 
     render() {
         return (
-            <>
+            <React.Fragment>
                 <br />
                 <br />
 
@@ -329,7 +329,7 @@ export default class Data extends Component {
                     />
                 </div>
                 {/* End Bottom Pagination */}
-            </>
+            </React.Fragment>
         );
     }
 }
