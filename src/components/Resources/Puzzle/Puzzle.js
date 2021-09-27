@@ -46,6 +46,11 @@ export default class Puzzle extends Component {
                 quarter={this.quarter}
                 session={this.session}
                 data={this.data}
+                // end={false}
+                // week={'2'}
+                // quarter={'Spring 2019'}
+                // session={1}
+                // data={this.data[this.quarter]['2']}
             />
         );
         this.toggle();
@@ -86,7 +91,7 @@ export default class Puzzle extends Component {
                     <Navigation />
                     <Banner
                         lead="Weekly Problems and Solutions"
-                        leadSub="New Problems will be posted an hour before each meeting"
+                        leadSub="Due to current circumstances all meetings will be held online. Times are TBD"
                     />
                     {this.error}
                     <div className="center">
@@ -128,19 +133,19 @@ export default class Puzzle extends Component {
                             </Alert>
                         </Row>
                         <Row className="center">
-                            <h1 className="display-4">
-                                Join In-Person @ DBH 4011 or Virtually on{' '}
+                            <h1 className="display-3">
+                                Join Meetings on{' '}
                                 <a
                                     href="https://discord.gg/MCtKPxC"
                                     style={{ color: 'rgb(81, 168, 202)' }}
                                     target="_blank"
                                     rel="noopener noreferrer">
-                                    Zoom
+                                    Discord
                                 </a>
                             </h1>
                         </Row>
                         <Row className="center">
-                            <span>Tuesdays and Thursdays 6-8pm</span>
+                            <span>Wednesdays and Fridays 6-8 pm</span>
                         </Row>
                     </div>
 
