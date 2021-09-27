@@ -478,6 +478,7 @@ export default class Submit extends Component {
                     .push().key;
                 updates['/submissions/' + newPostKey] = s;
 
+                console.log(updates);
                 firebase
                     .database()
                     .ref()
