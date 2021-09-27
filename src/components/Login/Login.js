@@ -126,15 +126,11 @@ export default class Login extends Component {
     processData(data) {
         if (this.state.status === 'Login') {
             this.emails = data.val()['logs'];
-            console.log(this.emails);
             const username = this.owner.hasOwnProperty('email')
                 ? this.owner.email.split('@')[0]
                 : '';
-            console.log('why no work ', username);
             if (this.emails.hasOwnProperty(username)) {
-                console.log('here', this.emails[username]);
                 if (!this.emails[username].hasOwnProperty(this.quarter)) {
-                    console.log('run this');
                     var u = {};
                     for (let i = 0; i <= 11; ++i) {
                         u[
