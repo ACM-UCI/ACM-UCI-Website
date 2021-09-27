@@ -50,8 +50,7 @@ const config = {
         '2017-2018',
         '2018-2019',
         '2019-2020',
-        '2020-2021',
-        '2021-2022'
+        '2020-2021'
     ],
     current: '2021-2022', // This must be of form 'prevyear-nextyear'
     // Arranges weekly meeting schedule corresponding to quarter
@@ -66,7 +65,6 @@ const config = {
         ],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
-        [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)]
     ],
     quarters: [
@@ -78,8 +76,7 @@ const config = {
         'Spring 2020',
         'Fall 2020',
         'Winter 2021',
-        'Spring 2021',
-        'Fall 2021'
+        'Spring 2021'
     ],
     dates: [
         new Date('October 2, 2018 18:00:00').getTime(),
@@ -90,8 +87,7 @@ const config = {
         new Date('March 31, 2020 08:00:00').getTime(), // Tu 8am - Th 8am & Th
         new Date('October 7, 2020 18:00:00').getTime(),
         new Date('January 6, 2021 17:00:00').getTime(),
-        new Date('March 31, 2021 17:30:00').getTime(),
-        new Date('September 28, 2021 17:00:00').getTime()
+        new Date('March 31, 2021 17:30:00').getTime()
     ],
     boardAccess: [
         // The date when the board is able to set problems for a specific quarter
@@ -103,8 +99,7 @@ const config = {
         new Date('March 31, 2020 08:00:00').getTime(), // Tu 8am - Th 8am & Th
         new Date('October 1, 2020 00:00:00').getTime(),
         new Date('January 3, 2021 00:00:00').getTime(),
-        new Date('March 2, 2021 17:00:00').getTime(),
-        new Date('September 19, 2021 00:00:00').getTime()
+        new Date('March 2, 2021 17:00:00').getTime()
     ],
     defaultData: {
         Category: '',

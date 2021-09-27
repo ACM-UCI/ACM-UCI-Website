@@ -75,9 +75,9 @@ class Home extends Component {
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
-                        month="Sept"
-                        date="28"
-                        event="First Meeting of Quarter @DBH 4011"
+                        month="Jan"
+                        date="6"
+                        event="First Meeting of Quarter"
                         link="https://discord.gg/MCtKPxC"
                     />
                 </Row>
@@ -89,10 +89,10 @@ class Home extends Component {
                 style={{ width: w }}>
                 <CardTitle style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: 29 }}>Meeting Times</p>
-                    <i>Fall 2021</i>
+                    <i>Spring 2021</i>
                     <br></br>
                     <strong>
-                        All meetings this quarter will be in person at DBH 4011.
+                        All meetings this quarter will be conducted on Discord.
                         To keep up to date follow our{' '}
                         <a href="https://www.facebook.com/groups/228954137162541/">
                             Facebook
@@ -104,10 +104,10 @@ class Home extends Component {
                 </CardTitle>
                 <hr className="home-line" />
                 <CardText claassname="card-text-home">
-                    <strong>Tuesday: </strong>
-                    DBH 4011, 6:00 - 8:00 pm <br />
-                    <strong>Thursday: </strong>
-                    DBH 4011, 6:00 - 8:00 pm
+                    <strong>Wednesday: </strong>
+                    Discord, 6:30 - 8:30 pm <br />
+                    <strong>Friday: </strong>
+                    Discord, 6:30 - 8:30 pm
                 </CardText>
             </Card>,
             <Card
