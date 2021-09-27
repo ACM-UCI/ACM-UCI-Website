@@ -134,18 +134,18 @@ export default class Puzzle extends Component {
                         </Row>
                         <Row className="center">
                             <h1 className="display-3">
-                                Join Meetings on{' '}
+                                Join In-Person @ DBH 4011 or Virtually on{' '}
                                 <a
                                     href="https://discord.gg/MCtKPxC"
                                     style={{ color: 'rgb(81, 168, 202)' }}
                                     target="_blank"
                                     rel="noopener noreferrer">
-                                    Discord
+                                    Zoom
                                 </a>
                             </h1>
                         </Row>
                         <Row className="center">
-                            <span>Wednesdays and Fridays 6-8 pm</span>
+                            <span>Tuesday and Thursday 6-8 pm</span>
                         </Row>
                     </div>
 
