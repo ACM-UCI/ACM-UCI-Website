@@ -1,4 +1,42 @@
 {
+    "2021-2022": {
+        "pbaldara": {
+            "name": "Paul Baldaray",
+            "position": "President"
+        },
+        "jsley": {
+            "name": "Justin Ley",
+            "position": "Internal Vice President"
+        },
+        "mantoun": {
+            "name": "Michael Antoun",
+            "position": "External Vice President"
+        },
+        "rhsakuma": {
+            "name": "Ryan Sakuma",
+            "position": "Treasurer"
+        },
+        "ryansy": {
+            "name": "Ryan Yoshida",
+            "position": "Director of Technology"
+        },
+        "tejasv": {
+            "name": "Tejas Venkateswaran",
+            "position": "Director of Eduction"
+        },
+        "jerryzl": {
+            "name": "Jerry Li",
+            "position": "Director of Competitions"
+        },
+        "tshridha": {
+            "name": "Tuan Shridhar",
+            "position": "Officer"
+        },
+        "pattis": {
+            "name": "Richard E. Pattis",
+            "position": "Faculty Advisor"
+        }
+    },
     "2020-2021": {
         "pbaldara": {
             "name": "Paul Baldaray",
@@ -22,11 +60,15 @@
         },
         "tejasv": {
             "name": "Tejas Venkateswaran",
-            "position": "Webslave"
+            "position": "Director of Eduction"
         },
         "bmchu1": {
             "name": "Brian Chu",
             "position": "Director of Marketing and Director of Innovation"
+        },
+        "tshridha": {
+            "name": "Tuan Shridhar",
+            "position": "Officer"
         },
         "pattis": {
             "name": "Richard E. Pattis",
