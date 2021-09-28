@@ -131,7 +131,7 @@ export default class Puzzle extends Component {
                             <h1 className="display-4">
                                 Join In-Person @ DBH 4011 or Virtually on{' '}
                                 <a
-                                    href="https://discord.gg/MCtKPxC"
+                                    href="https://uci.zoom.us/j/97925576938"
                                     style={{ color: 'rgb(81, 168, 202)' }}
                                     target="_blank"
                                     rel="noopener noreferrer">
