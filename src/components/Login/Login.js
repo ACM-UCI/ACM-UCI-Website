@@ -77,6 +77,7 @@ export default class Login extends Component {
         if (u !== null) {
             // User is logged in
             const { email } = u;
+            const ucinetid = email.split('@')[0];
 
             // Verify has @uci.edu email
             if (
@@ -95,6 +96,58 @@ export default class Login extends Component {
                     status: 'Login'
                 });
             }
+
+            const userUpdateData = {};
+
+            // Check if log entry exists, if not, insert new log entry
+            if (!this.emails.hasOwnProperty(ucinetid)) {
+                for (var i = 1; i <= 11; i++) {
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Winter 2019/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Spring 2019/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Fall 2019/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Winter 2020/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Spring 2020/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Fall 2020/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Winter 2021/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Spring 2021/' + i.toString()
+                    ] = 0;
+                    userUpdateData[
+                        '/logs/' + ucinetid + '/Fall 2021/' + i.toString()
+                    ] = 0;
+                }
+                userUpdateData['/logs/' + ucinetid + '/Name'] = u.displayName;
+                userUpdateData['/logs/' + ucinetid + '/Position'] = 'Member';
+                userUpdateData['/logs/' + ucinetid + '/Photo'] = u.photoURL;
+                firebase
+                    .database()
+                    .ref()
+                    .update(userUpdateData);
+            } else if (
+                this.emails[ucinetid].Photo === undefined ||
+                this.emails[ucinetid].Photo === ''
+            ) {
+                userUpdateData['/logs/' + ucinetid + '/Photo'] = user.photoURL;
+                firebase
+                    .database()
+                    .ref()
+                    .update(userUpdateData);
+            }
+
             if (this.state.can_display_data) {
                 this.verified(u);
             }
