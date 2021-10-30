@@ -56,7 +56,7 @@ jobs:
         with:
           src_dir: ./build
           target_owner: ACM-UCI
-          target_repo: ACM-UCI-Website
+          target_repo: ACM-UCI.github.io
           target_dir: /
           target_branch: master
           # access_token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
