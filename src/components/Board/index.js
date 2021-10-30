@@ -32,6 +32,7 @@ const Images = {
     mantoun: require('../../img/mantian.gif'),
     rhsakuma: require('../../img/rhsakuma.jpg'),
     tejasv: require('../../img/tejasv.jpg'),
+    tshridha: require('../../img/tshridha.JPG'),
     ryansy: require('../../img/ryansy.jpg')
 };
 
