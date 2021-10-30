@@ -51,14 +51,17 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     steps:
-      - name: Deploy to repo
-        uses: manzoorwanijk/action-deploy-to-repo@v1
+      - name: Download build files
+        uses: actions/download-artifact@v2
         with:
-          src_dir: ./build
-          target_owner: ACM-UCI
-          target_repo: ACM-UCI.github.io
-          target_dir: /
-          target_branch: master
-          # access_token: ${{ secrets.GITHUB_ACCESS_TOKEN }}
-          cleanup_command: rm -rf ./*
+          name: production-files
+          path: ./build
+      - name: Push directory to another repository
+        uses: cpina/github-action-push-to-another-repository@v1.3
+        with:
+          source-directory: ./build
+          destination-github-username: ACM-UCI
+          destination-repository-name: ACM-UCI.github.io
+          user-email: ryan.yoshida@comcast.net
+          target-branch: master
     
