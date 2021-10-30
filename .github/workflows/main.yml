@@ -62,8 +62,10 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: ./build
-          destination-github-username: ACM-UCI
+          destination-github-username: ryoshida28
           destination-repository-name: ACM-UCI.github.io
+          destination-repository-username: ACM-UCI
           user-email: ryan.yoshida@comcast.net
+          user-name: ryoshida28
           target-branch: master
     
