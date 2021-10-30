@@ -29,7 +29,7 @@ const Images = {
     pbaldara: require('../../img/pbaldaray.jpg'),
     // jsley: require('../../img/jley.jpg'),
     jsley: require('../../img/jley2.png'),
-    mantoun: require('../../img/mantoun.jpg'),
+    mantoun: require('../../img/mantian.gif'),
     rhsakuma: require('../../img/rhsakuma.jpg'),
     tejasv: require('../../img/tejasv.jpg'),
     ryansy: require('../../img/ryansy.jpg')
