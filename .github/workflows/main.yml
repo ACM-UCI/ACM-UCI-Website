@@ -49,7 +49,7 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+#     if: github.ref == 'refs/heads/main'
     steps:
       - name: Download build files
         uses: actions/download-artifact@v2
