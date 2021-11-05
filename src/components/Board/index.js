@@ -28,6 +28,7 @@ const Images = {
     sdowdle: require('../../img/sdowdle.jpg'),
     pbaldara: require('../../img/pbaldaray.jpg'),
     // jsley: require('../../img/jley.jpg'),
+    jerryzl: require('../../img/jerryzl.jpg'),
     jsley: require('../../img/jley2.png'),
     mantoun: require('../../img/mantian.gif'),
     rhsakuma: require('../../img/rhsakuma.jpg'),
