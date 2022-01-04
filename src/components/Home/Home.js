@@ -75,9 +75,9 @@ class Home extends Component {
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
-                        month="Sept"
-                        date="28"
-                        event="First Meeting of Quarter @DBH 4011"
+                        month="Jan"
+                        date="4"
+                        event="First Meeting of Quarter on Discord"
                         link="https://discord.gg/MCtKPxC"
                     />
                 </Row>
@@ -89,11 +89,11 @@ class Home extends Component {
                 style={{ width: w }}>
                 <CardTitle style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: 29 }}>Meeting Times</p>
-                    <i>Fall 2021</i>
+                    <i>Winter 2022</i>
                     <br></br>
                     <strong>
-                        All meetings this quarter will be in person at DBH 4011.
-                        To keep up to date follow our{' '}
+                        Until campus reopens all meetings this quarter will be
+                        online on Discord. To keep up to date follow our{' '}
                         <a href="https://www.facebook.com/groups/228954137162541/">
                             Facebook
                         </a>{' '}

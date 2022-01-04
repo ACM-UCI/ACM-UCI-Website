@@ -31,7 +31,7 @@ export async function initializeSchedule() {
 async function computeSchedule(data) {
     state.datetime = new Date(data.datetime);
 
-    // state.datetime = new Date('October 3, 2021 20:00:01'); // Use for testing
+    // state.datetime = new Date('January 13, 2022 17:00:01'); // Use for testing
     // Verify time is valid ------------------------------------------------------------------
     if (!(state.datetime instanceof Date) || isNaN(state.datetime.getTime())) {
         return Promise.reject(
@@ -124,6 +124,7 @@ async function computeSchedule(data) {
             state.currentSessionOver = false;
         }
     }
+    console.log(state);
 
     state.initialized = true;
     return state;
