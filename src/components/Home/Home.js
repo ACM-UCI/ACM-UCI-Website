@@ -75,10 +75,10 @@ class Home extends Component {
                 </CardTitle>
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
-                        month="Jan"
-                        date="4"
-                        event="First Meeting of Quarter on Discord"
-                        link="https://discord.gg/MCtKPxC"
+                        month="Mar"
+                        date="29"
+                        event="First Meeting of Quarter in ICS 428"
+                        link=""
                     />
                 </Row>
             </Card>,
@@ -89,7 +89,7 @@ class Home extends Component {
                 style={{ width: w }}>
                 <CardTitle style={{ textAlign: 'center' }}>
                     <p style={{ fontSize: 29 }}>Meeting Times</p>
-                    <i>Winter 2022</i>
+                    <i>Spring 2022</i>
                     <br></br>
                     <strong>
                         Until campus reopens all meetings this quarter will be
