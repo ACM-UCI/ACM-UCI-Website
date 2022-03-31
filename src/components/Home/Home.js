@@ -76,8 +76,8 @@ class Home extends Component {
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
                         month="Mar"
-                        date="29"
-                        event="First Meeting of Quarter in ICS 428"
+                        date="31"
+                        event="Second Meeting of Quarter in DBH 4011 (just for this meeting)"
                         link=""
                     />
                 </Row>
@@ -92,8 +92,7 @@ class Home extends Component {
                     <i>Spring 2022</i>
                     <br></br>
                     <strong>
-                        Until campus reopens all meetings this quarter will be
-                        online on Discord. To keep up to date follow our{' '}
+                        To keep up to date, follow our{' '}
                         <a href="https://www.facebook.com/groups/228954137162541/">
                             Facebook
                         </a>{' '}
@@ -105,9 +104,9 @@ class Home extends Component {
                 <hr className="home-line" />
                 <CardText claassname="card-text-home">
                     <strong>Tuesday: </strong>
-                    ICS 428, 6:00 - 8:00 pm <br />
+                    DBH 4011, 6:00 - 8:00 pm <br />
                     <strong>Thursday: </strong>
-                    ICS 428, 6:00 - 8:00 pm
+                    DBH 4011, 6:00 - 8:00 pm
                 </CardText>
             </Card>,
             <Card
