@@ -76,8 +76,8 @@ class Home extends Component {
                 <Row style={{ justifyContent: 'center' }}>
                     <Calendar
                         month="Mar"
-                        date="31"
-                        event="Second Meeting of Quarter in DBH 4011 (just for this meeting)"
+                        date="29"
+                        event="First Meeting of Quarter in ICS 428"
                         link=""
                     />
                 </Row>
@@ -104,9 +104,9 @@ class Home extends Component {
                 <hr className="home-line" />
                 <CardText claassname="card-text-home">
                     <strong>Tuesday: </strong>
-                    DBH 4011, 6:00 - 8:00 pm <br />
+                    ICS 428, 6:00 - 8:00 pm <br />
                     <strong>Thursday: </strong>
-                    DBH 4011, 6:00 - 8:00 pm
+                    ICS 428, 6:00 - 8:00 pm
                 </CardText>
             </Card>,
             <Card
