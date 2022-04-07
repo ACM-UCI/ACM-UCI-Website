@@ -129,7 +129,7 @@ export default class Puzzle extends Component {
                         </Row>
                         <Row className="center">
                             <h1 className="display-4">
-                                Join In-Person @ ICS 428 or Virtually on{' '}
+                                Join In-Person @ DBH 4011 or Virtually on{' '}
                                 <a
                                     href="https://uci.zoom.us/j/97925576938"
                                     style={{ color: 'rgb(81, 168, 202)' }}
