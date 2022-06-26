@@ -6,3 +6,7 @@
 .problinkdata:hover{
     color: rgb(158, 150, 150);
 }
+
+th, td {
+    vertical-align: middle !important;
+}

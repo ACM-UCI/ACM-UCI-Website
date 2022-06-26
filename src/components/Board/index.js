@@ -34,7 +34,9 @@ const Images = {
     rhsakuma: require('../../img/rhsakuma.jpg'),
     tejasv: require('../../img/tejasv.jpg'),
     tshridha: require('../../img/tshridha.JPG'),
-    ryansy: require('../../img/ryansy.jpg')
+    ryansy: require('../../img/ryansy.jpg'),
+    zcsu: require('../../img/zcsu.jpg'),
+    sder: require('../../img/sder.jpg')
 };
 
 export default Images;

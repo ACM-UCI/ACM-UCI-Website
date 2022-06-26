@@ -40,15 +40,14 @@ class Events extends Component {
         this.content = (
             <div>
                 {/* <h2 className="mt-3">Next Event</h2> */}
-
                 <h3 className="mt-3">Weekly Schedule</h3>
                 <Card body className="card-body">
-                    <div>ACM Practice - Fall 2020</div>
+                    <div>ACM Practice - Fall 2022</div>
                     <div>
-                        <strong>Wednesday: </strong>
-                        Discord, 7:00 - 9:00 pm <br />
+                        <strong>Tuesday: </strong>
+                        DBH 4011, 6:00 - 8:00 pm <br />
                         <strong>Friday: </strong>
-                        Discord, 7:00 - 9:00 pm
+                        DBH 4011, 6:00 - 8:00 pm
                     </div>
                 </Card>
                 <hr className="event-line" />
@@ -138,8 +137,9 @@ class Events extends Component {
                                 marginLeft: '5%',
                                 paddingRight: '5%'
                             }}>
-                            <h2 id="upcoming-events" className="mt-3">
-                                Upcoming Events
+                            <h1>Past Events</h1>
+                            <h2 id="fall-2020-events" className="mt-3">
+                                Fall 2020 Events
                             </h2>
                             {/* First Meeting 2020 */}
                             <Card body className="card-body">
@@ -195,7 +195,7 @@ class Events extends Component {
                                     </i>
                                 </div>
                             </Card>
-                            <h2 id="summer-2020-events" className="mt-3">
+                            <h2 id="fall-2020-events" className="mt-3">
                                 Summer 2020 Events
                             </h2>
                             {/* UCIxUCSD Collab Competition */}

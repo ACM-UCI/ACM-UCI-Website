@@ -1,4 +1,26 @@
 {
+    "2022-2023": {
+        "jerryzl": {
+            "name": "Jerry Li",
+            "position": "Director of Competitions"
+        },
+        "neillt": {
+            "name": "Thomas Neill",
+            "position": "Internal Vice President (incoming)"
+        },
+        "epedley": {
+            "name": "Eric Pedley",
+            "position": "External Vice President (incoming)"
+        },
+        "zcsu": {
+            "name": "Zachary Su",
+            "position": "Treasurer (incoming)"
+        },
+        "sder": {
+            "name": "Sam Der",
+            "position": "Director of Technology (incoming)"
+        }
+    },
     "2021-2022": {
         "pbaldara": {
             "name": "Paul Baldaray",
@@ -31,26 +53,6 @@
         "tshridha": {
             "name": "Tuan Shridhar",
             "position": "Director of Innnovation"
-        },
-        "neillt": {
-            "name": "Thomas Neill",
-            "position": "Internal Vice President (incoming)"
-        },
-        "epedley": {
-            "name": "Eric Pedley",
-            "position": "External Vice President (incoming)"
-        },
-        "zcsu": {
-            "name": "Zachary Su",
-            "position": "Treasurer (incoming)"
-        },
-        "sder": {
-            "name": "Sam Der",
-            "position": "Director of Technology (incoming)"
-        },
-        "pattis": {
-            "name": "Richard E. Pattis",
-            "position": "Faculty Advisor"
         }
     },
     "2020-2021": {

@@ -52,8 +52,8 @@ export default class Data extends Component {
         };
 
         var quarters = config['quarters'];
-        for (var i in quarters) {
-            for (var j = 1; j <= 11; j++) {
+        for (var i = quarters.length - 1; i >= 0; i--) {
+            for (var j = 11; j >= 1; j--) {
                 this.options.sess.push(
                     <option key={'sessopt' + quarters[i] + j.toString() + '/1'}>
                         {quarters[i] + '/' + j.toString() + '/1'}

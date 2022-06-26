@@ -17,3 +17,7 @@
 .link:hover {
   color: #02284B;
 }
+
+body {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
