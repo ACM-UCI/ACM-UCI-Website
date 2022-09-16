@@ -1,4 +1,4 @@
-import config, { Meeting } from '../components/config.js';
+import config, { Meeting } from '../components/config';
 
 const START_TIMES = config.dates;
 const QUARTERS = config.quarters;
@@ -14,26 +14,18 @@ export const state = {
     quarterIndex: undefined,
     week: undefined,
     session: undefined,
-    currentSessionOver: false
+    currentSessionOver: false,
 };
-
-/**
- * Makes a request to external world clock api to get current time in Pacific Daylight Time. (TODO - need to add this functionality)
- * Returns a Promise whose then clause takes a one argument callback function where the argument is the current time Date object.
- */
-export async function initializeSchedule() {
-    const data = {
-        datetime: Date.now()
-    };
-    return await computeSchedule(data).then(st => st);
-}
 
 async function computeSchedule(data) {
     state.datetime = new Date(data.datetime);
 
     // state.datetime = new Date('January 13, 2022 17:00:01'); // Use for testing
     // Verify time is valid ------------------------------------------------------------------
-    if (!(state.datetime instanceof Date) || isNaN(state.datetime.getTime())) {
+    if (
+        !(state.datetime instanceof Date) ||
+        Number.isNaN(state.datetime.getTime())
+    ) {
         return Promise.reject(
             new TypeError(
                 "We noticed that your computer's clock is not set correctly. Please set it correctly for better performance! :)"
@@ -50,7 +42,7 @@ async function computeSchedule(data) {
         q + 1 < START_TIMES.length &&
         START_TIMES[q + 1] < currTimeMilli
     )
-        ++q;
+        q += 1;
     if (q < QUARTERS.length && q < START_TIMES.length) {
         state.quarterStart = START_TIMES[q];
         state.quarter = QUARTERS[q];
@@ -71,10 +63,10 @@ async function computeSchedule(data) {
         q < BOARD_QUARTERS.length &&
         BOARD_QUARTERS[q] < currTimeMilli
     ) {
-        ++q;
+        q += 1;
     }
 
-    --q;
+    q -= 1;
     state.boardQuarterInd = q;
     state.boardQuarter = QUARTERS[q];
 
@@ -89,45 +81,56 @@ async function computeSchedule(data) {
     if (state.week === 11) {
         if (state.quarterIndex < QUARTERS.length - 1) {
             state.week = 0;
-            ++state.quarterIndex;
+            state.quarterIndex += 1;
             state.quarter = QUARTERS[state.quarterIndex];
         }
         if (state.boardQuarterInd < QUARTERS.length - 1) {
             // Automatically allows board to add problems for next quarter if in between quarters
-            ++state.boardQuarterInd;
+            state.boardQuarterInd += 1;
             state.boardQuarter = QUARTERS[state.boardQuarterInd];
         }
     }
 
     // Determine Session of Week -------------------------------------------------------------
-    const weekTimeElapsed = (currTimeMilli - state.quarterStart) % 604800000; // 604800000 milliseconds in a week
+    // 604800000 milliseconds in a week
+    const weekTimeElapsed = (currTimeMilli - state.quarterStart) % 604800000;
 
     let i = 0;
     while (
         i < MEETINGS.length &&
         MEETINGS[i].determineState(weekTimeElapsed) === Meeting.STATE_ENDED()
     )
-        ++i;
+        i += 1;
 
     if (i >= MEETINGS.length) {
         state.session = MEETINGS.length + 1; // Must do +1 because of 1-based indexing in Week.js
         state.currentSessionOver = true;
+    } else if (
+        MEETINGS[i].determineState(weekTimeElapsed) === Meeting.STATE_PRIOR()
+    ) {
+        // Sets it to previous session and flags it as complete, will not show current session
+        state.session = i;
+        state.currentSessionOver = true;
     } else {
-        if (
-            MEETINGS[i].determineState(weekTimeElapsed) ===
-            Meeting.STATE_PRIOR()
-        ) {
-            state.session = i; // Sets it to previous session and flags it as complete, will not show current session
-            state.currentSessionOver = true;
-        } else {
-            state.session = i + 1; // Must do +1 because of 1-based indexing in Week.js
-            state.currentSessionOver = false;
-        }
+        state.session = i + 1; // Must do +1 because of 1-based indexing in Week.js
+        state.currentSessionOver = false;
     }
-    console.log(state);
 
     state.initialized = true;
     return state;
+}
+
+/**
+ * Makes a request to external world clock api to get current time in Pacific
+ *  Daylight Time. (TODO - need to add this functionality)
+ * Returns a Promise whose then clause takes a one argument callback function
+ *  where the argument is the current time Date object.
+ */
+export async function initializeSchedule() {
+    const data = {
+        datetime: Date.now(),
+    };
+    return computeSchedule(data).then((st) => st);
 }
 
 /**
@@ -140,7 +143,7 @@ export function isInitialized() {
 // Accessor functions
 /**
  * Returns a string representation the current year that can be used to access
- * board.json as well as the logs in the firebase database.
+ * boardMembers.json as well as the logs in the firebase database.
  *
  * Example form: '2019-2020'
  */

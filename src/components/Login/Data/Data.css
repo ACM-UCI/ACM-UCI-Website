@@ -10,3 +10,15 @@
 th, td {
     vertical-align: middle !important;
 }
+
+.page-link {
+    color: black;
+}
+
+.page-link:hover {
+    color: black;
+}
+
+.pagination {
+    margin: 0;
+}

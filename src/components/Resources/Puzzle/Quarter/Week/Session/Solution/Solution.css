@@ -1,11 +1,6 @@
 .big {
     width: 80%;
 }
-.fb {
-    height: 50px;
-    width: 50px;
-    margin-top: 20px;
-  }
 
 .btn-sol {
     background-color: white;
@@ -17,4 +12,8 @@
     object-fit: contain;
     padding: 0;
     margin: 0;
+}
+
+.card-title a {
+    text-decoration: none;
 }

@@ -36,7 +36,7 @@ export default function processLink(link) {
     if (link === 'renjied') {
         return [
             'https://www.facebook.com/profile.php?id=100007416798455',
-            jacky
+            jacky,
         ];
     }
     if (link === 'cdipalma') {
@@ -48,7 +48,7 @@ export default function processLink(link) {
     if (link === 'zhonghas') {
         return [
             'https://www.facebook.com/profile.php?id=100012887927941',
-            frank
+            frank,
         ];
     }
     if (link === 'timothy4') {

@@ -21,5 +21,5 @@
 
 ### src/components/Board/index.js
 * [ ] If new school year, add any new board members with their photos to the board
-### src/components/Board/board.json
+### src/components/Board/boardMembers.json
 * [ ] If new school year, update new board

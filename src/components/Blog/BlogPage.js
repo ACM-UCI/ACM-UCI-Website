@@ -3,7 +3,13 @@
  */
 
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Container, Col, Card } from 'reactstrap';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    Container,
+    Col,
+    Card,
+} from 'react-bootstrap';
 import { HashLink as Link } from 'react-router-hash-link';
 import { Redirect } from 'react-router-dom';
 
@@ -30,7 +36,7 @@ const MONTHS = [
     'Sep',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
 ];
 
 class BlogPageContent extends Component {
@@ -40,7 +46,7 @@ class BlogPageContent extends Component {
         this.state = {
             title: props.title,
             post: null,
-            redirect: false // will be set true when invalid data received from database
+            redirect: false, // will be set true when invalid data received from database
         };
 
         // Bind Local Functions
@@ -85,7 +91,8 @@ class BlogPageContent extends Component {
                 <Container
                     className="event-body"
                     fluid
-                    style={{ margin: 0, padding: 0 }}>
+                    style={{ margin: 0, padding: 0 }}
+                >
                     <div className="psuedo" />
                     <br />
                     <Col
@@ -96,8 +103,9 @@ class BlogPageContent extends Component {
                             paddingTop: '20px',
                             marginLeft: '10%',
                             marginRight: '0',
-                            paddingRight: '0'
-                        }}>
+                            paddingRight: '0',
+                        }}
+                    >
                         <Card body className="card-body-blog">
                             {post !== null && (
                                 <React.Fragment>
@@ -105,7 +113,8 @@ class BlogPageContent extends Component {
                                         <BreadcrumbItem>
                                             <Link
                                                 to="/blog"
-                                                style={{ color: '#6DB6E2' }}>
+                                                style={{ color: '#6DB6E2' }}
+                                            >
                                                 Home
                                             </Link>
                                         </BreadcrumbItem>
@@ -128,7 +137,7 @@ class BlogPageContent extends Component {
                                         {/* Renders description as markdown parsed html */}
                                         <ReactMarkdown
                                             source={post.description}
-                                            transformImageUri={uri => {
+                                            transformImageUri={(uri) => {
                                                 if (uri.match(/%IMG_PATH%/)) {
                                                     return IMG_PATH(
                                                         uri.replace(
@@ -140,7 +149,7 @@ class BlogPageContent extends Component {
                                                     return uri;
                                                 }
                                             }}
-                                            transformLinkUri={uri => {
+                                            transformLinkUri={(uri) => {
                                                 if (
                                                     uri !== undefined &&
                                                     uri.match(/%BASE_URL%/)
@@ -155,7 +164,7 @@ class BlogPageContent extends Component {
                                             }}
                                             renderers={{
                                                 image: ImageRenderer,
-                                                link: DescriptionLink
+                                                link: DescriptionLink,
                                             }}
                                         />
                                     </div>

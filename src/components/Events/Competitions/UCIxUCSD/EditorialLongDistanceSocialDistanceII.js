@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Container } from 'reactstrap';
+import { Row, Button, Container } from 'react-bootstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 
 import 'katex/dist/katex.min.css';
@@ -14,7 +14,8 @@ export default function EditorialLongDistanceSocialDistanceII() {
         <Container className="mx-auto text-center">
             <a
                 href="https://www.hackerrank.com/contests/uci-ucsd-quarantine-competition/challenges/long-distance-social-distance/problem"
-                className="problem-link">
+                className="problem-link"
+            >
                 {' '}
                 {/* This should be link to hackerrank problem */}
                 <h1 className="display-3">Social Distancing II</h1>
@@ -38,7 +39,8 @@ export default function EditorialLongDistanceSocialDistanceII() {
                 <Container className="mx-0 w-25">
                     <BlockMath
                         className="text-left"
-                        math="0 \le N \le 10^{18}"></BlockMath>
+                        math="0 \le N \le 10^{18}"
+                    ></BlockMath>
                     <BlockMath className="text-left">1 \le T \le 10</BlockMath>
                 </Container>
             </Container>
@@ -130,19 +132,24 @@ export default function EditorialLongDistanceSocialDistanceII() {
                 <Container className="mx-0 w-25">
                     <BlockMath
                         className="text-left"
-                        math={`f_{\\text{empty}}(m) = f_{\\text{middle}}(m - 1) + f_{\\text{one on left}}(m - 1) + f_{\\text{one in right}}(m - 1) + f_{\\text{empty}}(m - 1) +  f_{\\text{left and right}}(m - 1)`}></BlockMath>
+                        math={`f_{\\text{empty}}(m) = f_{\\text{middle}}(m - 1) + f_{\\text{one on left}}(m - 1) + f_{\\text{one in right}}(m - 1) + f_{\\text{empty}}(m - 1) +  f_{\\text{left and right}}(m - 1)`}
+                    ></BlockMath>
                     <BlockMath
                         className="text-left"
-                        math={`f_{\\text{one on left}}(m) = f_{\\text{one on right}}(m - 1) + f_{\\text{one in middle}}(m - 1) + f_{\\text{empty}}(m - 1)`}></BlockMath>
+                        math={`f_{\\text{one on left}}(m) = f_{\\text{one on right}}(m - 1) + f_{\\text{one in middle}}(m - 1) + f_{\\text{empty}}(m - 1)`}
+                    ></BlockMath>
                     <BlockMath
                         className="text-left"
-                        math={`f_{\\text{middle}}(m) = f_{\\text{one on left}}(m - 1) + f_{\\text{one in right}}(m - 1) + f_{\\text{empty}}(m - 1) +  f_{\\text{left and right}}(m - 1)`}></BlockMath>
+                        math={`f_{\\text{middle}}(m) = f_{\\text{one on left}}(m - 1) + f_{\\text{one in right}}(m - 1) + f_{\\text{empty}}(m - 1) +  f_{\\text{left and right}}(m - 1)`}
+                    ></BlockMath>
                     <BlockMath
                         className="text-left"
-                        math={`f_{\\text{one on right}}(m) = f_{\\text{one on left}}(m - 1) + f_{\\text{one in middle}}(m - 1) + f_{\\text{empty}}(m - 1)`}></BlockMath>
+                        math={`f_{\\text{one on right}}(m) = f_{\\text{one on left}}(m - 1) + f_{\\text{one in middle}}(m - 1) + f_{\\text{empty}}(m - 1)`}
+                    ></BlockMath>
                     <BlockMath
                         className="text-left"
-                        math={`f_{\\text{left and right}}(m) = f_{\\text{middle}}(m - 1) + f_{\\text{empty}}(m - 1)`}></BlockMath>
+                        math={`f_{\\text{left and right}}(m) = f_{\\text{middle}}(m - 1) + f_{\\text{empty}}(m - 1)`}
+                    ></BlockMath>
                 </Container>
                 <p>
                     For simplicity, let's rename the state "empty" to be 0,
@@ -236,13 +243,16 @@ export default function EditorialLongDistanceSocialDistanceII() {
                 <Container className="mx-0 w-25">
                     <BlockMath
                         className="text-left"
-                        math={`f(m) = \\begin{bmatrix}1 && 1 && 1 && 1 && 1 \\\\ 1 && 0 && 1 && 1 && 0 \\\\ 1 && 1 && 0 && 1 && 1 \\\\ 1 && 1 && 1 && 0 && 0 \\\\ 1 && 0 && 1 && 0 && 0 \\end{bmatrix}f(m - 1)`}></BlockMath>
+                        math={`f(m) = \\begin{bmatrix}1 && 1 && 1 && 1 && 1 \\\\ 1 && 0 && 1 && 1 && 0 \\\\ 1 && 1 && 0 && 1 && 1 \\\\ 1 && 1 && 1 && 0 && 0 \\\\ 1 && 0 && 1 && 0 && 0 \\end{bmatrix}f(m - 1)`}
+                    ></BlockMath>
                     <BlockMath
                         className="text-left"
-                        math={`f(1) = \\begin{bmatrix}1 \\\\ 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{bmatrix}`}></BlockMath>
+                        math={`f(1) = \\begin{bmatrix}1 \\\\ 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{bmatrix}`}
+                    ></BlockMath>
                     <BlockMath
                         className="text-left"
-                        math={`f(m) = \\begin{bmatrix}1 && 1 && 1 && 1 && 1 \\\\ 1 && 0 && 1 && 1 && 0 \\\\ 1 && 1 && 0 && 1 && 1 \\\\ 1 && 1 && 1 && 0 && 0 \\\\ 1 && 0 && 1 && 0 && 0 \\end{bmatrix}^{m-1}\\begin{bmatrix}1 \\\\ 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{bmatrix}`}></BlockMath>
+                        math={`f(m) = \\begin{bmatrix}1 && 1 && 1 && 1 && 1 \\\\ 1 && 0 && 1 && 1 && 0 \\\\ 1 && 1 && 0 && 1 && 1 \\\\ 1 && 1 && 1 && 0 && 0 \\\\ 1 && 0 && 1 && 0 && 0 \\end{bmatrix}^{m-1}\\begin{bmatrix}1 \\\\ 1 \\\\ 1 \\\\ 1 \\\\ 1 \\end{bmatrix}`}
+                    ></BlockMath>
                 </Container>
                 <p>
                     You can observe that the above equation is a reexpression of

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Container } from 'reactstrap';
+import { Row, Button, Container } from 'react-bootstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 
 import 'katex/dist/katex.min.css';
@@ -17,7 +17,8 @@ export default function EditorialToiletPaperTravesty() {
                 href="https://www.hackerrank.com/contests/uci-ucsd-quarantine-competition/challenges/toilet-paper-travesty"
                 className="problem-link"
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer"
+            >
                 {/* This should be link to hackerrank problem */}
                 <h1 className="display-3">Toilet Paper Travesty</h1>
             </a>
@@ -245,7 +246,8 @@ export default function EditorialToiletPaperTravesty() {
                             className="body-link"
                             href="https://codeforces.com/edu/courses"
                             targe="_blank"
-                            rel="noopener noreferrer">
+                            rel="noopener noreferrer"
+                        >
                             ITMO Academy Pilot Course
                         </a>{' '}
                         on Codeforces. This is an ongoing series that provides

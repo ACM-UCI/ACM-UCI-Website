@@ -41,3 +41,12 @@
     background-color: rgb(3, 24, 44);
     color: white;
 }
+
+.accordion {
+    margin-top: 2rem;
+}
+
+.accordion-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+}

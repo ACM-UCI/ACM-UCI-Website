@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Card, CardBody, CardTitle } from 'reactstrap';
+import { Col, Card } from 'react-bootstrap';
 import './PollCard.css';
 import Popup from './Popup';
 
@@ -19,19 +19,19 @@ export default class PollCard extends Component {
         );
 
         this.obj = (
-            <CardTitle style={{ color: 'white' }}>{props.name} </CardTitle>
+            <Card.Title style={{ color: 'white' }}>{props.name} </Card.Title>
         );
     }
 
     render() {
         return (
             <Card className="poll probcard minh">
-                <CardBody>
+                <Card.Body>
                     <Col>
                         {this.obj}
                         {this.popup}
                     </Col>
-                </CardBody>
+                </Card.Body>
             </Card>
         );
     }

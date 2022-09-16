@@ -1,18 +1,23 @@
+import {
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+    setPersistence,
+    browserLocalPersistence,
+} from 'firebase/auth';
 import Firebase from '../../Firebase';
-import firebase from 'firebase/app';
-import 'firebase/auth';
 /**
  * Auth.js
  * Defines functions relating to firebase user authentication.
  */
 
-const auth = Firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
 const auth_listeners = [];
 
 // Listener for auth state changes
-auth.onAuthStateChanged(u => {
-    auth_listeners.forEach(callback => callback(u));
+auth.onAuthStateChanged((u) => {
+    auth_listeners.forEach((callback) => callback(u));
 });
 
 /**
@@ -34,18 +39,15 @@ export async function getUser() {
  * Handles firebase login.
  * Returns a promise with fulfillment callback argument `user_info` which is user info returned by firebase.
  */
-export async function login() {
-    let user_info = await auth
-        .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(async () => {
-            return await auth.signInWithPopup(provider);
-        })
-        .catch(error => {
+export function login() {
+    const user_info = setPersistence(auth, browserLocalPersistence)
+        .then(() => signInWithPopup(auth, provider))
+        .catch((error) => {
             console.error(error.code);
             console.error(error.message);
         });
 
-    return await user_info;
+    return user_info;
 }
 
 /**

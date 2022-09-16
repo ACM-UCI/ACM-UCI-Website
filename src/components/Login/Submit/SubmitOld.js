@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Col, Row, Button, Form, Input, FormText } from 'reactstrap';
 import firebase from '../../../Firebase';
-import board from '../../Board/board.json';
+import board from '../../Board/boardMembers.json';
 import './Submit.css';
 import config from '../../config.js';
 import Chip from '@material-ui/core/Chip';
@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 // TOOD - Will need to drastically redesign this system to allow greater flexibility
 const vars = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong', 'presentation'],
-    extras: ['event', 'announcement', 'finals', 'thanksgiving', 'poll']
+    extras: ['event', 'announcement', 'finals', 'thanksgiving', 'poll'],
 };
 
 export default class Submit extends Component {
@@ -19,8 +19,8 @@ export default class Submit extends Component {
         super(props);
 
         this.acceptedLangs = '.py';
-        for (var lang in config.supportedLanguage) {
-            this.acceptedLangs += ',.' + lang;
+        for (const lang in config.supportedLanguage) {
+            this.acceptedLangs += `,.${lang}`;
         }
         this.quarter = props.quarter;
         this.week = props.week;
@@ -32,7 +32,7 @@ export default class Submit extends Component {
         this.readCode = this.readCode.bind(this);
         this.err = this.err.bind(this);
         this.state = {
-            loaded: false
+            loaded: false,
         };
 
         this.prompt = 'Upload';
@@ -50,11 +50,11 @@ export default class Submit extends Component {
         }
 
         this.diffSel = [];
-        var i = 0;
+        let i = 0;
 
         for (i = 0; i < vars.difficulties.length; i++) {
             this.diffSel.push(
-                <option key={'opt' + i.toString()}>
+                <option key={`opt${i.toString()}`}>
                     {vars.difficulties[i]}
                 </option>
             );
@@ -62,7 +62,7 @@ export default class Submit extends Component {
         if (props.owner === 'mnovitia' || props.owner === 'ryansy') {
             for (i = 0; i < vars.extras.length; i++) {
                 this.diffSel.push(
-                    <option key={'ex' + i.toString()}>{vars.extras[i]}</option>
+                    <option key={`ex${i.toString()}`}>{vars.extras[i]}</option>
                 );
             }
         }
@@ -72,26 +72,26 @@ export default class Submit extends Component {
         this.status = [];
 
         this.submission = {};
-        for (var key in props.data) {
+        for (const key in props.data) {
             this.submission[key] = props.data[key];
         }
         if (
-            this.submission['Category'] === '' ||
-            this.submission['Category'] === undefined
+            this.submission.Category === '' ||
+            this.submission.Category === undefined
         ) {
-            this.submission['Category'] = [];
+            this.submission.Category = [];
         }
         if (
-            this.submission['Session'] === '' ||
-            this.submission['Session'] === undefined
+            this.submission.Session === '' ||
+            this.submission.Session === undefined
         ) {
-            this.submission['Session'] = [];
+            this.submission.Session = [];
         }
         if (
-            this.submission['Contributor'] === '' ||
-            this.submission['Contributor'] === undefined
+            this.submission.Contributor === '' ||
+            this.submission.Contributor === undefined
         ) {
-            this.submission['Contributor'] = [props.owner];
+            this.submission.Contributor = [props.owner];
         }
 
         this.categories = [];
@@ -168,25 +168,25 @@ export default class Submit extends Component {
                 .update(u);
         }
         // */
-        this.categories = this.data['categories'].sort();
+        this.categories = this.data.categories.sort();
         this.setState({ loaded: true });
     }
 
     updateInputValue(e) {
         if (e.target.id === 'File' && e.target.value !== '') {
-            var file = e.target.files[0];
+            const file = e.target.files[0];
             this.submission.Solution = file.name;
-            var reader = new FileReader();
+            const reader = new FileReader();
             reader.onload = this.readCode;
             reader.readAsText(file);
         } else {
             this.submission[e.target.id] = e.target.value;
             while (
                 e.target.id === 'Link' &&
-                this.submission['Link'].endsWith('/')
+                this.submission.Link.endsWith('/')
             ) {
-                var str = this.submission['Link'];
-                this.submission['Link'] = str.slice(0, str.length - 1);
+                const str = this.submission.Link;
+                this.submission.Link = str.slice(0, str.length - 1);
             }
         }
 
@@ -196,7 +196,7 @@ export default class Submit extends Component {
                 this.isPresentation &&
                 !this.submission.hasOwnProperty('PresNotes')
             ) {
-                this.submission['PresNotes'] = '';
+                this.submission.PresNotes = '';
             } else if (!this.isPresentation) {
                 delete this.submission.PresNotes;
             }
@@ -210,8 +210,8 @@ export default class Submit extends Component {
     }
 
     upload() {
-        var s = this.submission;
-        var errors = [];
+        const s = this.submission;
+        const errors = [];
 
         if (s.Difficulty === 'presentation') {
             // Quick Error Check:
@@ -234,28 +234,25 @@ export default class Submit extends Component {
                     </Alert>
                 );
                 this.setState({
-                    tog: false
+                    tog: false,
                 });
             } else {
                 s.SubmitDate = Date().toString();
                 s.SubmitBy = this.owner;
 
-                let newPostKey = firebase
+                const newPostKey = firebase
                     .database()
                     .ref()
                     .child('submissions')
                     .push().key;
-                let updates = {};
-                updates['/submissions/' + newPostKey] = s;
+                const updates = {};
+                updates[`/submissions/${newPostKey}`] = s;
 
-                firebase
-                    .database()
-                    .ref()
-                    .update(updates, this.err);
+                firebase.database().ref().update(updates, this.err);
                 this.err(null);
 
                 this.setState({
-                    tog: false
+                    tog: false,
                 });
             }
             return;
@@ -333,14 +330,14 @@ export default class Submit extends Component {
 
             // current problem collision checker
             if (s.Difficulty !== 'event') {
-                var problem = null;
-                for (var key in this.data['submissions']) {
-                    if (this.data['submissions'].hasOwnProperty(key)) {
-                        problem = this.data['submissions'][key];
+                let problem = null;
+                for (const key in this.data.submissions) {
+                    if (this.data.submissions.hasOwnProperty(key)) {
+                        problem = this.data.submissions[key];
                         if (problem != null) {
                             if (
                                 (s.Link === problem.Link ||
-                                    s.Link + '/' === problem.Link) &&
+                                    `${s.Link}/` === problem.Link) &&
                                 problem.Link !== this.props.data.Link
                             ) {
                                 errors.push(
@@ -357,10 +354,11 @@ export default class Submit extends Component {
         }
 
         // adding custom categories - TO DO: check if ever gonna have a double update
-        var current_categories = [];
-        for (var c in this.categories)
-            current_categories.push(this.categories[c].toLowerCase()); // case insensitive
-        for (var new_c in s.Category) {
+        const current_categories = [];
+        for (const c in this.categories) {
+            current_categories.push(this.categories[c].toLowerCase());
+        } // case insensitive
+        for (const new_c in s.Category) {
             if (!current_categories.includes(s.Category[new_c].toLowerCase())) {
                 this.categories.push(s.Category[new_c]);
             }
@@ -368,12 +366,12 @@ export default class Submit extends Component {
 
         if (
             !board[config.current].hasOwnProperty(this.owner) &&
-            this.data['logs'].hasOwnProperty(this.owner) &&
-            this.data['logs'][this.owner].hasOwnProperty(this.quarter) &&
-            this.data['logs'][this.owner][this.quarter].hasOwnProperty(
+            this.data.logs.hasOwnProperty(this.owner) &&
+            this.data.logs[this.owner].hasOwnProperty(this.quarter) &&
+            this.data.logs[this.owner][this.quarter].hasOwnProperty(
                 this.week
             ) &&
-            this.data['logs'][this.owner][this.quarter][this.week] >= 5
+            this.data.logs[this.owner][this.quarter][this.week] >= 5
         ) {
             errors.push(
                 <li key={errors.length}>
@@ -390,15 +388,15 @@ export default class Submit extends Component {
                 </Alert>
             );
             this.setState({
-                tog: false
+                tog: false,
             });
         } else {
             s.SubmitDate = Date().toString();
             s.SubmitBy = this.owner;
-            var updates = { categories: this.categories };
-            var conLen = 0;
-            var i = 0;
-            var contrib = '';
+            const updates = { categories: this.categories };
+            let conLen = 0;
+            let i = 0;
+            let contrib = '';
 
             if (
                 vars.difficulties.indexOf(this.props.data.Difficulty) !== -1 &&
@@ -408,15 +406,8 @@ export default class Submit extends Component {
                 conLen = this.props.data.Contributor.length;
                 for (i = 0; i < conLen; i++) {
                     contrib = this.props.data.Contributor[i];
-                    updates[
-                        '/logs/' +
-                            contrib +
-                            '/' +
-                            this.quarter +
-                            '/' +
-                            this.week
-                    ] =
-                        this.data['logs'][contrib][this.quarter][this.week] -
+                    updates[`/logs/${contrib}/${this.quarter}/${this.week}`] =
+                        this.data.logs[contrib][this.quarter][this.week] -
                         1 / conLen;
                 }
             }
@@ -427,34 +418,17 @@ export default class Submit extends Component {
                     contrib = this.submission.Contributor[i];
                     if (
                         updates.hasOwnProperty(
-                            '/logs/' +
-                                contrib +
-                                '/' +
-                                this.quarter +
-                                '/' +
-                                this.week
+                            `/logs/${contrib}/${this.quarter}/${this.week}`
                         )
                     ) {
                         updates[
-                            '/logs/' +
-                                contrib +
-                                '/' +
-                                this.quarter +
-                                '/' +
-                                this.week
+                            `/logs/${contrib}/${this.quarter}/${this.week}`
                         ] += 1 / conLen;
                     } else {
                         updates[
-                            '/logs/' +
-                                contrib +
-                                '/' +
-                                this.quarter +
-                                '/' +
-                                this.week
+                            `/logs/${contrib}/${this.quarter}/${this.week}`
                         ] =
-                            this.data['logs'][contrib][this.quarter][
-                                this.week
-                            ] +
+                            this.data.logs[contrib][this.quarter][this.week] +
                             1 / conLen;
                     }
                 }
@@ -464,28 +438,22 @@ export default class Submit extends Component {
                 this.props.data.Link !== '' &&
                 this.props.data.Link !== undefined
             ) {
-                updates['submissions/' + this.props.x] = s;
-                firebase
-                    .database()
-                    .ref()
-                    .update(updates, this.err);
+                updates[`submissions/${this.props.x}`] = s;
+                firebase.database().ref().update(updates, this.err);
                 this.err(null);
             } else {
-                let newPostKey = firebase
+                const newPostKey = firebase
                     .database()
                     .ref()
                     .child('submissions')
                     .push().key;
-                updates['/submissions/' + newPostKey] = s;
+                updates[`/submissions/${newPostKey}`] = s;
 
-                firebase
-                    .database()
-                    .ref()
-                    .update(updates, this.err);
+                firebase.database().ref().update(updates, this.err);
                 this.err(null);
 
                 this.setState({
-                    tog: false
+                    tog: false,
                 });
             }
         }
@@ -499,7 +467,7 @@ export default class Submit extends Component {
                 </Alert>
             );
             this.setState({
-                tog: false
+                tog: false,
             });
         } else {
             this.status = (
@@ -522,14 +490,15 @@ export default class Submit extends Component {
                             disabled
                             style={{
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
-                                color: '#02284B'
-                            }}>
+                                color: '#02284B',
+                            }}
+                        >
                             Problem Name
                         </button>
                     </Col>
                     <Col>
                         <Input
-                            onChange={evt => this.updateInputValue(evt)}
+                            onChange={(evt) => this.updateInputValue(evt)}
                             id="Name"
                             defaultValue={this.props.data.Name}
                             placeholder="Plz don't make it too long"
@@ -545,14 +514,15 @@ export default class Submit extends Component {
                             disabled
                             style={{
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
-                                color: '#02284B'
-                            }}>
+                                color: '#02284B',
+                            }}
+                        >
                             Problem Link
                         </button>
                     </Col>
                     <Col>
                         <Input
-                            onChange={evt => this.updateInputValue(evt)}
+                            onChange={(evt) => this.updateInputValue(evt)}
                             id="Link"
                             defaultValue={this.props.data.Link}
                             placeholder="Don't include additional queries at the end"
@@ -568,8 +538,9 @@ export default class Submit extends Component {
                             disabled
                             style={{
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
-                                color: '#02284B'
-                            }}>
+                                color: '#02284B',
+                            }}
+                        >
                             Difficulty
                         </button>
                     </Col>
@@ -577,9 +548,10 @@ export default class Submit extends Component {
                         <Input
                             type="select"
                             defaultValue={this.props.data.Difficulty}
-                            onChange={evt => this.updateInputValue(evt)}
+                            onChange={(evt) => this.updateInputValue(evt)}
                             name="select"
-                            id="Difficulty">
+                            id="Difficulty"
+                        >
                             <option>Select one</option>
                             {this.diffSel}
                         </Input>
@@ -588,7 +560,7 @@ export default class Submit extends Component {
                 <br />
 
                 {this.isPresentation && (
-                    <React.Fragment>
+                    <>
                         <Row>
                             <Col className="submitcol">
                                 <button
@@ -597,8 +569,9 @@ export default class Submit extends Component {
                                     style={{
                                         backgroundColor:
                                             'rgba(109, 181, 226, 0.051)',
-                                        color: '#02284B'
-                                    }}>
+                                        color: '#02284B',
+                                    }}
+                                >
                                     Pres Notes Link
                                 </button>
                             </Col>
@@ -606,14 +579,16 @@ export default class Submit extends Component {
                                 <Input
                                     type="text"
                                     defaultValue=""
-                                    onChange={evt => this.updateInputValue(evt)}
+                                    onChange={(evt) =>
+                                        this.updateInputValue(evt)
+                                    }
                                     name="presentation-notes"
                                     id="PresNotes"
                                 />
                             </Col>
                         </Row>
                         <br />
-                    </React.Fragment>
+                    </>
                 )}
 
                 <Row>
@@ -623,8 +598,9 @@ export default class Submit extends Component {
                             disabled
                             style={{
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
-                                color: '#02284B'
-                            }}>
+                                color: '#02284B',
+                            }}
+                        >
                             Contributors
                         </button>
                     </Col>
@@ -638,7 +614,7 @@ export default class Submit extends Component {
                             freeSolo={false}
                             onChange={(evt, value) => {
                                 this.updateInputValue({
-                                    target: { id: 'Contributor', value: value }
+                                    target: { id: 'Contributor', value },
                                 });
                             }}
                             renderTags={(value, getTagProps) =>
@@ -650,7 +626,7 @@ export default class Submit extends Component {
                                     />
                                 ))
                             }
-                            renderInput={params => (
+                            renderInput={(params) => (
                                 <TextField
                                     {...params}
                                     variant="outlined"
@@ -669,8 +645,9 @@ export default class Submit extends Component {
                             disabled
                             style={{
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
-                                color: '#02284B'
-                            }}>
+                                color: '#02284B',
+                            }}
+                        >
                             Categories
                         </button>
                     </Col>
@@ -683,7 +660,7 @@ export default class Submit extends Component {
                             freeSolo
                             onChange={(evt, value) => {
                                 this.updateInputValue({
-                                    target: { id: 'Category', value: value }
+                                    target: { id: 'Category', value },
                                 });
                             }}
                             renderTags={(value, getTagProps) =>
@@ -695,7 +672,7 @@ export default class Submit extends Component {
                                     />
                                 ))
                             }
-                            renderInput={params => (
+                            renderInput={(params) => (
                                 <TextField
                                     {...params}
                                     variant="outlined"
@@ -715,8 +692,9 @@ export default class Submit extends Component {
                             disabled
                             style={{
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
-                                color: '#02284B'
-                            }}>
+                                color: '#02284B',
+                            }}
+                        >
                             Notes
                         </button>
                     </Col>
@@ -727,7 +705,7 @@ export default class Submit extends Component {
                             placeholder="Optional. Place each point in a new line"
                             value={this.submission.Note}
                             id="Note"
-                            onChange={evt => this.updateInputValue(evt)}
+                            onChange={(evt) => this.updateInputValue(evt)}
                         />
                     </Col>
                 </Row>
@@ -740,8 +718,9 @@ export default class Submit extends Component {
                             disabled
                             style={{
                                 backgroundColor: 'rgba(109, 181, 226, 0.051)',
-                                color: '#02284B'
-                            }}>
+                                color: '#02284B',
+                            }}
+                        >
                             Solution
                         </button>
                     </Col>
@@ -751,7 +730,7 @@ export default class Submit extends Component {
                             name="file"
                             id="File"
                             accept={this.acceptedLangs}
-                            onChange={evt => this.updateInputValue(evt)}
+                            onChange={(evt) => this.updateInputValue(evt)}
                         />
                         {this.filename}
                         <FormText color="muted" style={{ textAlign: 'left' }}>

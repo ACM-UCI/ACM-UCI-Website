@@ -46,8 +46,11 @@
 }
 
 .formsubmit{
-    border: 10px solid rgb(4, 63, 117);
-    padding: 5%;
+    padding: 5% 1%;
     margin-right: 5%;
     margin-left: 5%;
+}
+
+.formsubmit legend {
+    width: auto;
 }

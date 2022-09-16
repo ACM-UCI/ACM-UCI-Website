@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Container } from 'reactstrap';
+import { Row, Button, Container } from 'react-bootstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 
 import 'katex/dist/katex.min.css';
@@ -13,7 +13,8 @@ export default function EditorialDeadlineDash() {
         <Container className="mx-auto text-center">
             <a
                 href="https://www.hackerrank.com/contests/uci-ucsd-quarantine-competition/challenges/deadline-dash"
-                className="problem-link">
+                className="problem-link"
+            >
                 {' '}
                 {/* This should be link to hackerrank problem */}
                 <h1 className="display-3">Deadline Dash</h1>

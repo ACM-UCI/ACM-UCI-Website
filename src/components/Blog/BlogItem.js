@@ -5,14 +5,7 @@
 
 import React from 'react';
 
-import {
-    NavLink,
-    Card,
-    CardTitle,
-    CardSubtitle,
-    CardImg,
-    CardBody
-} from 'reactstrap';
+import { NavLink, Card, CardSubtitle, CardImg } from 'react-bootstrap';
 
 import { HashLink as Link } from 'react-router-hash-link';
 
@@ -29,7 +22,7 @@ const MONTHS = [
     'Sep',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
 ];
 
 export default function BlogItem(props) {
@@ -39,16 +32,16 @@ export default function BlogItem(props) {
         <NavLink tag={Link} to={'/blog/' + route}>
             <Card className="blogcard">
                 <CardImg className="card-img" src={IMG_PATH(`./${post.img}`)} />
-                <CardBody>
-                    <CardTitle style={{ fontWeight: 'bold' }}>
+                <Card.Body>
+                    <Card.Title style={{ fontWeight: 'bold' }}>
                         {post.title}
-                    </CardTitle>
+                    </Card.Title>
                     <CardSubtitle>
                         {`by ${post.author} (${MONTHS[post.month - 1]} ${
                             post.day
                         })`}
                     </CardSubtitle>
-                </CardBody>
+                </Card.Body>
             </Card>
         </NavLink>
     );

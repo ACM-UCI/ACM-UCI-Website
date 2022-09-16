@@ -1,0 +1,19 @@
+h2 {
+    font-weight: bold;
+}
+
+.About p {
+    font-size: 18px;
+}
+
+.About .row {
+    padding: 3em 2em;
+}
+
+.row > h2, .row > p {
+    text-align: center;
+}
+
+.About .row img {
+    width: 75%;
+}

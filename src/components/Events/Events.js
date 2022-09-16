@@ -1,13 +1,5 @@
 import React, { Component } from 'react';
-import {
-    Container,
-    Row,
-    Col,
-    Card,
-    CardImg,
-    CardBody,
-    Button
-} from 'reactstrap';
+import { Container, Row, Col, Card, CardImg, Button } from 'react-bootstrap';
 import { HashLink as Link } from 'react-router-hash-link';
 import Navigation from '../Navbar/Navbar';
 import Banner from '../Banner/Banner';
@@ -35,7 +27,7 @@ class Events extends Component {
         this.scroll = this.scroll.bind(this);
         window.onscroll = this.scroll;
         this.state = {
-            tog: false
+            tog: false,
         };
         this.content = (
             <div>
@@ -56,13 +48,15 @@ class Events extends Component {
                     <div>
                         <Link
                             style={{ color: '#32587B' }}
-                            to="/events#upcoming-events">
+                            to="/events#upcoming-events"
+                        >
                             Upcoming Events
                         </Link>{' '}
                         <br />
                         <Link
                             style={{ color: '#32587B' }}
-                            to="/events#2019-fall-events">
+                            to="/events#2019-fall-events"
+                        >
                             2019-2020
                         </Link>{' '}
                         <br />
@@ -82,8 +76,9 @@ class Events extends Component {
                     maxWidth: '30%',
                     padding: '2%',
                     marginRight: '5%',
-                    paddingLeft: '1%'
-                }}>
+                    paddingLeft: '1%',
+                }}
+            >
                 {this.content}
             </Col>
         );
@@ -105,14 +100,15 @@ class Events extends Component {
                                 Math.max(0 - this.y, 20).toString() + 'px',
                             paddingBottom: '0',
                             marginRight: '5%',
-                            paddingLeft: '1%'
-                        }}>
+                            paddingLeft: '1%',
+                        }}
+                    >
                         {this.content}
                     </Col>
                 );
             }
             this.setState({
-                tog: true
+                tog: true,
             });
         }
     }
@@ -135,8 +131,9 @@ class Events extends Component {
                                 padding: '2%',
                                 paddingTop: '20px',
                                 marginLeft: '5%',
-                                paddingRight: '5%'
-                            }}>
+                                paddingRight: '5%',
+                            }}
+                        >
                             <h1>Past Events</h1>
                             <h2 id="fall-2020-events" className="mt-3">
                                 Fall 2020 Events
@@ -147,7 +144,8 @@ class Events extends Component {
                                     <Row>
                                         <Col
                                             xs="auto"
-                                            className="text-left px-0">
+                                            className="text-left px-0"
+                                        >
                                             <h3>
                                                 1st Meeting: The Pizza is
                                                 Virtual
@@ -175,7 +173,8 @@ class Events extends Component {
                                         style={{ color: '#32587B' }}
                                         href="https://discord.gg/MCtKPxC"
                                         target="_blank"
-                                        rel="noopener noreferrer">
+                                        rel="noopener noreferrer"
+                                    >
                                         Discord
                                     </a>
                                     . Learn about ACM@UCI. Meet the board. Meet
@@ -184,7 +183,8 @@ class Events extends Component {
                                         style={{ color: '#32587B' }}
                                         href="https://codeforces.com/profile/tourist"
                                         target="_blank"
-                                        rel="noopener noreferrer">
+                                        rel="noopener noreferrer"
+                                    >
                                         tourist
                                     </a>
                                     .
@@ -204,7 +204,8 @@ class Events extends Component {
                                     <Row>
                                         <Col
                                             xs="auto"
-                                            className="text-left px-0">
+                                            className="text-left px-0"
+                                        >
                                             <h3>
                                                 ACM UCSD x UCI Competition
                                                 (Sponsored by Service Now)
@@ -213,12 +214,14 @@ class Events extends Component {
                                         <Col xs="auto"></Col>
                                         <Col
                                             xs="auto"
-                                            className="text-right px-0 ml-auto">
+                                            className="text-right px-0 ml-auto"
+                                        >
                                             <Button
                                                 href="https://www.hackerrank.com/uci-ucsd-quarantine-competition"
                                                 size="lg"
                                                 target="_blank"
-                                                rel="noopener noreferrer">
+                                                rel="noopener noreferrer"
+                                            >
                                                 Sign Up
                                             </Button>
                                         </Col>
@@ -261,7 +264,8 @@ class Events extends Component {
                                                     'https://www.facebook.com/events/664339430844292/'
                                                 }
                                                 target="_blank"
-                                                rel="noopener noreferrer">
+                                                rel="noopener noreferrer"
+                                            >
                                                 {` Facebook `}
                                             </a>
                                             to stay up to date with this event
@@ -274,7 +278,8 @@ class Events extends Component {
                                                     'https://www.hackerrank.com/uci-ucsd-quarantine-competition'
                                                 }
                                                 target="_blank"
-                                                rel="noopener noreferrer">
+                                                rel="noopener noreferrer"
+                                            >
                                                 {` Here `}
                                             </a>
                                         </li>
@@ -284,7 +289,8 @@ class Events extends Component {
                                                 style={{ color: '#3b5998' }}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                href="https://ucsd.zoom.us/j/99419539223">
+                                                href="https://ucsd.zoom.us/j/99419539223"
+                                            >
                                                 https://ucsd.zoom.us/j/99419539223
                                             </a>
                                         </li>
@@ -300,7 +306,8 @@ class Events extends Component {
                                     <Row>
                                         <Col
                                             xs="auto"
-                                            className="text-left px-0">
+                                            className="text-left px-0"
+                                        >
                                             <h3>
                                                 ACM Internal Competition
                                                 (Sponsored by Facebook)
@@ -309,12 +316,14 @@ class Events extends Component {
                                         <Col xs="auto"></Col>
                                         <Col
                                             xs="auto"
-                                            className="text-right px-0 ml-auto">
+                                            className="text-right px-0 ml-auto"
+                                        >
                                             <Button
                                                 href="https://forms.gle/zu1cUPvPuoEbKejN6"
                                                 size="lg"
                                                 target="_blank"
-                                                rel="noopener noreferrer">
+                                                rel="noopener noreferrer"
+                                            >
                                                 Sign Up
                                             </Button>
                                         </Col>
@@ -352,7 +361,8 @@ class Events extends Component {
                                                     'https://www.facebook.com/events/568104980579743/?active_tab=about'
                                                 }
                                                 target="_blank"
-                                                rel="noopener noreferrer">
+                                                rel="noopener noreferrer"
+                                            >
                                                 {` Facebook `}
                                             </a>
                                             to stay up to date with this event
@@ -365,7 +375,8 @@ class Events extends Component {
                                                     'https://forms.gle/zu1cUPvPuoEbKejN6'
                                                 }
                                                 target="_blank"
-                                                rel="noopener noreferrer">
+                                                rel="noopener noreferrer"
+                                            >
                                                 {` Here `}
                                             </a>
                                         </li>
@@ -394,7 +405,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={acm_meeting}
                                         alt=""
@@ -407,7 +418,8 @@ class Events extends Component {
                                         style={{ color: '#3b5998' }}
                                         href={
                                             'https://www.facebook.com/events/2396693600444034/?active_tab=about'
-                                        }>
+                                        }
+                                    >
                                         {' '}
                                         Facebook
                                     </a>
@@ -430,7 +442,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={ieeextreme13}
                                         alt=""
@@ -492,7 +504,8 @@ class Events extends Component {
                                     <Link
                                         style={{ color: '#32587B' }}
                                         to="/blog/ieeextreme13"
-                                        target="_blank">
+                                        target="_blank"
+                                    >
                                         blog
                                     </Link>
                                     {'!'}
@@ -510,7 +523,8 @@ class Events extends Component {
                                             style={{ color: '#32587B' }}
                                             href="https://open.kattis.com/contests/gsp4oi"
                                             target="_blank"
-                                            rel="noopener noreferrer">
+                                            rel="noopener noreferrer"
+                                        >
                                             Kattis
                                         </a>
                                     </i>
@@ -522,7 +536,8 @@ class Events extends Component {
                                         href="http://bit.ly/32aZ6G0"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        style={{ color: '#32587B' }}>
+                                        style={{ color: '#32587B' }}
+                                    >
                                         http://bit.ly/32aZ6G0
                                     </a>
                                     <br />
@@ -531,7 +546,8 @@ class Events extends Component {
                                         style={{ color: '#32587B' }}
                                         href="https://open.kattis.com/contests/gsp4oi"
                                         rel="noopener noreferrer"
-                                        target="_blank">
+                                        target="_blank"
+                                    >
                                         https://open.kattis.com/contests/gsp4oi
                                     </a>
                                     <hr className="event-line" />
@@ -548,7 +564,8 @@ class Events extends Component {
                                         href="http://bit.ly/32aZ6G0"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        style={{ color: '#32587B' }}>
+                                        style={{ color: '#32587B' }}
+                                    >
                                         {' '}
                                         link
                                     </a>
@@ -571,7 +588,8 @@ class Events extends Component {
                                         href="http://bit.ly/32aZ6G0"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        style={{ color: '#32587B' }}>
+                                        style={{ color: '#32587B' }}
+                                    >
                                         {' '}
                                         interest form
                                     </a>
@@ -612,7 +630,8 @@ class Events extends Component {
                                     this
                                     <a
                                         href="mailto: acm@uci.edu?subject=[ICPC-Qual-2019]"
-                                        style={{ color: '#32587B' }}>
+                                        style={{ color: '#32587B' }}
+                                    >
                                         {' '}
                                         email{' '}
                                     </a>
@@ -621,7 +640,8 @@ class Events extends Component {
                                     performance is recorded,
                                     <a
                                         href="mailto: acm@uci.edu?subject=[ICPC-Qual-2019-Sub]"
-                                        style={{ color: '#32587B' }}>
+                                        style={{ color: '#32587B' }}
+                                    >
                                         {' '}
                                         email a screenshot of your position on
                                         the leaderboard{' '}
@@ -653,7 +673,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={facebooktech}
                                         alt=""
@@ -697,7 +717,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={uipath}
                                         alt=""
@@ -743,7 +763,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={junlintalk}
                                         alt=""
@@ -785,7 +805,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={pooyatalk}
                                         alt=""
@@ -826,7 +846,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={bryontalk}
                                         alt=""
@@ -868,7 +888,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={chinmaytalk}
                                         alt=""
@@ -904,7 +924,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={arnetalk}
                                         alt=""
@@ -946,7 +966,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={jenstalk}
                                         alt=""
@@ -987,7 +1007,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={jackytalk}
                                         alt=""
@@ -1016,7 +1036,8 @@ class Events extends Component {
                                 <a
                                     href="https://www.facebook.com/events/558100287990483/"
                                     target="_blank"
-                                    rel="noopener noreferrer">
+                                    rel="noopener noreferrer"
+                                >
                                     <CardImg
                                         top
                                         width="100%"
@@ -1024,7 +1045,7 @@ class Events extends Component {
                                         alt="girl coding nights"
                                     />
                                 </a>
-                                <CardBody>
+                                <Card.Body>
                                     <div>
                                         Girls' Coding Nights - January 23rd, DBH
                                         4011 @ 5 - 6 pm
@@ -1044,12 +1065,13 @@ class Events extends Component {
                                     <a
                                         href="https://www.facebook.com/events/558100287990483/"
                                         target="_blank"
-                                        rel="noopener noreferrer">
+                                        rel="noopener noreferrer"
+                                    >
                                         <Button className="event-button">
                                             RSVP For This Event
                                         </Button>
                                     </a>
-                                </CardBody>
+                                </Card.Body>
                             </Card>
 
                             {/* KARTHIK */}
@@ -1068,7 +1090,7 @@ class Events extends Component {
                                     <hr className="event-line" />
                                     <img
                                         style={{
-                                            width: '100%'
+                                            width: '100%',
                                         }}
                                         src={karthiktalk}
                                         alt=""

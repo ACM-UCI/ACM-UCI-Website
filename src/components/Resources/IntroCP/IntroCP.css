@@ -14,3 +14,11 @@
 .modal-body img {
   width: 100%;
 }
+
+.intro-to-cp pre {
+    border-radius: 5px;
+}
+
+.nav-tabs .nav-link {
+    color: black !important;
+}

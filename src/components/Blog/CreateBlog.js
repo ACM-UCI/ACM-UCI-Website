@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FormGroup, Input } from 'reactstrap';
+import { FormGroup, Input } from 'react-bootstrap';
 import { ButtonGroup, Button, Tooltip } from '@material-ui/core';
 import {
     FormatBold,
@@ -10,7 +10,7 @@ import {
     InsertPhoto,
     InsertLink,
     KeyboardTab,
-    Title
+    Title,
 } from '@material-ui/icons';
 
 export default function CreateBlog(props) {
@@ -68,24 +68,25 @@ export default function CreateBlog(props) {
                     variant="contained"
                     color="primary"
                     aria-label="contained primary button group"
-                    className="mx-3">
+                    className="mx-3"
+                >
                     <Tooltip title="Header">
-                        <Button onClick={e => insert('# ', true)}>
+                        <Button onClick={(e) => insert('# ', true)}>
                             <Title />
                         </Button>
                     </Tooltip>
                     <Tooltip title="Bold">
-                        <Button onClick={e => wrap('**%Text%**', 2)}>
+                        <Button onClick={(e) => wrap('**%Text%**', 2)}>
                             <FormatBold />
                         </Button>
                     </Tooltip>
                     <Tooltip title="Italics">
-                        <Button onClick={e => wrap('*%Text%*', 1)}>
+                        <Button onClick={(e) => wrap('*%Text%*', 1)}>
                             <FormatItalic />
                         </Button>
                     </Tooltip>
                     <Tooltip title="Indent">
-                        <Button onClick={e => indent()}>
+                        <Button onClick={(e) => indent()}>
                             <KeyboardTab />
                         </Button>
                     </Tooltip>
@@ -95,14 +96,15 @@ export default function CreateBlog(props) {
                     variant="contained"
                     color="primary"
                     aria-label="contained primary button group"
-                    className="mx-3">
+                    className="mx-3"
+                >
                     <Tooltip title="Bullet List">
-                        <Button onClick={e => insert('* ', true)}>
+                        <Button onClick={(e) => insert('* ', true)}>
                             <FormatListBulleted />
                         </Button>
                     </Tooltip>
                     <Tooltip title="Numbered List">
-                        <Button onClick={e => insert('1. ', true)}>
+                        <Button onClick={(e) => insert('1. ', true)}>
                             <FormatListNumbered />
                         </Button>
                     </Tooltip>
@@ -111,18 +113,21 @@ export default function CreateBlog(props) {
                     variant="contained"
                     color="primary"
                     aria-label="contained primary button group"
-                    className="mx-3">
+                    className="mx-3"
+                >
                     <Tooltip title="Insert Photo">
                         <Button
-                            onClick={e =>
+                            onClick={(e) =>
                                 wrap('![Description](%IMG_PATH%%Text%)')
-                            }>
+                            }
+                        >
                             <InsertPhoto />
                         </Button>
                     </Tooltip>
                     <Tooltip title="Insert Link">
                         <Button
-                            onClick={e => wrap('[%Text%](%BASE_URL%%Text%)')}>
+                            onClick={(e) => wrap('[%Text%](%BASE_URL%%Text%)')}
+                        >
                             <InsertLink />
                         </Button>
                     </Tooltip>
@@ -134,7 +139,7 @@ export default function CreateBlog(props) {
                     type="textarea"
                     id="editor"
                     style={{ fontFamily: '"Courier New", monospaced' }}
-                    onChange={e => props.setPostData(null, e.target.value)}
+                    onChange={(e) => props.setPostData(null, e.target.value)}
                 />
             </FormGroup>
         </React.Fragment>

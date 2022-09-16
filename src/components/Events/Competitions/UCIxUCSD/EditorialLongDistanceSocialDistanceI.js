@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Container } from 'reactstrap';
+import { Row, Button, Container } from 'react-bootstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 
 import 'katex/dist/katex.min.css';
@@ -17,7 +17,8 @@ export default function EditorialTemplate() {
                 href="https://www.hackerrank.com/contests/uci-ucsd-quarantine-competition/challenges/long-distance-social-distance-pt-1"
                 className="problem-link"
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener noreferrer"
+            >
                 {' '}
                 {/* This should be link to hackerrank problem */}
                 <h1 className="display-3">Long Distance Social Distance I</h1>
@@ -166,7 +167,8 @@ export default function EditorialTemplate() {
                         className="body-link"
                         href="https://mathworld.wolfram.com/Graph.html"
                         target="_blank"
-                        rel="noopener noreferrer">
+                        rel="noopener noreferrer"
+                    >
                         Graph
                     </a>{' '}
                     problem. In fact, it is a very specific type of graph: it is
@@ -175,7 +177,8 @@ export default function EditorialTemplate() {
                         className="body-link"
                         href="https://mathworld.wolfram.com/LatticeGraph.html"
                         target="_blank"
-                        rel="noopener noreferrer">
+                        rel="noopener noreferrer"
+                    >
                         Lattice Graph
                     </a>
                     .
@@ -188,7 +191,8 @@ export default function EditorialTemplate() {
                         className="body-link"
                         href="https://mathworld.wolfram.com/MaximumIndependentVertexSet.html"
                         target="_blank"
-                        rel="noopener noreferrer">
+                        rel="noopener noreferrer"
+                    >
                         The Maximium Independent Vertex Set
                     </a>
                     .
@@ -199,7 +203,8 @@ export default function EditorialTemplate() {
                         className="body-link"
                         href="https://en.wikipedia.org/wiki/NP-completeness"
                         target="_blank"
-                        rel="noopener noreferrer">
+                        rel="noopener noreferrer"
+                    >
                         NP Complete
                     </a>{' '}
                     problem. NP is a classification of decision based problems
@@ -208,7 +213,8 @@ export default function EditorialTemplate() {
                         className="body-link"
                         href="https://en.wikipedia.org/wiki/Nondeterministic_Turing_machine"
                         target="_blank"
-                        rel="noopener noreferrer">
+                        rel="noopener noreferrer"
+                    >
                         non-deterministic Turing Machine
                     </a>{' '}
                     in "non-deterministic polynomial time" - hence the name

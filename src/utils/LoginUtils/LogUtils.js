@@ -1,4 +1,4 @@
-import board from '../../components/Board/board.json';
+import board from '../../components/Board/boardMembers.json';
 
 /**
  * Defines a helper class for tracking the 3 maximum values in a set.
@@ -12,9 +12,11 @@ export class Max {
     get gold() {
         return this.max[0];
     }
+
     get silver() {
         return this.max[1];
     }
+
     get bronze() {
         return this.max[2];
     }
@@ -22,6 +24,7 @@ export class Max {
     reset() {
         this.max = [0, 0, 0];
     }
+
     // Mutators
     update(potVal) {
         // Bubble value to correct postion
@@ -48,7 +51,7 @@ export class Max {
 const extcolumns = [
     { columnName: 'Name', width: 170 },
     { columnName: 'score', align: 'center' },
-    { columnName: 'tot', align: 'center' }
+    { columnName: 'tot', align: 'center' },
 ];
 const columns = [{ name: 'Name' }];
 
@@ -69,7 +72,7 @@ export const filters = { ALL: 1, BOARD: 2, MEMBER: 3 };
 
 /**
  * Returns a true if the member is included in the filter and should be rendered.
- * @param {string} member The string of the members name as represented in board.json
+ * @param {string} member The string of the members name as represented in boardMembers.json
  * @param {year} string representing the year.
  * @param {int} filter An integer corresponding the enum filters.
  */

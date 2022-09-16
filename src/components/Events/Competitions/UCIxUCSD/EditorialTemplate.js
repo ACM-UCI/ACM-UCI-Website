@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Container } from 'reactstrap';
+import { Row, Button, Container } from 'react-bootstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 
 import 'katex/dist/katex.min.css';

@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Navigation from '../Navbar/Navbar';
@@ -22,13 +22,13 @@ class Blog extends Component {
 
         this.state = {
             posts: [],
-            authenticated: false
+            authenticated: false,
         };
 
         // Bind Local Function
         this.loadBlogPosts = this.loadBlogPosts.bind(this);
 
-        addAuthListener(u => this.setState({ authenticated: u !== null }));
+        addAuthListener((u) => this.setState({ authenticated: u !== null }));
     }
 
     // Callback for updating this.state.posts after database fetch complete
@@ -60,7 +60,7 @@ class Blog extends Component {
 
         // Generate BlogItem components
         // TODO when too many posts may need to split among multiple rows
-        let blogItems = this.state.posts.map(post => {
+        let blogItems = this.state.posts.map((post) => {
             return (
                 <Col md="4" key={post[0]}>
                     <BlogItem post={post} />
@@ -75,7 +75,8 @@ class Blog extends Component {
                 <Container
                     className="event-body"
                     fluid
-                    style={{ margin: 0, padding: 0 }}>
+                    style={{ margin: 0, padding: 0 }}
+                >
                     <div className="pseudo" />
                     {this.state.authenticated === true && (
                         <Row>

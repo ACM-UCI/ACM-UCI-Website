@@ -19,8 +19,8 @@ import {
     Modal,
     ModalHeader,
     ModalBody,
-    ModalFooter
-} from 'reactstrap';
+    ModalFooter,
+} from 'react-bootstrap';
 import ReactMarkdown from 'react-markdown';
 import {
     Paper,
@@ -30,7 +30,7 @@ import {
     ExpansionPanel,
     ExpansionPanelSummary,
     ExpansionPanelDetails,
-    Typography
+    Typography,
 } from '@material-ui/core';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 import { Redirect, Link } from 'react-router-dom';
@@ -54,7 +54,8 @@ function TabPanel(props) {
             hidden={value !== index}
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
-            {...other}>
+            {...other}
+        >
             {value === index && <Box p={3}>{children}</Box>}
         </Typography>
     );
@@ -84,10 +85,10 @@ export default class SubmitBlog extends Component {
             redirect: false,
             authenticated: false,
             success: false,
-            displayModal: false
+            displayModal: false,
         };
 
-        addAuthListener(u =>
+        addAuthListener((u) =>
             this.setState({ authenticated: u !== null, redirect: u === null })
         );
     }
@@ -115,7 +116,7 @@ export default class SubmitBlog extends Component {
             pageTitle,
             displayImage,
             imgName,
-            postData
+            postData,
         } = this.state;
 
         let errors = [];
@@ -154,9 +155,9 @@ export default class SubmitBlog extends Component {
                     title: postTitle,
                     day: day,
                     month: month,
-                    year: year
+                    year: year,
                 },
-                error => {
+                (error) => {
                     if (error !== null && error.code === 'PERMISSION_DENIED') {
                         console.log('Trying to hack? I think not!');
                         this.setState({ redirect: true });
@@ -170,7 +171,7 @@ export default class SubmitBlog extends Component {
                             success: true,
                             displayImage: null,
                             postData: null,
-                            displayModal: true
+                            displayModal: true,
                         });
                     }
                 }
@@ -187,12 +188,12 @@ export default class SubmitBlog extends Component {
             let imageURI = IMG_PATH(`./${filename}`);
             this.setState({
                 displayImage: imageURI,
-                imgName: filename
+                imgName: filename,
             });
         } catch (e) {
             this.setState({
                 displayImage: null,
-                imgName: null
+                imgName: null,
             });
         }
     }
@@ -204,7 +205,7 @@ export default class SubmitBlog extends Component {
     setPostData(errors, data) {
         this.setState({
             postData: data,
-            errorMsg: errors
+            errorMsg: errors,
         });
     }
 
@@ -217,7 +218,8 @@ export default class SubmitBlog extends Component {
             return (
                 <Alert
                     className="med m"
-                    transition={{ in: true, timeout: 100 }}>
+                    transition={{ in: true, timeout: 100 }}
+                >
                     Fetching Data :3
                 </Alert>
             );
@@ -231,7 +233,7 @@ export default class SubmitBlog extends Component {
             errorMsg,
             success,
             pageTitle,
-            displayModal
+            displayModal,
         } = this.state;
         return (
             <React.Fragment>
@@ -244,7 +246,8 @@ export default class SubmitBlog extends Component {
                             onChange={this.toggle}
                             indicatorColor="primary"
                             textColor="primary"
-                            centered>
+                            centered
+                        >
                             <Tab label="Create" />
                             <Tab label="Upload" />
                         </Tabs>
@@ -260,9 +263,9 @@ export default class SubmitBlog extends Component {
                                         type="text"
                                         name="post-author"
                                         id="post-author"
-                                        onChange={e =>
+                                        onChange={(e) =>
                                             this.setState({
-                                                author: e.target.value
+                                                author: e.target.value,
                                             })
                                         }
                                     />
@@ -277,9 +280,9 @@ export default class SubmitBlog extends Component {
                                         type="text"
                                         name="post-title"
                                         id="post-title"
-                                        onChange={e =>
+                                        onChange={(e) =>
                                             this.setState({
-                                                postTitle: e.target.value
+                                                postTitle: e.target.value,
                                             })
                                         }
                                     />
@@ -294,9 +297,9 @@ export default class SubmitBlog extends Component {
                                         type="text"
                                         name="page-title"
                                         id="page-title"
-                                        onChange={e =>
+                                        onChange={(e) =>
                                             this.setState({
-                                                pageTitle: e.target.value
+                                                pageTitle: e.target.value,
                                             })
                                         }
                                     />
@@ -312,7 +315,7 @@ export default class SubmitBlog extends Component {
                                         type="text"
                                         name="page-title"
                                         id="page-title"
-                                        onChange={e =>
+                                        onChange={(e) =>
                                             this.verifyImage(e.target.value)
                                         }
                                     />
@@ -339,7 +342,8 @@ export default class SubmitBlog extends Component {
                                 <Button
                                     type="submit"
                                     form="post-form"
-                                    value="Post">
+                                    value="Post"
+                                >
                                     Post
                                 </Button>
                             </FormGroup>
@@ -350,11 +354,12 @@ export default class SubmitBlog extends Component {
                                 // <Alert color="success">Blog Post Submitted</Alert>
                                 <Modal
                                     isOpen={displayModal}
-                                    toggle={e =>
+                                    toggle={(e) =>
                                         this.setState({
-                                            displayModal: !displayModal
+                                            displayModal: !displayModal,
                                         })
-                                    }>
+                                    }
+                                >
                                     <ModalHeader>Success</ModalHeader>
                                     <ModalBody>
                                         Blog post successfully submitted
@@ -363,7 +368,8 @@ export default class SubmitBlog extends Component {
                                         <Link
                                             to={`/blog/${pageTitle
                                                 .toLowerCase()
-                                                .replace(/ /g, '-')}`}>
+                                                .replace(/ /g, '-')}`}
+                                        >
                                             <Button>View It</Button>
                                         </Link>
                                     </ModalFooter>
@@ -377,13 +383,14 @@ export default class SubmitBlog extends Component {
                                 <ExpansionPanelSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     aria-controls="panel1a-content"
-                                    id="panel1a-header">
+                                    id="panel1a-header"
+                                >
                                     <Typography>Preview</Typography>
                                 </ExpansionPanelSummary>
                                 <ExpansionPanelDetails>
                                     <ReactMarkdown
                                         source={postData}
-                                        transformImageUri={uri => {
+                                        transformImageUri={(uri) => {
                                             if (uri.match(/%IMG_PATH%/)) {
                                                 try {
                                                     return IMG_PATH(
@@ -399,7 +406,7 @@ export default class SubmitBlog extends Component {
                                                 return uri;
                                             }
                                         }}
-                                        transformLinkUri={uri => {
+                                        transformLinkUri={(uri) => {
                                             if (
                                                 uri !== undefined &&
                                                 uri.match(/%BASE_URL%/)
@@ -414,7 +421,7 @@ export default class SubmitBlog extends Component {
                                         }}
                                         renderers={{
                                             image: ImageRenderer,
-                                            link: DescriptionLink
+                                            link: DescriptionLink,
                                         }}
                                         className="py-3"
                                     />

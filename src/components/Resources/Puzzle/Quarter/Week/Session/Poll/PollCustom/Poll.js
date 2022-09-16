@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
-import CheckIcon from '@material-ui/icons/Done';
+import { Button } from 'react-bootstrap';
+import DoneIcon from '@mui/icons-material/Done';
 import './Poll.css';
 
 export default class PollCard extends Component {
@@ -28,7 +28,7 @@ export default class PollCard extends Component {
         }
         return (
             <div className="poll-pop">
-                {this.props.answers.map(v => {
+                {this.props.answers.map((v) => {
                     var show = this.props.mark === 'past';
                     var percent = '0%';
                     if (show && count)
@@ -40,11 +40,12 @@ export default class PollCard extends Component {
                             <Button
                                 id={v.option}
                                 onClick={this.buttonHandle}
-                                disabled={this.voteAnswer !== null || show}>
+                                disabled={this.voteAnswer !== null || show}
+                            >
                                 {v.option}
                                 {show ? ' ' + percent : null}
                                 {this.voteAnswer === v.option ? (
-                                    <CheckIcon />
+                                    <DoneIcon />
                                 ) : null}
                                 <div
                                     className="pollBar"

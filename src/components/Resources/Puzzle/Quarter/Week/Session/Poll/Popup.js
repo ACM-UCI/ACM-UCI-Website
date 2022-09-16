@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'react-bootstrap';
 import Poll from './PollCustom/Poll';
 import './Popup.css';
+import { getDatabase, ref, onValue } from 'firebase/database';
 import firebase from '../../../../../../../Firebase';
 
 export default class Popup extends Component {
     constructor(props) {
         super(props);
         this.show = props.sol;
-        this.postRef = firebase
-            .database()
-            .ref('submissions/' + this.props.identifier + '/Poll/');
+        this.postRef = ref(
+            getDatabase(),
+            'submissions/' + this.props.identifier + '/Poll/'
+        );
 
         this.state = {
             modal: false,
             collapse: false,
-            pollAnswers: {}
+            pollAnswers: {},
         };
 
         this.toggle = this.toggle.bind(this);
@@ -24,7 +26,7 @@ export default class Popup extends Component {
     }
 
     componentDidMount() {
-        this.postRef.on('value', this.processData);
+        onValue(this.postRef, this.processData);
     }
 
     processData(data) {
@@ -33,7 +35,7 @@ export default class Popup extends Component {
 
     toggle() {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
         });
     }
 
@@ -45,7 +47,7 @@ export default class Popup extends Component {
         var postRef = firebase
             .database()
             .ref('submissions/' + this.props.identifier + '/Poll/');
-        postRef.transaction(function(poll) {
+        postRef.transaction(function (poll) {
             // console.log(poll)
             if (poll) {
                 if (poll.hasOwnProperty(voteAnswer)) poll[voteAnswer]++;
@@ -78,9 +80,9 @@ export default class Popup extends Component {
                         <Poll
                             theme={'blue'}
                             answers={Object.keys(this.state.pollAnswers).map(
-                                key => ({
+                                (key) => ({
                                     option: key,
-                                    votes: this.state.pollAnswers[key]
+                                    votes: this.state.pollAnswers[key],
                                 })
                             )}
                             onVote={this.handleVote}

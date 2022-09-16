@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button, Container } from 'reactstrap';
+import { Row, Button, Container } from 'react-bootstrap';
 import { InlineMath, BlockMath } from 'react-katex';
 
 import 'katex/dist/katex.min.css';
@@ -13,7 +13,8 @@ export default function EditorialMansion() {
         <Container className="mx-auto text-center">
             <a
                 href="https://www.hackerrank.com/contests/uci-ucsd-quarantine-competition/challenges/toilet-paper-display"
-                className="problem-link">
+                className="problem-link"
+            >
                 {' '}
                 {/* This should be link to hackerrank problem */}
                 <h1 className="display-3">Mansion!</h1>
@@ -77,7 +78,8 @@ export default function EditorialMansion() {
                     for a local competition like ours. This comes from a &nbsp;
                     <a
                         href="http://www.usaco.org/index.php?page=viewproblem2&cpid=650"
-                        className="link">
+                        className="link"
+                    >
                         USACO Platinum problem
                     </a>
                     &nbsp; and while the problem statement is relatively simple,
@@ -86,7 +88,8 @@ export default function EditorialMansion() {
                     simpler than the &nbsp;
                     <a
                         href="http://www.usaco.org/current/data/sol_landscape_platinum_open16.html"
-                        className="link">
+                        className="link"
+                    >
                         official solution
                     </a>
                     &nbsp; which runs in <InlineMath math="O(N)" /> as opposed
@@ -194,7 +197,8 @@ export default function EditorialMansion() {
                     of the priority queue. The{' '}
                     <a
                         href="http://www.usaco.org/current/data/sol_landscape_platinum_open16.html"
-                        className="link">
+                        className="link"
+                    >
                         <InlineMath math="O(NK)" /> dp solution
                     </a>{' '}
                     is much more complicated in my opinion, but you're welcome

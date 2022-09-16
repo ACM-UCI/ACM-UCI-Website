@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-    Alert,
-    Card,
-    CardTitle,
-    CardBody,
-    Row,
-    Col,
-    Container,
-    CardText
-} from 'reactstrap';
+import { Alert, Card, Row, Col, Container, CardText } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 // Material UI
@@ -24,18 +15,18 @@ import comp_list from './competition_list.json';
 
 import './EditorialBrowse.css';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-        position: 'relative'
+        position: 'relative',
     },
     bottom: {
-        color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700]
+        color: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
     },
     top: {
         color: '#1a90ff',
         position: 'absolute',
-        left: 0
-    }
+        left: 0,
+    },
 }));
 
 function CircularProgressWithLabel(props) {
@@ -63,13 +54,13 @@ function CircularProgressWithLabel(props) {
                     position="absolute"
                     display="flex"
                     alignItems="center"
-                    justifyContent="center">
+                    justifyContent="center"
+                >
                     <Typography
                         variant="caption"
                         component="div"
-                        color="textSecondary">{`${Math.round(
-                        props.value
-                    )}%`}</Typography>
+                        color="textSecondary"
+                    >{`${Math.round(props.value)}%`}</Typography>
                 </Box>
             </Box>
         </div>
@@ -84,11 +75,12 @@ function EditorialLink(props) {
                 <Card
                     className={`editorial-link-card ${
                         finished ? difficulty : 'disabled'
-                    } m`}>
-                    <CardBody className="w-75 py-4">
-                        <CardTitle className="text-center editorial-title">
+                    } m`}
+                >
+                    <Card.Body className="w-75 py-4">
+                        <Card.Title className="text-center editorial-title">
                             {name}
-                        </CardTitle>
+                        </Card.Title>
                         <CardText className="text-center editorial-text">
                             <Row className="align-content-center">
                                 <Col className="my-auto">
@@ -103,7 +95,7 @@ function EditorialLink(props) {
                                 </Col>
                             </Row>
                         </CardText>
-                    </CardBody>
+                    </Card.Body>
                 </Card>
             </Link>
         </Col>

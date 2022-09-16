@@ -3,12 +3,12 @@
  */
 function soundex(name) {
     if (name.trim().length === 0) return '';
-    let s = [];
+    const s = [];
     let si = 1;
     let c;
 
     //              ABCDEFGHIJKLMNOPQRSTUVWXYZ
-    let mappings = '01230120022455012623010202';
+    const mappings = '01230120022455012623010202';
 
     s[0] = name[0].toUpperCase();
 
@@ -48,19 +48,19 @@ function computeMatch(a, b) {
     const aSplit = a.split(' ');
     const bSplit = b.split(' ');
 
-    const aSoundex = aSplit.map(x => soundex(x));
-    const bSoundex = bSplit.map(x => soundex(x));
+    const aSoundex = aSplit.map((x) => soundex(x));
+    const bSoundex = bSplit.map((x) => soundex(x));
 
     const hashed = new Set(aSoundex);
 
-    return bSoundex.every(x => hashed.has(x)); // Every phonetic code of the search string
+    return bSoundex.every((x) => hashed.has(x)); // Every phonetic code of the search string
     // Must be found in the problem name
 }
 
 export default function filter(problem, filters) {
-    var sess_names =
+    const sessNames =
         problem && problem.Session
-            ? problem.Session.map(v => v.Name)
+            ? problem.Session.map((v) => v.Name)
             : undefined;
     if (
         ((filters.diff === 'All' &&
@@ -78,9 +78,9 @@ export default function filter(problem, filters) {
             (problem.Contributor !== undefined &&
                 problem.Contributor.indexOf(filters.cons) !== -1)) &&
         (filters.sess === 'All' ||
-            (filters.sess === 'Not Used' && sess_names === undefined) ||
-            (sess_names !== undefined &&
-                sess_names.indexOf(filters.sess) !== -1)) &&
+            (filters.sess === 'Not Used' && sessNames === undefined) ||
+            (sessNames !== undefined &&
+                sessNames.indexOf(filters.sess) !== -1)) &&
         (filters.note === 'All' ||
             (filters.note === 'No Notes' && problem.Note === '') ||
             (filters.note === 'Has Notes' && problem.Note !== '')) &&

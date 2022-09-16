@@ -51,9 +51,10 @@ const config = {
         '2018-2019',
         '2019-2020',
         '2020-2021',
-        '2021-2022'
+        '2021-2022',
+        '2022-2023',
     ],
-    current: '2021-2022', // This must be of form 'prevyear-nextyear'
+    current: '2022-2023', // This must be of form 'prevyear-nextyear'
     // Arranges weekly meeting schedule corresponding to quarter
     meetings: [
         [new Meeting(0, 180), new Meeting(172800000, 180)],
@@ -62,14 +63,15 @@ const config = {
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [
-            new Meeting(0, 10080) // Tuesday - 2 Days
+            new Meeting(0, 10080), // Tuesday - 2 Days
         ],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
-        [new Meeting(0, 180), new Meeting(172800000, 180)]
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
     ],
     quarters: [
         'Fall 2018',
@@ -83,7 +85,8 @@ const config = {
         'Spring 2021',
         'Fall 2021',
         'Winter 2022',
-        'Spring 2022'
+        'Spring 2022',
+        'Fall 2022',
     ],
     dates: [
         new Date('October 2, 2018 18:00:00').getTime(),
@@ -97,7 +100,8 @@ const config = {
         new Date('March 31, 2021 17:30:00').getTime(),
         new Date('September 28, 2021 17:00:00').getTime(),
         new Date('January 4, 2022 17:00:00').getTime(),
-        new Date('March 29, 2022 17:00:00').getTime()
+        new Date('March 29, 2022 17:00:00').getTime(),
+        new Date('September 19, 2022 18:00:00').getTime(),
     ],
     boardAccess: [
         // The date when the board is able to set problems for a specific quarter
@@ -112,7 +116,8 @@ const config = {
         new Date('March 2, 2021 17:00:00').getTime(),
         new Date('September 19, 2021 00:00:00').getTime(),
         new Date('January 1, 2022 17:00:00').getTime(),
-        new Date('March 23, 2022 18:00:00').getTime()
+        new Date('March 23, 2022 18:00:00').getTime(),
+        new Date('September 12, 2022 00:00:00').getTime(),
     ],
     defaultData: {
         Category: '',
@@ -124,7 +129,7 @@ const config = {
         Contributor: '',
         Session: undefined,
         Code: '',
-        SubmitDate: ''
+        SubmitDate: '',
     },
     supportedLanguage: {
         py: 'python',
@@ -138,12 +143,12 @@ const config = {
         cs: 'cs',
         php: 'php',
         kt: 'kotlin',
-        m: 'objectivec'
+        m: 'objectivec',
     },
     social: {
         Facebook: 'https://www.facebook.com/',
         GitHub: 'https://github.com/',
-        LinkedIn: 'https://www.linkedin.com/in/'
+        LinkedIn: 'https://www.linkedin.com/in/',
     },
 
     difficulties: {
@@ -156,8 +161,8 @@ const config = {
         poll: 6,
         finals: 7,
         thanksgiving: 8,
-        event: 9
-    }
+        event: 9,
+    },
 };
 
 export default config;

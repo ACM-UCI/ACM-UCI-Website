@@ -8,6 +8,14 @@
   font-size: 20px;
 }
 
+.banner {
+    padding: 4rem 2rem;
+}
+
+.banner, .banner img {
+    background-color: #6db6e2;
+}
+
 .banner img {
   height: 80px;
 }

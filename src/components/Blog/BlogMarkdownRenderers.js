@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Col } from 'reactstrap';
+import { Col } from 'react-bootstrap';
 
 /**
  * Defines rendering components to be used by React Markdown.
@@ -21,8 +21,9 @@ export function ImageRenderer(props) {
     return (
         <Col
             style={{
-                textAlign: 'center'
-            }}>
+                textAlign: 'center',
+            }}
+        >
             <img className="blog-img" alt={props.alt} {...props} />
             <i>{props.alt}</i>
         </Col>

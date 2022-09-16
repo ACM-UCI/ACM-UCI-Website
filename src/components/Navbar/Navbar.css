@@ -4,24 +4,12 @@
   -moz-transition: color 0.5s;
   -o-transition: color 0.5s;
   transition: color 0.5s;
-}
-
-
-.navbar {
-  padding: 38px 10px;
+  margin: 0 0.5em;
 }
 
 .nav-brand {
   position: relative;
   margin-left: 10%;
-}
-
-#logo {
-  width: 200px;
-  right: 100px;
-  position: absolute;
-  top: -37px;
-  left: -60px;
 }
 
 @media screen and (max-width: 767px) {

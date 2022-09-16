@@ -3,7 +3,7 @@ import config from '../../config.js';
 
 const difficultyTags = {
     difficulties: ['easy', 'med', 'hard', 'icpc', 'codealong', 'presentation'],
-    extras: ['event', 'announcement', 'finals', 'thanksgiving', 'poll']
+    extras: ['event', 'announcement', 'finals', 'thanksgiving', 'poll'],
 };
 
 export default function Submit(props) {

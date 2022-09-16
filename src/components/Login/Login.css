@@ -21,6 +21,10 @@
     text-align: center;
 }
 
+.logincontainer small {
+    text-align: left !important;
+}
+
 .welcome{
     background-color: rgb(71, 159, 214);
     color: white;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Collapse, Button } from 'reactstrap';
+import { Container, Accordion, Button } from 'react-bootstrap';
 import Session from './Session/Session';
 import drop from './drop.png';
 import raise from './raise.png';
@@ -41,26 +41,13 @@ export default class Week extends Component {
             src = raise;
         }
         return (
-            <Container>
-                <Button
-                    className="b"
-                    onClick={this.toggle}
-                    style={{
-                        marginTop: '1rem',
-                        width: '100%',
-                        height: '30%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginBottom: '1rem',
-                        fontSize: '26px'
-                    }}>
-                    Week {this.week + ' '}{' '}
-                    <img style={{ height: '10px' }} src={src} alt="" />
-                </Button>
-
-                <Collapse className="marpad" isOpen={this.state.collapse}>
-                    {this.sessions}
-                </Collapse>
+            <Container fluid>
+                <Accordion className="marpad">
+                    <Accordion.Header>
+                        <h3>Week {this.week}</h3>
+                    </Accordion.Header>
+                    <Accordion.Body>{this.sessions}</Accordion.Body>
+                </Accordion>
             </Container>
         );
     }
