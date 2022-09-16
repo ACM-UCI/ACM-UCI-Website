@@ -127,12 +127,11 @@ print(total)
                                         all you really need to know is that they
                                         organize the ICPC, one of the most
                                         prestigious programming competitions for
-                                        college students. Find out more at
+                                        college students. Find out more at{' '}
                                         <a
                                             href="https://www.acm.org/about-acm/about-the-acm-organization"
                                             className="link"
                                         >
-                                            {' '}
                                             acm.org
                                         </a>
                                     </p>
@@ -146,7 +145,7 @@ print(total)
                                             className="link"
                                         >
                                             wikipedia
-                                        </a>
+                                        </a>{' '}
                                         for more)
                                     </p>
 
@@ -172,7 +171,7 @@ print(total)
                                             >
                                                 wikipedia
                                             </a>{' '}
-                                            and
+                                            and{' '}
                                             <a
                                                 href="http://ieeextreme.org/"
                                                 className="link"
