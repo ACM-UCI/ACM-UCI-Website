@@ -42,7 +42,6 @@ export default class Puzzle extends Component {
     getDate(state) {
         this.quarter = state.quarter;
         this.week = state.week;
-        console.log(this.week);
         this.session = state.session;
         this.end = state.currentSessionOver;
 
