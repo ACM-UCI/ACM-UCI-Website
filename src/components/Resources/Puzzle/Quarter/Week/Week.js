@@ -13,6 +13,7 @@ export default class Week extends Component {
         this.week = props.week;
         this.quarter = props.quarter;
         this.session = props.session;
+        this.eventKey = props.eventKey;
         this.sessions = [];
 
         for (let i = 1; i < this.session; i++) {
@@ -41,14 +42,12 @@ export default class Week extends Component {
             src = raise;
         }
         return (
-            <Container fluid>
-                <Accordion className="marpad">
-                    <Accordion.Header>
-                        <h3>Week {this.week}</h3>
-                    </Accordion.Header>
-                    <Accordion.Body>{this.sessions}</Accordion.Body>
-                </Accordion>
-            </Container>
+            <Accordion.Item eventKey={this.eventKey}>
+                <Accordion.Header>
+                    <h3>Week {this.week}</h3>
+                </Accordion.Header>
+                <Accordion.Body>{this.sessions}</Accordion.Body>
+            </Accordion.Item>
         );
     }
 }

@@ -71,7 +71,7 @@ const config = {
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
-        [new Meeting(0, 180), new Meeting(172800000, 180)],
+        [new Meeting(0, 180), new Meeting(86400000, 180)],
     ],
     quarters: [
         'Fall 2018',
@@ -101,7 +101,7 @@ const config = {
         new Date('September 28, 2021 17:00:00').getTime(),
         new Date('January 4, 2022 17:00:00').getTime(),
         new Date('March 29, 2022 17:00:00').getTime(),
-        new Date('September 19, 2022 18:00:00').getTime(),
+        new Date('September 26, 2022 17:00:00').getTime(),
     ],
     boardAccess: [
         // The date when the board is able to set problems for a specific quarter
@@ -117,7 +117,7 @@ const config = {
         new Date('September 19, 2021 00:00:00').getTime(),
         new Date('January 1, 2022 17:00:00').getTime(),
         new Date('March 23, 2022 18:00:00').getTime(),
-        new Date('September 12, 2022 00:00:00').getTime(),
+        new Date('September 19, 2022 00:00:00').getTime(),
     ],
     defaultData: {
         Category: '',

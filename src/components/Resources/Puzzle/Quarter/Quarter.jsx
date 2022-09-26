@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Container } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import Week from './Week/Week';
 import './Quarter.css';
 import config from '../../../config';
@@ -9,6 +9,7 @@ export default class Quarter extends Component {
     constructor(props) {
         super(props);
         this.weeks = [];
+        this.currWeek = props.week;
 
         const lastWeek = (
             <Week
@@ -26,6 +27,7 @@ export default class Quarter extends Component {
         for (let i = props.week - 1; i > 0; i--) {
             const week = (
                 <Week
+                    eventKey={i}
                     key={i}
                     week={i}
                     quarter={props.quarter}
@@ -43,7 +45,11 @@ export default class Quarter extends Component {
         if (this.weeks.length === 0) {
             return null;
         }
-        return <Container>{this.weeks}</Container>;
+        return (
+            <Accordion className="marpad" defaultActiveKey={this.currWeek}>
+                {this.weeks}
+            </Accordion>
+        );
     }
 }
 
