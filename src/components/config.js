@@ -71,7 +71,7 @@ const config = {
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
         [new Meeting(0, 180), new Meeting(172800000, 180)],
-        [new Meeting(0, 180), new Meeting(86400000, 180)],
+        [new Meeting(0, 180), new Meeting(172800000, 180)],
     ],
     quarters: [
         'Fall 2018',

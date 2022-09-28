@@ -7,7 +7,7 @@ function Presentation({ name, presentationLink, presentationNotes }) {
     return (
         <Card className="presentation probcard minh">
             <Card.Body>
-                <Col>
+                <Col style={{ marginTop: '20px' }}>
                     <Card.Title style={{ fontSize: 20 }}>
                         <a
                             href={presentationLink}
