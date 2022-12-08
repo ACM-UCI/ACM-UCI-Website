@@ -107,7 +107,7 @@ export default class Puzzle extends Component {
                             </h1>
                         </Row>
                         <Row className="center">
-                            <span>Mondays and Wednesdays 6-8pm</span>
+                            <span>Tuesdays and Thursdays 6-8pm</span>
                         </Row>
                     </div>
 
