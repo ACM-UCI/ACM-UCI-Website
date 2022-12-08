@@ -73,9 +73,9 @@ export default class Home extends Component {
                     </Card.Title>
                     <hr className="home-line" />
                     <Card.Text className="card-text-home">
-                        <strong>Monday: </strong>
+                        <strong>Tuesday: </strong>
                         DBH 4011, 6:00 - 8:00 pm <br />
-                        <strong>Wednesday: </strong>
+                        <strong>Thursday: </strong>
                         DBH 4011, 6:00 - 8:00 pm
                     </Card.Text>
                 </Card>
