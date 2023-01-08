@@ -104,7 +104,7 @@ const config = {
         new Date('January 4, 2022 17:00:00').getTime(),
         new Date('March 29, 2022 17:00:00').getTime(),
         new Date('September 26, 2022 17:00:00').getTime(),
-        new Date('December 28, 2022 17:00:00').getTime(),
+        new Date('January 10, 2023 17:00:00').getTime(),
     ],
     boardAccess: [
         // The date when the board is able to set problems for a specific quarter
