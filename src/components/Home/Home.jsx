@@ -46,8 +46,8 @@ export default class Home extends Component {
                     </Card.Title>
                     <Row className="justify-content-center">
                         <Calendar
-                            month="Jan"
-                            date="10"
+                            month="Apr"
+                            date="4"
                             event="First Meeting of Quarter in DBH 4011"
                             link=""
                         />
@@ -58,7 +58,7 @@ export default class Home extends Component {
                 <Card className="card-body-home mx-auto p-5" key="card2">
                     <Card.Title style={{ textAlign: 'center' }}>
                         <p style={{ fontSize: 29 }}>Meeting Times</p>
-                        <i>Winter 2023</i>
+                        <i>Spring 2023</i>
                         <br />
                         <br />
                         <strong>
