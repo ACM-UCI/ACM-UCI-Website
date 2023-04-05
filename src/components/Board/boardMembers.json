@@ -19,6 +19,22 @@
         "sder": {
             "name": "Sam Der",
             "position": "Director of Technology"
+        },
+        "atallahn": {
+            "name": "Nathaniel Atallah",
+            "position": "Webmaster"
+        },
+        "chenrr": {
+            "name": "Richard Chen",
+            "position": "Director of Education"
+        },
+        "liangth1": {
+            "name": "Teresa Liang",
+            "position": "Publicity Officer"
+        },
+        "zwu25": {
+            "name": "Brady Wu",
+            "position": "Marketing Officer"
         }
     },
     "2021-2022": {
